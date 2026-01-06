@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://ck1sx5qwyrfr0"]
+
+[ext_resource type="Script" path="res://DungeonGen/DungeonGenerator.gd" id="1_00xre"]
+[ext_resource type="TileSet" uid="uid://dprcwuveh2j43" path="res://DungeonGen/TESTING_TILESET.tres" id="2_7u838"]
+[ext_resource type="Script" path="res://tile_map_layer.gd" id="3_p7jqa"]
+[ext_resource type="Script" path="res://Units/basic_unit.gd" id="4_ykgec"]
+[ext_resource type="Texture2D" uid="uid://bu0vyre80ngmu" path="res://icon.svg" id="5_i5ehb"]
+[ext_resource type="Script" path="res://turn_queue.gd" id="6_bw375"]
+[ext_resource type="Script" path="res://signal_tester.gd" id="7_0eb28"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4ir1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_i5ehb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8kvyr"]
+size = Vector2(32, 32)
+
+[node name="DungeonFloor" type="Node2D"]
+script = ExtResource("1_00xre")
+Room_Sizes = 1
+Room_Density = 2
+River_MaxAddedWidth = 0
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_7u838")
+collision_visibility_mode = 1
+script = ExtResource("3_p7jqa")
+
+[node name="BasicUnit" type="Area2D" parent="."]
+script = ExtResource("4_ykgec")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BasicUnit"]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_g4ir1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BasicUnit"]
+shape = SubResource("RectangleShape2D_8kvyr")
+
+[node name="RayCast2D" type="RayCast2D" parent="BasicUnit"]
+
+[node name="TurnQueue" type="Node" parent="."]
+script = ExtResource("6_bw375")
+
+[node name="BasicUnit2" type="Area2D" parent="."]
+script = ExtResource("4_ykgec")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BasicUnit2"]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_g4ir1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BasicUnit2"]
+shape = SubResource("RectangleShape2D_8kvyr")
+
+[node name="RayCast2D" type="RayCast2D" parent="BasicUnit2"]
+
+[node name="SignalTester" type="AnimatedSprite2D" parent="."]
+script = ExtResource("7_0eb28")
+
+[node name="RayCast2D" type="RayCast2D" parent="SignalTester"]

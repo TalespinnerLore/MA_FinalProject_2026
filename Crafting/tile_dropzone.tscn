@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6dntdfdb23xd"]
+
+[ext_resource type="Texture2D" uid="uid://di2aeqg1yubbr" path="res://2D_images/PodiumSlots.png" id="1_a5me1"]
+[ext_resource type="Script" path="res://Crafting/tile_dropzone.gd" id="1_rfhjc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cypve"]
+size = Vector2(16, 16)
+
+[node name="TileDropzone" type="StaticBody2D" groups=["dropzone"]]
+script = ExtResource("1_rfhjc")
+rarity = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
+texture = ExtResource("1_a5me1")
+hframes = 2
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["dropzone"]]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_cypve")
