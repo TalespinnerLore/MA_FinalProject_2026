@@ -1,0 +1,350 @@
+[gd_scene load_steps=7 format=4 uid="uid://dxwo7cyxienmy"]
+
+[ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_etfp0"]
+[ext_resource type="PackedScene" uid="uid://b6dntdfdb23xd" path="res://Crafting/tile_dropzone.tscn" id="1_r7nn6"]
+[ext_resource type="Script" path="res://ui_towercrafting.gd" id="1_x160o"]
+[ext_resource type="TileSet" uid="uid://ty37cym0krxg" path="res://Crafting/tower_crafting_ui.tres" id="2_p4nb7"]
+[ext_resource type="FontFile" uid="uid://bme72xoxft30d" path="res://Art/Tiny5-Regular.ttf" id="3_8c48e"]
+[ext_resource type="PackedScene" uid="uid://d1yshb420qmo7" path="res://Crafting/tile_object.tscn" id="6_haejk"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMapLayer_SideUI" type="TileMapLayer" parent="."]
+light_mask = 0
+position = Vector2(0, 4)
+tile_map_data = PackedByteArray("AAAAAAAABAAJAAMAAAABAAAABAAKAAUAAAACAAAABAAKAAUAAAADAAAABAALAAMAAAAEAAAABAAHAAcAAAAFAAAABAAHAAcAAAAGAAAABAAHAAcAAAAHAAAABAAHAAcAAAAIAAAABAAHAAcAAAAJAAAABAAHAAcAAAAKAAAABAAHAAcAAAALAAAABAAHAAcAAAAMAAAABAAHAAcAAAANAAAABAAHAAcAAAAOAAAABAAHAAcAAAAPAAAABAAHAAcAAAAQAAAABAAJAAMAAAARAAAABAAKAAMAAAASAAAABAAKAAMAAAATAAAABAALAAMAAAAAAAEABAAJAAEAAAAAAAIABAAJAAEAAAAAAAMABAAJAAEAAAAAAAQABAAJAAEAAAAAAAUABAAJAAEAAAAAAAYABAAJAAEAAAAAAAcABAAJAAEAAAAAAAgABAAJAAEAAAAAAAkABAAJAAEAAAATAAIABAALAAEAAAATAAMABAALAAEAAAATAAQABAALAAEAAAATAAUABAALAAEAAAATAAYABAALAAEAAAATAAcABAALAAEAAAATAAgABAALAAEAAAATAAkABAALAAEAAAATAAEABAALAAEAAAAEAAEABAAHAAcAAAAEAAIABAAHAAcAAAAEAAMABAAHAAcAAAAEAAQABAAHAAcAAAAEAAUABAAHAAcAAAAEAAYABAAHAAcAAAAEAAcABAAHAAcAAAAEAAgABAAHAAcAAAAEAAkABAAHAAcAAAAPAAEABAAHAAcAAAAPAAIABAAHAAcAAAAPAAQABAAHAAcAAAAPAAUABAAHAAcAAAAPAAYABAAHAAcAAAAPAAcABAAHAAcAAAAPAAgABAAHAAcAAAAPAAkABAAHAAcAAAAFAAEABAAHAAcAAAAFAAIABAAHAAcAAAAFAAMABAAHAAcAAAAFAAQABAAHAAcAAAAFAAUABAAHAAcAAAAFAAYABAAHAAcAAAAFAAcABAAHAAcAAAAFAAgABAAHAAcAAAAFAAkABAAHAAcAAAAGAAEABAAHAAcAAAAGAAIABAAHAAcAAAAGAAMABAAHAAcAAAAGAAQABAAHAAcAAAAGAAUABAAHAAcAAAAGAAYABAAHAAcAAAAGAAcABAAHAAcAAAAGAAgABAAHAAcAAAAGAAkABAAHAAcAAAAHAAEABAAHAAcAAAAHAAIABAAHAAcAAAAHAAMABAAHAAcAAAAHAAQABAAHAAcAAAAHAAUABAAHAAcAAAAHAAYABAAHAAcAAAAHAAcABAAHAAcAAAAHAAgABAAHAAcAAAAHAAkABAAHAAcAAAAIAAEABAAHAAcAAAAIAAIABAAHAAcAAAAIAAMABAAHAAcAAAAIAAQABAAHAAcAAAAIAAUABAAHAAcAAAAIAAYABAAHAAcAAAAIAAcABAAHAAcAAAAIAAgABAAHAAcAAAAIAAkABAAHAAcAAAAJAAEABAAHAAcAAAAJAAIABAAHAAcAAAAJAAMABAAHAAcAAAAJAAQABAAHAAcAAAAJAAUABAAHAAcAAAAJAAYABAAHAAcAAAAJAAcABAAHAAcAAAAJAAgABAAHAAcAAAAJAAkABAAHAAcAAAAKAAEABAAHAAcAAAAKAAIABAAHAAcAAAAKAAMABAAHAAcAAAAKAAQABAAHAAcAAAAKAAUABAAHAAcAAAAKAAYABAAHAAcAAAAKAAcABAAHAAcAAAAKAAgABAAHAAcAAAAKAAkABAAHAAcAAAALAAEABAAHAAcAAAALAAIABAAHAAcAAAALAAMABAAHAAcAAAALAAQABAAHAAcAAAALAAUABAAHAAcAAAALAAYABAAHAAcAAAALAAcABAAHAAcAAAALAAgABAAHAAcAAAALAAkABAAHAAcAAAAMAAEABAAHAAcAAAAMAAIABAAHAAcAAAAMAAMABAAHAAcAAAAMAAQABAAHAAcAAAAMAAUABAAHAAcAAAAMAAYABAAHAAcAAAAMAAcABAAHAAcAAAAMAAgABAAHAAcAAAAMAAkABAAHAAcAAAANAAEABAAHAAcAAAANAAIABAAHAAcAAAANAAMABAAHAAcAAAANAAQABAAHAAcAAAANAAUABAAHAAcAAAANAAYABAAHAAcAAAANAAcABAAHAAcAAAANAAgABAAHAAcAAAANAAkABAAHAAcAAAAOAAEABAAHAAcAAAAOAAIABAAHAAcAAAAOAAMABAAHAAcAAAAOAAQABAAHAAcAAAAOAAUABAAHAAcAAAAOAAYABAAHAAcAAAAOAAcABAAHAAcAAAAOAAgABAAHAAcAAAAOAAkABAAHAAcAAAAPAAMABAAHAAcAAAADAAEABAALAAEAAAADAAIABAALAAEAAAADAAMABAALAAEAAAADAAQABAALAAEAAAADAAUABAALAAEAAAADAAYABAALAAEAAAADAAcABAALAAEAAAADAAgABAALAAEAAAADAAkABAALAAEAAAAQAAEABAAJAAEAAAAQAAIABAAJAAEAAAAQAAMABAAJAAEAAAAQAAQABAAJAAEAAAAQAAUABAAJAAEAAAAQAAYABAAJAAEAAAAQAAcABAAJAAEAAAAQAAgABAAJAAEAAAAQAAkABAAJAAEAAAARAAEABAAKAAEAAAARAAIABAAKAAEAAAARAAMABAAKAAEAAAARAAQABAAKAAEAAAARAAUABAAKAAEAAAARAAYABAAKAAEAAAARAAcABAAKAAEAAAARAAgABAAKAAEAAAARAAkABAAKAAEAAAASAAEABAAKAAEAAAASAAIABAAKAAEAAAASAAMABAAKAAEAAAASAAQABAAKAAEAAAASAAUABAAKAAEAAAASAAYABAAKAAEAAAASAAcABAAKAAEAAAASAAgABAAKAAEAAAASAAkABAAKAAEAAAABAAEABAAKAAEAAAABAAIABAAKAAEAAAABAAMABAAKAAEAAAABAAQABAAKAAEAAAABAAUABAAKAAEAAAABAAYABAAKAAEAAAABAAcABAAKAAEAAAABAAgABAAKAAEAAAABAAkABAAKAAEAAAACAAEABAAKAAEAAAACAAIABAAKAAEAAAACAAMABAAKAAEAAAACAAQABAAKAAEAAAACAAUABAAKAAEAAAACAAYABAAKAAEAAAACAAcABAAKAAEAAAACAAgABAAKAAEAAAACAAkABAAKAAEAAAAAAAoABAAJAAIAAAABAAoABAAKAAIAAAACAAoABAAKAAIAAAADAAoABAALAAIAAAAEAAoABAAHAAcAAAAFAAoABAAHAAcAAAAGAAoABAAHAAcAAAAHAAoABAAHAAcAAAAIAAoABAAHAAcAAAAJAAoABAAHAAcAAAAKAAoABAAHAAcAAAALAAoABAAHAAcAAAAMAAoABAAHAAcAAAANAAoABAAHAAcAAAAOAAoABAAHAAcAAAAPAAoABAAHAAcAAAAQAAoABAAJAAIAAAARAAoABAAKAAIAAAASAAoABAAKAAIAAAATAAoABAALAAIAAAAAAAsABAABAAkAAAABAAsABAABAAkAAAACAAsABAABAAkAAAADAAsABAABAAkAAAAEAAsABAABAAkAAAAFAAsABAABAAkAAAAGAAsABAABAAkAAAAHAAsABAABAAkAAAAIAAsABAABAAkAAAAJAAsABAABAAkAAAAKAAsABAABAAkAAAALAAsABAABAAkAAAAMAAsABAABAAkAAAANAAsABAABAAkAAAAOAAsABAABAAkAAAAPAAsABAABAAkAAAAQAAsABAABAAkAAAARAAsABAABAAkAAAASAAsABAABAAkAAAATAAsABAABAAkAAAAAAP//BAABAAsAAAABAP//BAABAAsAAAACAP//BAABAAsAAAADAP//BAABAAsAAAAEAP//BAABAAsAAAAFAP//BAABAAsAAAAGAP//BAABAAsAAAAHAP//BAABAAsAAAAIAP//BAABAAsAAAAJAP//BAABAAsAAAAKAP//BAABAAsAAAALAP//BAABAAsAAAAMAP//BAABAAsAAAANAP//BAABAAsAAAAOAP//BAABAAsAAAAPAP//BAABAAsAAAAQAP//BAABAAsAAAARAP//BAABAAsAAAASAP//BAABAAsAAAATAP//BAABAAsAAAAUAP//AAABAAEAAAAUAAAABAAAAAoAAAAUAAEABAAAAAoAAAAUAAIABAAAAAoAAAAUAAMABAAAAAoAAAAUAAQABAAAAAoAAAAUAAUABAAAAAoAAAAUAAYABAAAAAoAAAAUAAcABAAAAAoAAAAUAAgABAAAAAoAAAAUAAkABAAAAAoAAAAUAAoABAAAAAoAAAAUAAsAAAABAAEAAAD/////AAABAAEAAAD//wAABAACAAoAAAD//wEABAACAAoAAAD//wIABAACAAoAAAD//wMABAACAAoAAAD//wQABAACAAoAAAD//wUABAACAAoAAAD//wYABAACAAoAAAD//wcABAACAAoAAAD//wgABAACAAoAAAD//wkABAACAAoAAAD//woABAACAAoAAAD//wsAAAABAAEAAAA=")
+tile_set = ExtResource("1_etfp0")
+
+[node name="TileMapLayer_Base1" type="TileMapLayer" parent="."]
+light_mask = 0
+position = Vector2(144, 4)
+tile_map_data = PackedByteArray("AAAFAAUAAAACAAIAAAAEAAYAAAABAAMAAAAEAAQAAAABAAEAAAAGAAQAAAADAAEAAAAGAAYAAAADAAMAAAAEAAUAAAABAAYAAAAGAAUAAAADAAYAAAAFAAQAAAACAAUAAAAFAAYAAAACAAcAAAACAAgAAAAJAAYAAAAIAAgAAAAJAAYAAAAIAAIAAAAJAAYAAAACAAIAAAAJAAYAAAADAAIAAAAKAAYAAAAEAAIAAAAKAAYAAAAFAAIAAAAKAAYAAAAGAAIAAAAKAAYAAAAHAAIAAAAKAAYAAAADAAgAAAAKAAYAAAAEAAgAAAAKAAYAAAAFAAgAAAAKAAYAAAAGAAgAAAAKAAYAAAAHAAgAAAAKAAYAAAACAAMAAAAJAAcAAAACAAQAAAAJAAcAAAACAAUAAAAJAAcAAAACAAYAAAAJAAcAAAACAAcAAAAJAAcAAAAIAAMAAAAJAAcAAAAIAAQAAAAJAAcAAAAIAAUAAAAJAAcAAAAIAAYAAAAJAAcAAAAIAAcAAAAJAAcAAAAEAAMAAAAKAAYAAAAFAAMAAAAKAAYAAAAGAAMAAAAKAAYAAAAEAAcAAAAKAAYAAAAFAAcAAAAKAAYAAAAGAAcAAAAKAAYAAAAHAAYAAAAJAAcAAAAHAAUAAAAJAAcAAAAHAAQAAAAJAAcAAAADAAQAAAAJAAcAAAADAAUAAAAJAAcAAAADAAYAAAAJAAcAAAAHAAcAAAAJAAYAAAADAAcAAAAJAAYAAAADAAMAAAAJAAYAAAAHAAMAAAAJAAYAAAA=")
+tile_set = ExtResource("2_p4nb7")
+
+[node name="TileMapLayer_Slots1" type="TileMapLayer" parent="TileMapLayer_Base1"]
+light_mask = 0
+tile_map_data = PackedByteArray("AAAFAAUAAQAAAAAAAAAEAAUAAQABAAEAAAAGAAUAAQABAAEAAAAFAAQAAQABAAEAAAAFAAYAAQABAAEAAAAEAAYAAQABAAAAAAAEAAQAAQABAAAAAAAGAAQAAQABAAAAAAAGAAYAAQABAAAAAAA=")
+tile_set = ExtResource("2_p4nb7")
+
+[node name="TileMapLayer_Base2" type="TileMapLayer" parent="."]
+light_mask = 0
+position = Vector2(144, 4)
+tile_map_data = PackedByteArray("AAAFAAcAAAACAAQAAAAHAAUAAAAEAAIAAAADAAUAAAAAAAIAAAAFAAMAAAACAAAAAAAHAAcAAAAHAAIAAAAHAAMAAAAHAAIAAAADAAMAAAAHAAIAAAADAAcAAAAHAAIAAAABAAMAAAAJAAcAAAABAAQAAAAJAAcAAAABAAUAAAAJAAcAAAABAAYAAAAJAAcAAAABAAcAAAAJAAcAAAABAAgAAAAJAAcAAAAJAAgAAAAJAAcAAAAJAAcAAAAJAAcAAAAJAAYAAAAJAAcAAAAJAAUAAAAJAAcAAAAJAAQAAAAJAAcAAAAJAAMAAAAJAAcAAAAJAAIAAAAJAAcAAAABAAIAAAAJAAcAAAABAAEAAAAJAAYAAAAJAAEAAAAJAAYAAAAJAAkAAAAJAAYAAAABAAkAAAAJAAYAAAACAAkAAAAKAAYAAAADAAkAAAAKAAYAAAAEAAkAAAAKAAYAAAAFAAkAAAAKAAYAAAAGAAkAAAAKAAYAAAAHAAkAAAAKAAYAAAAIAAkAAAAKAAYAAAAIAAEAAAAKAAYAAAAHAAEAAAAKAAYAAAAGAAEAAAAKAAYAAAAFAAEAAAAKAAYAAAAEAAEAAAAKAAYAAAADAAEAAAAKAAYAAAACAAEAAAAKAAYAAAAEAAYAAAABAAMAAAAEAAUAAAABAAIAAAAEAAQAAAABAAEAAAAFAAQAAAACAAEAAAAGAAQAAAADAAEAAAAGAAUAAAADAAIAAAAGAAYAAAADAAMAAAAFAAYAAAACAAMAAAAFAAUAAAACAAIAAAA=")
+tile_set = ExtResource("2_p4nb7")
+
+[node name="TileMapLayer_Slots2" type="TileMapLayer" parent="TileMapLayer_Base2"]
+visible = false
+light_mask = 0
+tile_map_data = PackedByteArray("AAAFAAUAAQAAAAAAAAAEAAUAAQABAAEAAAAGAAUAAQABAAEAAAAFAAQAAQABAAEAAAAFAAYAAQABAAEAAAAEAAYAAQABAAAAAAAFAAcAAQABAAAAAAAHAAUAAQABAAAAAAADAAUAAQABAAAAAAAFAAMAAQABAAAAAAAEAAQAAQABAAAAAAAGAAQAAQABAAAAAAAGAAYAAQABAAAAAAAHAAcAAQAAAAEAAAAHAAMAAQAAAAEAAAADAAMAAQAAAAEAAAADAAcAAQAAAAEAAAA=")
+tile_set = ExtResource("2_p4nb7")
+
+[node name="TileMapLayer_Base3" type="TileMapLayer" parent="."]
+light_mask = 0
+position = Vector2(144, 4)
+tile_map_data = PackedByteArray("AAAAAAAAAAAJAAYAAAAAAAEAAAAJAAcAAAAAAAQAAAAJAAcAAAABAAAAAAAKAAYAAAACAAAAAAAKAAYAAAADAAAAAAAKAAYAAAAEAAAAAAAKAAYAAAAFAAAAAAAKAAYAAAAGAAAAAAAKAAYAAAAHAAAAAAAKAAYAAAAAAAgAAAAJAAcAAAAIAAAAAAAKAAYAAAAJAAAAAAAKAAYAAAAAAAkAAAAJAAcAAAAIAAoAAAAKAAYAAAAHAAoAAAAKAAYAAAAGAAoAAAAKAAYAAAADAAoAAAAKAAYAAAACAAoAAAAKAAYAAAABAAoAAAAKAAYAAAAAAAoAAAAJAAYAAAAKAAAAAAAJAAYAAAAKAAEAAAAJAAcAAAAKAAIAAAAJAAcAAAAKAAMAAAAJAAcAAAAKAAQAAAAJAAcAAAAKAAUAAAAJAAcAAAAKAAYAAAAJAAcAAAAKAAcAAAAJAAcAAAAKAAgAAAAJAAcAAAAKAAkAAAAJAAcAAAAKAAoAAAAJAAYAAAAJAAoAAAAKAAYAAAAEAAoAAAAKAAYAAAAFAAoAAAAKAAYAAAAAAAcAAAAJAAcAAAAAAAYAAAAJAAcAAAAAAAUAAAAJAAcAAAAAAAMAAAAJAAcAAAAAAAIAAAAJAAcAAAACAAcAAAAFAAMAAAADAAgAAAAGAAQAAAAHAAgAAAAIAAQAAAAIAAcAAAAJAAMAAAACAAMAAAAFAAEAAAADAAIAAAAGAAAAAAAHAAIAAAAIAAAAAAAIAAMAAAAJAAEAAAAFAAEAAAAHAAIAAAABAAUAAAAHAAIAAAAJAAUAAAAHAAIAAAAFAAkAAAAHAAIAAAAHAAMAAAAIAAEAAAADAAMAAAAGAAEAAAAFAAMAAAACAAAAAAADAAUAAAAAAAIAAAAHAAUAAAAEAAIAAAAGAAYAAAADAAMAAAAEAAYAAAABAAMAAAAEAAUAAAABAAIAAAAEAAQAAAABAAEAAAAFAAQAAAACAAEAAAAFAAUAAAACAAIAAAAGAAUAAAADAAIAAAAGAAQAAAADAAEAAAAHAAcAAAAIAAMAAAAFAAcAAAACAAQAAAAFAAYAAAACAAMAAAADAAcAAAAGAAMAAAA=")
+tile_set = ExtResource("2_p4nb7")
+
+[node name="TileMapLayer_Slots3" type="TileMapLayer" parent="TileMapLayer_Base3"]
+visible = false
+light_mask = 0
+tile_map_data = PackedByteArray("AAAFAAUAAQAAAAAAAAAEAAUAAQABAAEAAAAGAAUAAQABAAEAAAAFAAQAAQABAAEAAAAFAAYAAQABAAEAAAAEAAYAAQABAAAAAAAFAAcAAQABAAAAAAAHAAUAAQABAAAAAAADAAUAAQABAAAAAAAFAAMAAQABAAAAAAAEAAQAAQABAAAAAAAGAAQAAQABAAAAAAAGAAYAAQABAAAAAAAHAAcAAQAAAAEAAAAHAAMAAQAAAAEAAAADAAMAAQAAAAEAAAADAAcAAQAAAAEAAAACAAcAAQABAAEAAAADAAgAAQABAAEAAAAHAAgAAQABAAEAAAAIAAcAAQABAAEAAAACAAMAAQABAAEAAAADAAIAAQABAAEAAAAHAAIAAQABAAEAAAAIAAMAAQABAAEAAAAFAAEAAQABAAEAAAABAAUAAQABAAEAAAAJAAUAAQABAAEAAAAFAAkAAQABAAEAAAA=")
+tile_set = ExtResource("2_p4nb7")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 14.0
+offset_right = 106.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 16
+text = "INVENTORY:"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 536.0
+offset_top = 14.0
+offset_right = 616.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("3_8c48e")
+text = "EFFECTS:"
+horizontal_alignment = 1
+
+[node name="DROPZONES" type="Node2D" parent="."]
+
+[node name="Tier1" type="Node2D" parent="DROPZONES"]
+
+[node name="TileDropzone" parent="DROPZONES/Tier1" instance=ExtResource("1_r7nn6")]
+position = Vector2(320, 180)
+rarity = 3
+
+[node name="TileDropzone2" parent="DROPZONES/Tier1" instance=ExtResource("1_r7nn6")]
+position = Vector2(320, 148)
+rarity = 1
+
+[node name="TileDropzone3" parent="DROPZONES/Tier1" instance=ExtResource("1_r7nn6")]
+position = Vector2(288, 148)
+rarity = 0
+
+[node name="TileDropzone4" parent="DROPZONES/Tier1" instance=ExtResource("1_r7nn6")]
+position = Vector2(288, 180)
+rarity = 1
+
+[node name="TileDropzone5" parent="DROPZONES/Tier1" instance=ExtResource("1_r7nn6")]
+position = Vector2(288, 212)
+rarity = 0
+
+[node name="TileDropzone6" parent="DROPZONES/Tier1" instance=ExtResource("1_r7nn6")]
+position = Vector2(352, 212)
+rarity = 0
+
+[node name="TileDropzone7" parent="DROPZONES/Tier1" instance=ExtResource("1_r7nn6")]
+position = Vector2(352, 180)
+rarity = 1
+
+[node name="TileDropzone8" parent="DROPZONES/Tier1" instance=ExtResource("1_r7nn6")]
+position = Vector2(352, 148)
+rarity = 0
+
+[node name="TileDropzone9" parent="DROPZONES/Tier1" instance=ExtResource("1_r7nn6")]
+position = Vector2(320, 212)
+rarity = 1
+
+[node name="Tier2" type="Node2D" parent="DROPZONES"]
+
+[node name="TileDropzone10" parent="DROPZONES/Tier2" instance=ExtResource("1_r7nn6")]
+position = Vector2(256, 180)
+rarity = 0
+
+[node name="TileDropzone11" parent="DROPZONES/Tier2" instance=ExtResource("1_r7nn6")]
+position = Vector2(256, 244)
+
+[node name="TileDropzone12" parent="DROPZONES/Tier2" instance=ExtResource("1_r7nn6")]
+position = Vector2(384, 244)
+
+[node name="TileDropzone13" parent="DROPZONES/Tier2" instance=ExtResource("1_r7nn6")]
+position = Vector2(320, 244)
+rarity = 0
+
+[node name="TileDropzone14" parent="DROPZONES/Tier2" instance=ExtResource("1_r7nn6")]
+position = Vector2(384, 180)
+rarity = 0
+
+[node name="TileDropzone15" parent="DROPZONES/Tier2" instance=ExtResource("1_r7nn6")]
+position = Vector2(384, 116)
+
+[node name="TileDropzone16" parent="DROPZONES/Tier2" instance=ExtResource("1_r7nn6")]
+position = Vector2(320, 116)
+rarity = 0
+
+[node name="TileDropzone17" parent="DROPZONES/Tier2" instance=ExtResource("1_r7nn6")]
+position = Vector2(256, 116)
+
+[node name="Tier3" type="Node2D" parent="DROPZONES"]
+
+[node name="TileDropzone18" parent="DROPZONES/Tier3" instance=ExtResource("1_r7nn6")]
+position = Vector2(256, 84)
+rarity = 1
+
+[node name="TileDropzone19" parent="DROPZONES/Tier3" instance=ExtResource("1_r7nn6")]
+position = Vector2(224, 116)
+rarity = 1
+
+[node name="TileDropzone20" parent="DROPZONES/Tier3" instance=ExtResource("1_r7nn6")]
+position = Vector2(320, 52)
+rarity = 1
+
+[node name="TileDropzone21" parent="DROPZONES/Tier3" instance=ExtResource("1_r7nn6")]
+position = Vector2(384, 84)
+rarity = 1
+
+[node name="TileDropzone22" parent="DROPZONES/Tier3" instance=ExtResource("1_r7nn6")]
+position = Vector2(416, 116)
+rarity = 1
+
+[node name="TileDropzone23" parent="DROPZONES/Tier3" instance=ExtResource("1_r7nn6")]
+position = Vector2(448, 180)
+rarity = 1
+
+[node name="TileDropzone24" parent="DROPZONES/Tier3" instance=ExtResource("1_r7nn6")]
+position = Vector2(416, 244)
+rarity = 1
+
+[node name="TileDropzone25" parent="DROPZONES/Tier3" instance=ExtResource("1_r7nn6")]
+position = Vector2(384, 276)
+rarity = 1
+
+[node name="TileDropzone26" parent="DROPZONES/Tier3" instance=ExtResource("1_r7nn6")]
+position = Vector2(320, 308)
+rarity = 1
+
+[node name="TileDropzone27" parent="DROPZONES/Tier3" instance=ExtResource("1_r7nn6")]
+position = Vector2(256, 276)
+rarity = 1
+
+[node name="TileDropzone28" parent="DROPZONES/Tier3" instance=ExtResource("1_r7nn6")]
+position = Vector2(224, 244)
+rarity = 1
+
+[node name="TileDropzone29" parent="DROPZONES/Tier3" instance=ExtResource("1_r7nn6")]
+position = Vector2(192, 180)
+rarity = 1
+
+[node name="TileInventory" type="Node2D" parent="."]
+script = ExtResource("1_x160o")
+
+[node name="InventoryPage1" type="TileMapLayer" parent="TileInventory"]
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+light_mask = 0
+position = Vector2(144, 4)
+tile_map_data = PackedByteArray("AAD8/wEAAgAAAAAAAAD9/wEAAgABAAAAAAD+/wEAAgACAAAAAAD8/wIAAgAAAAEAAAD9/wMAAgABAAIAAAD9/wIAAgABAAEAAAD+/wUAAgACAAQAAAD9/wQAAgABAAMAAAD8/wQAAgAAAAMAAAD8/wMAAgAAAAIAAAD+/wQAAgACAAMAAAD+/wMAAgACAAIAAAD+/wIAAgACAAEAAAD+/wYAAgACAAUAAAD9/wYAAgABAAUAAAD8/wYAAgAAAAUAAAD8/wcAAgAAAAYAAAD9/wcAAgABAAYAAAD9/wkAAgABAAgAAAD+/wcAAgACAAYAAAD+/wkAAgACAAgAAAD9/wgAAgABAAcAAAD+/wgAAgACAAcAAAD8/wgAAgAAAAcAAAD8/wkAAgAAAAgAAAD8/wUAAgAAAAQAAAD9/wUAAgABAAQAAAA=")
+tile_set = ExtResource("2_p4nb7")
+
+[node name="InventoryPage2" type="TileMapLayer" parent="TileInventory"]
+visible = false
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+light_mask = 0
+position = Vector2(144, 4)
+tile_map_data = PackedByteArray("AAD8/wEAAgAAAAkAAAD9/wEAAgABAAkAAAD+/wEAAgACAAkAAAD8/wIAAgAAAAoAAAD9/wIAAgABAAoAAAD+/wIAAgACAAoAAAD8/wMAAgAAAAsAAAD9/wMAAgABAAsAAAD+/wMAAgACAAsAAAD8/wQAAgAAAAwAAAD9/wQAAgABAAwAAAD+/wQAAgACAAwAAAD8/wUAAgAAAA0AAAD9/wUAAgABAA0AAAD+/wUAAgACAA0AAAD8/wYAAgAAAA4AAAD9/wYAAgABAA4AAAD+/wYAAgACAA4AAAD8/wcAAgAAAA8AAAD9/wcAAgABAA8AAAD+/wcAAgACAA8AAAD8/wgAAgAAABAAAAD9/wgAAgABABAAAAD+/wgAAgACABAAAAD8/wkAAgAAABEAAAD9/wkAAgABABEAAAD+/wkAAgACABEAAAA=")
+tile_set = ExtResource("2_p4nb7")
+
+[node name="InventoryPage3" type="TileMapLayer" parent="TileInventory"]
+visible = false
+modulate = Color(0.498039, 0.498039, 0.498039, 1)
+light_mask = 0
+position = Vector2(144, 4)
+tile_map_data = PackedByteArray("AAD8/wEAAgAAABIAAAD9/wEAAgAAABIAAAD+/wEAAgAAABIAAAA=")
+tile_set = ExtResource("2_p4nb7")
+
+[node name="Button<" type="Button" parent="."]
+offset_left = 36.0
+offset_top = 326.0
+offset_right = 60.0
+offset_bottom = 352.0
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 16
+text = "<"
+
+[node name="Button>" type="Button" parent="."]
+offset_left = 68.0
+offset_top = 326.0
+offset_right = 92.0
+offset_bottom = 352.0
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 16
+text = ">"
+
+[node name="ButtonSTART" type="Button" parent="."]
+offset_left = 544.0
+offset_top = 326.0
+offset_right = 610.0
+offset_bottom = 352.0
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 16
+text = "[START]"
+
+[node name="TileObject" parent="ButtonSTART" instance=ExtResource("6_haejk")]
+visible = false
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="."]
+offset_left = 520.0
+offset_top = 40.0
+offset_right = 632.0
+offset_bottom = 320.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer2"]
+custom_minimum_size = Vector2(112, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 16
+text = "Affinity:
+"
+autowrap_mode = 2
+
+[node name="affinity" type="Label" parent="ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 8
+text = "Affinity is a scam, man, what a dick dtimtbomrbornomyn
+"
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 16
+text = "Environment:
+"
+autowrap_mode = 2
+
+[node name="environment" type="Label" parent="ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 8
+text = "Environment is a scam, man, what a dick dtimtbomrbornomyn
+"
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 16
+text = "Enemies:
+"
+autowrap_mode = 2
+
+[node name="enemies" type="Label" parent="ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 8
+text = "Enemies are a scam, man, what a dick dtimtbomrbornomyn
+"
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 16
+text = "Loot:
+"
+autowrap_mode = 2
+
+[node name="loot" type="Label" parent="ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 8
+text = "Loot is a scam, man, what a dick dtimtbomrbornomyn
+"
+autowrap_mode = 2
+
+[node name="Label5" type="Label" parent="ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = -3
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 16
+text = "Special Features:
+"
+autowrap_mode = 2
+
+[node name="special_features" type="Label" parent="ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("3_8c48e")
+theme_override_font_sizes/font_size = 8
+text = "Special Features a scam, man, what a dick dtimtbomrbornomyn
+"
+autowrap_mode = 2
+
+[connection signal="pressed" from="Button<" to="TileInventory" method="_on_button_pressed_left"]
+[connection signal="pressed" from="Button>" to="TileInventory" method="_on_button_pressed_right"]
+[connection signal="pressed" from="ButtonSTART" to="TileInventory" method="_on_button_start_pressed"]

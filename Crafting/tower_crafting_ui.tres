@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" load_steps=9 format=3 uid="uid://ty37cym0krxg"]
 
-[ext_resource type="Texture2D" uid="uid://d0uj06egk8ngv" path="res://2D_images/PodiumBase.png" id="1_8mmgn"]
-[ext_resource type="Texture2D" uid="uid://di2aeqg1yubbr" path="res://2D_images/PodiumSlots.png" id="2_f77g1"]
-[ext_resource type="Texture2D" uid="uid://dh3fjbqm6wr8o" path="res://2D_images/PodiumTileSprites_3wide.png" id="3_04kvg"]
-[ext_resource type="Texture2D" uid="uid://bkctyo8o6pout" path="res://2D_images/PodiumTileSprites.png" id="3_ihlgo"]
+[ext_resource type="Texture2D" uid="uid://d0uj06egk8ngv" path="res://Art/2D_images/PodiumBase.png" id="1_8mmgn"]
+[ext_resource type="Texture2D" uid="uid://di2aeqg1yubbr" path="res://Art/2D_images/PodiumSlots.png" id="2_f77g1"]
+[ext_resource type="Texture2D" uid="uid://dh3fjbqm6wr8o" path="res://Art/2D_images/PodiumTileSprites_3wide.png" id="3_04kvg"]
+[ext_resource type="Texture2D" uid="uid://bkctyo8o6pout" path="res://Art/2D_images/PodiumTileSprites.png" id="3_ihlgo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ivwqf"]
 texture = ExtResource("1_8mmgn")

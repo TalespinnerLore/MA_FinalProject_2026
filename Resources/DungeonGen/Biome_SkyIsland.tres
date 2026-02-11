@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=6 format=3 uid="uid://bqaonnk5pg2lo"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_rfd3r"]
+[ext_resource type="Resource" uid="uid://dgm8dna5mwt7q" path="res://Resources/Units/Enemy/Stats_EnemyMagic.tres" id="2_8342w"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/Biome.gd" id="2_qgbin"]
+[ext_resource type="Resource" uid="uid://dunj0e8tqw7uv" path="res://Resources/Units/Enemy/Stats_EnemyMelee.tres" id="3_jjmap"]
+[ext_resource type="Resource" uid="uid://brn8pf5kf160g" path="res://Resources/Units/Enemy/Stats_EnemyRanged.tres" id="4_p4a57"]
+
+[resource]
+script = ExtResource("2_qgbin")
+Unique_Rooms = Array[Resource]([])
+Common_Enemies = Array[ExtResource("1_rfd3r")]([ExtResource("2_8342w"), ExtResource("3_jjmap"), ExtResource("4_p4a57")])
+Rare_Enemies = Array[ExtResource("1_rfd3r")]([])
+Common_Items = Array[Resource]([])
+Rare_Items = Array[Resource]([])
+Mini_Boss = false
+Wandering_Boss = false
+Flooded = true
+FloodTile = 2
+RiverTile = 0
+RoomDensity = 2
+RoomSize = 0
+RoundRooms = false

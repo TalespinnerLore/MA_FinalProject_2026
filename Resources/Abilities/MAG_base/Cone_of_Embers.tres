@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://cfg11x78ssvji"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_jackf"]
+
+[resource]
+script = ExtResource("1_jackf")
+ability_name = "Cone_of_Embers"
+element = 0
+valid_target = 0
+targeting = 2
+range = 2
+damage_type = 5
+damaging = true
+inflict_status = Array[Resource]([])
+BaseStats_required = [0, 0, 0, 0, 0, 0]
+Abilities_required = Array[ExtResource("1_jackf")]([])

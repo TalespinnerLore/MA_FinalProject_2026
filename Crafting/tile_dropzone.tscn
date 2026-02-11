@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b6dntdfdb23xd"]
 
-[ext_resource type="Texture2D" uid="uid://di2aeqg1yubbr" path="res://2D_images/PodiumSlots.png" id="1_a5me1"]
+[ext_resource type="Texture2D" uid="uid://di2aeqg1yubbr" path="res://Art/2D_images/PodiumSlots.png" id="1_a5me1"]
 [ext_resource type="Script" path="res://Crafting/tile_dropzone.gd" id="1_rfhjc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cypve"]

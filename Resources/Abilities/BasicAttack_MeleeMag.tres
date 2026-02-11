@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://dygpdjty37286"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_r8tsg"]
+
+[resource]
+script = ExtResource("1_r8tsg")
+ability_name = "BasicAttack_MeleeMag"
+element = 4
+valid_target = 2
+targeting = 0
+range = 1
+damage_type = 4
+damaging = true
+inflict_status = Array[Resource]([])

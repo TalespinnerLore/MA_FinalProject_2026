@@ -1,10 +1,54 @@
 class_name TOWER_CRAFTING_UI
 extends Node2D
 
+#vvvvvTO BE DELETED, OUT OF DATEvvvvv
 @export var TileID_Inventory = [0,0,0,0,1,1,1,1,2,2,3,3,4,4,5,6,6,6,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,0,0,0,0,1,1,1,1,2,2,3,3,4,4,5,6,6,6,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,0,0,0,0,1,1,1,1,2,2,3,3,4,4,5,6,6,6,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,0,0,0,0,1,1,1,1,2,2,3,3,4,4,5,6,6,6,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52]
+#^^^^^TO BE DELETED, OUT OF DATE^^^^^
+
 var inventory_grid_size = Vector2i(3,9)
 var current_page:int = -1
 var max_page_num:int = 2
+
+@export var TileID_NamedInventory = [["TEST",0],["FIRE",1],["WATER",2],["EARTH",2],["AIR",2],["FORCE",1],\
+["VOLCANO",2],["ISLANDS",2],["MESA",2],["SKY_ISLANDS",2],\
+["RIVER",0],["LAKE",0],["ROUND_ROOMS",0],["DENSE_LAYOUT",0],["SPARSE_LAYOUT",1],["ALTERNATING_SIZE_ROOMS",0],["SMALL_ROOMS",0],["LARGE_ROOMS",0],\
+["CONSUMABLES",0],["GEAR",1],["LOCKBOXES",0],["WEAPONS",0],["ARMOUR",0],["TRINKETS",2],\
+["VANGUARD",0],["WARRIOR",0],["MAGE",0],["ROGUE",0],["HEALER",0],["JESTER",0],\
+["INCREASED_MOB_DENSITY",0],["INCREASED_GOLD",1],["INCREASED_XP",0],["DECREASED_MOB_DENSITY",0],["DECREASED_GOLD",0],["DECREASED_XP",1],\
+["BEASTS",0],["ELEMENTALS",0],["UNDEAD",0],["CONSTRUCTS",0],["MORTALS",0],["WILDLINGS",0],\
+["TREASURE_ROOM",1],["MINI_BOSS",0],["MONSTER_HOUSE",2],\
+["T1_BOSS",1],["T1_FIREBOSS",1],["T1_WATERBOSS",0],["T1_EARTHBOSS",0],["T1_AIRBOSS",0],["T1_FORCEBOSS",0],\
+["T2_BOSS",0],["T2_QUADBOSS",0],["T2_FORCEBOSS",0]]
+
+func populate_inventory_named():
+	print("POPULATING_named")
+	var ID_index = -1
+	for ID in TileID_NamedInventory:
+		ID_index+=1
+		if ID[1] > 0:
+			if ID_index-(inventory_grid_size.x*inventory_grid_size.y*current_page) < (inventory_grid_size.x*inventory_grid_size.y) \
+			and ID_index-(inventory_grid_size.x*inventory_grid_size.y*current_page) >= 0:
+				var tile = basetile.instantiate()
+				tile.position = Vector2(32+32*((ID_index-inventory_grid_size.x*inventory_grid_size.y*current_page)%inventory_grid_size.x),52+32*((ID_index-inventory_grid_size.x*inventory_grid_size.y*current_page)/inventory_grid_size.x))
+				tile.TILE_ID = ID_index
+				self.add_child(tile)
+
+func adjust_count_named(TILE_ID:int, adding:bool):
+	var ID = TILE_ID
+	var amount = TileID_NamedInventory[ID][1]
+	if adding:
+		TileID_NamedInventory[ID][1] = clampi(amount+1,0,9999)
+	else:
+		TileID_NamedInventory[ID][1] = clampi(amount-1,0,9999) 
+	
+	if TileID_NamedInventory[ID][1] == 1 and (current_page+1)*inventory_grid_size.x*inventory_grid_size.y > ID and ID >= clampi(current_page-1,0,max_page_num)*inventory_grid_size.length():
+		var tile = basetile.instantiate()
+		print("ID:",ID," GridCoord: ",Vector2((ID-inventory_grid_size.x*inventory_grid_size.y*current_page)%inventory_grid_size.x,(ID-inventory_grid_size.x*inventory_grid_size.y*current_page)/3))
+		tile.position = Vector2(32+32*((ID-inventory_grid_size.x*inventory_grid_size.y*current_page)%inventory_grid_size.x),52+32*((ID-inventory_grid_size.x*inventory_grid_size.y*current_page)/inventory_grid_size.x))
+		tile.TILE_ID = ID
+		self.add_child(tile)
+	pass
+
 
 @export_category("DungeonGen")
 @export var Affinity = [[Global.DG_Mods["ELEMENTS"][0],0],[Global.DG_Mods["ELEMENTS"][1],0],[Global.DG_Mods["ELEMENTS"][2],0],[Global.DG_Mods["ELEMENTS"][3],0],[Global.DG_Mods["ELEMENTS"][4],0],[Global.DG_Mods["ELEMENTS"][5],0],[Global.DG_Mods["ELEMENTS"][6],0]]
@@ -107,17 +151,23 @@ func change_page(next:bool):
 			page.visible = true
 		else:
 			page.visible = false
+	#print(self.get_children())
 	for child in get_children():
-		if child.get_index() > max_page_num+1:
-			#if not child.has("is_placed"):
-			if not child.is_placed: #all children of index above max page num should be tiles,
+		if child is CRAFTING_TILE_TOWER:
+			#if child.TILE_ID > max_page_num+1: #FUKING OUTDATED CODE REEEEEEEEEEEEEEEEE
+			if not child.is_placed: #all objects that are 
 				child.queue_free()  # so no need for error checking here.
-			
-	populate_inventory()
+	#print(self.get_children())
+	#print(TileID_NamedInventory)
+	#for child in self.get_children():
+	#	if child is CRAFTING_TILE_TOWER:
+	#		print(child.is_placed)
+	populate_inventory_named()
 	pass
 
 const basetile = preload("res://Crafting/tile_object.tscn")
 
+#vvvvvTO BE DELETED, OUT OF DATEvvvvv
 func adjust_count(TILE_ID:int, adding:bool):
 	var ID = TILE_ID
 	if adding:
@@ -134,6 +184,7 @@ func adjust_count(TILE_ID:int, adding:bool):
 		self.add_child(tile)
 	pass
 
+#vvvvvTO BE DELETED, OUT OF DATEvvvvv
 func populate_inventory():
 	print("POPULATING")
 	var last_ID = -1
@@ -171,3 +222,14 @@ func _on_button_pressed_left() -> void:
 
 func _on_button_pressed_right() -> void:
 	change_page(true)
+
+func _on_button_start_pressed() -> void:
+	print("testing button")
+	
+	pass # Replace with function body.
+
+func print_mods():
+	var pastethis = ''
+	for key in $"../ButtonSTART/TileObject".Tile_Crafting_Mods.keys():
+		pastethis+=('["'+str(key)+'",0],')
+	print(pastethis)

@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bge6c34betll2"]
+
+[ext_resource type="Script" path="res://Units/unit.gd" id="1_g2b4t"]
+[ext_resource type="Resource" uid="uid://oygkar1j0gy3" path="res://Resources/Units/Player/Stats_Warrior.tres" id="2_d6r3d"]
+[ext_resource type="Texture2D" uid="uid://di2aeqg1yubbr" path="res://Art/2D_images/PodiumSlots.png" id="2_ugdlb"]
+[ext_resource type="Script" path="res://Units/abilities.gd" id="4_8kna7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85qmf"]
+size = Vector2(18, 18)
+
+[node name="Unit" type="CharacterBody2D"]
+script = ExtResource("1_g2b4t")
+UnitStats = ExtResource("2_d6r3d")
+HP_Current = 100
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ugdlb")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(1.35, 1.35)
+shape = SubResource("RectangleShape2D_85qmf")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 32)
+
+[node name="Abilities" type="Node" parent="."]
+script = ExtResource("4_8kna7")

@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://dxffe5d5i50fh"]
+
+[ext_resource type="Script" path="res://Objects/level.gd" id="1_rsgk2"]
+[ext_resource type="Script" path="res://Scenes/DungeonGen/DungeonGenerator.gd" id="1_sqxux"]
+[ext_resource type="Script" path="res://Scenes/DungeonGen/Biome.gd" id="2_kgi24"]
+[ext_resource type="Script" path="res://tile_map_layer.gd" id="3_dhha4"]
+[ext_resource type="Script" path="res://Objects/items.gd" id="3_osw2d"]
+[ext_resource type="Script" path="res://Objects/objects.gd" id="4_esg8x"]
+[ext_resource type="Script" path="res://Units/units_manager.gd" id="7_yny0y"]
+[ext_resource type="Script" path="res://Units/unit_group.gd" id="8_eulhk"]
+[ext_resource type="Script" path="res://Units/unit.gd" id="9_h2lrn"]
+
+[sub_resource type="Resource" id="Resource_fwurp"]
+script = ExtResource("2_kgi24")
+BiomeType = 0
+Element = 0
+Environmental_Features = []
+Unique_Rooms = []
+Common_Enemies = []
+Rare_Enemies = []
+Common_Items = ["$Moolah$"]
+Rare_Items = []
+Flooded = false
+
+[node name="Level" type="Node"]
+script = ExtResource("1_rsgk2")
+FloorBiome = SubResource("Resource_fwurp")
+
+[node name="LevelGenerator" type="Node" parent="."]
+script = ExtResource("1_sqxux")
+
+[node name="TileMap" type="TileMapLayer" parent="."]
+script = ExtResource("3_dhha4")
+
+[node name="Items" type="Node2D" parent="."]
+script = ExtResource("3_osw2d")
+
+[node name="Objects" type="Node2D" parent="."]
+script = ExtResource("4_esg8x")
+
+[node name="Units" type="Node2D" parent="."]
+script = ExtResource("7_yny0y")
+
+[node name="Player_Group" type="Node2D" parent="Units"]
+script = ExtResource("8_eulhk")
+
+[node name="Unit" type="Node2D" parent="Units/Player_Group"]
+script = ExtResource("9_h2lrn")
+is_dead = null
+has_taken_turn = null
+is_active_unit = null
+is_team_leader = null
+in_combat = null
+Team = null
+ElementalAffinity = null
+Level = null
+XP = null
+XP_to_Level = null
+XP_Mult = null
+XP_to_Reward = null
+BaseXP = null
+STR = null
+DEX = null
+VIT = null
+MAG = null
+DEF = null
+LUK = null
+STR_boost = null
+DEX_boost = null
+VIT_boost = null
+MAG_boost = null
+DEF_boost = null
+LUK_boost = null
+HP_Max = null
+HP_Current = 100
+
+[node name="Enemy_Group" type="Node2D" parent="Units"]
+script = ExtResource("8_eulhk")
+
+[node name="Unit" type="Node2D" parent="Units/Enemy_Group"]

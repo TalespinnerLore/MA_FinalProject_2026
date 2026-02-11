@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://bge6c34betll2"]
+
+[ext_resource type="Script" path="res://unit.gd" id="1_g2b4t"]
+[ext_resource type="Texture2D" uid="uid://di2aeqg1yubbr" path="res://2D_images/PodiumSlots.png" id="2_ugdlb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85qmf"]
+size = Vector2(18, 18)
+
+[node name="Unit" type="CharacterBody2D"]
+script = ExtResource("1_g2b4t")
+is_dead = null
+has_taken_turn = null
+is_active_unit = null
+is_team_leader = null
+in_combat = null
+Team = null
+ElementalAffinity = null
+Level = null
+XP = null
+XP_to_Level = null
+XP_Mult = null
+XP_to_Reward = null
+BaseXP = null
+STR = null
+DEX = null
+VIT = null
+MAG = null
+DEF = null
+LUK = null
+STR_boost = null
+DEX_boost = null
+VIT_boost = null
+MAG_boost = null
+DEF_boost = null
+LUK_boost = null
+HP_Max = null
+HP_Current = 100
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ugdlb")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.96046e-08, 5.96046e-08)
+scale = Vector2(1.35, 1.35)
+shape = SubResource("RectangleShape2D_85qmf")

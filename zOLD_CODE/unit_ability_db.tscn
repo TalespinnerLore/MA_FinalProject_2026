@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cssjqvd7hh46h"]
+
+[ext_resource type="Script" path="res://Units/unit_ability_db.gd" id="1_e4sgu"]
+
+[node name="UnitAbility_DB" type="Node"]
+script = ExtResource("1_e4sgu")

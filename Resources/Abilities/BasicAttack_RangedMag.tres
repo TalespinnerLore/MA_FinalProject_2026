@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://d02ns3e6v636q"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_w3hca"]
+
+[resource]
+script = ExtResource("1_w3hca")
+ability_name = "BasicAttack_RangedPhys"
+element = 4
+valid_target = 2
+targeting = 0
+range = 2
+damage_type = 5
+damaging = true
+inflict_status = Array[Resource]([])

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://kptl3g8vvhsx"]
-
-[ext_resource type="Script" path="res://unit_ability_data.gd" id="1_sbfca"]
-
-[node name="UnitAbility_Data" type="Node"]
-script = ExtResource("1_sbfca")

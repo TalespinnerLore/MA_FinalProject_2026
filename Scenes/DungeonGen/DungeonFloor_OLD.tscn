@@ -1,0 +1,57 @@
+[gd_scene load_steps=12 format=3 uid="uid://dxffe5d5i50fh"]
+
+[ext_resource type="Script" path="res://Objects/level.gd" id="1_slsc6"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/Biome.gd" id="2_d5ycq"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="2_qn1rn"]
+[ext_resource type="Script" path="res://Scenes/DungeonGen/DungeonGenerator.gd" id="3_16gv0"]
+[ext_resource type="Script" path="res://tile_map_layer.gd" id="4_x7e4j"]
+[ext_resource type="Script" path="res://Objects/objects.gd" id="5_swyvv"]
+[ext_resource type="Script" path="res://Objects/items.gd" id="6_fg58q"]
+[ext_resource type="Script" path="res://Units/units_manager.gd" id="7_w7l3n"]
+[ext_resource type="Script" path="res://Units/unit_group.gd" id="8_euixu"]
+[ext_resource type="PackedScene" uid="uid://bge6c34betll2" path="res://Units/unit.tscn" id="9_fvbp5"]
+
+[sub_resource type="Resource" id="Resource_fwurp"]
+script = ExtResource("2_d5ycq")
+Unique_Rooms = Array[Resource]([])
+Common_Enemies = Array[ExtResource("2_qn1rn")]([])
+Rare_Enemies = Array[ExtResource("2_qn1rn")]([])
+Common_Items = Array[Resource]([])
+Rare_Items = Array[Resource]([])
+Mini_Boss = false
+Wandering_Boss = false
+Flooded = false
+FloodTile = 0
+RiverTile = 0
+RoomDensity = 0
+RoomSize = 0
+RoundRooms = false
+
+[node name="Level" type="Node"]
+script = ExtResource("1_slsc6")
+FloorBiome = SubResource("Resource_fwurp")
+
+[node name="LevelGenerator" type="Node" parent="."]
+script = ExtResource("3_16gv0")
+
+[node name="TileMap" type="TileMapLayer" parent="."]
+script = ExtResource("4_x7e4j")
+
+[node name="Objects" type="Node2D" parent="."]
+script = ExtResource("5_swyvv")
+
+[node name="Items" type="Node2D" parent="."]
+script = ExtResource("6_fg58q")
+
+[node name="Units" type="Node2D" parent="."]
+script = ExtResource("7_w7l3n")
+
+[node name="Player_Group" type="Node2D" parent="Units"]
+script = ExtResource("8_euixu")
+
+[node name="Unit" parent="Units/Player_Group" instance=ExtResource("9_fvbp5")]
+
+[node name="Enemy_Group" type="Node2D" parent="Units"]
+script = ExtResource("8_euixu")
+
+[node name="Unit" parent="Units/Enemy_Group" instance=ExtResource("9_fvbp5")]

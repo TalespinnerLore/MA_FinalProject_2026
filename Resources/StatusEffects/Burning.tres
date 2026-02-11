@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://d7u28wdirfu7"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffect.gd" id="1_yib7j"]
+
+[resource]
+script = ExtResource("1_yib7j")
+effect_name = "Burning"
+is_negative = true
+duration = 5
+periodic = false
+periodic_trigger = 1
+basedamage = 5
+source = null

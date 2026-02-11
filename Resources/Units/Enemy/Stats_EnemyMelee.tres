@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="StatComponent" load_steps=3 format=3 uid="uid://dunj0e8tqw7uv"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_ie0ch"]
+[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/BasicAttack_MeleePhys.tres" id="1_xx2me"]
+
+[resource]
+script = ExtResource("1_ie0ch")
+BasicAttack = ExtResource("1_xx2me")
+STR_up = 3
+DEX_up = 1
+VIT_up = 2
+MAG_up = 1
+DEF_up = 3
+LUK_up = 0
+Free_Stats = 0
+Base_HP = 10
+STR = 3
+DEX = 1
+VIT = 2
+MAG = 1
+DEF = 3
+LUK = 5
+HP_Max = 10
+Base_Phys_ATK = 5.0
+Base_Mag_ATK = 5.0
+Base_Phys_DEF = 5.0
+Base_Mag_DEF = 5.0
+Base_Evasion = 5.0
+Heal_Buff_Mult = 1.1
+Melee_Mult = 1.1
+Ranged_Mult = 1.1
+Def_Mult = 1.1
+Reroll_Chance = 0.05
+STR_boost = 0
+DEX_boost = 0
+VIT_boost = 0
+MAG_boost = 0
+DEF_boost = 0
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0

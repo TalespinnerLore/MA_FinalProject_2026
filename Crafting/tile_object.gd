@@ -1,4 +1,5 @@
 extends Node2D
+class_name CRAFTING_TILE_TOWER
 
 var is_placed = false
 
@@ -53,7 +54,7 @@ func _process(delta: float) -> void:
 			cursor_offset = get_global_mouse_position()-self.global_position
 			Global.is_DraggingObject = true
 		if Input.is_action_just_pressed("RightClick"):
-			self.get_parent().adjust_count(TILE_ID,true)#what ID is it, and is it being added or removed?
+			self.get_parent().adjust_count_named(TILE_ID,true)#what ID is it, and is it being added or removed?
 			if ref_dropzone != null:
 				ref_dropzone.slot_filled = false #set slot to empty
 			remove_modifiers() #removes mdiefiers from the parent object
@@ -76,7 +77,7 @@ func _process(delta: float) -> void:
 						taken_dropzone.slot_filled = false
 					taken_dropzone = ref_dropzone
 					_on_area_2d_mouse_exited()
-					self.get_parent().adjust_count(TILE_ID,false)#what ID is it, and is it being added or removed?
+					self.get_parent().adjust_count_named(TILE_ID,false)#what ID is it, and is it being added or removed?
 				else:
 					tween.tween_property(self,"position",initial_pos,0.1).set_ease(tween.EASE_OUT)
 			else:

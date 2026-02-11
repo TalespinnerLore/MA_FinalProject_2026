@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=4 uid="uid://dspeh61ajoxhb"]
 
-[ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://DungeonGen/Dungeon_Tileset.tres" id="1_mgkh6"]
+[ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_mgkh6"]
 [ext_resource type="TileSet" uid="uid://ty37cym0krxg" path="res://Crafting/tower_crafting_ui.tres" id="2_3abey"]
-[ext_resource type="FontFile" uid="uid://bme72xoxft30d" path="res://Tiny5-Regular.ttf" id="3_148se"]
+[ext_resource type="FontFile" uid="uid://bme72xoxft30d" path="res://Art/Tiny5-Regular.ttf" id="3_148se"]
 [ext_resource type="PackedScene" uid="uid://b6dntdfdb23xd" path="res://Crafting/tile_dropzone.tscn" id="3_50506"]
 [ext_resource type="PackedScene" uid="uid://d1yshb420qmo7" path="res://Crafting/tile_object.tscn" id="5_q1qgn"]
 
