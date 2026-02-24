@@ -1,35 +1,85 @@
-[gd_scene load_steps=6 format=3 uid="uid://bge6c34betll2"]
+[gd_scene load_steps=10 format=3 uid="uid://bge6c34betll2"]
 
 [ext_resource type="Script" path="res://Units/unit.gd" id="1_g2b4t"]
 [ext_resource type="Resource" uid="uid://oygkar1j0gy3" path="res://Resources/Units/Player/Stats_Warrior.tres" id="2_d6r3d"]
-[ext_resource type="Texture2D" uid="uid://di2aeqg1yubbr" path="res://Art/2D_images/PodiumSlots.png" id="2_ugdlb"]
+[ext_resource type="PackedScene" uid="uid://dp6qyj1ggegbu" path="res://Utility/Components/HP_module.tscn" id="3_1q7qa"]
 [ext_resource type="Script" path="res://Units/abilities.gd" id="4_8kna7"]
+[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/BasicAttack_MeleePhys.tres" id="4_wxsla"]
+[ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/Cone_of_Embers.tres" id="5_4miw2"]
+[ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="5_aevor"]
+[ext_resource type="Resource" uid="uid://cv14lef7fcshm" path="res://Resources/Abilities/DEX_base/Piercing_Shot.tres" id="6_6q1lq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85qmf"]
-size = Vector2(18, 18)
+size = Vector2(16, 16)
 
 [node name="Unit" type="CharacterBody2D"]
 script = ExtResource("1_g2b4t")
 UnitStats = ExtResource("2_d6r3d")
 HP_Current = 100
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Abilities" type="Node" parent="."]
+script = ExtResource("4_8kna7")
+BasicAttack = ExtResource("4_wxsla")
+Slot_1 = ExtResource("5_4miw2")
+Slot_2 = ExtResource("6_6q1lq")
+Slot_3 = ExtResource("5_4miw2")
+Slot_4 = ExtResource("5_4miw2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ugdlb")
-region_enabled = true
-region_rect = Rect2(32, 0, 32, 32)
+texture = ExtResource("5_aevor")
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
+
+[node name="HP_module" parent="Sprite2D" instance=ExtResource("3_1q7qa")]
+position = Vector2(0, -24)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5.96046e-08, 5.96046e-08)
-scale = Vector2(1.35, 1.35)
 shape = SubResource("RectangleShape2D_85qmf")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+visible = false
 target_position = Vector2(0, 32)
 
-[node name="Abilities" type="Node" parent="."]
-script = ExtResource("4_8kna7")
+[node name="up" type="RayCast2D" parent="."]
+position = Vector2(0, -16)
+target_position = Vector2(0, -16)
+hit_from_inside = true
+
+[node name="down" type="RayCast2D" parent="."]
+position = Vector2(0, 16)
+target_position = Vector2(0, 16)
+hit_from_inside = true
+
+[node name="left" type="RayCast2D" parent="."]
+position = Vector2(-16, 0)
+target_position = Vector2(-16, 0)
+hit_from_inside = true
+
+[node name="right" type="RayCast2D" parent="."]
+position = Vector2(16, 0)
+target_position = Vector2(16, 0)
+hit_from_inside = true
+
+[node name="upleft" type="RayCast2D" parent="."]
+position = Vector2(-16, -16)
+target_position = Vector2(-16, -16)
+hit_from_inside = true
+
+[node name="upright" type="RayCast2D" parent="."]
+position = Vector2(16, -16)
+target_position = Vector2(16, -16)
+hit_from_inside = true
+
+[node name="downleft" type="RayCast2D" parent="."]
+position = Vector2(-16, 16)
+target_position = Vector2(-16, 16)
+hit_from_inside = true
+
+[node name="downright" type="RayCast2D" parent="."]
+position = Vector2(16, 16)
+target_position = Vector2(16, 16)
+hit_from_inside = true

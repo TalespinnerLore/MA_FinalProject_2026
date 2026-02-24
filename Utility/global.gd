@@ -17,6 +17,16 @@ func randb():
 					Vector2i.UP+Vector2i.LEFT,Vector2i.UP+Vector2i.RIGHT,\
 					Vector2i.DOWN+Vector2i.LEFT,Vector2i.DOWN+Vector2i.RIGHT]
 
+var tile_size = 32
+
+func grid_to_pos(coord:Vector2i, pos:Vector2):
+	coord = Vector2(coord)
+	var to_grid = (pos-Vector2(tile_size/2,tile_size/2)) / tile_size
+	var to_pos = Vector2(coord*tile_size) + Vector2(tile_size/2,tile_size/2)
+	return([to_grid,to_pos]) #0 is grid coords, 1 is posistion according to Godot
+
+
+
 var is_DraggingObject = false
 
 enum RARITIES {BASIC,RARE,ELITE,UNIQUE}

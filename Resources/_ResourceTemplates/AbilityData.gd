@@ -7,6 +7,8 @@ enum TargetType {Front, Line, Cone, Circle, Specify}
 enum Validity {Enemy, Ally, Any, Self}
 
 @export var ability_name:String = 'Default Attack'
+@export var sprite:Texture2D
+@export var vfx:Texture2D
 @export var element:ElementType = 4
 @export var valid_target:Validity = 0 #Enemy, Ally, Any, Self
 @export var targeting:TargetType = 0 #Front, Line, Cone, Circle, Specify

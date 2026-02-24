@@ -1,6 +1,8 @@
 extends Resource
 class_name Biome
 
+@export var BiomeID:BIOMES = 0
+
 @export var Unique_Rooms:Array[Resource]
 @export var Common_Enemies:Array[StatComponent]
 @export var Rare_Enemies:Array[StatComponent]
@@ -16,7 +18,7 @@ class_name Biome
 @export var RoomSize:ROOM_SIZE
 @export var RoundRooms:bool = false
 #enum ELEMENTS {FIRE,WATER,EARTH,AIR,FORCE,LIGHT,DARK}
-#enum BIOMES{test,VOLCANO,ISLAND,MESA,SKY_ISLAND}
+enum BIOMES{test,VOLCANO,ISLAND,MESA,SKY_ISLAND}
 enum ENV_FEATURES{RIVER,LAKE,FLOODED,BARREN}
 enum FLOOD_TILE{WATER,LAVA,AIR}
 enum RIVER_TILE{WATER,LAVA}

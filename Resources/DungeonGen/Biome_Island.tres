@@ -8,8 +8,9 @@
 
 [resource]
 script = ExtResource("1_cs21w")
+BiomeID = 2
 Unique_Rooms = Array[Resource]([])
-Common_Enemies = Array[ExtResource("1_tmr2p")]([])
+Common_Enemies = Array[ExtResource("1_tmr2p")]([ExtResource("2_c4iep"), ExtResource("3_xd75s"), ExtResource("4_loclw")])
 Rare_Enemies = Array[ExtResource("1_tmr2p")]([ExtResource("2_c4iep"), ExtResource("3_xd75s"), ExtResource("4_loclw")])
 Common_Items = Array[Resource]([])
 Rare_Items = Array[Resource]([])
@@ -17,6 +18,7 @@ Mini_Boss = false
 Wandering_Boss = false
 Flooded = true
 FloodTile = 0
+RiverTile = 0
 RoomDensity = 0
 RoomSize = 0
 RoundRooms = true

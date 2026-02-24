@@ -1,3 +1,4 @@
+class_name Dungeon_Floor
 extends TileMapLayer
 
 @export var Width_X = 70
@@ -764,7 +765,7 @@ func populate_tile_terrain():
 		
 	pass
 
-var terrain_set = 2
+
 
 
 func what_is_this_tile(x,y):
@@ -795,12 +796,22 @@ func what_is_this_tile(x,y):
 		pass
 
 	pass
+	
+var terrain_set = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#seed(randi())
-	seed(129)
-	print("BEGIN - SDIBRIVUN")
+	terrain_set = DungeonData.floor_biome.BiomeID
+	Max_Size = DungeonData.max_size
+	Min_Size = DungeonData.min_size
+	Room_Attempts = DungeonData.room_attempts
+	Interconnectivity = DungeonData.interconnectivity
+	Rounded = DungeonData.rounded
+	SpawnRiver = DungeonData.spawn_river
+
+	seed(randi())
+	#seed(129)
+	#print("BEGIN - SDIBRIVUN")
 	InitializeGrid()
 	FillGrid()
 	#SetTiles(Width_X,Height_Y,TileGrid) #PLACES TESTINT TILESET, EASIER TO BUGFIX SOME THINGS.
@@ -808,12 +819,26 @@ func _ready() -> void:
 	#for tile in FillDeadEndHallway(Vector2i(1,6)):
 	#	set_cell(tile,0, Vector2i(0,3))
 	#what_is_this_tile(1,19)
-	print("SDIBRIVUN - END")
+	#print("SDIBRIVUN - END")
+	var validspawn = false
+	var spawnpoint:Vector2i
+	while validspawn == false:
+		spawnpoint = cells_Ground.pick_random()
+		if AllHallTiles.has(spawnpoint):
+			validspawn = false
+		else:
+			validspawn = true
+	$"../Unit_Manager/Player_Group/Unit".set_spawn(spawnpoint)
+	
+	$"../Unit_Manager/Enemy_Group".temp_distribute()
+			
+			
 	
 	#print(Rooms[0][2])
 		
 
 @export var bugfixing = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		_ready()

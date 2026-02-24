@@ -10,7 +10,7 @@ var current_page:int = -1
 var max_page_num:int = 2
 
 @export var TileID_NamedInventory = [["TEST",0],["FIRE",1],["WATER",2],["EARTH",2],["AIR",2],["FORCE",1],\
-["VOLCANO",2],["ISLANDS",2],["MESA",2],["SKY_ISLANDS",2],\
+["VOLCANO",2],["ISLANDS",4],["MESA",0],["SKY_ISLANDS",2],\
 ["RIVER",0],["LAKE",0],["ROUND_ROOMS",0],["DENSE_LAYOUT",0],["SPARSE_LAYOUT",1],["ALTERNATING_SIZE_ROOMS",0],["SMALL_ROOMS",0],["LARGE_ROOMS",0],\
 ["CONSUMABLES",0],["GEAR",1],["LOCKBOXES",0],["WEAPONS",0],["ARMOUR",0],["TRINKETS",2],\
 ["VANGUARD",0],["WARRIOR",0],["MAGE",0],["ROGUE",0],["HEALER",0],["JESTER",0],\
@@ -225,8 +225,19 @@ func _on_button_pressed_right() -> void:
 
 func _on_button_start_pressed() -> void:
 	print("testing button")
+	DungeonData.Affinity = Affinity
+	DungeonData.Enemies = Enemies
+	DungeonData.Environments = Environments
+	DungeonData.Loot = Loot
+	DungeonData.Special_Features = Special_Features
+	DungeonData.choose_biome()
+	DungeonData.open_level()
 	
 	pass # Replace with function body.
+
+
+
+
 
 func print_mods():
 	var pastethis = ''

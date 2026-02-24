@@ -8,6 +8,7 @@
 
 [resource]
 script = ExtResource("2_pt78k")
+BiomeID = 3
 Unique_Rooms = Array[Resource]([])
 Common_Enemies = Array[ExtResource("1_hfycw")]([ExtResource("2_dr3nc"), ExtResource("3_wb55p"), ExtResource("4_p6308")])
 Rare_Enemies = Array[ExtResource("1_hfycw")]([])

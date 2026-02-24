@@ -23,7 +23,8 @@ func init() -> void:
 	for child in get_children():
 		child.init()
 		all_groups.append(child)
-		child.attack.connect(_process_attack)
+		child.AbilityUsed.connect(_process_ability)
+	#	child.attack.connect(_process_attack)
 	#	child.turn_complete.connect(_on_turn_complete)
 		child.defeated.connect(_on_group_defeated)
 	 	
@@ -70,11 +71,62 @@ func _process_attack(ActionDef,facing,source_coord,attack_source_stats):
 	if ActionDef["valid_target"] == 1 or ActionDef["valid_target"] == 2: #check if hits Ally or Any
 		pass
 
-var tilegrid ########GET REFERENCE TO GRID
+const Ability_vfx = preload("res://Objects/AbilityVFX.tscn")
 
-func calc_hit_tiles(targeting:String, range:int, facing:Vector2i, source_coord:Vector2i):
+func _process_ability(Ability:AbilityData,Source):
+	print(Source.name," uses ",Ability.ability_name,"!")
+	var hit_tiles = calc_hit_tiles(Ability.targeting,Ability.range,Source.facing,Source.self_coords)
+	#print(hit_tiles)
+	var units_to_check:Array[Unit_Instance]
+	var does_pierce = false
+	if Ability.targeting != 0: #FRONT
+		does_pierce = true
+	print("Hit Tiles: ",hit_tiles)
+	for tile in hit_tiles:
+		#print("Hit Tile: ",tile)
+		if does_pierce:
+			var vfx = Ability_vfx.instantiate()
+			vfx.texture = Ability.vfx
+			print(Ability.vfx.get_size())
+			vfx.position = Global.grid_to_pos(tile,Vector2.ZERO)[1]
+			$"../VFX".add_child(vfx)
+		for group in all_groups:
+			#print("Group: ",group.name)
+			for child in group.get_children():
+				#print("Unit: ",child,", Coords: ",child.self_coords)
+				if Vector2i(child.self_coords) == Vector2i(tile): # vvv ENEMY, ALLY, ANY, SELF
+					if Source.Team == child.Team and Ability.valid_target != 0: 
+					#if same team and can hit ally, any or self, do hit.
+						child.ability_effect_calculations(Ability,Source)
+						if ! does_pierce:
+							#print("not pierce swewsvsdivusiuvhsdivhs8dhv")
+							var vfx = Ability_vfx.instantiate()
+							vfx.position = Global.grid_to_pos(tile,Vector2.ZERO)[1]
+							$"../VFX".add_child(vfx)
+							break
+						else:
+							pass
+							#print("IS pierce swewsvsdivusiuvhsdivhs8dhv")
+					elif Source.Team != child.Team and Ability.valid_target != 1 and Ability.valid_target != 3:
+					#if different team and can hit enemy or any, do hit.
+						child.ability_effect_calculations(Ability,Source)
+						if ! does_pierce:
+								#print("not pierce swewsvsdivusiuvhsdivhs8dhv")
+								var vfx = Ability_vfx.instantiate()
+								vfx.global_position = Global.grid_to_pos(tile,Vector2.ZERO)[1]
+								$"../VFX".add_child(vfx)
+								break
+	pass
+
+@onready var tilegrid = $"../TileMapLayer"########GET REFERENCE TO GRID
+
+func calc_hit_tiles(targeting:int, range:int, facing:Vector2i, source_coord:Vector2i):
+	var targettypes = ["Front", "Line", "Cone", "Circle", "Specify"]
+	var target = targettypes[targeting]
+	print("Targeting: ",target,"Range: ",range,"Facing: ",facing,"SourceCoord",source_coord)
 	var relative_tiles = []
-	match targeting: #Front, Line, Cone, Circle, Specify
+	print(targeting,target)
+	match target: #Front, Line, Cone, Circle, Specify
 		"Front":
 			for i in range:
 				relative_tiles.append(facing*(i+1))
@@ -83,31 +135,34 @@ func calc_hit_tiles(targeting:String, range:int, facing:Vector2i, source_coord:V
 			var i = 0
 			while fin == false:
 				i+=1
-				if tilegrid.get_terrain(source_coord+facing*i) != 0: #if the next tile isn't a Wall, continue.
-					relative_tiles.append(source_coord+facing*i)
+				var tile = source_coord+(facing*i)
+				print("LINE_TILE: ",tile)
+				var tile_type = tilegrid.what_is_this_tile(tile.x,tile.y)
+				if  tile_type == 'FLOOR' or tile_type == 'WATER': #if the next tile isn't a Wall, continue.
+					relative_tiles.append((facing*i))
 				else:
 					fin = true
 			pass
 		"Cone": #expanding cone of tiles, tight if straight, in a checker pattern in diagonal.
 			if facing.length() > 1:
 				for r in range:
-					relative_tiles.append[facing*(r+1)]#
+					relative_tiles.append(facing*(r+1))#
 					if r > 0:
 						for step in r:
-							relative_tiles.append[facing*(r+1) + Vector2i(facing.x,0)]
-							relative_tiles.append[facing*(r+1) + Vector2i(0,facing.y)]
-			else:
+							relative_tiles.append(facing*(r+1) + Vector2i(facing.x,0))
+							relative_tiles.append(facing*(r+1) + Vector2i(0,facing.y))
+			else: #STRAIGHT-ON CONE
 				var cone_spread = Vector2i.ZERO
 				for r in range:
-					relative_tiles.append[facing*(r+1)]
+					relative_tiles.append(Vector2i(facing*(r+1)))
 					if facing.x != 0:
 						cone_spread = Vector2i(0,1)
 					else:
 						cone_spread = Vector2i(1,0)
 					if r > 0:
 						for step in r:
-							relative_tiles.append[facing*(r+1) + cone_spread]
-							relative_tiles.append[facing*(r+1) - cone_spread]
+							relative_tiles.append(facing*(r+1) + cone_spread*(step+1))
+							relative_tiles.append(facing*(r+1) - cone_spread*(step+1))
 			pass
 		"Circle":
 			relative_tiles = Circular_Area(range,source_coord,false)
@@ -116,7 +171,13 @@ func calc_hit_tiles(targeting:String, range:int, facing:Vector2i, source_coord:V
 		"Specify":
 			#relative_tiles.append[target_tile]
 			pass
-	return(relative_tiles)
+	print("Sourcecoord: ",source_coord,"relative tiles: ",relative_tiles)
+	var real_tiles = []
+	for tile in relative_tiles:
+		real_tiles.append(tile+source_coord)
+		#print("real_tiles: ",real_tiles)
+	#print("+sourcecoord",relative_tiles)
+	return(real_tiles)
 
 func Circular_Area(radius,Tile_Location,Relative):
 	var side_erase = floori(((radius*2)+1)/4)

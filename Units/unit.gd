@@ -3,8 +3,8 @@ extends CharacterBody2D
 
 signal turn_start
 signal move_complete
-signal attack_start(ActionDef)
-signal attack_end(ActionDef)
+signal attack_start(AbilityData)#attack_start(ActionDef)
+#signal attack_end(ActionDef)
 signal unit_defeated
 signal unit_hit
 signal damaged
@@ -17,10 +17,12 @@ signal turn_complete
 @export_category("UNIT STATUS")
 @export var is_dead:bool = false
 @export var has_taken_turn:bool = false
-@export var is_active_unit:bool = false
 @export var is_team_leader:bool = false
+@export var is_active_unit:bool = false
+var is_acting:bool = false
+@export var has_moved:bool = false
 @export var in_combat = false
-
+var facing:= Vector2i(1,0)
 @export var Team:Teams = 0
 @export var TeamStrategy:Strategy = 0
 @export var self_coords = Vector2i(0,0)
@@ -37,10 +39,10 @@ enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_R
 ####################################################
 #Experience
 @export_category('XP Stats')
-@export var Level:int = 1
+@export var Level:int = 0
 @export var XP:int = 0
 @export var XP_to_Level:int = 50
-#var XP_to_Level_1to2 = 50
+#var XP_to_Level_0to1 = 50
 
 @export var XP_Mult = 1.0
 @export var XP_to_Reward = 5
@@ -89,7 +91,7 @@ func IncreaseStats(str:int,dex:int,vit:int,mag:int,def:int,luk:int,free:int):
 #CalculatedStats
 @export var HP_Max = 25
 @export var HP_Current = HP_Max
-var Base_Phys_ATK = 5
+@export var Base_Phys_ATK = 5
 var Base_Mag_ATK = 5
 var Base_Phys_DEF = 5
 var Base_Mag_DEF = 5
@@ -99,8 +101,12 @@ var Melee_Mult = 1.0
 var Ranged_Mult = 1.0
 var Def_Mult = 1.0
 var Reroll_Chance = 0.05
+var Crit_Boost = 0.0
 
 func set_stats():
+	UnitStats.calc_stats()
+	HP_Max = UnitStats.HP_Max
+	HP_Current = HP_Max
 	STR = UnitStats.STR
 	DEX = UnitStats.DEX
 	VIT = UnitStats.VIT
@@ -138,14 +144,51 @@ func reroll_outcome(attempts:int, go_lower:bool, prev_outcome:float, threshold:f
 #ATTACK CODE
 ####################################################
 
+func ability_effect_calculations(Ability:AbilityData,Source):
+	var amount = 0
+	print(Source," hits ",self.name)
+	var hitcrit = calc_evasion_and_crit(Source.Base_Evasion,Source.Crit_Boost)
+	if Ability.valid_target != 0:
+		hitcrit = [true,hitcrit[1]]
+	if hitcrit[0] == true:
+		if Ability.damaging == true:
+			match Ability.damage_type:
+				0:
+					amount = Source.Base_Phys_ATK
+				1:
+					amount = Source.Base_Phys_ATK * Source.Melee_Mult
+					print(Source.Base_Phys_ATK, " * ",Source.Melee_Mult," = ",amount)
+				2:
+					amount = Source.Base_Phys_ATK * Source.Ranged_Mult
+				3:
+					amount = Source.Base_Mag_ATK
+				4:
+					amount = Source.Base_Mag_ATK * Source.Melee_Mult
+				5:
+					amount = Source.Base_Mag_ATK * Source.Ranged_Mult
+				6:
+					amount = 1
+			print("Before: ",HP_Current)
+			HP_Current -= calc_damage(Ability.damage_type,amount,hitcrit[1],Ability.element)
+			$Sprite2D/HP_module._take_damage(calc_damage(Ability.damage_type,amount,hitcrit[1],Ability.element))
+			print("After: ",HP_Current)
+		if Ability.inflict_status.size() > 0:
+			pass
+	else:
+		print("MISS!")
+	pass 
 
-func calc_evasion_and_crit(accuracy,crit_boost:float): #runs on TARGETED UNIT
-	var Hit_Chance = (accuracy - Base_Evasion)*0.05 #total attacking dex - defending dex
-	var Crit_Chance = ((Hit_Chance-1.0)/5.0) + crit_boost
+func calc_evasion_and_crit(Accuracy,crit_boost:float): #runs on TARGETED UNIT
+	var Miss_Chance = 0.0
+	var Crit_Chance = 0.0 + crit_boost
+	if Base_Evasion > Accuracy:
+		Miss_Chance += ((Base_Evasion-Accuracy)*0.01)
+		Crit_Chance -= Miss_Chance
+	elif Accuracy > Base_Evasion:
+		Crit_Chance += ((Accuracy-Base_Evasion)*0.01)
 	
-	#Miss_Chance = abs(Miss_Chance) #needs to be positive
 	var hit_roll = randf_range(0.0,1.0)
-	if hit_roll <= Hit_Chance:
+	if hit_roll <= Miss_Chance:
 		return [false, false] #[HIT, CRIT?]
 	else:
 		var crit_roll = randf_range(0.0,1.0)
@@ -153,30 +196,33 @@ func calc_evasion_and_crit(accuracy,crit_boost:float): #runs on TARGETED UNIT
 			return [true, true] #[HIT, CRIT?]
 		else:
 			return [true, false] #[HIT, CRIT?]
-	
-	
-			
-	
-		
 
-func calc_damage(Damage_Type:int,amount:int,crit:bool,AttackingElement:ElementType): #runs on HIT UNIT
+
+func calc_damage(Damage_Type:int,amount:int,crit:bool,AttackingElement:int): #runs on HIT UNIT
 	var damage_taken = 0
 	if crit == true:
+		print("CRITICAL HIT!")
 		amount *= 2 #may change to 1.5, needs testing
 	amount *= ElementalWeakness(AttackingElement,ElementalAffinity)
+	print("Damamge with multipliers: ",amount)
 		
 	if Damage_Type == 0 or Damage_Type == 1 or Damage_Type == 2: 
 		#Phys Generic      #Phys Melee         #Phys Ranged
 		damage_taken = amount-(Base_Phys_DEF*Def_Mult)
+		print("Damage negated by defense: ",roundi(Base_Phys_DEF*Def_Mult))
 	elif Damage_Type == 3 or Damage_Type == 4 or Damage_Type == 5:
 		#Magic Generic      #Magic Melee         #Magic Ranged
 		damage_taken = amount-(Base_Mag_DEF*Def_Mult)
+		print("Damage negated by defense: ",roundi(Base_Mag_DEF*Def_Mult))
 	else:
-		damage_taken = amount*(1-Def_Mult)
-		#totally generic damage, also here as an emergency stop so the game diesnt break in this scenario.
-		
+		damage_taken = amount/Def_Mult
+		print("Damage negated by defense: ",roundi(amount - amount/Def_Mult))
+		#totally generic damage, also here as an emergency stop so the game doesn't break in this scenario.
+	
 	if damage_taken < 1:
 		damage_taken = 1 #all hits deal at least 1 damage, to ensure deadlocks can't happen in combat.
+	damage_taken = roundi(damage_taken)
+	print("Damage after defence: ",damage_taken)
 	return damage_taken
 
 
@@ -229,7 +275,7 @@ func ElementalWeakness(AttackingElement:ElementType, DefendingElement:ElementTyp
 	return 1.0 #if there is no elemental interaction, default to a 1x multiplier.
 
 func AttackTiles(CoordList:Array, Damage_Type:int, AttackingElement:ElementType, Base_Damage:int, Friendly_Fire:bool, Ally_Only:bool, Damaging:bool):
-	var tilegrid: TileMapLayer
+	var tilegrid:TileMapLayer
 	for tile in CoordList:
 		if (tilegrid.has_unit(tile) == true and tilegrid.get_team(tile) != Team and Friendly_Fire != true) \
 		or (tilegrid.has_unit(tile) == true and tilegrid.get_team(tile) == Team and Ally_Only == true) \
@@ -259,52 +305,102 @@ func grid_to_pos(coord, pos):
 
 
 ####################################################
-#BASIC MOVEMENT CODE
+#BASIC MOVEMENT/ACTION CODE
 ####################################################
 
 func _physics_process(delta: float) -> void:
-	if is_active_unit and Team == Teams.PLAYER and is_team_leader:
-		if not moving:
-			if get_dir_input() != Vector2.ZERO:
-				move(get_dir_input())
-			if Input.is_action_just_pressed("LeftClick"):
-				pass #BASIC ATTACK HERE
+	if is_active_unit and Team == Teams.PLAYER and is_team_leader and ! has_moved:
+		is_acting = true
+		check_move_input()
+		if Input.is_action_just_pressed("LeftClick"):
+			print("attempt emit signal")
+			#get_tree().get_node
+			emit_signal("attack_start",$Abilities.BasicAttack,self)
+			has_moved = true
+			_on_turn_start()
+			pass #BASIC ATTACK HERE ^^^
+		
+		elif Input.is_action_just_pressed("Ability_1"):
+			emit_signal("attack_start",$Abilities.Slot_1,self)
+		elif Input.is_action_just_pressed("Ability_2"):
+			emit_signal("attack_start",$Abilities.Slot_2,self)
+		elif Input.is_action_just_pressed("Ability_3"):
+			emit_signal("attack_start",$Abilities.Slot_3,self)
+		elif Input.is_action_just_pressed("Ability_4"):
+			emit_signal("attack_start",$Abilities.Slot_4,self)
+		#if not moving:
+		#	if get_dir_input() != Vector2.ZERO:
+		#		move(get_dir_input())
+		#	
 				
 			
+
+const tile_size = 32
+var sprite_node_pos_tween: Tween
+var move_duration:= 0.185
+
+func check_move_input():
+	#FOR SMOOTH MOVEMENT WITH HOLDING BUTTON, CHANGE is_action_just_pressed() FOR is_action_pressed().
+	#NEED TO MAKE SURE THE REST OF THE TURN CYCLE GOES SMOOTHLY, AND ONLY WHEN NOT IN COMBAT STATE.
+	if ! sprite_node_pos_tween or ! sprite_node_pos_tween.is_running():
+		if Input.is_key_pressed(KEY_SHIFT):
+			if Input.is_action_pressed("up") and Input.is_action_pressed("left"):
+				_select_direction(Vector2.UP+Vector2.LEFT)
+				if ! $upleft.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+					_move(Vector2.UP+Vector2.LEFT)
+			elif Input.is_action_pressed("up") and Input.is_action_pressed("right"):
+				_select_direction(Vector2.UP+Vector2.RIGHT)
+				if ! $upright.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+					_move(Vector2.UP+Vector2.RIGHT)
+			elif Input.is_action_pressed("down") and Input.is_action_pressed("left"):
+				_select_direction(Vector2.DOWN+Vector2.LEFT)
+				if ! $downleft.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+					_move(Vector2.DOWN+Vector2.LEFT)
+			elif Input.is_action_pressed("down") and Input.is_action_pressed("right"):
+				_select_direction(Vector2.DOWN+Vector2.RIGHT)
+				if ! $downright.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+					_move(Vector2.DOWN+Vector2.RIGHT)
+		else:
+			if Input.is_action_just_pressed("up"):
+				_select_direction(Vector2.UP)
+				if ! $up.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+					_move(Vector2.UP)
+			elif Input.is_action_just_pressed("down"):
+				_select_direction(Vector2.DOWN)
+				if ! $down.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+					_move(Vector2.DOWN)
+			elif Input.is_action_just_pressed("left"):
+				_select_direction(Vector2.LEFT)
+				if ! $left.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+					_move(Vector2.LEFT)
+			elif Input.is_action_just_pressed("right"):
+				_select_direction(Vector2.RIGHT)
+				if ! $right.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+					_move(Vector2.RIGHT)
+			pass
 	
+	pass
 
-func get_dir_input():
-	var input_direction = Input.get_vector("left", "right", "up", "down")
-	#match input_direction:
-	#print(input_direction)
-	return input_direction
+func _move(dir:Vector2):
+	global_position += dir*tile_size
+	$Sprite2D.global_position -= dir * tile_size #lake the spirte lag behind by a tile
+	facing = Vector2i(dir)
+	if sprite_node_pos_tween: 
+		sprite_node_pos_tween.kill()
+	sprite_node_pos_tween = create_tween()
+	sprite_node_pos_tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	sprite_node_pos_tween.tween_property($Sprite2D, "global_position", global_position, move_duration).set_trans(Tween.TRANS_SINE)
+	#^^^actual movment is snappy, but visually the sprite moves smoothly - CAMERA TIED TO SPRITE, OR CHOPPY AS FUCK! My eyes...
+	get_self_coords()
+	has_moved = true
+	is_acting = false
+	emit_signal("turn_complete")
+	_on_turn_start()
+	pass
 
-
-var tile_size = 32
-var animation_speed = 3
-var moving  = false
-
-
-
-var directions = [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN,\
-Vector2.UP+Vector2.RIGHT, Vector2.UP+Vector2.LEFT, Vector2.DOWN+Vector2.RIGHT, Vector2.DOWN+Vector2.LEFT]
-
-
-
-@onready var ray = $RayCast2D
-
-func move(dir):
-	ray.target_position = dir * tile_size #directions[dir] * tile_size
-	ray.force_raycast_update()
-	if !ray.is_colliding():
-		#position += inputs[dir] * tile_size
-		var tween = create_tween()
-		tween.tween_property(self, "position",\
-			position + dir * tile_size, 1.0/animation_speed).set_trans(Tween.TRANS_LINEAR)
-		moving = true #^directions[dir]
-		await tween.finished
-		moving = false
-		emit_signal("move_complete")
+func _select_direction(dir:Vector2):
+	facing = Vector2i(dir)
+	return facing
 
 #######################################
 #SPAWN CODE
@@ -312,35 +408,53 @@ func move(dir):
 
 
 func init(is_player_controlled):
+	print(self," INITIALIZED")
+	
 	print("unit ", self.name, " INITIALIZED")
 	set_stats()
-	
+	$Sprite2D/HP_module.hp = HP_Max
+	$Sprite2D/HP_module.maxhp = HP_Max
 	if is_player_controlled:
 		Team = Teams.PLAYER
 	else: #FIX THIS LATER TO ACCOUNT FOR NPC AND ALLY UNITS
 		Team = Teams.ENEMY
+		$Sprite2D.texture = UnitStats.Sprite
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += Vector2.ONE * tile_size/2
+	get_self_coords()
+	print(self,"self_coords: ",self_coords)
 
 func set_spawn(spawnpoint):
 	position = grid_to_pos(spawnpoint,Vector2(0,0))[1] #the [1] gtes just the grid position
 
+
+
+
 func _ready():
 	pass
+
+#######################################
+#DEATH CODE
+#######################################
+
+func _on_death():
+	if Team == Teams.ENEMY:
+		#Award EXP
+		#Roll Dropchance --- random pool
+		#Roll Dropchance --- equipped gear
+		pass
+	else:
+		pass
+	#Play Death ANIMATION
+	#
+	queue_free()
 
 
 #######################################
 #ABILITIES CODE
 #######################################
-var BasicAttack = ['Basic Attack', INF, 'MeleePhys', 'Front', 1, false, false, true]
-var BasicAttacks = "Default Attack (Physical)"
-var Slot1 = [] #[Name, MaxUses, DamageType, Targeting, Range, FriendlyFire, AllyOnly,Damaging]
-var Slot2 = []
-var Slot3 = []
-var Slot4 = []
-var GearSlot_Weapon = []
-var GearSlot_Armour = []
-var GearSlot_Trinket = []
+
+
 
 #var Available_Abilities = [ActionDef]
 
@@ -348,9 +462,14 @@ var GearSlot_Trinket = []
 
 func _on_turn_start() -> void:
 	is_active_unit = true
+	has_moved = false
 	if Team == Teams.PLAYER or Team == Teams.ALLY:
 		if is_team_leader:
 			emit_signal("waiting_for_instructions",self_coords)
 			pass #wait for instructions
 		else:
 			pass
+
+func reset_turn():
+	print("reset turn - ",self.name)
+	pass

@@ -2,7 +2,7 @@ extends Node2D
 class_name CRAFTING_TILE_TOWER
 
 var is_placed = false
-
+#var is_in_inventory = true
 var is_draggable = false
 var is_inside_dropzone = false
 var ref_dropzone
@@ -49,21 +49,21 @@ func remove_modifiers():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if is_draggable:
-		if Input.is_action_just_pressed("Click"):
+		if Input.is_action_just_pressed("LeftClick"):
 			initial_pos = self.global_position
 			cursor_offset = get_global_mouse_position()-self.global_position
 			Global.is_DraggingObject = true
-		if Input.is_action_just_pressed("RightClick"):
+		if Input.is_action_just_pressed("RightClick") and is_inside_dropzone:
 			self.get_parent().adjust_count_named(TILE_ID,true)#what ID is it, and is it being added or removed?
 			if ref_dropzone != null:
 				ref_dropzone.slot_filled = false #set slot to empty
 			remove_modifiers() #removes mdiefiers from the parent object
 			queue_free() #remove tile object
 			
-		if Input.is_action_pressed("Click"): #While dragging, tile follows cursor.
+		if Input.is_action_pressed("LeftClick"): #While dragging, tile follows cursor.
 			self.global_position = get_global_mouse_position()
 			
-		elif Input.is_action_just_released("Click"): #When dropped, either move back to initial location,
+		elif Input.is_action_just_released("LeftClick"): #When dropped, either move back to initial location,
 			Global.is_DraggingObject = false         # or into place in hovered slot.
 			var tween = get_tree().create_tween()
 			if is_inside_dropzone and "slot_filled" in ref_dropzone:
@@ -93,6 +93,7 @@ func _on_area_2d_mouse_entered() -> void:
 	
 	if not Global.is_DraggingObject:
 		is_draggable = true
+		print("isdraggable: ",is_draggable)
 		#scale = Vector2(1.05,1.05)
 		$ColorRect.visible = true
 

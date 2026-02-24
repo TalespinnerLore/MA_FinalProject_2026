@@ -1,13 +1,14 @@
 class_name Unit_Group
 extends Node2D
 
-signal attack(ActionDef)
+signal AbilityUsed(Ability:AbilityData,Source)
 signal turn_completed
 signal defeated
 signal on_turn_complete
 
 #var current_unit: Unit_Instance
 var current_unit_index = 0
+var current_unit:Unit_Instance
 @export var is_player_controlled = false
 #turn order
 #watch for team wipe (players)
@@ -25,6 +26,22 @@ func init() -> void:
 		if is_player_controlled:
 			print(child," is player controlled")
 			pass
+		else:
+			pass
+	take_turn_team()
+
+func temp_distribute():
+	for unit in get_children():
+		var validspawn = false
+		var spawnpoint:Vector2i
+		while validspawn == false:
+			spawnpoint = $"../../TileMapLayer".cells_Ground.pick_random()
+			if $"../../TileMapLayer".AllHallTiles.has(spawnpoint):
+				validspawn = false
+			else:
+				unit.set_spawn(spawnpoint)
+				validspawn = true
+
 
 func take_turn_team() -> void:
 	current_unit_index = -1
@@ -37,12 +54,14 @@ func _step_turn() -> void:
 	if is_player_controlled:
 		_step_turn_player()
 	else:
+		print("ai turns not implemented yet")
 		#_step_turn_ai()
 		pass
 
 
 
 func _step_turn_player() -> void:
+	print("stepped turn player")
 	#check for end of turn
 	var waiting_units = get_waiting_units()
 	if waiting_units.size() == 0:
@@ -50,6 +69,7 @@ func _step_turn_player() -> void:
 		return
 	disconnect_current_unit_signals()
 #	current_unit = waiting_units[0]
+	current_unit = waiting_units[0]
 	waiting_units.pop_front()
 	connect_current_unit_signals()
 	#TAKE ACTIONS HERE
@@ -63,9 +83,9 @@ func _step_turn_ai() -> void:
 		if current_unit_index >= get_child_count():
 			_end_turn()
 			return
-#		current_unit = get_child(current_unit_index)
+		current_unit = get_child(current_unit_index)
 #		if current_unit.can_take_turn == true:
-			break
+			#break
 	connect_current_unit_signals()
 	_step_unit()
 	
@@ -95,6 +115,9 @@ func get_waiting_units():
 
 func connect_current_unit_signals() -> void:
 	#current_unit.attack_complete.connect(_process_attack)
+	print(current_unit)
+	current_unit.attack_start.connect(_process_ability)
+	print("connectted")
 	pass
 
 func disconnect_current_unit_signals() -> void:
@@ -103,6 +126,10 @@ func disconnect_current_unit_signals() -> void:
 
 func _process_attack(ActionDef):
 	pass
+
+func _process_ability(Ability:AbilityData,Source):#Ability,Source
+	print("attack signal emitted ",Ability.ability_name,Source)
+	emit_signal("AbilityUsed",Ability,Source)
 
 func _step_unit():
 	pass

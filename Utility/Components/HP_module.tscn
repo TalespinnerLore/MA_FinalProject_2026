@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp6qyj1ggegbu"]
+
+[ext_resource type="Script" path="res://Utility/Components/HP_module.gd" id="1_xqi16"]
+[ext_resource type="FontFile" uid="uid://bme72xoxft30d" path="res://Art/Tiny5-Regular.ttf" id="2_mfqbq"]
+[ext_resource type="Texture2D" uid="uid://dcplcxb71odtk" path="res://Art/2D_images/BasicCharacter_healthbar_2.png" id="3_lo4il"]
+
+[node name="HP_module" type="Node2D"]
+script = ExtResource("1_xqi16")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(0, -11)
+texture = ExtResource("3_lo4il")
+
+[node name="HP_Outline" type="ColorRect" parent="."]
+visible = false
+show_behind_parent = true
+z_index = 5
+offset_left = -15.0
+offset_top = -3.0
+offset_right = 15.0
+offset_bottom = 3.0
+pivot_offset = Vector2(15, 3)
+color = Color(0, 0, 0, 1)
+
+[node name="HP" type="ColorRect" parent="."]
+visible = false
+z_index = 5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -2.0
+offset_right = 14.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(14, 2)
+color = Color(1, 0, 0, 1)
+
+[node name="HP_Label" type="Label" parent="."]
+auto_translate_mode = 2
+visible = false
+z_index = 5
+texture_filter = 1
+offset_right = 54.0
+offset_bottom = 18.0
+scale = Vector2(0.25, 0.25)
+localize_numeral_system = false
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_mfqbq")
+text = "999/999"
+horizontal_alignment = 1

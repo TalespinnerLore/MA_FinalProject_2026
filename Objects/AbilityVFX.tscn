@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw347qjr5li2r"]
+
+[ext_resource type="Script" path="res://Objects/ability_vfx.gd" id="1_r2wf1"]
+[ext_resource type="Texture2D" uid="uid://bj32ind2q44rj" path="res://Art/VFX Sprites/Flare01_pxl.png" id="1_rdqoq"]
+
+[node name="AbilityVfx" type="Sprite2D"]
+z_index = 10
+texture = ExtResource("1_rdqoq")
+script = ExtResource("1_r2wf1")

@@ -2,6 +2,7 @@
 class_name StatComponent
 extends Resource
 
+@export var Sprite:Texture2D
 @export var BasicAttack:AbilityData
 
 @export_category('Level-Up Stats')
@@ -61,6 +62,11 @@ extends Resource
 @export var Def_Mult_boost = 0.0
 @export var Reroll_Chance_boost = 0.00
 
+
+func apply_level_stats(level):
+	var BaseStats = [STR,DEX,VIT,MAG,DEF,LUK]
+	BaseStats*=level
+	return BaseStats
 
 func calc_stats():
 	HP_Max = Base_HP + 5*(VIT+VIT_boost)
