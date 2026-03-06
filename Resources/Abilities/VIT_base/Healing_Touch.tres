@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://b3vlgoi6d1u1t"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_60f51"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_deek4"]
+[ext_resource type="Texture2D" uid="uid://jo8g6xyk6vmd" path="res://Art/VFX Sprites/vfx_water.png" id="2_v2ab2"]
+
+[resource]
+script = ExtResource("1_60f51")
+ability_name = "Healing Touch"
+vfx = ExtResource("2_v2ab2")
+element = 1
+valid_target = 1
+targeting = 0
+range = 1
+base_value = 1
+damage_type = 4
+damaging = false
+healing = true
+creates_shield = false
+inflict_status = Array[ExtResource("2_deek4")]([])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 0, 10, 10, 0, 0]
+Abilities_required = Array[ExtResource("1_60f51")]([])

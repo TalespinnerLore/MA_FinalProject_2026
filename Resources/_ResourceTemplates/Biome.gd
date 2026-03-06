@@ -46,13 +46,13 @@ func get_DG_Mods():
 			2:
 				mods.append([Global.DG_Mods["ROOMS"][5],4])
 		if RoundRooms:
-			mods.append([Global.DG_Mods["ROOMS"][0],1])
+			mods.append([Global.DG_Mods["ROOMS"][0],4])
 		if Mini_Boss:
 			mods.append([Global.DG_Mods["BOSS"][0],1])
 		if Wandering_Boss:
 			mods.append([Global.DG_Mods["BOSS"][2],1])
 		if Flooded:
-			mods.append([Global.DG_Mods["ENV_FEATURES"][3],4])
+			mods.append([Global.DG_Mods["ENV_FEATURES"][2],4])
 	return mods
 
 

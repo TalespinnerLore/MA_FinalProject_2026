@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://g0pn5fxivvyi"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_qa4st"]
-[ext_resource type="Texture2D" uid="uid://bj32ind2q44rj" path="res://Art/VFX Sprites/Flare01_pxl.png" id="2_5gm25"]
+[ext_resource type="Texture2D" uid="uid://c4u8f5l3g4xbx" path="res://Art/VFX Sprites/vfx_force.png" id="2_b2u8c"]
 
 [resource]
 script = ExtResource("1_qa4st")
 ability_name = "Default Attack"
-vfx = ExtResource("2_5gm25")
+vfx = ExtResource("2_b2u8c")
 element = 4
 valid_target = 2
 targeting = 0
@@ -14,5 +14,6 @@ range = 1
 damage_type = 6
 damaging = true
 inflict_status = Array[Resource]([])
+STR_DEX_VIT_MAG_DEF_LUK = null
 BaseStats_required = [0, 0, 0, 0, 0, 0]
 Abilities_required = Array[ExtResource("1_qa4st")]([])

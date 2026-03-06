@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjnq3b6x2yw1e"]
+
+[ext_resource type="Texture2D" uid="uid://m6qgl74us38r" path="res://Art/EnvironmentSprites/Stairs.png" id="1_vaon5"]
+[ext_resource type="Script" path="res://Objects/EnvironmentObjects/dungeon_stairs.gd" id="2_m41wm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0npy"]
+size = Vector2(8, 8)
+
+[node name="DungeonStairs" type="Sprite2D"]
+texture = ExtResource("1_vaon5")
+script = ExtResource("2_m41wm")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_o0npy")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

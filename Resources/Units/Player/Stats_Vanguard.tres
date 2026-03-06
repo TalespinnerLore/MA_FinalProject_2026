@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="StatComponent" load_steps=3 format=3 uid="uid://crgv6vgn5oh3u"]
 
-[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/BasicAttack_MeleePhys.tres" id="1_7a4j6"]
+[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_7a4j6"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_sag3s"]
 
 [resource]

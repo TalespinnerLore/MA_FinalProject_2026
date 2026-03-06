@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="StatComponent" load_steps=3 format=3 uid="uid://oygkar1j0gy3"]
 
-[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/BasicAttack_MeleePhys.tres" id="1_6yyl8"]
+[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_b2avj"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="2_2gbsx"]
 
 [resource]
 script = ExtResource("2_2gbsx")
-BasicAttack = ExtResource("1_6yyl8")
+BasicAttack = ExtResource("1_b2avj")
 STR_up = 5
 DEX_up = 0
 VIT_up = 0

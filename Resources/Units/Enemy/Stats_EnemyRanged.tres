@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="StatComponent" load_steps=4 format=3 uid="uid://brn8pf5kf160g"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_fgudt"]
-[ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/BasicAttack_RangedPhys.tres" id="1_lg36o"]
+[ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="1_lg36o"]
 [ext_resource type="Texture2D" uid="uid://iuxuthmy31rr" path="res://Art/UnitSprites/BasicCharacter_enemy.png" id="2_7ylcg"]
 
 [resource]

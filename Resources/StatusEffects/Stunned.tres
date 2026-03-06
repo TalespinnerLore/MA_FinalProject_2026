@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=3 format=3 uid="uid://b4fce3e1vs38n"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_5jhvq"]
+[ext_resource type="Texture2D" uid="uid://dmgwhlft4rjab" path="res://Art/VFX Sprites/vfx_earth.png" id="2_uypy0"]
+
+[resource]
+script = ExtResource("1_5jhvq")
+vfx = ExtResource("2_uypy0")
+effect_name = "[DEFAULT]"
+is_negative = false
+turn_duration = 1
+has_periodic_effect = true
+trigger_periodic_on_gain = false
+trigger_effect_on_timeout = false
+periodic_effect_trigger = 0
+element = 2
+damage_type = 6
+base_damage = 0
+can_stack = false
+stat_multiplier = 0

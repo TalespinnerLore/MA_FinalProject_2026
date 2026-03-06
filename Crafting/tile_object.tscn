@@ -21,7 +21,7 @@ light_mask = 0
 texture = ExtResource("2_bdrvt")
 hframes = 3
 vframes = 19
-frame = 53
+frame = 48
 
 [node name="Area2D" type="Area2D" parent="."]
 

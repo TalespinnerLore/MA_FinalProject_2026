@@ -63,12 +63,12 @@ extends Resource
 @export var Reroll_Chance_boost = 0.00
 
 
-func apply_level_stats(level):
+func get_levelup_stats(level):
 	var BaseStats = [STR,DEX,VIT,MAG,DEF,LUK]
 	BaseStats*=level
 	return BaseStats
 
-func calc_stats():
+func calc_template_stats():
 	HP_Max = Base_HP + 5*(VIT+VIT_boost)
 	Heal_Buff_Mult = 1.0 + 0.02*(VIT+VIT_boost)
 	Base_Phys_ATK = STR + STR_boost
@@ -82,7 +82,7 @@ func calc_stats():
 	Reroll_Chance = 0.01*(LUK+LUK_boost)
 	pass
 
-func apply_calc_stat_boosts():
+func apply_template_calc_stat_boosts():
 	HP_Max += HP_Max_boost
 	Base_Phys_ATK += Phys_ATK_boost
 	Base_Mag_ATK += Mag_ATK_boost

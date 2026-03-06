@@ -7,11 +7,12 @@ func get_variable_value(object:Object,var_name:String):
 	return object.var_name
 
 func randb():
-	var b = randi()
+	var b = randi_range(0,1)
 	if b > 0:
 		return true
 	else:
 		return false
+
 @export var dir4 = [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT,Vector2i.RIGHT]
 @export var dir8 = [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT,Vector2i.RIGHT,\
 					Vector2i.UP+Vector2i.LEFT,Vector2i.UP+Vector2i.RIGHT,\

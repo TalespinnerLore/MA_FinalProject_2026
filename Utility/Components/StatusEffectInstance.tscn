@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6p7aeseafqjm"]
+
+[ext_resource type="Script" path="res://Utility/Components/StatusEffectInstance.gd" id="1_w2i04"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_ys3wl"]
+
+[sub_resource type="Resource" id="Resource_r6e03"]
+script = ExtResource("2_ys3wl")
+effect_name = "[DEFAULT]"
+is_negative = false
+turn_duration = 1
+has_periodic_effect = false
+trigger_periodic_on_gain = false
+trigger_effect_on_timeout = false
+periodic_effect_trigger = 0
+element = 4
+damage_type = 6
+base_damage = 0
+can_stack = false
+stat_multiplier = 0
+
+[node name="StatusEffectInstance" type="Node"]
+script = ExtResource("1_w2i04")
+StatusData = SubResource("Resource_r6e03")

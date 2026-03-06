@@ -10,8 +10,8 @@ extends TileMapLayer
 @export var Rooms = [] #Rect2i, FloorTiles, WallTiles
 var Hallways = []
 @export var Interconnectivity = 2 #0-10
-var Max_Extra_Doorways = Rooms.size()*ceili(Interconnectivity/2.0)
-@export var Max_DeadEnds = 0
+var Max_Extra_Doorways = Rooms.size()*ceili(Interconnectivity/2.0) 
+@export var Max_DeadEnds = 0 #in Interconnectivity is 5, max extra doors = 3*number of rooms
 @export var Rounded = false
 
 @export var SpawnRiver = false
@@ -126,6 +126,8 @@ func RandomRooms(): #GENERATE RANDOM ROOMS ON THE GRID.
 				AllRoomTiles.erase(Vector2i(x,y))
 			elif TileGrid[x][y] == 'ROOM_WALL':
 				AllRoomWalls.append(Vector2i(x,y))
+				
+	Max_Extra_Doorways = Rooms.size()*ceili(Interconnectivity/2.0) #just making sure this goes off
 	pass
 
 
@@ -190,6 +192,7 @@ func Roundify_Room(room:Rect2i):
 			to_fill.erase(x_corner+Vector2i(0,i))
 			to_fill.append(x_corner+Vector2i(0,i))
 		done = true
+
 	for tile in to_fill:
 		TileGrid[tile.x][tile.y] = 'ROOM_WALL'
 	return to_fill
@@ -529,6 +532,8 @@ func ExtraDoors(): #makes extra doors to prevent perfection in the map
 				if randi_range(1,100) <= 10+floori(2.5*Interconnectivity):
 					TileGrid[tile.x][tile.y] = 'FLOOR'
 					Extra.append(tile)
+	
+	
 	#print("ExtraDoors: ",Extra)
 
 
@@ -647,6 +652,10 @@ func generateRiver():
 		#push_error("ERROR - testIndex: ",test_tiles.find(tile),", tile: ", tile)
 	return [River_Tiles]#, test_tiles]
 
+
+
+
+
 func FillGrid(): #once the rooms are decided, this fills in the rest of the level
 	RandomRooms()
 	FindUnusedTiles()
@@ -680,12 +689,22 @@ func FillGrid(): #once the rooms are decided, this fills in the rest of the leve
 				intersect.append(door)
 		var emergency_door = intersect.pick_random()
 		PermDoors.append(emergency_door)
+		print(emergency_door,"<-emergencydoor")
 		TileGrid[emergency_door.x][emergency_door.y] = 'FLOOR'
 	
-	print(DeadEnds.size())
+	#after all extra doors are made,
+	for room in Rooms: #take every room,
+		var toPop = []
+		for possible_door in room[3]: #go through all the possible doors,
+			if TileGrid[possible_door.x][possible_door.y] != 'FLOOR':
+				toPop.append(possible_door) #find the unused doors in the list,
+		for unused in toPop: #then erase them from the list, so I have a list of actual doors, connected to room data.
+			room[3].erase(unused)
+	
+	#print(DeadEnds.size())
 	Simple_FillDeadEnds(Max_DeadEnds)
-	print(DeadEnds.size())
-	print(DeadEnds)
+	#print(DeadEnds.size())
+	#print(DeadEnds)
 	for i in DeadEnds:
 		set_cell(Vector2i(i[0].x,i[0].y),0, Vector2i(0,2))
 		
@@ -696,7 +715,15 @@ func FillGrid(): #once the rooms are decided, this fills in the rest of the leve
 		for tile in AllHallTiles:
 			if what_is_this_tile(tile.x,tile.y) == 'WATER':
 				TileGrid[tile.x][tile.y] = 'FLOOR'
-	#print(AllHallTiles.size())
+	
+	
+func place_stairs():
+	var stairs = load("res://Objects/EnvironmentObjects/dungeon_stairs.tscn")
+	pass
+	
+	######################
+	#MAKE FLOOR NAVIGABLE#
+	######################
 
 
 
@@ -747,8 +774,13 @@ func populate_tile_terrain():
 			if TileGrid[x][y] == 'WATER':
 				#set_cell(Vector2i(x,y),0, Vector2i(0,3))
 				pass
-			if TileGrid[x][y] == 'WALL' or TileGrid[x][y] == 'ROOM_WALL':
+			if TileGrid[x][y] == 'ROOM_WALL':
 				cells_Wall.append(Vector2i(x,y))
+			elif TileGrid[x][y] == 'WALL':
+				if DungeonData.flooded:
+					cells_Water.append(Vector2i(x,y))
+				else:
+					cells_Wall.append(Vector2i(x,y))
 			elif TileGrid[x][y] == 'FLOOR':
 				cells_Ground.append(Vector2i(x,y))
 			elif TileGrid[x][y] == 'WATER' or River_Tiles_list.has(Vector2i(x,y)):
@@ -760,7 +792,7 @@ func populate_tile_terrain():
 		set_cells_terrain_connect(cells_Ground,terrain_set,1,true)
 		set_cells_terrain_connect(cells_Water,terrain_set,2,true)
 		for tile in AllHallTiles:
-			if River_Tiles_list.has(tile):
+			if River_Tiles_list.has(tile) or DungeonData.flooded:
 				set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(10,10)) #THIS IS THE BRIDGE TILE
 		
 	pass
@@ -796,8 +828,8 @@ func what_is_this_tile(x,y):
 		pass
 
 	pass
-	
-var terrain_set = 0
+@export var bugfixing = false	
+var terrain_set = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -824,20 +856,25 @@ func _ready() -> void:
 	var spawnpoint:Vector2i
 	while validspawn == false:
 		spawnpoint = cells_Ground.pick_random()
-		if AllHallTiles.has(spawnpoint):
+		if AllHallTiles.has(spawnpoint) or cells_Wall.has(spawnpoint):
 			validspawn = false
 		else:
 			validspawn = true
 	$"../Unit_Manager/Player_Group/Unit".set_spawn(spawnpoint)
 	
 	$"../Unit_Manager/Enemy_Group".temp_distribute()
+	var i = -1
+	for room in Rooms:
+		i+=1
+		print("room ",i," doors:",room[3])
+	
 			
 			
 	
 	#print(Rooms[0][2])
 		
 
-@export var bugfixing = false
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):

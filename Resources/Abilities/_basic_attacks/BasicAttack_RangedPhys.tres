@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://cvdimoxqxgfkf"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_4d8n2"]
+[ext_resource type="Texture2D" uid="uid://c4u8f5l3g4xbx" path="res://Art/VFX Sprites/vfx_force.png" id="2_j6yk1"]
+
+[resource]
+script = ExtResource("1_4d8n2")
+ability_name = "BasicAttack_RangedPhys"
+vfx = ExtResource("2_j6yk1")
+element = 4
+valid_target = 2
+targeting = 0
+range = 2
+damage_type = 2
+damaging = true
+inflict_status = Array[Resource]([])
+STR_DEX_VIT_MAG_DEF_LUK = null
+BaseStats_required = [0, 0, 0, 0, 0, 0]
+Abilities_required = Array[ExtResource("1_4d8n2")]([])

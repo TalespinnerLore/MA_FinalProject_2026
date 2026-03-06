@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://bsl8f6nvn0fw"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_d25f4"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_ro071"]
+[ext_resource type="Resource" uid="uid://d7u28wdirfu7" path="res://Resources/StatusEffects/Burning.tres" id="3_xo6tp"]
+[ext_resource type="Texture2D" uid="uid://dssgt1n5mnc5k" path="res://Art/VFX Sprites/vfx_fire.png" id="4_suomq"]
+
+[resource]
+script = ExtResource("1_d25f4")
+ability_name = "Incinerate"
+vfx = ExtResource("4_suomq")
+element = 0
+valid_target = 0
+targeting = 0
+range = 2
+base_value = 5
+damage_type = 5
+damaging = true
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_ro071")]([ExtResource("3_xo6tp")])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 0, 0, 0, 0, 0]
+Abilities_required = Array[ExtResource("1_d25f4")]([])

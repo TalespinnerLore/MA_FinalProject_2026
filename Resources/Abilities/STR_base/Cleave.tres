@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://7j5xdkj4glc6"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_kott2"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_jsyj1"]
+[ext_resource type="Texture2D" uid="uid://kecoy3onkl54" path="res://Art/VFX Sprites/Flare00_pxl.png" id="2_r6xo3"]
+
+[resource]
+script = ExtResource("1_kott2")
+ability_name = "Cleave"
+vfx = ExtResource("2_r6xo3")
+element = 6
+valid_target = 0
+targeting = 0
+range = 1
+base_value = 5
+damage_type = 1
+damaging = true
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_jsyj1")]([])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [15, 0, 0, 0, 10, 0]
+Abilities_required = Array[ExtResource("1_kott2")]([])

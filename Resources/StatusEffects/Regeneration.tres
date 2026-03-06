@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=3 format=3 uid="uid://eivq82k3cb6i"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_hj8r1"]
+[ext_resource type="Texture2D" uid="uid://jo8g6xyk6vmd" path="res://Art/VFX Sprites/vfx_water.png" id="2_6sgmp"]
+
+[resource]
+script = ExtResource("1_hj8r1")
+vfx = ExtResource("2_6sgmp")
+effect_name = "Regeneration"
+is_negative = false
+turn_duration = 3
+has_periodic_effect = true
+trigger_periodic_on_gain = true
+trigger_effect_on_timeout = false
+periodic_effect_trigger = 0
+element = 1
+damage_type = 6
+base_damage = 5
+can_stack = false
+stat_multiplier = 2

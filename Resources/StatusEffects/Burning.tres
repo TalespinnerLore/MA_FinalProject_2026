@@ -1,13 +1,20 @@
-[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://d7u28wdirfu7"]
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=3 format=3 uid="uid://d7u28wdirfu7"]
 
-[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffect.gd" id="1_yib7j"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_yib7j"]
+[ext_resource type="Texture2D" uid="uid://dssgt1n5mnc5k" path="res://Art/VFX Sprites/vfx_fire.png" id="2_t6o8t"]
 
 [resource]
 script = ExtResource("1_yib7j")
-effect_name = "Burning"
+vfx = ExtResource("2_t6o8t")
+effect_name = "Burned"
 is_negative = true
-duration = 5
-periodic = false
-periodic_trigger = 1
-basedamage = 5
-source = null
+turn_duration = 3
+has_periodic_effect = true
+trigger_periodic_on_gain = false
+trigger_effect_on_timeout = false
+periodic_effect_trigger = 0
+element = 0
+damage_type = 6
+base_damage = 5
+can_stack = false
+stat_multiplier = 3

@@ -13,7 +13,7 @@ signal player_died(can_revive)
 var all_groups: =[]# Array[Unit_Group] = []
 
 var current_group: Node
-var current_group_index: int = 0
+var current_group_index: int = -1
 var previous_group_index: int = -1
 
 @export var Active_Units = []
@@ -25,57 +25,54 @@ func init() -> void:
 		all_groups.append(child)
 		child.AbilityUsed.connect(_process_ability)
 	#	child.attack.connect(_process_attack)
-	#	child.turn_complete.connect(_on_turn_complete)
-		child.defeated.connect(_on_group_defeated)
-	 	
+		child.group_turn_completed.connect(_on_turn_complete)
+		#child.defeated.connect(_on_group_defeated)
+	
 	pass
 
 func _step_turn() -> void:
+	var holding_variable = 0
 	while true:
+		holding_variable = current_group_index
 		current_group_index = wrapi(current_group_index + 1, 0, all_groups.size())
 		print("group index: ",current_group_index)
+		previous_group_index = holding_variable
 		current_group = all_groups[current_group_index]
 		print("group: ",current_group)
 		if current_group.get_active_units().size() > 0:
+			print("breaks here")
 			break
 		#prevents lockup, supposedly
 		if current_group_index == previous_group_index:
 			push_error('Only one group found')
 			break
-		_begin_turn()
+	_begin_turn()
 
 func _begin_turn() -> void:
+	print("HITS MANAGER BEGIN TURN")
 	current_group.take_turn_team()
 
-# {"Default Attack (Physical)":
-#								{"ability_name": 'Default Attack (Physical)',
-#								"valid_target": 0, #Enemy, Ally, Any
-#								"targeting": 0, 
-#								"range": 1,
-#								"damage_type": 0,
-#								"damaging": true,
-#								"inflicts_status": [0]},
 
-func _process_attack(ActionDef,facing,source_coord,attack_source_stats):
-	var relative_tiles = calc_hit_tiles(ActionDef["targeting"],ActionDef["range"],facing,source_coord)
-	var tiles_to_check = []
-	for tile in relative_tiles:
-		tiles_to_check.append(tile+source_coord)
-	if ActionDef["valid_target"] == 0 or ActionDef["valid_target"] == 2: #check if hits Enemy or Any
-		for unit in $Enemy_Group.get_children():
-			if unit.calc_hit_crit()[0]:
-				if ActionDef["damaging"]:
-					unit.calc_damage_taken(attack_source_stats)
-				for status in ActionDef["inflicts_status"]:
-					unit.inflict_status(status)
-	if ActionDef["valid_target"] == 1 or ActionDef["valid_target"] == 2: #check if hits Ally or Any
-		pass
+func _on_turn_complete() -> void:
+	print('manager on group turn complete hit')
+	_step_turn()
+	return
+
+func _on_group_defeated(_is_player: bool):
+	if _is_player:
+		get_tree().change_scene_to_file("res://Crafting/TowerCrafting.tscn")
+	pass #you loseQ get booted out of the dungeon
+
+func _ready():
+	init()
+	_step_turn()
+
 
 const Ability_vfx = preload("res://Objects/AbilityVFX.tscn")
 
 func _process_ability(Ability:AbilityData,Source):
 	print(Source.name," uses ",Ability.ability_name,"!")
-	var hit_tiles = calc_hit_tiles(Ability.targeting,Ability.range,Source.facing,Source.self_coords)
+	var hit_tiles = calc_hit_tiles(Ability.targeting,Ability.range+Source.Range_Boost,Source.facing,Source.self_coords)
 	#print(hit_tiles)
 	var units_to_check:Array[Unit_Instance]
 	var does_pierce = false
@@ -138,19 +135,22 @@ func calc_hit_tiles(targeting:int, range:int, facing:Vector2i, source_coord:Vect
 				var tile = source_coord+(facing*i)
 				print("LINE_TILE: ",tile)
 				var tile_type = tilegrid.what_is_this_tile(tile.x,tile.y)
+				print(tile_type)
 				if  tile_type == 'FLOOR' or tile_type == 'WATER': #if the next tile isn't a Wall, continue.
 					relative_tiles.append((facing*i))
 				else:
 					fin = true
 			pass
 		"Cone": #expanding cone of tiles, tight if straight, in a checker pattern in diagonal.
-			if facing.length() > 1:
+			if facing.length() > 1: #<-diagonal cone
 				for r in range:
 					relative_tiles.append(facing*(r+1))#
 					if r > 0:
 						for step in r:
-							relative_tiles.append(facing*(r+1) + Vector2i(facing.x,0))
-							relative_tiles.append(facing*(r+1) + Vector2i(0,facing.y))
+							relative_tiles.append(facing*(r+1) + Vector2i(facing.x,-facing.y)*(step+1))
+							relative_tiles.append(facing*(r+1) + Vector2i(-facing.x,facing.y)*(step+1))
+							#relative_tiles.append(facing*(r) + Vector2i(facing.x,step))
+							#relative_tiles.append(facing*(r) + Vector2i(step,facing.y))
 			else: #STRAIGHT-ON CONE
 				var cone_spread = Vector2i.ZERO
 				for r in range:
@@ -168,8 +168,8 @@ func calc_hit_tiles(targeting:int, range:int, facing:Vector2i, source_coord:Vect
 			relative_tiles = Circular_Area(range,source_coord,false)
 			relative_tiles.erase(source_coord)
 			pass
-		"Specify":
-			#relative_tiles.append[target_tile]
+		"Self":
+			relative_tiles.append[Vector2i(0,0)]
 			pass
 	print("Sourcecoord: ",source_coord,"relative tiles: ",relative_tiles)
 	var real_tiles = []
@@ -217,12 +217,18 @@ func Circular_Area(radius,Tile_Location,Relative):
 	else:
 		return circle_tiles
 
-func _on_turn_complete() -> void:
-	_step_turn()
-	return
 
-func _on_group_defeated(_is_player: bool):
-	pass #you loseQ get booted out of the dungeon
-
-func _ready():
-	init()
+func _process_attack(ActionDef,facing,source_coord,attack_source_stats): #DEPRECIATED
+	var relative_tiles = calc_hit_tiles(ActionDef["targeting"],ActionDef["range"],facing,source_coord)
+	var tiles_to_check = []
+	for tile in relative_tiles:
+		tiles_to_check.append(tile+source_coord)
+	if ActionDef["valid_target"] == 0 or ActionDef["valid_target"] == 2: #check if hits Enemy or Any
+		for unit in $Enemy_Group.get_children():
+			if unit.calc_hit_crit()[0]:
+				if ActionDef["damaging"]:
+					unit.calc_damage_taken(attack_source_stats)
+				for status in ActionDef["inflicts_status"]:
+					unit.inflict_status(status)
+	if ActionDef["valid_target"] == 1 or ActionDef["valid_target"] == 2: #check if hits Ally or Any
+		pass

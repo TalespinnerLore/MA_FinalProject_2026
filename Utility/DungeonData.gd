@@ -56,9 +56,10 @@ func choose_biome():
 	
 
 var room_attempts = 25
-var interconnectivity = 2
+var interconnectivity = 2#0-10 range
 var rounded = false
 var spawn_river = false
+var flooded:bool = true#false
 var max_size = 15
 var min_size = 5
 
@@ -88,25 +89,31 @@ func open_level():
 	else:
 		spawn_river = false
 	
-	if Environments[8][1]  > randi_range(0,4):
+	if Environments[7][1] >= randi_range(0,4):
+		flooded = true
+	else:
+		flooded = false
+	
+	
+	if Environments[9][1]  >= randi_range(0,4):
 		rounded = true
 	else:
 		rounded = false
 	
-	if (Environments[9][1] > randi_range(0,4)) and (Environments[10][1] <= randi_range(0,4)) :
+	if (Environments[10][1] > randi_range(0,4)) and (Environments[11][1] <= randi_range(0,4)) :
 		room_attempts = 50
-	elif Environments[10][1] > randi_range(0,4) and Environments[9][1] <= randi_range(0,4):
+	elif Environments[11][1] > randi_range(0,4) and Environments[10][1] <= randi_range(0,4):
 		room_attempts = 15
 	else:
 		room_attempts = 25
 	
-	if Environments[13][1] > randi_range(0,4):
+	if Environments[14][1] > randi_range(0,4):
 		var max_size = 20
 		var min_size = 10
-	if Environments[12][1] > randi_range(0,4):
+	if Environments[13][1] > randi_range(0,4):
 		var max_size = 10
 		var min_size = 5
-	if Environments[11][1] > randi_range(0,4):
+	if Environments[12][1] > randi_range(0,4):
 		var max_size = 15
 		var min_size = 5
 	

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=3 format=3 uid="uid://v7gy1dfehh8o"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_43mg8"]
+[ext_resource type="Texture2D" uid="uid://kecoy3onkl54" path="res://Art/VFX Sprites/Flare00_pxl.png" id="2_bo5g0"]
+
+[resource]
+script = ExtResource("1_43mg8")
+vfx = ExtResource("2_bo5g0")
+effect_name = "Poison"
+is_negative = true
+turn_duration = 3
+has_periodic_effect = true
+trigger_periodic_on_gain = true
+trigger_effect_on_timeout = false
+periodic_effect_trigger = 1
+element = 6
+damage_type = 6
+base_damage = 5
+can_stack = false
+stat_multiplier = 1

@@ -6,10 +6,11 @@ signal move_complete
 signal attack_start(AbilityData)#attack_start(ActionDef)
 #signal attack_end(ActionDef)
 signal unit_defeated
-signal unit_hit
+signal hit_other_unit
 signal damaged
 signal turn_complete
 
+const StatusEffect_instance = preload("res://Utility/Components/StatusEffectInstance.tscn")
 
 ####################################################
 #CURRENT UNIT STATUS
@@ -20,11 +21,15 @@ signal turn_complete
 @export var is_team_leader:bool = false
 @export var is_active_unit:bool = false
 var is_acting:bool = false
+var max_turn_actions = 1
+var turn_actions_used = 0
 @export var has_moved:bool = false
-@export var in_combat = false
+@export var in_combat:bool = false
+@export var skipping_turn:bool = false
+@export var has_shield:bool = false
 var facing:= Vector2i(1,0)
 @export var Team:Teams = 0
-@export var TeamStrategy:Strategy = 0
+@export var TeamStrategy:Strategy = Strategy.FOLLOW
 @export var self_coords = Vector2i(0,0)
 @export var ElementalAffinity:ElementType = 4
 
@@ -101,10 +106,34 @@ var Melee_Mult = 1.0
 var Ranged_Mult = 1.0
 var Def_Mult = 1.0
 var Reroll_Chance = 0.05
-var Crit_Boost = 0.0
+var Crit_Boost = 0.0 #APPLY AT CRIT CHANCE CALCULATION
+var Range_Boost = 0 #extra tile range for abilities
+
+@export_category('Stat Boosts') #Applied by gear, buffs, debuffs, etc.
+#Base Stat Boosts
+@export var STR_boost:int = 0
+@export var DEX_boost:int = 0
+@export var VIT_boost:int = 0
+@export var MAG_boost:int = 0
+@export var DEF_boost:int = 0
+@export var LUK_boost:int = 0
+
+#CalculatedStatBoosts
+@export var HP_Max_boost = 0
+@export var Phys_ATK_boost = 0
+@export var Mag_ATK_boost = 0
+@export var Phys_DEF_boost = 0
+@export var Mag_DEF_boost = 0
+@export var Evasion_boost = 0
+@export var Heal_Buff_Mult_boost = 0.0
+@export var Melee_Mult_boost = 0.0
+@export var Ranged_Mult_boost = 0.0
+@export var Def_Mult_boost = 0.0
+@export var Reroll_Chance_boost = 0.00
+
 
 func set_stats():
-	UnitStats.calc_stats()
+	UnitStats.calc_template_stats()
 	HP_Max = UnitStats.HP_Max
 	HP_Current = HP_Max
 	STR = UnitStats.STR
@@ -124,6 +153,34 @@ func set_stats():
 	Ranged_Mult = UnitStats.Ranged_Mult
 	Def_Mult = UnitStats.Def_Mult
 	Reroll_Chance = UnitStats.Reroll_Chance
+
+func calc_stats_with_boost():
+	HP_Max = UnitStats.Base_HP + 5*(VIT+VIT_boost)
+	Heal_Buff_Mult = 1.0 + 0.02*(VIT+VIT_boost)
+	Base_Phys_ATK = STR + STR_boost
+	Melee_Mult = 1.0 + 0.02*(STR + STR_boost)
+	Base_Evasion = DEX+DEX_boost
+	Ranged_Mult = 1.0 + 0.02*(DEX+DEX_boost)
+	Base_Mag_ATK = MAG+MAG_boost
+	Base_Phys_DEF = DEF+DEF_boost
+	Base_Mag_DEF = (Base_Mag_ATK/2.0) + (Base_Phys_DEF/2.0)
+	Def_Mult = 1.0 + 0.02*(DEF+DEF_boost)
+	Reroll_Chance = 0.01*(LUK+LUK_boost)
+	apply_calc_stat_boosts()
+	pass
+
+func apply_calc_stat_boosts():
+	HP_Max += HP_Max_boost
+	Base_Phys_ATK += Phys_ATK_boost
+	Base_Mag_ATK += Mag_ATK_boost
+	Base_Phys_DEF += Phys_DEF_boost
+	Base_Mag_DEF += Mag_DEF_boost 
+	Base_Evasion += Evasion_boost 
+	Heal_Buff_Mult += Heal_Buff_Mult_boost 
+	Melee_Mult += Melee_Mult_boost
+	Ranged_Mult += Ranged_Mult_boost
+	Def_Mult += Def_Mult_boost
+	Reroll_Chance += Reroll_Chance_boost
 
 ####################################################
 #LUCK CODE
@@ -148,32 +205,50 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 	var amount = 0
 	print(Source," hits ",self.name)
 	var hitcrit = calc_evasion_and_crit(Source.Base_Evasion,Source.Crit_Boost)
-	if Ability.valid_target != 0:
+	if (Ability.valid_target != 0 and Team != Teams.ENEMY and Ability.damaging == false) \
+	or (Ability.valid_target == 0 and Team == Teams.ENEMY and Ability.damaging == false):
 		hitcrit = [true,hitcrit[1]]
 	if hitcrit[0] == true:
+		match Ability.damage_type:
+			0:
+				amount = Source.Base_Phys_ATK
+			1:
+				amount = Source.Base_Phys_ATK * Source.Melee_Mult
+				print(Source.Base_Phys_ATK, " * ",Source.Melee_Mult," = ",amount)
+			2:
+				amount = Source.Base_Phys_ATK * Source.Ranged_Mult
+			3:
+				amount = Source.Base_Mag_ATK
+			4:
+				amount = Source.Base_Mag_ATK * Source.Melee_Mult
+			5:
+				amount = Source.Base_Mag_ATK * Source.Ranged_Mult
+			6:
+				amount = 1
+		amount+=Ability.base_value
+		
 		if Ability.damaging == true:
-			match Ability.damage_type:
-				0:
-					amount = Source.Base_Phys_ATK
-				1:
-					amount = Source.Base_Phys_ATK * Source.Melee_Mult
-					print(Source.Base_Phys_ATK, " * ",Source.Melee_Mult," = ",amount)
-				2:
-					amount = Source.Base_Phys_ATK * Source.Ranged_Mult
-				3:
-					amount = Source.Base_Mag_ATK
-				4:
-					amount = Source.Base_Mag_ATK * Source.Melee_Mult
-				5:
-					amount = Source.Base_Mag_ATK * Source.Ranged_Mult
-				6:
-					amount = 1
 			print("Before: ",HP_Current)
-			HP_Current -= calc_damage(Ability.damage_type,amount,hitcrit[1],Ability.element)
 			$Sprite2D/HP_module._take_damage(calc_damage(Ability.damage_type,amount,hitcrit[1],Ability.element))
+			HP_Current = $Sprite2D/HP_module.hp
 			print("After: ",HP_Current)
+			
+		if Ability.healing:
+			calc_healing(amount,hitcrit[1],Ability.element)
+		
+		if Ability.creates_shield: # and ! has_shield ##Shields overwrite other shields, probably plays better
+			$Sprite2D/HP_module.gain_shield(Ability,Source)
+		
 		if Ability.inflict_status.size() > 0:
-			pass
+			for s_e in Ability.inflict_status:
+				if ! s_e.can_stack:
+					if ! $StatusEffects.has_stack(s_e.effect_name):
+						var s_e_i = StatusEffect_instance.instantiate()
+						s_e_i.source_unit = Source
+						$StatusEffects.add_child(s_e_i)
+				var s_e_i = StatusEffect_instance.instantiate()
+				s_e_i.source_unit = Source
+				$StatusEffects.add_child(s_e_i)
 	else:
 		print("MISS!")
 	pass 
@@ -225,7 +300,12 @@ func calc_damage(Damage_Type:int,amount:int,crit:bool,AttackingElement:int): #ru
 	print("Damage after defence: ",damage_taken)
 	return damage_taken
 
-
+func calc_healing(amount:int,crit:bool,HealingElement:int):
+	if crit == true:
+		print("CRITICAL HEAL!")
+		amount *= 2 #may change to 1.5, needs testing
+	amount *= ElementalWeakness(HealingElement,ElementalAffinity)
+	pass
 
 func ElementalWeakness(AttackingElement:ElementType, DefendingElement:ElementType):
 	match AttackingElement: #FIRE<WATER<EARTH<AIR<FIRE , DARK>LIGHT><FORCE><DARK<LIGHT
@@ -316,18 +396,23 @@ func _physics_process(delta: float) -> void:
 			print("attempt emit signal")
 			#get_tree().get_node
 			emit_signal("attack_start",$Abilities.BasicAttack,self)
-			has_moved = true
-			_on_turn_start()
+			action_used()
+			#has_moved = true
+			#_on_turn_start()
 			pass #BASIC ATTACK HERE ^^^
 		
 		elif Input.is_action_just_pressed("Ability_1"):
 			emit_signal("attack_start",$Abilities.Slot_1,self)
+			action_used()
 		elif Input.is_action_just_pressed("Ability_2"):
 			emit_signal("attack_start",$Abilities.Slot_2,self)
+			action_used()
 		elif Input.is_action_just_pressed("Ability_3"):
 			emit_signal("attack_start",$Abilities.Slot_3,self)
+			action_used()
 		elif Input.is_action_just_pressed("Ability_4"):
 			emit_signal("attack_start",$Abilities.Slot_4,self)
+			action_used()
 		#if not moving:
 		#	if get_dir_input() != Vector2.ZERO:
 		#		move(get_dir_input())
@@ -394,23 +479,28 @@ func _move(dir:Vector2):
 	get_self_coords()
 	has_moved = true
 	is_acting = false
-	emit_signal("turn_complete")
-	_on_turn_start()
+	action_used()
+	#end_turn()
+	#_on_turn_start()
 	pass
 
 func _select_direction(dir:Vector2):
 	facing = Vector2i(dir)
 	return facing
 
+func action_used():
+	turn_actions_used+=1
+	if turn_actions_used>=max_turn_actions:
+		end_turn()
 #######################################
 #SPAWN CODE
 #######################################
 
 
 func init(is_player_controlled):
-	print(self," INITIALIZED")
+	#print(self," INITIALIZED")
 	
-	print("unit ", self.name, " INITIALIZED")
+	#print("unit ", self.name, " INITIALIZED")
 	set_stats()
 	$Sprite2D/HP_module.hp = HP_Max
 	$Sprite2D/HP_module.maxhp = HP_Max
@@ -419,10 +509,10 @@ func init(is_player_controlled):
 	else: #FIX THIS LATER TO ACCOUNT FOR NPC AND ALLY UNITS
 		Team = Teams.ENEMY
 		$Sprite2D.texture = UnitStats.Sprite
-	position = position.snapped(Vector2.ONE * tile_size)
-	position += Vector2.ONE * tile_size/2
+	#position = position.snapped(Vector2.ONE * tile_size)
+	#position += Vector2.ONE * tile_size/2
 	get_self_coords()
-	print(self,"self_coords: ",self_coords)
+	#print(self,"self_coords: ",self_coords)
 
 func set_spawn(spawnpoint):
 	position = grid_to_pos(spawnpoint,Vector2(0,0))[1] #the [1] gtes just the grid position
@@ -462,14 +552,68 @@ func _on_death():
 
 func _on_turn_start() -> void:
 	is_active_unit = true
+	turn_actions_used = 0
 	has_moved = false
+	skipping_turn = false
+	emit_signal("turn_start")
+	
+	if skipping_turn:
+		skipping_turn = false
+		end_turn()
+	
 	if Team == Teams.PLAYER or Team == Teams.ALLY:
 		if is_team_leader:
 			emit_signal("waiting_for_instructions",self_coords)
 			pass #wait for instructions
 		else:
+			print("team AI turn not yet implemented")
 			pass
+	else:
+		AI_turn_enemy()
+	
+
+var goal_tile:Vector2i
+var target_unit:Unit_Instance
+@onready var pathfinding_manager:PathfindingManager = $"../../../PathfindingManager" #temp fix for now
+var path:Array[Vector2i] = []
+
+func AI_turn_enemy():
+	if in_combat:
+		if (self_coords - target_unit.self_coords).length() > 1.5: #if not next to target
+			goal_tile = pathfinding_manager.get_valid_path(self_coords,target_unit.self_coords)[0]
+			facing = goal_tile - self_coords
+			_move(facing)
+			action_used()
+			pass
+		else:
+			emit_signal("attack_start",$Abilities.BasicAttack,self)
+			action_used()
+		pass
+	else:
+		if path.size() < 1:
+			path = pathfinding_manager.get_valid_path(self_coords,$"../../../TileMapLayer".cells_Ground.pick_random())
+		#^^^ unfuck this atrocious line of code over the weekend
+		goal_tile = path[0]
+		facing = goal_tile - self_coords
+		_move(facing)
+		path.pop_front()
+		action_used()
+		pass
+	pass
+
+func AI_turn_ally():
+	pass
+
+func AI_turn_npc():
+	pass
+
+func check_in_range():
+	pass 
+
 
 func reset_turn():
-	print("reset turn - ",self.name)
 	pass
+
+func end_turn():
+	has_taken_turn = true
+	emit_signal("turn_complete")
