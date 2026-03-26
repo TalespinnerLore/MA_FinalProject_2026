@@ -31,7 +31,7 @@ var biomes:Array[Biome] = [preload("res://Resources/DungeonGen/Biome_Volcano.tre
 			preload("res://Resources/DungeonGen/Biome_Mesa.tres"),
 			preload("res://Resources/DungeonGen/Biome_SkyIsland.tres")]
 
-var floor_biome:Biome = biomes[0]
+var floor_biome:Biome = biomes[4]
 
 func choose_biome():
 	var total_chance = Environments[0][1] + Environments[1][1] + Environments[2][1] + Environments[3][1] + Environments[4][1]
@@ -59,7 +59,7 @@ var room_attempts = 25
 var interconnectivity = 2#0-10 range
 var rounded = false
 var spawn_river = false
-var flooded:bool = true#false
+var flooded:bool = false
 var max_size = 15
 var min_size = 5
 

@@ -69,7 +69,7 @@ func _process(delta: float) -> void:
 			if is_inside_dropzone and "slot_filled" in ref_dropzone:
 				print("TileRarity:",rarity," SlotRarity:",ref_dropzone.rarity," IsFilled?:",ref_dropzone.slot_filled)
 				if not ref_dropzone.slot_filled and ref_dropzone.rarity >= rarity:
-					tween.tween_property(self,"position",ref_dropzone.position,0.1).set_ease(tween.EASE_OUT)
+					tween.tween_property(self,"global_position",ref_dropzone.global_position,0.1).set_ease(tween.EASE_OUT)
 					ref_dropzone.slot_filled = true
 					is_placed = true
 					add_modifiers() #add the modifiers to the towercrafting ui
@@ -79,9 +79,9 @@ func _process(delta: float) -> void:
 					_on_area_2d_mouse_exited()
 					self.get_parent().adjust_count_named(TILE_ID,false)#what ID is it, and is it being added or removed?
 				else:
-					tween.tween_property(self,"position",initial_pos,0.1).set_ease(tween.EASE_OUT)
+					tween.tween_property(self,"global_position",initial_pos,0.1).set_ease(tween.EASE_OUT)
 			else:
-				tween.tween_property(self,"position",initial_pos,0.1).set_ease(tween.EASE_OUT)
+				tween.tween_property(self,"global_position",initial_pos,0.1).set_ease(tween.EASE_OUT)
 			is_draggable = false #failsafe, in case of fuckery
 	
 	pass
@@ -89,15 +89,11 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_mouse_entered() -> void:
-	#print("MOUSE ENTER")
-	
 	if not Global.is_DraggingObject:
 		is_draggable = true
 		print("isdraggable: ",is_draggable)
 		#scale = Vector2(1.05,1.05)
 		$ColorRect.visible = true
-
-
 
 func _on_area_2d_mouse_exited() -> void:
 	#print("MOUSE EXIT")

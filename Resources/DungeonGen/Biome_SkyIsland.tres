@@ -21,4 +21,4 @@ FloodTile = 2
 RiverTile = 0
 RoomDensity = 2
 RoomSize = 0
-RoundRooms = false
+RoundRooms = true

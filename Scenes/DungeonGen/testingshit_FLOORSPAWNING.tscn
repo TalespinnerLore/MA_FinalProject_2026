@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://dp4jwcpmslvp5"]
+[gd_scene load_steps=9 format=4 uid="uid://dp4jwcpmslvp5"]
 
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_kjv7h"]
 [ext_resource type="Script" path="res://Scenes/DungeonGen/testing_tilemap_DUNGEONFLOOR.gd" id="2_ipgfc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Units/unit_group.gd" id="4_jnwa3"]
 [ext_resource type="PackedScene" uid="uid://bge6c34betll2" path="res://Units/unit.tscn" id="5_77aqi"]
 [ext_resource type="Resource" uid="uid://dunj0e8tqw7uv" path="res://Resources/Units/Enemy/Stats_EnemyMelee.tres" id="6_h185u"]
+[ext_resource type="Resource" uid="uid://ht133k0aitwq" path="res://Resources/Units/Player/Stats_Mage.tres" id="6_msa6s"]
 [ext_resource type="Script" path="res://Scenes/DungeonGen/pathfinding_manager.gd" id="7_l2bui"]
 
 [node name="Node2D" type="Node2D"]
@@ -28,6 +29,7 @@ is_player_controlled = true
 [node name="Unit" parent="Unit_Manager/Player_Group" instance=ExtResource("5_77aqi")]
 is_team_leader = true
 is_active_unit = true
+UnitStats = ExtResource("6_msa6s")
 
 [node name="Enemy_Group" type="Node2D" parent="Unit_Manager"]
 script = ExtResource("4_jnwa3")
@@ -53,31 +55,6 @@ Team = 1
 UnitStats = ExtResource("6_h185u")
 
 [node name="Unit5" parent="Unit_Manager/Enemy_Group" instance=ExtResource("5_77aqi")]
-position = Vector2(56, 32)
-Team = 1
-UnitStats = ExtResource("6_h185u")
-
-[node name="Unit6" parent="Unit_Manager/Enemy_Group" instance=ExtResource("5_77aqi")]
-position = Vector2(56, 32)
-Team = 1
-UnitStats = ExtResource("6_h185u")
-
-[node name="Unit7" parent="Unit_Manager/Enemy_Group" instance=ExtResource("5_77aqi")]
-position = Vector2(56, 32)
-Team = 1
-UnitStats = ExtResource("6_h185u")
-
-[node name="Unit8" parent="Unit_Manager/Enemy_Group" instance=ExtResource("5_77aqi")]
-position = Vector2(56, 32)
-Team = 1
-UnitStats = ExtResource("6_h185u")
-
-[node name="Unit9" parent="Unit_Manager/Enemy_Group" instance=ExtResource("5_77aqi")]
-position = Vector2(56, 32)
-Team = 1
-UnitStats = ExtResource("6_h185u")
-
-[node name="Unit10" parent="Unit_Manager/Enemy_Group" instance=ExtResource("5_77aqi")]
 position = Vector2(56, 32)
 Team = 1
 UnitStats = ExtResource("6_h185u")

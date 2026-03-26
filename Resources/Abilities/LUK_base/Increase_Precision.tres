@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://djndl3e5gc6vi"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://djndl3e5gc6vi"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_ia3vy"]
-[ext_resource type="Texture2D" uid="uid://bj32ind2q44rj" path="res://Art/VFX Sprites/Flare01_pxl.png" id="2_0ajs8"]
 [ext_resource type="Resource" uid="uid://cmijj0dvoxony" path="res://Resources/StatusEffects/Precision.tres" id="2_ccy02"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_t3rlh"]
+[ext_resource type="Texture2D" uid="uid://m6sk7hjt5ypo" path="res://Art/VFX Sprites/vfx_light.png" id="4_qcjaq"]
 
 [resource]
 script = ExtResource("1_ia3vy")
 ability_name = "IncreasePrecision"
-vfx = ExtResource("2_0ajs8")
+vfx = ExtResource("4_qcjaq")
 element = 5
 valid_target = 1
 targeting = 3
@@ -17,7 +18,7 @@ damage_type = 6
 damaging = true
 healing = false
 creates_shield = false
-inflict_status = Array[Resource]([ExtResource("2_ccy02")])
+inflict_status = Array[ExtResource("2_t3rlh")]([ExtResource("2_ccy02")])
 STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
 BaseStats_required = [0, 0, 0, 0, 0, 0]
 Abilities_required = Array[ExtResource("1_ia3vy")]([])

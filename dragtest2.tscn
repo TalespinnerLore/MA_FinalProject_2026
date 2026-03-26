@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfdluxyfw00t7"]
+
+[ext_resource type="PackedScene" uid="uid://b6dntdfdb23xd" path="res://Crafting/tile_dropzone.tscn" id="1_dfo7v"]
+[ext_resource type="PackedScene" uid="uid://bitvmnpjfrxby" path="res://Crafting/DungeonCraftingTile.tscn" id="2_m61br"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(336, 160)
+
+[node name="TileDropzone" parent="." instance=ExtResource("1_dfo7v")]
+rarity = 3
+
+[node name="DungeonCraftingTile" parent="." instance=ExtResource("2_m61br")]
+position = Vector2(-64, 0)
+
+[node name="DungeonCraftingTile2" parent="." instance=ExtResource("2_m61br")]
+position = Vector2(-64, 32)

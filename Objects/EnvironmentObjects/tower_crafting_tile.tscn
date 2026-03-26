@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfwhb7u03fvhb"]
+
+[ext_resource type="Script" path="res://Objects/EnvironmentObjects/tower_crafting_tile.gd" id="1_mu53l"]
+[ext_resource type="Texture2D" uid="uid://dngq1ki03hoi5" path="res://Art/EnvironmentSprites/podium_tile.png" id="1_nclts"]
+[ext_resource type="PackedScene" uid="uid://dxwo7cyxienmy" path="res://Crafting/TowerCrafting.tscn" id="3_nlhbe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gb6pr"]
+
+[node name="TowerCraftingTile" type="StaticBody2D"]
+y_sort_enabled = true
+disable_mode = 1
+script = ExtResource("1_mu53l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_nclts")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+shape = SubResource("RectangleShape2D_gb6pr")
+
+[node name="TowerCrafting" parent="." instance=ExtResource("3_nlhbe")]
+visible = false
+position = Vector2(-320, -148)

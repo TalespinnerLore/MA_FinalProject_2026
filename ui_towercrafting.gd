@@ -8,16 +8,18 @@ extends Node2D
 var inventory_grid_size = Vector2i(3,9)
 var current_page:int = -1
 var max_page_num:int = 2
+const basetile = preload("res://Crafting/tile_object.tscn")
+const basetile_fixed = preload("res://Crafting/DungeonCraftingTile.tscn")
 
-@export var TileID_NamedInventory = [["TEST",0],["FIRE",1],["WATER",2],["EARTH",2],["AIR",2],["FORCE",1],\
-["VOLCANO",2],["ISLANDS",4],["MESA",0],["SKY_ISLANDS",2],\
-["RIVER",0],["LAKE",0],["ROUND_ROOMS",0],["DENSE_LAYOUT",0],["SPARSE_LAYOUT",1],["ALTERNATING_SIZE_ROOMS",0],["SMALL_ROOMS",0],["LARGE_ROOMS",0],\
-["CONSUMABLES",0],["GEAR",1],["LOCKBOXES",0],["WEAPONS",0],["ARMOUR",0],["TRINKETS",2],\
+@export var TileID_NamedInventory = [["TEST",0],["FIRE",4],["WATER",4],["EARTH",4],["AIR",4],["FORCE",4],\
+["VOLCANO",4],["ISLANDS",4],["MESA",4],["SKY_ISLANDS",4],\
+["RIVER",4],["LAKE",0],["ROUND_ROOMS",4],["DENSE_LAYOUT",2],["SPARSE_LAYOUT",2],["ALTERNATING_SIZE_ROOMS",0],["SMALL_ROOMS",2],["LARGE_ROOMS",2],\
+["CONSUMABLES",0],["GEAR",0],["LOCKBOXES",0],["WEAPONS",0],["ARMOUR",0],["TRINKETS",0],\
 ["VANGUARD",0],["WARRIOR",0],["MAGE",0],["ROGUE",0],["HEALER",0],["JESTER",0],\
-["INCREASED_MOB_DENSITY",0],["INCREASED_GOLD",1],["INCREASED_XP",0],["DECREASED_MOB_DENSITY",0],["DECREASED_GOLD",0],["DECREASED_XP",1],\
+["INCREASED_MOB_DENSITY",0],["INCREASED_GOLD",2],["INCREASED_XP",1],["DECREASED_MOB_DENSITY",1],["DECREASED_GOLD",3],["DECREASED_XP",0],\
 ["BEASTS",0],["ELEMENTALS",0],["UNDEAD",0],["CONSTRUCTS",0],["MORTALS",0],["WILDLINGS",0],\
-["TREASURE_ROOM",1],["MINI_BOSS",0],["MONSTER_HOUSE",2],\
-["T1_BOSS",1],["T1_FIREBOSS",1],["T1_WATERBOSS",0],["T1_EARTHBOSS",0],["T1_AIRBOSS",0],["T1_FORCEBOSS",0],\
+["TREASURE_ROOM",1],["MINI_BOSS",0],["MONSTER_HOUSE",0],\
+["T1_BOSS",1],["T1_FIREBOSS",0],["T1_WATERBOSS",0],["T1_EARTHBOSS",0],["T1_AIRBOSS",0],["T1_FORCEBOSS",0],\
 ["T2_BOSS",0],["T2_QUADBOSS",0],["T2_FORCEBOSS",0]]
 
 func populate_inventory_named():
@@ -33,6 +35,30 @@ func populate_inventory_named():
 				tile.TILE_ID = ID_index
 				self.add_child(tile)
 
+func populate_inventory_named_fixed():
+	print("POPULATING_named_fixed")
+	var ID_index = -1
+	for ID in TileID_NamedInventory:
+		ID_index+=1
+		if ID_index-(inventory_grid_size.x*inventory_grid_size.y*current_page) < (inventory_grid_size.x*inventory_grid_size.y) \
+		and ID_index-(inventory_grid_size.x*inventory_grid_size.y*current_page) >= 0:
+			var tile = basetile_fixed.instantiate()
+			tile.position = Vector2(32+32*((ID_index-inventory_grid_size.x*inventory_grid_size.y*current_page)%inventory_grid_size.x),52+32*((ID_index-inventory_grid_size.x*inventory_grid_size.y*current_page)/inventory_grid_size.x))
+			tile.TILE_ID = ID_index
+			self.add_child(tile)
+
+func adjust_count_named_fixed(TILE_ID:int, adding:bool):
+	var ID = TILE_ID
+	var amount = TileID_NamedInventory[ID][1]
+	if adding:
+		TileID_NamedInventory[ID][1] = clampi(amount+1,0,9999)
+	else:
+		TileID_NamedInventory[ID][1] = clampi(amount-1,0,9999) 
+	var tile = get_child(3+ID-((current_page+1)*inventory_grid_size.x*inventory_grid_size.y))
+	if tile is DungeonCraftingTile and tile.data.TILE_ID == ID:
+		tile.check_visible()
+	pass
+
 func adjust_count_named(TILE_ID:int, adding:bool):
 	var ID = TILE_ID
 	var amount = TileID_NamedInventory[ID][1]
@@ -40,13 +66,17 @@ func adjust_count_named(TILE_ID:int, adding:bool):
 		TileID_NamedInventory[ID][1] = clampi(amount+1,0,9999)
 	else:
 		TileID_NamedInventory[ID][1] = clampi(amount-1,0,9999) 
-	
-	if TileID_NamedInventory[ID][1] == 1 and (current_page+1)*inventory_grid_size.x*inventory_grid_size.y > ID and ID >= clampi(current_page-1,0,max_page_num)*inventory_grid_size.length():
-		var tile = basetile.instantiate()
-		print("ID:",ID," GridCoord: ",Vector2((ID-inventory_grid_size.x*inventory_grid_size.y*current_page)%inventory_grid_size.x,(ID-inventory_grid_size.x*inventory_grid_size.y*current_page)/3))
-		tile.position = Vector2(32+32*((ID-inventory_grid_size.x*inventory_grid_size.y*current_page)%inventory_grid_size.x),52+32*((ID-inventory_grid_size.x*inventory_grid_size.y*current_page)/inventory_grid_size.x))
-		tile.TILE_ID = ID
-		self.add_child(tile)
+	for child in get_children():
+		if child is CRAFTING_TILE_TOWER:
+			if not child.is_placed: #all objects that are 
+				child.queue_free()  # so no need for error checking here.
+	populate_inventory_named()
+	#if TileID_NamedInventory[ID][1] == 1 and (current_page+1)*inventory_grid_size.x*inventory_grid_size.y > ID and ID >= clampi(current_page-1,0,max_page_num)*inventory_grid_size.length():
+	#	var tile = basetile.instantiate()
+	#	print("ID:",ID," GridCoord: ",Vector2((ID-inventory_grid_size.x*inventory_grid_size.y*current_page)%inventory_grid_size.x,(ID-inventory_grid_size.x*inventory_grid_size.y*current_page)/3))
+	#	tile.position = Vector2(32+32*((ID-inventory_grid_size.x*inventory_grid_size.y*current_page)%inventory_grid_size.x),52+32*((ID-inventory_grid_size.x*inventory_grid_size.y*current_page)/inventory_grid_size.x))
+	#	tile.TILE_ID = ID
+	#	self.add_child(tile)
 	pass
 
 
@@ -112,27 +142,27 @@ func modifier_text():
 	var sf_text = ""
 	for i in Affinity:
 		if i[1] != 0:
-			a_text += i[0]+" + "+str(i[1]*25)+"%\n"
+			a_text += "  "+i[0]+" + "+str(i[1]*25)+"%\n"
 	for i in Environments:
 		if i[1] != 0:
-			e_text += i[0]+" + "+str(i[1]*25)+"%\n"
+			e_text += "  "+i[0]+" + "+str(i[1]*25)+"%\n"
 	for i in Enemies:
 		if i[1] != 0:
 			if Enemies.find(i) == 0:
-				m_text += i[0]+" + "+str(i[1]*5)+"%\n"
+				m_text += "  "+i[0]+" + "+str(i[1]*5)+"%\n"
 			elif Enemies.find(i) == 1:
-				m_text += i[0]+" + "+str(i[1])+"\n"
+				m_text += "  "+i[0]+" + "+str(i[1])+"\n"
 			else:
-				m_text += i[0]+" + "+str(i[1]*25)+"%\n"
+				m_text += "  "+i[0]+" + "+str(i[1]*25)+"%\n"
 	for i in Loot:
 		if i[1] != 0:
 			if Loot.find(i) == 0:
-				l_text += i[0]+" + "+str(i[1]*5)+"%\n"
+				l_text += "  "+i[0]+" + "+str(i[1]*5)+"%\n"
 			else:
-				l_text += i[0]+" + "+str(i[1]*25)+"%\n"
+				l_text += "  "+i[0]+" + "+str(i[1]*25)+"%\n"
 	for i in Special_Features:
 		if i[1] != 0:
-			sf_text += i[0]+" + "+str(i[1])+"\n"
+			sf_text += "  "+i[0]+" + "+str(i[1])+"\n"
 	$"../ScrollContainer2/VBoxContainer/affinity".text = a_text
 	$"../ScrollContainer2/VBoxContainer/environment".text = e_text
 	$"../ScrollContainer2/VBoxContainer/enemies".text = m_text
@@ -165,7 +195,7 @@ func change_page(next:bool):
 	populate_inventory_named()
 	pass
 
-const basetile = preload("res://Crafting/tile_object.tscn")
+
 
 #vvvvvTO BE DELETED, OUT OF DATEvvvvv
 func adjust_count(TILE_ID:int, adding:bool):
@@ -207,10 +237,12 @@ func populate_inventory():
 
 
 func _ready() -> void:
-	change_page(true)
-	modifier_text()
+	init()
 	pass # Replace with function body.
 
+func init():
+	change_page(true)
+	modifier_text()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

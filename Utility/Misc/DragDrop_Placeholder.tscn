@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://8ldkbaye4ra3"]
+
+[ext_resource type="Texture2D" uid="uid://di2aeqg1yubbr" path="res://Art/2D_images/PodiumSlots.png" id="1_7xg86"]
+[ext_resource type="Script" path="res://Utility/Misc/drag_drop_placeholder.gd" id="2_upyvg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uetk6"]
+size = Vector2(26, 26)
+
+[node name="DragDropPlaceholder" type="Sprite2D"]
+texture = ExtResource("1_7xg86")
+hframes = 2
+vframes = 2
+script = ExtResource("2_upyvg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+light_mask = 3
+visibility_layer = 3
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_uetk6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

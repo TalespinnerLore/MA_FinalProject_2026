@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bge6c34betll2"]
+[gd_scene load_steps=12 format=3 uid="uid://bge6c34betll2"]
 
 [ext_resource type="Script" path="res://Units/unit.gd" id="1_g2b4t"]
 [ext_resource type="Resource" uid="uid://oygkar1j0gy3" path="res://Resources/Units/Player/Stats_Warrior.tres" id="2_d6r3d"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="5_aevor"]
 [ext_resource type="Resource" uid="uid://cv14lef7fcshm" path="res://Resources/Abilities/DEX_base/Piercing_Shot.tres" id="6_6q1lq"]
 [ext_resource type="Script" path="res://Units/status_effects_manager.gd" id="7_vti38"]
+[ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="10_gh1p6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85qmf"]
 size = Vector2(16, 16)
@@ -87,3 +88,23 @@ hit_from_inside = true
 position = Vector2(16, 16)
 target_position = Vector2(16, 16)
 hit_from_inside = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -304.0
+offset_top = 136.0
+offset_right = -168.0
+offset_bottom = 159.0
+theme = ExtResource("10_gh1p6")
+theme_override_constants/outline_size = 4
+text = "SHIFT + Direction to face that direction.
+Left Mouse to basic attack.
+1 and 2 to use other attacks."
+
+[node name="CombatText" type="Label" parent="."]
+offset_left = -64.0
+offset_top = 136.0
+offset_right = 64.0
+offset_bottom = 168.0
+theme = ExtResource("10_gh1p6")
+theme_override_constants/outline_size = 4
+autowrap_mode = 3

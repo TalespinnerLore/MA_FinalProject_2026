@@ -24,11 +24,13 @@ func init() -> void:
 		child.unit_defeated.connect(_on_unit_defeated)
 		
 		if is_player_controlled:
+			child.add_to_group("Player")
 			#print(child," is player controlled")
 			pass
 		else:
 			pass
-	current_unit = get_children()[0]
+	if get_children().size() > 0:
+		current_unit = get_children()[0]
 	#take_turn_team()
 
 func temp_distribute():
@@ -89,12 +91,14 @@ func _step_turn_ai() -> void:
 	#while true:
 	current_unit_index+=1
 	if current_unit_index >= get_child_count():
+		print("END AI GROUPS TURN")
 		_end_group_turn()
 		return
 	current_unit = get_child(current_unit_index)
 #		if current_unit.can_take_turn == true:
 			#break
 	connect_current_unit_signals()
+	current_unit._on_turn_start()
 	#_step_unit()
 	
 func _on_unit_damaged() -> void:

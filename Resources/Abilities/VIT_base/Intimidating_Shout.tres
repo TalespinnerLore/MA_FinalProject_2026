@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_3lemq"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_kcoca"]
-[ext_resource type="Texture2D" uid="uid://kecoy3onkl54" path="res://Art/VFX Sprites/Flare00_pxl.png" id="3_fvnuv"]
 [ext_resource type="Resource" uid="uid://ddu1mb15e71kr" path="res://Resources/StatusEffects/Demoralized.tres" id="3_tbwgi"]
+[ext_resource type="Texture2D" uid="uid://jg5fc0geer0a" path="res://Art/VFX Sprites/vfx_dark.png" id="4_rvrts"]
 
 [resource]
 script = ExtResource("1_3lemq")
 ability_name = "Intimidating_Shout"
-vfx = ExtResource("3_fvnuv")
+vfx = ExtResource("4_rvrts")
 element = 6
 valid_target = 0
 targeting = 2

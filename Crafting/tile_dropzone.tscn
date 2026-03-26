@@ -16,6 +16,11 @@ texture = ExtResource("1_a5me1")
 hframes = 2
 vframes = 2
 
+[node name="filled_sprite" type="Sprite2D" parent="."]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["dropzone"]]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.75, 0.75)
 shape = SubResource("RectangleShape2D_cypve")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

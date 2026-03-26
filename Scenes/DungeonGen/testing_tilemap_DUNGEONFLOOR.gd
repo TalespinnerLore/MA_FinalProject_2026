@@ -700,6 +700,7 @@ func FillGrid(): #once the rooms are decided, this fills in the rest of the leve
 				toPop.append(possible_door) #find the unused doors in the list,
 		for unused in toPop: #then erase them from the list, so I have a list of actual doors, connected to room data.
 			room[3].erase(unused)
+		print("doors: ",room[3])
 	
 	#print(DeadEnds.size())
 	Simple_FillDeadEnds(Max_DeadEnds)
@@ -717,10 +718,28 @@ func FillGrid(): #once the rooms are decided, this fills in the rest of the leve
 				TileGrid[tile.x][tile.y] = 'FLOOR'
 	
 	
+	
 func place_stairs():
 	var stairs = load("res://Objects/EnvironmentObjects/dungeon_stairs.tscn")
+	var stairs_coords:Vector2i
+	var valid = false
+	while valid == false:
+		var tile = AllRoomTiles.pick_random()
+		if cells_Ground.has(tile):
+			stairs_coords = tile
+			valid = true
+	var i = -1
+	for room in Rooms:
+		i+=1
+		if room[1].has(stairs_coords):
+			Rooms[i][3].append(stairs_coords)
+			break
+	var new_stairs = stairs.instantiate()
+	new_stairs.global_position = Global.grid_to_pos(stairs_coords,Vector2.ZERO)[1]
+	add_child(new_stairs)
+	get_child(0).player_found_stairs.connect(found_stairs)
 	pass
-	
+
 	######################
 	#MAKE FLOOR NAVIGABLE#
 	######################
@@ -794,7 +813,36 @@ func populate_tile_terrain():
 		for tile in AllHallTiles:
 			if River_Tiles_list.has(tile) or DungeonData.flooded:
 				set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(10,10)) #THIS IS THE BRIDGE TILE
-		
+	place_stairs()
+	if River_Tiles_list.size() > 0:
+		#connect_doorways
+		pass
+
+func connect_doorways():
+	for room in Rooms:
+		var connecting_path = []
+		if room[3].size() > 1: #more than one doorway/point of interest
+			for i in range(0,room[3].size()-1): #all doorways, and added points of interest
+				var start = room[3][i]
+				var end = room[3][wrapi(i+1,0,room[3].size()-1)]
+				var current = start
+				var done = false
+				while done == false:
+					var new_tile:Vector2i
+					var up_down = Global.randb()
+					var direction = Vector2i(clampi(end.x-current.x,-1,1),clampi(end.y-current.y,-1,1))
+					if up_down and direction.x != 0 and room[1].has(current+Vector2i(direction.x,0)):
+						new_tile = current+Vector2i(direction.x,0)
+					else:
+						new_tile = current+Vector2i(0,direction.y)
+					connecting_path.append(new_tile)
+					current = new_tile
+					if room[3].has(current):
+						done = true
+			
+			for tile in connecting_path:
+				if River_Tiles_list.has(tile):
+					set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(10,10)) #THIS IS THE BRIDGE TILE
 	pass
 
 
@@ -877,5 +925,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		_ready()
+	#if Input.is_action_just_pressed("ui_accept"):
+	#	_ready()
+	pass
+
+func found_stairs():
+	pass

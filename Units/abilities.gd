@@ -13,6 +13,6 @@ extends Node
 
 
 
-func _ready():
-	BasicAttack = $"..".UnitStats.BasicAttack
+func init():
+	BasicAttack = get_parent().UnitStats.BasicAttack
 	pass

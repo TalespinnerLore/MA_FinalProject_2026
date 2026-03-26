@@ -1,13 +1,14 @@
 [gd_scene load_steps=7 format=4 uid="uid://dxwo7cyxienmy"]
 
+[ext_resource type="Script" path="res://Crafting/tower_crafting.gd" id="1_hifjx"]
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_tshsg"]
 [ext_resource type="TileSet" uid="uid://ty37cym0krxg" path="res://Crafting/tower_crafting_ui.tres" id="2_goe6b"]
 [ext_resource type="FontFile" uid="uid://bme72xoxft30d" path="res://Art/Tiny5-Regular.ttf" id="3_u0l83"]
 [ext_resource type="PackedScene" uid="uid://b6dntdfdb23xd" path="res://Crafting/tile_dropzone.tscn" id="4_j1cbo"]
 [ext_resource type="Script" path="res://ui_towercrafting.gd" id="5_rbkyg"]
-[ext_resource type="PackedScene" uid="uid://d1yshb420qmo7" path="res://Crafting/tile_object.tscn" id="6_jf1jn"]
 
 [node name="TowerCrafting" type="Node2D"]
+script = ExtResource("1_hifjx")
 
 [node name="TileMapLayer_SideUI" type="TileMapLayer" parent="."]
 light_mask = 0
@@ -27,7 +28,6 @@ tile_map_data = PackedByteArray("AAAFAAUAAQAAAAAAAAAEAAUAAQABAAEAAAAGAAUAAQABAAE
 tile_set = ExtResource("2_goe6b")
 
 [node name="TileMapLayer_Base2" type="TileMapLayer" parent="."]
-visible = false
 light_mask = 0
 position = Vector2(144, 4)
 tile_map_data = PackedByteArray("AAAFAAcAAAACAAQAAAAHAAUAAAAEAAIAAAADAAUAAAAAAAIAAAAFAAMAAAACAAAAAAAHAAcAAAAHAAIAAAAHAAMAAAAHAAIAAAADAAMAAAAHAAIAAAADAAcAAAAHAAIAAAABAAMAAAAJAAcAAAABAAQAAAAJAAcAAAABAAUAAAAJAAcAAAABAAYAAAAJAAcAAAABAAcAAAAJAAcAAAABAAgAAAAJAAcAAAAJAAgAAAAJAAcAAAAJAAcAAAAJAAcAAAAJAAYAAAAJAAcAAAAJAAUAAAAJAAcAAAAJAAQAAAAJAAcAAAAJAAMAAAAJAAcAAAAJAAIAAAAJAAcAAAABAAIAAAAJAAcAAAABAAEAAAAJAAYAAAAJAAEAAAAJAAYAAAAJAAkAAAAJAAYAAAABAAkAAAAJAAYAAAACAAkAAAAKAAYAAAADAAkAAAAKAAYAAAAEAAkAAAAKAAYAAAAFAAkAAAAKAAYAAAAGAAkAAAAKAAYAAAAHAAkAAAAKAAYAAAAIAAkAAAAKAAYAAAAIAAEAAAAKAAYAAAAHAAEAAAAKAAYAAAAGAAEAAAAKAAYAAAAFAAEAAAAKAAYAAAAEAAEAAAAKAAYAAAADAAEAAAAKAAYAAAACAAEAAAAKAAYAAAAEAAYAAAABAAMAAAAEAAUAAAABAAIAAAAEAAQAAAABAAEAAAAFAAQAAAACAAEAAAAGAAQAAAADAAEAAAAGAAUAAAADAAIAAAAGAAYAAAADAAMAAAAFAAYAAAACAAMAAAAFAAUAAAACAAIAAAA=")
@@ -40,7 +40,6 @@ tile_map_data = PackedByteArray("AAAFAAUAAQAAAAAAAAAEAAUAAQABAAEAAAAGAAUAAQABAAE
 tile_set = ExtResource("2_goe6b")
 
 [node name="TileMapLayer_Base3" type="TileMapLayer" parent="."]
-visible = false
 light_mask = 0
 position = Vector2(144, 4)
 tile_map_data = PackedByteArray("AAAAAAAAAAAJAAYAAAAAAAEAAAAJAAcAAAAAAAQAAAAJAAcAAAABAAAAAAAKAAYAAAACAAAAAAAKAAYAAAADAAAAAAAKAAYAAAAEAAAAAAAKAAYAAAAFAAAAAAAKAAYAAAAGAAAAAAAKAAYAAAAHAAAAAAAKAAYAAAAAAAgAAAAJAAcAAAAIAAAAAAAKAAYAAAAJAAAAAAAKAAYAAAAAAAkAAAAJAAcAAAAIAAoAAAAKAAYAAAAHAAoAAAAKAAYAAAAGAAoAAAAKAAYAAAADAAoAAAAKAAYAAAACAAoAAAAKAAYAAAABAAoAAAAKAAYAAAAAAAoAAAAJAAYAAAAKAAAAAAAJAAYAAAAKAAEAAAAJAAcAAAAKAAIAAAAJAAcAAAAKAAMAAAAJAAcAAAAKAAQAAAAJAAcAAAAKAAUAAAAJAAcAAAAKAAYAAAAJAAcAAAAKAAcAAAAJAAcAAAAKAAgAAAAJAAcAAAAKAAkAAAAJAAcAAAAKAAoAAAAJAAYAAAAJAAoAAAAKAAYAAAAEAAoAAAAKAAYAAAAFAAoAAAAKAAYAAAAAAAcAAAAJAAcAAAAAAAYAAAAJAAcAAAAAAAUAAAAJAAcAAAAAAAMAAAAJAAcAAAAAAAIAAAAJAAcAAAACAAcAAAAFAAMAAAADAAgAAAAGAAQAAAAHAAgAAAAIAAQAAAAIAAcAAAAJAAMAAAACAAMAAAAFAAEAAAADAAIAAAAGAAAAAAAHAAIAAAAIAAAAAAAIAAMAAAAJAAEAAAAFAAEAAAAHAAIAAAABAAUAAAAHAAIAAAAJAAUAAAAHAAIAAAAFAAkAAAAHAAIAAAAHAAMAAAAIAAEAAAADAAMAAAAGAAEAAAAFAAMAAAACAAAAAAADAAUAAAAAAAIAAAAHAAUAAAAEAAIAAAAGAAYAAAADAAMAAAAEAAYAAAABAAMAAAAEAAUAAAABAAIAAAAEAAQAAAABAAEAAAAFAAQAAAACAAEAAAAFAAUAAAACAAIAAAAGAAUAAAADAAIAAAAGAAQAAAADAAEAAAAHAAcAAAAIAAMAAAAFAAcAAAACAAQAAAAFAAYAAAACAAMAAAADAAcAAAAGAAMAAAA=")
@@ -57,6 +56,7 @@ offset_left = 24.0
 offset_top = 14.0
 offset_right = 106.0
 offset_bottom = 32.0
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_u0l83")
 theme_override_font_sizes/font_size = 16
 text = "INVENTORY:"
@@ -67,6 +67,7 @@ offset_left = 536.0
 offset_top = 14.0
 offset_right = 616.0
 offset_bottom = 32.0
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_u0l83")
 text = "EFFECTS:"
 horizontal_alignment = 1
@@ -112,7 +113,6 @@ position = Vector2(320, 212)
 rarity = 1
 
 [node name="Tier2" type="Node2D" parent="DROPZONES"]
-visible = false
 
 [node name="TileDropzone10" parent="DROPZONES/Tier2" instance=ExtResource("4_j1cbo")]
 position = Vector2(256, 180)
@@ -143,7 +143,6 @@ rarity = 0
 position = Vector2(256, 116)
 
 [node name="Tier3" type="Node2D" parent="DROPZONES"]
-visible = false
 
 [node name="TileDropzone18" parent="DROPZONES/Tier3" instance=ExtResource("4_j1cbo")]
 position = Vector2(256, 84)
@@ -246,9 +245,6 @@ theme_override_fonts/font = ExtResource("3_u0l83")
 theme_override_font_sizes/font_size = 16
 text = "[START]"
 
-[node name="TileObject" parent="ButtonSTART" instance=ExtResource("6_jf1jn")]
-visible = false
-
 [node name="ScrollContainer2" type="ScrollContainer" parent="."]
 offset_left = 520.0
 offset_top = 40.0
@@ -260,17 +256,21 @@ custom_minimum_size = Vector2(112, 0)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="ScrollContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(110, 10)
 layout_mode = 2
 theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_u0l83")
 theme_override_font_sizes/font_size = 16
-text = "Affinity:
+text = " Affinity:
 "
 autowrap_mode = 2
 
 [node name="affinity" type="Label" parent="ScrollContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(110, 10)
 layout_mode = 2
 theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_u0l83")
 theme_override_font_sizes/font_size = 8
 text = "Affinity is a scam, man, what a dick dtimtbomrbornomyn
@@ -278,17 +278,21 @@ text = "Affinity is a scam, man, what a dick dtimtbomrbornomyn
 autowrap_mode = 2
 
 [node name="Label2" type="Label" parent="ScrollContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(110, 10)
 layout_mode = 2
 theme_override_constants/line_spacing = -3
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_u0l83")
 theme_override_font_sizes/font_size = 16
-text = "Environment:
+text = " Environment:
 "
 autowrap_mode = 2
 
 [node name="environment" type="Label" parent="ScrollContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(110, 10)
 layout_mode = 2
 theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_u0l83")
 theme_override_font_sizes/font_size = 8
 text = "Environment is a scam, man, what a dick dtimtbomrbornomyn
@@ -296,17 +300,21 @@ text = "Environment is a scam, man, what a dick dtimtbomrbornomyn
 autowrap_mode = 2
 
 [node name="Label3" type="Label" parent="ScrollContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(110, 10)
 layout_mode = 2
 theme_override_constants/line_spacing = -3
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_u0l83")
 theme_override_font_sizes/font_size = 16
-text = "Enemies:
+text = " Enemies:
 "
 autowrap_mode = 2
 
 [node name="enemies" type="Label" parent="ScrollContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(110, 10)
 layout_mode = 2
 theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_u0l83")
 theme_override_font_sizes/font_size = 8
 text = "Enemies are a scam, man, what a dick dtimtbomrbornomyn
@@ -314,17 +322,21 @@ text = "Enemies are a scam, man, what a dick dtimtbomrbornomyn
 autowrap_mode = 2
 
 [node name="Label4" type="Label" parent="ScrollContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(110, 10)
 layout_mode = 2
 theme_override_constants/line_spacing = -3
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_u0l83")
 theme_override_font_sizes/font_size = 16
-text = "Loot:
+text = " Loot:
 "
 autowrap_mode = 2
 
 [node name="loot" type="Label" parent="ScrollContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(110, 10)
 layout_mode = 2
 theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_u0l83")
 theme_override_font_sizes/font_size = 8
 text = "Loot is a scam, man, what a dick dtimtbomrbornomyn
@@ -332,17 +344,22 @@ text = "Loot is a scam, man, what a dick dtimtbomrbornomyn
 autowrap_mode = 2
 
 [node name="Label5" type="Label" parent="ScrollContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(110, 10)
 layout_mode = 2
 theme_override_constants/line_spacing = -3
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_u0l83")
 theme_override_font_sizes/font_size = 16
-text = "Special Features:
+text = " Special 
+ Features:
 "
 autowrap_mode = 2
 
 [node name="special_features" type="Label" parent="ScrollContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(110, 10)
 layout_mode = 2
 theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_u0l83")
 theme_override_font_sizes/font_size = 8
 text = "Special Features a scam, man, what a dick dtimtbomrbornomyn

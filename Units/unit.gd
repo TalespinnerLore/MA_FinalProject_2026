@@ -203,6 +203,7 @@ func reroll_outcome(attempts:int, go_lower:bool, prev_outcome:float, threshold:f
 
 func ability_effect_calculations(Ability:AbilityData,Source):
 	var amount = 0
+	target_unit.combattext(str(Source," hits ",self.name))
 	print(Source," hits ",self.name)
 	var hitcrit = calc_evasion_and_crit(Source.Base_Evasion,Source.Crit_Boost)
 	if (Ability.valid_target != 0 and Team != Teams.ENEMY and Ability.damaging == false) \
@@ -228,11 +229,13 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 		amount+=Ability.base_value
 		
 		if Ability.damaging == true:
+			target_unit.combattext(str("Before: ",HP_Current))
 			print("Before: ",HP_Current)
 			$Sprite2D/HP_module._take_damage(calc_damage(Ability.damage_type,amount,hitcrit[1],Ability.element))
 			HP_Current = $Sprite2D/HP_module.hp
+			target_unit.combattext(str("After: ",HP_Current))
 			print("After: ",HP_Current)
-			
+			in_combat = true
 		if Ability.healing:
 			calc_healing(amount,hitcrit[1],Ability.element)
 		
@@ -250,6 +253,7 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 				s_e_i.source_unit = Source
 				$StatusEffects.add_child(s_e_i)
 	else:
+		target_unit.combattext(str("MISS!"))
 		print("MISS!")
 	pass 
 
@@ -395,7 +399,9 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("LeftClick"):
 			print("attempt emit signal")
 			#get_tree().get_node
+			
 			emit_signal("attack_start",$Abilities.BasicAttack,self)
+			combattext(str(self.name," uses ",$Abilities.BasicAttack.ability_name,"!"))
 			action_used()
 			#has_moved = true
 			#_on_turn_start()
@@ -403,22 +409,28 @@ func _physics_process(delta: float) -> void:
 		
 		elif Input.is_action_just_pressed("Ability_1"):
 			emit_signal("attack_start",$Abilities.Slot_1,self)
+			combattext(str(self.name," uses ",$Abilities.Slot_1.ability_name,"!"))
 			action_used()
 		elif Input.is_action_just_pressed("Ability_2"):
 			emit_signal("attack_start",$Abilities.Slot_2,self)
+			combattext(str(self.name," uses ",$Abilities.Slot_2.ability_name,"!"))
 			action_used()
 		elif Input.is_action_just_pressed("Ability_3"):
 			emit_signal("attack_start",$Abilities.Slot_3,self)
+			
+			combattext(str(self.name," uses ",$Abilities.Slot_3.ability_name,"!"))
 			action_used()
 		elif Input.is_action_just_pressed("Ability_4"):
 			emit_signal("attack_start",$Abilities.Slot_4,self)
+			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
 			action_used()
 		#if not moving:
 		#	if get_dir_input() != Vector2.ZERO:
 		#		move(get_dir_input())
 		#	
-				
-			
+
+func combattext(string):
+	$CombatText.text = str(string +"\n")
 
 const tile_size = 32
 var sprite_node_pos_tween: Tween
@@ -427,6 +439,7 @@ var move_duration:= 0.185
 func check_move_input():
 	#FOR SMOOTH MOVEMENT WITH HOLDING BUTTON, CHANGE is_action_just_pressed() FOR is_action_pressed().
 	#NEED TO MAKE SURE THE REST OF THE TURN CYCLE GOES SMOOTHLY, AND ONLY WHEN NOT IN COMBAT STATE.
+	
 	if ! sprite_node_pos_tween or ! sprite_node_pos_tween.is_running():
 		if Input.is_key_pressed(KEY_SHIFT):
 			if Input.is_action_pressed("up") and Input.is_action_pressed("left"):
@@ -489,6 +502,12 @@ func _select_direction(dir:Vector2):
 	return facing
 
 func action_used():
+	if is_team_leader and Team == Teams.PLAYER:
+		pass
+		#await get_tree().create_timer(1.0).timeout
+	else:
+		pass
+		#await get_tree().create_timer(0.1).timeout
 	turn_actions_used+=1
 	if turn_actions_used>=max_turn_actions:
 		end_turn()
@@ -501,14 +520,28 @@ func init(is_player_controlled):
 	#print(self," INITIALIZED")
 	
 	#print("unit ", self.name, " INITIALIZED")
-	set_stats()
-	$Sprite2D/HP_module.hp = HP_Max
-	$Sprite2D/HP_module.maxhp = HP_Max
+	
 	if is_player_controlled:
 		Team = Teams.PLAYER
-	else: #FIX THIS LATER TO ACCOUNT FOR NPC AND ALLY UNITS
-		Team = Teams.ENEMY
+
+		UnitStats = PlayerStats.p1_class
+		$Abilities.Slot_1 = PlayerStats.p1_equipped_abilities[0]
+		$Abilities.Slot_2 = PlayerStats.p1_equipped_abilities[1]
+		$Abilities.Slot_3 = PlayerStats.p1_equipped_abilities[0]
+		$Abilities.Slot_4 = PlayerStats.p1_equipped_abilities[1]
+		set_stats()
 		$Sprite2D.texture = UnitStats.Sprite
+		$Abilities.init()
+		$Sprite2D/HP_module.hp = HP_Max
+		$Sprite2D/HP_module.maxhp = HP_Max
+	else: #FIX THIS LATER TO ACCOUNT FOR NPC AND ALLY UNITS
+		$Label.visible = false
+		Team = Teams.ENEMY
+		$Abilities.init()
+		$Sprite2D/HP_module.hp = HP_Max
+		$Sprite2D/HP_module.maxhp = HP_Max
+		$Sprite2D.texture = UnitStats.Sprite
+	target_unit = get_tree().get_first_node_in_group("Player")
 	#position = position.snapped(Vector2.ONE * tile_size)
 	#position += Vector2.ONE * tile_size/2
 	get_self_coords()
@@ -558,12 +591,14 @@ func _on_turn_start() -> void:
 	emit_signal("turn_start")
 	
 	if skipping_turn:
+		print("hit Skip TURN")
 		skipping_turn = false
 		end_turn()
 	
 	if Team == Teams.PLAYER or Team == Teams.ALLY:
 		if is_team_leader:
 			emit_signal("waiting_for_instructions",self_coords)
+			
 			pass #wait for instructions
 		else:
 			print("team AI turn not yet implemented")
@@ -579,9 +614,12 @@ var path:Array[Vector2i] = []
 
 func AI_turn_enemy():
 	if in_combat:
-		if (self_coords - target_unit.self_coords).length() > 1.5: #if not next to target
-			goal_tile = pathfinding_manager.get_valid_path(self_coords,target_unit.self_coords)[0]
-			facing = goal_tile - self_coords
+		#target_unit = get_tree().get_first_node_in_group("Player")
+		print("self: ",self_coords," player: ",target_unit.self_coords)
+		goal_tile = Vector2i(clampi(self_coords.x - target_unit.self_coords.x,-1,1),clampi(self_coords.y - target_unit.self_coords.y,-1,1))
+		facing = Vector2i(goal_tile) - Vector2i(self_coords)
+		if goal_tile.x+goal_tile.y > 2: #if not next to target
+			#goal_tile = pathfinding_manager.get_valid_path(self_coords,target_unit.self_coords)[0]
 			_move(facing)
 			action_used()
 			pass
@@ -590,16 +628,32 @@ func AI_turn_enemy():
 			action_used()
 		pass
 	else:
-		if path.size() < 1:
-			path = pathfinding_manager.get_valid_path(self_coords,$"../../../TileMapLayer".cells_Ground.pick_random())
+		#if path.size() < 1:
+		#	path = pathfinding_manager.get_valid_path(self_coords,$"../../../TileMapLayer".cells_Ground.pick_random())
+		#	print(self,path)
 		#^^^ unfuck this atrocious line of code over the weekend
-		goal_tile = path[0]
-		facing = goal_tile - self_coords
-		_move(facing)
-		path.pop_front()
+		#goal_tile = path[0]
+		#print("selftile: ",self_coords,"  next tile: ",goal_tile)
+		#facing = Vector2i(goal_tile) - Vector2i(self_coords)
+		#_move(facing)
+		#print("newtile: ",self_coords)
+		#path.pop_front()
+		path_random_tile()
 		action_used()
 		pass
 	pass
+
+func path_random_tile():
+	var rand_dir = Global.dir8
+	rand_dir.shuffle()
+	var valid = $"../../../TileMapLayer".cells_Ground
+	for dir in rand_dir:
+		var target_tile:Vector2i = Vector2i(self_coords)+Vector2i(dir)
+		if valid.has(target_tile):
+			facing = target_tile - Vector2i(self_coords)
+			break
+	_move(facing)
+
 
 func AI_turn_ally():
 	pass
@@ -612,8 +666,13 @@ func check_in_range():
 
 
 func reset_turn():
+	has_taken_turn = false
 	pass
 
 func end_turn():
 	has_taken_turn = true
+	#cleartext()
 	emit_signal("turn_complete")
+
+func cleartext():
+	$CombatText.text = ""

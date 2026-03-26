@@ -32,20 +32,22 @@ func init() -> void:
 
 func _step_turn() -> void:
 	var holding_variable = 0
-	while true:
-		holding_variable = current_group_index
-		current_group_index = wrapi(current_group_index + 1, 0, all_groups.size())
-		print("group index: ",current_group_index)
-		previous_group_index = holding_variable
-		current_group = all_groups[current_group_index]
-		print("group: ",current_group)
-		if current_group.get_active_units().size() > 0:
-			print("breaks here")
-			break
-		#prevents lockup, supposedly
-		if current_group_index == previous_group_index:
-			push_error('Only one group found')
-			break
+	#while true:
+	holding_variable = current_group_index
+	current_group_index = wrapi(current_group_index + 1, 0, all_groups.size())
+	print("group index: ",current_group_index)
+	previous_group_index = holding_variable
+	current_group = all_groups[current_group_index]
+	print("group: ",current_group)
+	if current_group.get_active_units().size() <= 0:
+		print("empty group, skip")
+		_step_turn()
+		#print("breaks here")
+	#	break
+	#prevents lockup, supposedly
+	if current_group_index == previous_group_index:
+		push_error('Only one group found')
+	#	break
 	_begin_turn()
 
 func _begin_turn() -> void:
@@ -81,12 +83,12 @@ func _process_ability(Ability:AbilityData,Source):
 	print("Hit Tiles: ",hit_tiles)
 	for tile in hit_tiles:
 		#print("Hit Tile: ",tile)
-		if does_pierce:
-			var vfx = Ability_vfx.instantiate()
-			vfx.texture = Ability.vfx
-			print(Ability.vfx.get_size())
-			vfx.position = Global.grid_to_pos(tile,Vector2.ZERO)[1]
-			$"../VFX".add_child(vfx)
+		#if does_pierce:
+		var vfx = Ability_vfx.instantiate()
+		vfx.texture = Ability.vfx
+		print(Ability.vfx.get_size())
+		vfx.position = Global.grid_to_pos(tile,Vector2.ZERO)[1]
+		$"../VFX".add_child(vfx)
 		for group in all_groups:
 			#print("Group: ",group.name)
 			for child in group.get_children():
@@ -97,9 +99,9 @@ func _process_ability(Ability:AbilityData,Source):
 						child.ability_effect_calculations(Ability,Source)
 						if ! does_pierce:
 							#print("not pierce swewsvsdivusiuvhsdivhs8dhv")
-							var vfx = Ability_vfx.instantiate()
-							vfx.position = Global.grid_to_pos(tile,Vector2.ZERO)[1]
-							$"../VFX".add_child(vfx)
+							var new_vfx = Ability_vfx.instantiate()
+							new_vfx.position = Global.grid_to_pos(tile,Vector2.ZERO)[1]
+							$"../VFX".add_child(new_vfx)
 							break
 						else:
 							pass
@@ -109,11 +111,15 @@ func _process_ability(Ability:AbilityData,Source):
 						child.ability_effect_calculations(Ability,Source)
 						if ! does_pierce:
 								#print("not pierce swewsvsdivusiuvhsdivhs8dhv")
-								var vfx = Ability_vfx.instantiate()
-								vfx.global_position = Global.grid_to_pos(tile,Vector2.ZERO)[1]
-								$"../VFX".add_child(vfx)
+								var neww_vfx = Ability_vfx.instantiate()
+								neww_vfx.global_position = Global.grid_to_pos(tile,Vector2.ZERO)[1]
+								$"../VFX".add_child(neww_vfx)
 								break
 	pass
+
+
+	
+
 
 @onready var tilegrid = $"../TileMapLayer"########GET REFERENCE TO GRID
 
@@ -165,7 +171,7 @@ func calc_hit_tiles(targeting:int, range:int, facing:Vector2i, source_coord:Vect
 							relative_tiles.append(facing*(r+1) - cone_spread*(step+1))
 			pass
 		"Circle":
-			relative_tiles = Circular_Area(range,source_coord,false)
+			relative_tiles = Circular_Area(range,Vector2i.ZERO,false)
 			relative_tiles.erase(source_coord)
 			pass
 		"Self":

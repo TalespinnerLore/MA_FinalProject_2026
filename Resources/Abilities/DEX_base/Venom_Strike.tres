@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_xxhvv"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_63mst"]
 [ext_resource type="Resource" uid="uid://v7gy1dfehh8o" path="res://Resources/StatusEffects/Poisoned.tres" id="3_lvlg5"]
-[ext_resource type="Texture2D" uid="uid://kecoy3onkl54" path="res://Art/VFX Sprites/Flare00_pxl.png" id="4_ufwap"]
+[ext_resource type="Texture2D" uid="uid://jg5fc0geer0a" path="res://Art/VFX Sprites/vfx_dark.png" id="4_lf8f7"]
 
 [resource]
 script = ExtResource("1_xxhvv")
 ability_name = "Venom Strike"
-vfx = ExtResource("4_ufwap")
+vfx = ExtResource("4_lf8f7")
 element = 6
 valid_target = 0
 targeting = 0

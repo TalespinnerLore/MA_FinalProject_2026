@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="TowerOfTrials_Test"
-run/main_scene="res://Scenes/DungeonGen/testingshit_FLOORSPAWNING.tscn"
+run/main_scene="res://Scenes/StaticLevels/HubScene_Playtesting.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*res://Utility/global.gd"
 DungeonData="*res://Utility/DungeonData.gd"
+PlayerStats="*res://Utility/Player_Stats.gd"
 
 [display]
 
@@ -35,6 +36,7 @@ folder_colors={
 "res://Resources/": "teal",
 "res://Scenes/": "green",
 "res://Sounds/": "blue",
+"res://UI/": "yellow",
 "res://Units/": "red",
 "res://Utility/": "gray"
 }
@@ -43,6 +45,7 @@ folder_colors={
 
 draganddrop="objects that can be dragged and dropped"
 dropzone="zone where draganddrop items can be placed"
+Player=""
 
 [input]
 

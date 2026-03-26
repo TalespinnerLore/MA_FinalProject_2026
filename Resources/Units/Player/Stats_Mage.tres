@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=3 format=3 uid="uid://ht133k0aitwq"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=4 format=3 uid="uid://ht133k0aitwq"]
 
-[ext_resource type="Resource" uid="uid://d02ns3e6v636q" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres" id="1_3p7qy"]
+[ext_resource type="Resource" uid="uid://cq5mgv3o752bk" path="res://Resources/Abilities/MAG_base/EXPLOSION.tres" id="1_7h3li"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_b5sfj"]
+[ext_resource type="Texture2D" uid="uid://bixa6lgv0t1kx" path="res://Art/UnitSprites/BasicCharacter_mage.png" id="2_xv6od"]
 
 [resource]
 script = ExtResource("1_b5sfj")
-BasicAttack = ExtResource("1_3p7qy")
+Sprite = ExtResource("2_xv6od")
+BasicAttack = ExtResource("1_7h3li")
 STR_up = 0
 DEX_up = 5
 VIT_up = 0

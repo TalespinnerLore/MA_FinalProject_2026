@@ -9,8 +9,10 @@ var path_array:Array[Vector2i] = []
 @export var tilemaplayer_ref:TileMapLayer = null
 
 func _ready() -> void:
+	tilemaplayer_ref = $"../TileMapLayer"
 	set_up_grid()
 	set_terrain_movement_cost()
+	pass
 
 func set_up_grid() -> void:
 	astar_grid.region = tilemaplayer_ref.get_used_rect()
@@ -24,7 +26,7 @@ func set_terrain_movement_cost() -> void:
 		var cell_data = tilemaplayer_ref.get_cell_tile_data(tile)
 		var cell_path_cost:int = 0
 		if tilemaplayer_ref is Dungeon_Floor:
-			match tilemaplayer_ref.what_is_this_tile():
+			match tilemaplayer_ref.what_is_this_tile(tile.x,tile.y):
 				'FLOOR':
 					cell_path_cost = 0
 				'WALL':
@@ -39,7 +41,7 @@ func set_terrain_movement_cost() -> void:
 func get_valid_path(start_pos:Vector2i,end_pos:Vector2i) -> Array[Vector2i]:
 	path_array.clear()
 	for point in astar_grid.get_point_path(start_pos,end_pos,true):
-		var current_point = point
+		var current_point = Vector2i(point)
 		current_point += tilemaplayer_ref.tile_set.tile_size / 2
 		path_array.append(current_point)	
 	return path_array
