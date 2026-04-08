@@ -58,7 +58,7 @@ func choose_biome():
 var room_attempts = 25
 var interconnectivity = 2#0-10 range
 var rounded = false
-var spawn_river = false
+var spawn_river = true### false
 var flooded:bool = false
 var max_size = 15
 var min_size = 5

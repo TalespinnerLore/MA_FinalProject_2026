@@ -27,6 +27,8 @@ var UnusedTiles = []
 var cells_Wall = []    ##
 var cells_Ground = []  ##
 var cells_Water = []   ##
+var cells_Lava = []    ##
+var cells_Air = []     ##
 #########################
 
 func InitializeGrid():
@@ -815,26 +817,120 @@ func populate_tile_terrain():
 				set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(10,10)) #THIS IS THE BRIDGE TILE
 	place_stairs()
 	if River_Tiles_list.size() > 0:
-		#connect_doorways
+		for num in range(0,Rooms.size()):
+			Connect_Doors_BRUTE(num)
+		#Connect_Doors_BRUTE(8)
+		#connect_doorways()
 		pass
+
+func Connect_Doors_BRUTE(room_index):
+	var room = Rooms[room_index]
+	var connecting_path = []
+	var end:Vector2i
+	var start:Vector2i
+	if room[3].size() > 1: #more than one doorway/point of interest
+		var doors = room[3]
+		#doors.shuffle()
+		for i in range(0,doors.size()): #all doorways, and added points of interest
+			start = doors[i]
+			if i+1 >= doors.size():
+				end = doors[0]
+			else:
+				end = doors[i+1]
+			
+			var current = start
+			connecting_path.append(start)
+			var done = false
+			
+			while done == false:
+				var direction = Vector2i(clampi(end.x-current.x,-1,1),clampi(end.y-current.y,-1,1))
+				var new_tile:Vector2i = current+direction
+				var up_down = Global.randb()
+				var valid_tile = false
+				
+				if direction.x == 0 or direction.y == 0:
+					if ! room[2].has(new_tile):
+						valid_tile = true
+					else:
+						for dir in Global.dir4:
+							if room[1].has(current+dir):
+								new_tile = current+dir
+								valid_tile = true
+								break
+						print("? fuck noes")
+						
+				else:
+					if up_down:
+						new_tile.y = current.y
+					else:
+						new_tile.x = current.x
+					
+					if ! room[2].has(new_tile):
+						valid_tile = true
+					else:
+						new_tile = current+direction
+						if up_down:
+							new_tile.x = current.x
+						else:
+							new_tile.y = current.y
+						if ! room[2].has(new_tile):
+							valid_tile = true
+						else:
+							#new_tile = connecting_path.back()
+							print("INVALID EVERYTHING APPARENTLY FUCK MEEEEEEEEEEEEEEEE")
+				
+				if valid_tile == true:
+					if connecting_path.has(new_tile):
+						done = true
+					else:
+						connecting_path.append(new_tile)
+				
+				current = new_tile
+				
+				if doors.has(current):
+					done = true
+					
+		for tile in connecting_path:
+				if River_Tiles_list.has(tile):
+					set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(10,10)) #THIS IS THE BRIDGE TILE
+				#set_cell(Vector2i(tile.x,tile.y),0, Vector2i(0,2)) #THIS IS THE BRIDGE TILE
+		#print("walls: ",room[2])
+		#print("path: ",connecting_path)
+		#var temp = []
+		#for tile in room[2]:
+		#	if connecting_path.has(tile):
+		#		temp.append(tile)
+		#print("both: ",temp)
+	else:
+		print("ONLY 1 DOORWAY")
 
 func connect_doorways():
 	for room in Rooms:
+		print("room rect: ",room[0]," room doors: ",room[3])
 		var connecting_path = []
+		room = Rooms[1]
 		if room[3].size() > 1: #more than one doorway/point of interest
 			for i in range(0,room[3].size()-1): #all doorways, and added points of interest
+				#var i = 0
 				var start = room[3][i]
 				var end = room[3][wrapi(i+1,0,room[3].size()-1)]
+				print("startpoint: ",start," endpoint: ",end, "index: ",i)
 				var current = start
 				var done = false
 				while done == false:
 					var new_tile:Vector2i
 					var up_down = Global.randb()
 					var direction = Vector2i(clampi(end.x-current.x,-1,1),clampi(end.y-current.y,-1,1))
-					if up_down and direction.x != 0 and room[1].has(current+Vector2i(direction.x,0)):
-						new_tile = current+Vector2i(direction.x,0)
-					else:
+					print("dir vector ", Vector2i(end.x-current.x,end.y-current.y))
+					print(room[1])
+					print(current,"    ",end, "      ",room[3])
+					print(direction)
+					if up_down and direction.y != 0 and (AllRoomTiles.has(current+Vector2i(0,direction.y)) or room[3].has(current+Vector2i(0,direction.y))):
 						new_tile = current+Vector2i(0,direction.y)
+						print("up/down: true, direction: ",direction,", currenttile: ",current,", newtile: ",new_tile)
+					else:
+						new_tile = current+Vector2i(direction.x,0)
+					#print("up/down: ",up_down," direction: ",direction," new_tile: ",new_tile," old_tile: ",connecting_path.back())
 					connecting_path.append(new_tile)
 					current = new_tile
 					if room[3].has(current):
@@ -842,7 +938,8 @@ func connect_doorways():
 			
 			for tile in connecting_path:
 				if River_Tiles_list.has(tile):
-					set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(10,10)) #THIS IS THE BRIDGE TILE
+					#set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(10,10)) #THIS IS THE BRIDGE TILE
+					set_cell(Vector2i(tile.x,tile.y),0, Vector2i(0,2)) #THIS IS THE BRIDGE TILE
 	pass
 
 
@@ -877,6 +974,7 @@ func what_is_this_tile(x,y):
 
 	pass
 @export var bugfixing = false	
+@export var has_units := false
 var terrain_set = 2
 
 # Called when the node enters the scene tree for the first time.
@@ -888,9 +986,12 @@ func _ready() -> void:
 	Interconnectivity = DungeonData.interconnectivity
 	Rounded = DungeonData.rounded
 	SpawnRiver = DungeonData.spawn_river
-
-	seed(randi())
-	#seed(129)
+	
+	if get_tree().get_first_node_in_group("Player") != null:
+		has_units = true
+	print("vererver")
+	#seed(randi())
+	seed(129)
 	#print("BEGIN - SDIBRIVUN")
 	InitializeGrid()
 	FillGrid()
@@ -900,17 +1001,18 @@ func _ready() -> void:
 	#	set_cell(tile,0, Vector2i(0,3))
 	#what_is_this_tile(1,19)
 	#print("SDIBRIVUN - END")
-	var validspawn = false
-	var spawnpoint:Vector2i
-	while validspawn == false:
-		spawnpoint = cells_Ground.pick_random()
-		if AllHallTiles.has(spawnpoint) or cells_Wall.has(spawnpoint):
-			validspawn = false
-		else:
-			validspawn = true
-	$"../Unit_Manager/Player_Group/Unit".set_spawn(spawnpoint)
-	
-	$"../Unit_Manager/Enemy_Group".temp_distribute()
+	if has_units:
+		var validspawn = false
+		var spawnpoint:Vector2i
+		while validspawn == false:
+			spawnpoint = cells_Ground.pick_random()
+			if AllHallTiles.has(spawnpoint) or cells_Wall.has(spawnpoint):
+				validspawn = false
+			else:
+				validspawn = true
+		$"../Unit_Manager/Player_Group/Unit".set_spawn(spawnpoint)
+		
+		$"../Unit_Manager/Enemy_Group".temp_distribute()
 	var i = -1
 	for room in Rooms:
 		i+=1

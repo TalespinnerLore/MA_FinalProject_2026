@@ -41,6 +41,7 @@ func _step_turn() -> void:
 	print("group: ",current_group)
 	if current_group.get_active_units().size() <= 0:
 		print("empty group, skip")
+		#SPAWN ENEMY IF NOT PLAYER_CONTROLLED, ELSE, STOP FUNCTION
 		_step_turn()
 		#print("breaks here")
 	#	break

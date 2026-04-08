@@ -25,7 +25,6 @@ PlayerStats="*res://Utility/Player_Stats.gd"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/stretch/mode="viewport"
 
 [file_customization]
 
@@ -46,6 +45,9 @@ folder_colors={
 draganddrop="objects that can be dragged and dropped"
 dropzone="zone where draganddrop items can be placed"
 Player=""
+TILEMAP=""
+ENVIRONMENT_OBJECT_MANAGER=""
+UNIT_MANAGER=""
 
 [input]
 
