@@ -22,7 +22,7 @@ func notify_room_env_object(adding:bool,objectref:Node2D,tile:Vector2i):
 
 ########ROOM DATA########
 var ROOMS:Array[NavigationRoom]
-
+var ROOMS_with_player:Array[NavigationRoom]
 ######TILEMAP CELLS######
 var cells_Wall = []    ##
 var cells_Ground = []  ##
@@ -46,6 +46,7 @@ var grid_size:Vector2i = Vector2i(40,40)
 var path_array:Array[Vector2i] = [] #storage var for path whenever a path is needed.
 
 func set_up_grid() -> void:
+	grid_size = Vector2i(tilemaplayer_ref.get_used_rect().size)
 	var index = -1
 	for grid in grids:
 		index +=1
@@ -152,12 +153,14 @@ const room_scene = preload("res://Scenes/DungeonGen/navigation_room_scene.tscn")
 
 func spawn_new_room(RoomOrigin,RoomSize,RoomDoors,RoomFloor):
 	var room = room_scene.instantiate()
-	room.global_position = RoomOrigin*Vector2i(32,32)
+	#print("origin:",RoomOrigin)
+	room.position = RoomOrigin*Vector2i(32,32)
+	#print("position:",room.position," ","coord:",Global.pos_to_grid(room.global_position+Vector2(16,16)))
 	room.RoomOrigin = RoomOrigin
 	room.RoomCenter = Vector2i(int(RoomOrigin.x/2),int(RoomOrigin.y/2))
 	room.RoomSize = RoomSize
-	room.RoomDoors = RoomDoors
-	room.RoomFloor = RoomFloor
+	room.RoomDoors.append_array(RoomDoors)
+	room.RoomFloor.append_array(RoomFloor)
 	add_child(room)
 	var new_room = get_child(-1)
 	new_room.init()
@@ -166,19 +169,25 @@ func spawn_new_room(RoomOrigin,RoomSize,RoomDoors,RoomFloor):
 #########################
 
 func init():
-	if is_instance_valid(env_object_manager_ref):
+	tilemaplayer_ref = get_tree().get_first_node_in_group("TILEMAP")
+	if is_instance_valid(tilemaplayer_ref):
 		cells_Wall = tilemaplayer_ref.cells_Wall
 		cells_Ground = tilemaplayer_ref.cells_Ground
 		cells_Water = tilemaplayer_ref.cells_Water
 		cells_Lava = tilemaplayer_ref.cells_Lava
 		cells_Air = tilemaplayer_ref.cells_Air
-	if cells_Water.size() > 0:
-		has_water = true
-	if cells_Lava.size() > 0:
-		has_lava = true
-	if cells_Air.size() > 0:
-		has_air = true
-
+		if cells_Water.size() > 0:
+			has_water = true
+		if cells_Lava.size() > 0:
+			has_lava = true
+		if cells_Air.size() > 0:
+			has_air = true
+		set_up_grid()
+		for room in tilemaplayer_ref.Rooms:
+			spawn_new_room(room[0].position,room[0].size,room[3],room[1])
+	else:
+		push_error("Invalid reference to TileMapLayer_DungeonFloor")
+#Rect2i, floor, walls, doors
 #########################
 
 

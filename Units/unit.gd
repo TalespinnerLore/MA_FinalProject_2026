@@ -38,7 +38,13 @@ enum Strategy {FOLLOW,AGGRESSIVE,}
 enum ElementType {FIRE,WATER,EARTH,AIR,FORCE,LIGHT,DARK}
 enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_Ranged,Other}
 
+@export_category("GEAR")
+@export var ARMOUR:ItemData
+@export var WEAPON:ItemData
+@export var TRINKET:ItemData
 
+@export var HeldItem:ItemData
+@export var HeldItem_stacksize := 0
 ####################################################
 #CHARACTER/UNIT STATISTICS
 ####################################################
@@ -379,7 +385,7 @@ func AttackTiles(CoordList:Array, Damage_Type:int, AttackingElement:ElementType,
 
 func get_self_coords():
 	var coords = (position-Vector2(tile_size/2,tile_size/2))/tile_size
-	self_coords = coords
+	self_coords = Vector2i(coords)
 	return(coords)
 
 func grid_to_pos(coord, pos):
@@ -459,19 +465,19 @@ func check_move_input():
 				if ! $downright.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
 					_move(Vector2.DOWN+Vector2.RIGHT)
 		else:
-			if Input.is_action_just_pressed("up"):
+			if Input.is_action_pressed("up"):
 				_select_direction(Vector2.UP)
 				if ! $up.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
 					_move(Vector2.UP)
-			elif Input.is_action_just_pressed("down"):
+			elif Input.is_action_pressed("down"):
 				_select_direction(Vector2.DOWN)
 				if ! $down.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
 					_move(Vector2.DOWN)
-			elif Input.is_action_just_pressed("left"):
+			elif Input.is_action_pressed("left"):
 				_select_direction(Vector2.LEFT)
 				if ! $left.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
 					_move(Vector2.LEFT)
-			elif Input.is_action_just_pressed("right"):
+			elif Input.is_action_pressed("right"):
 				_select_direction(Vector2.RIGHT)
 				if ! $right.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
 					_move(Vector2.RIGHT)
@@ -481,15 +487,16 @@ func check_move_input():
 
 func _move(dir:Vector2):
 	global_position += dir*tile_size
+	get_self_coords()
 	$Sprite2D.global_position -= dir * tile_size #lake the spirte lag behind by a tile
 	facing = Vector2i(dir)
 	if sprite_node_pos_tween: 
 		sprite_node_pos_tween.kill()
 	sprite_node_pos_tween = create_tween()
 	sprite_node_pos_tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	sprite_node_pos_tween.tween_property($Sprite2D, "global_position", global_position, move_duration).set_trans(Tween.TRANS_SINE)
+	await sprite_node_pos_tween.tween_property($Sprite2D, "global_position", global_position, move_duration).set_trans(Tween.TRANS_SINE)
 	#^^^actual movment is snappy, but visually the sprite moves smoothly - CAMERA TIED TO SPRITE, OR CHOPPY AS FUCK! My eyes...
-	get_self_coords()
+	
 	has_moved = true
 	is_acting = false
 	action_used()
@@ -604,6 +611,7 @@ func _on_turn_start() -> void:
 			print("team AI turn not yet implemented")
 			pass
 	else:
+		await get_tree().create_timer(0.05).timeout
 		AI_turn_enemy()
 	
 
@@ -613,12 +621,15 @@ var target_unit:Unit_Instance
 var path:Array[Vector2i] = []
 
 func AI_turn_enemy():
+	print("################# enemy AI turn start ####################")
 	if in_combat:
+		print("enemy AI is in combat")
 		#target_unit = get_tree().get_first_node_in_group("Player")
 		print("self: ",self_coords," player: ",target_unit.self_coords)
-		goal_tile = Vector2i(clampi(self_coords.x - target_unit.self_coords.x,-1,1),clampi(self_coords.y - target_unit.self_coords.y,-1,1))
-		facing = Vector2i(goal_tile) - Vector2i(self_coords)
-		if goal_tile.x+goal_tile.y > 2: #if not next to target
+		facing = Vector2i(clampi(self_coords.x - target_unit.self_coords.x,-1,1),clampi(self_coords.y - target_unit.self_coords.y,-1,1))
+		facing *= -1
+		goal_tile = target_unit.self_coords
+		if abs(goal_tile-self_coords).length() > 1.5: #if not next to target
 			#goal_tile = pathfinding_manager.get_valid_path(self_coords,target_unit.self_coords)[0]
 			_move(facing)
 			action_used()

@@ -15,6 +15,8 @@
 size = Vector2(16, 16)
 
 [node name="Unit" type="CharacterBody2D"]
+collision_layer = 15
+collision_mask = 2
 script = ExtResource("1_g2b4t")
 UnitStats = ExtResource("2_d6r3d")
 HP_Current = 100
@@ -47,46 +49,56 @@ shape = SubResource("RectangleShape2D_85qmf")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 visible = false
+scale = Vector2(1.25, 1.25)
 target_position = Vector2(0, 32)
+collision_mask = 3
 
 [node name="up" type="RayCast2D" parent="."]
 position = Vector2(0, -16)
 target_position = Vector2(0, -16)
+collision_mask = 3
 hit_from_inside = true
 
 [node name="down" type="RayCast2D" parent="."]
 position = Vector2(0, 16)
 target_position = Vector2(0, 16)
+collision_mask = 3
 hit_from_inside = true
 
 [node name="left" type="RayCast2D" parent="."]
 position = Vector2(-16, 0)
 target_position = Vector2(-16, 0)
+collision_mask = 3
 hit_from_inside = true
 
 [node name="right" type="RayCast2D" parent="."]
 position = Vector2(16, 0)
 target_position = Vector2(16, 0)
+collision_mask = 3
 hit_from_inside = true
 
 [node name="upleft" type="RayCast2D" parent="."]
 position = Vector2(-16, -16)
 target_position = Vector2(-16, -16)
+collision_mask = 3
 hit_from_inside = true
 
 [node name="upright" type="RayCast2D" parent="."]
 position = Vector2(16, -16)
 target_position = Vector2(16, -16)
+collision_mask = 3
 hit_from_inside = true
 
 [node name="downleft" type="RayCast2D" parent="."]
 position = Vector2(-16, 16)
 target_position = Vector2(-16, 16)
+collision_mask = 3
 hit_from_inside = true
 
 [node name="downright" type="RayCast2D" parent="."]
 position = Vector2(16, 16)
 target_position = Vector2(16, 16)
+collision_mask = 3
 hit_from_inside = true
 
 [node name="Label" type="Label" parent="."]

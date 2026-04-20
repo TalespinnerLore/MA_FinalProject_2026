@@ -31,7 +31,14 @@ var cells_Lava = []    ##
 var cells_Air = []     ##
 #########################
 
+######MANAGER SCENE REFERENCES######
+@onready var nav_manager_ref:NavigationManager =  get_tree().get_first_node_in_group("NAVIGATION_MANAGER")
+####################################
+
+
+
 func InitializeGrid():
+	self.clear()
 	TileGrid.clear()
 	for x in Width_X:
 		TileGrid.append([])
@@ -716,6 +723,7 @@ func FillGrid(): #once the rooms are decided, this fills in the rest of the leve
 	if SpawnRiver == true:
 		generateRiver()
 		for tile in AllHallTiles:
+			print("checking hall tiles")
 			if what_is_this_tile(tile.x,tile.y) == 'WATER':
 				TileGrid[tile.x][tile.y] = 'FLOOR'
 	
@@ -737,9 +745,10 @@ func place_stairs():
 			Rooms[i][3].append(stairs_coords)
 			break
 	var new_stairs = stairs.instantiate()
-	new_stairs.global_position = Global.grid_to_pos(stairs_coords,Vector2.ZERO)[1]
+	new_stairs.global_position = Global.grid_to_pos(stairs_coords)
 	add_child(new_stairs)
 	get_child(0).player_found_stairs.connect(found_stairs)
+	get_child(0).init()
 	pass
 
 	######################
@@ -946,29 +955,31 @@ func connect_doorways():
 
 
 func what_is_this_tile(x,y):
+	#print("X,Y: ",x,",",y)
 	if River_Tiles_list.has(Vector2i(x,y)):
-		print("isriver")
+		#print("isriver")
 		pass
 	if AllHallTiles.has(Vector2i(x,y)):
-		print("ishallway")
+		#print("ishallway")
 		pass
 	if DeadEnds.has(Vector2i(x,y)):
-		print("isdedend")
+		#print("isdedend")
+		pass
 		
 	if TileGrid[x][y] == 'WALL':
-		print("iswall")
+		#print("iswall")
 		return('WALL')
 		pass
 	if TileGrid[x][y] == 'ROOM_WALL':
-		print("isROOMWALL")
+		#print("isROOMWALL")
 		return('ROOM_WALL')
 		pass
 	if TileGrid[x][y] == 'FLOOR':
-		print("isfloor")
+		#print("isfloor")
 		return('FLOOR')
 		pass
 	if TileGrid[x][y] == 'WATER':
-		print("iswater")
+		#print("iswater")
 		return('WATER')
 		pass
 
@@ -980,8 +991,8 @@ var terrain_set = 2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	terrain_set = DungeonData.floor_biome.BiomeID
-	Max_Size = DungeonData.max_size
-	Min_Size = DungeonData.min_size
+	#Max_Size = DungeonData.max_size
+	#Min_Size = DungeonData.min_size
 	Room_Attempts = DungeonData.room_attempts
 	Interconnectivity = DungeonData.interconnectivity
 	Rounded = DungeonData.rounded
@@ -1001,28 +1012,31 @@ func _ready() -> void:
 	#	set_cell(tile,0, Vector2i(0,3))
 	#what_is_this_tile(1,19)
 	#print("SDIBRIVUN - END")
-	if has_units:
-		var validspawn = false
-		var spawnpoint:Vector2i
-		while validspawn == false:
-			spawnpoint = cells_Ground.pick_random()
-			if AllHallTiles.has(spawnpoint) or cells_Wall.has(spawnpoint):
-				validspawn = false
-			else:
-				validspawn = true
-		$"../Unit_Manager/Player_Group/Unit".set_spawn(spawnpoint)
-		
-		$"../Unit_Manager/Enemy_Group".temp_distribute()
-	var i = -1
-	for room in Rooms:
-		i+=1
-		print("room ",i," doors:",room[3])
+	#if has_units:
+	#	var validspawn = false
+	#	var spawnpoint:Vector2i
+	#	while validspawn == false:
+	#		spawnpoint = cells_Ground.pick_random()
+	#		if AllHallTiles.has(spawnpoint) or cells_Wall.has(spawnpoint):
+	#			validspawn = false
+	#		else:
+	#			validspawn = true
+	#	$"../Unit_Manager/Player_Group/Unit".set_spawn(spawnpoint)
+	#	
+	#	$"../Unit_Manager/Enemy_Group".temp_distribute()
 	
-			
-			
+	DungeonData.dungeon_gen_testing()
 	
-	#print(Rooms[0][2])
-		
+	if get_tree().get_first_node_in_group("UNIT_MANAGER") != null:
+		$"../Unit_Manager".init()
+	if get_tree().get_first_node_in_group("NAVIGATION_MANAGER") != null:
+		nav_manager_ref = $"../Navigation_Manager"
+		nav_manager_ref.init()
+	#var i = -1
+	#for room in Rooms:
+	#	i+=1
+	#	print("room ",i," doors:",room[3])
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -1032,4 +1046,5 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func found_stairs():
-	pass
+	pass #SEND SIGNAL? maybe call this on signal? update dungeon data, then call new level?
+	

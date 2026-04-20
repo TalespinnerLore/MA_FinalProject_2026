@@ -1,17 +1,18 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=6 format=3 uid="uid://b1u4kv5m3ccr2"]
+[gd_resource type="Resource" script_class="Biome" load_steps=7 format=3 uid="uid://b1u4kv5m3ccr2"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_hfycw"]
 [ext_resource type="Resource" uid="uid://dgm8dna5mwt7q" path="res://Resources/Units/Enemy/Stats_EnemyMagic.tres" id="2_dr3nc"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/Biome.gd" id="2_pt78k"]
 [ext_resource type="Resource" uid="uid://dunj0e8tqw7uv" path="res://Resources/Units/Enemy/Stats_EnemyMelee.tres" id="3_wb55p"]
 [ext_resource type="Resource" uid="uid://brn8pf5kf160g" path="res://Resources/Units/Enemy/Stats_EnemyRanged.tres" id="4_p6308"]
+[ext_resource type="Resource" uid="uid://b1mex6jfj2b7r" path="res://Resources/Units/Enemy/Stats_RareEnemyTest.tres" id="5_m748s"]
 
 [resource]
 script = ExtResource("2_pt78k")
 BiomeID = 3
 Unique_Rooms = Array[Resource]([])
 Common_Enemies = Array[ExtResource("1_hfycw")]([ExtResource("2_dr3nc"), ExtResource("3_wb55p"), ExtResource("4_p6308")])
-Rare_Enemies = Array[ExtResource("1_hfycw")]([])
+Rare_Enemies = Array[ExtResource("1_hfycw")]([ExtResource("5_m748s")])
 Common_Items = Array[Resource]([])
 Rare_Items = Array[Resource]([])
 Mini_Boss = false

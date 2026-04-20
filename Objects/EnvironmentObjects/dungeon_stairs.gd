@@ -9,3 +9,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			emit_signal("player_found_stairs")
 			pass #SHOW DO YOU WANT TO GO TO THE NEXT FLOOR POPUP
 	pass # Replace with function body.
+
+@onready var env_object_manager_ref:EnvironmentObjectManager = get_tree().get_first_node_in_group("ENVIRONMENT_OBJECT_MANAGER")
+
+
+func init() -> void:
+	if env_object_manager_ref != null:
+		self.reparent(env_object_manager_ref)
+		#env_object_manager_ref.unpassable_tiles.append(Global.pos_to_grid(self.global_position))
+		#^^^unneeded, all units may walk over the stairs.

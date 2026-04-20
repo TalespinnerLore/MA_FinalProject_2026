@@ -48,6 +48,7 @@ Player=""
 TILEMAP=""
 ENVIRONMENT_OBJECT_MANAGER=""
 UNIT_MANAGER=""
+NAVIGATION_MANAGER=""
 
 [input]
 
@@ -149,6 +150,13 @@ Ability_Trinket={
 "deadzone": 0.5,
 "events": []
 }
+
+[layer_names]
+
+2d_physics/layer_1="World / Walls"
+2d_physics/layer_2="Player / Units"
+2d_physics/layer_3="Environment Objects / Stairs"
+2d_physics/layer_4="Items / Ground Objects"
 
 [rendering]
 

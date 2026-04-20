@@ -14,24 +14,36 @@ var current_unit:Unit_Instance
 #watch for team wipe (players)
 #signal major events
 
-
+var UnitManager:Unit_Manager
 
 func init() -> void:
-	print("UNIT ",self.name," INITIALIZED")
+	UnitManager = self.get_parent()
+	#print("UNIT ",self.name," INITIALIZED")
 	for child in get_children():
-		child.init(is_player_controlled)#child.init(name, is_player_controlled)
-		child.damaged.connect(_on_unit_damaged)
-		child.unit_defeated.connect(_on_unit_defeated)
-		
-		if is_player_controlled:
-			child.add_to_group("Player")
-			#print(child," is player controlled")
-			pass
-		else:
-			pass
+		print(child)
+		init_child(child)
+		UnitManager.Active_Units.append(child)
+	
+	temp_distribute()
+	
+	if get_children().size() < DungeonData.max_wandering_units and ! is_player_controlled:
+		for i in DungeonData.max_wandering_units/2:
+			self.get_parent().spawn_unit(self)
+	
 	if get_children().size() > 0:
 		current_unit = get_children()[0]
 	#take_turn_team()
+
+func init_child(child):
+	child.init(is_player_controlled)
+	child.damaged.connect(_on_unit_damaged)
+	child.unit_defeated.connect(_on_unit_defeated)
+	
+	if is_player_controlled:
+		child.add_to_group("Player")
+		pass
+	else:
+		pass
 
 func temp_distribute():
 	for unit in get_children():

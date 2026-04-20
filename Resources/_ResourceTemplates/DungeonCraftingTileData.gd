@@ -7,7 +7,7 @@ enum RARITIES {BASIC,RARE,ELITE,UNIQUE}
 
 @export var Affinity_Fire = 0
 @export var Affinity_Water = 0
-@export var Affinity__Earth = 0
+@export var Affinity_Earth = 0
 @export var Affinity_Air = 0
 @export var Affinity_Force = 0
 @export var Affinity_Light = 0

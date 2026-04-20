@@ -31,7 +31,7 @@ var biomes:Array[Biome] = [preload("res://Resources/DungeonGen/Biome_Volcano.tre
 			preload("res://Resources/DungeonGen/Biome_Mesa.tres"),
 			preload("res://Resources/DungeonGen/Biome_SkyIsland.tres")]
 
-var floor_biome:Biome = biomes[4]
+var floor_biome:Biome = biomes[3]
 
 func choose_biome():
 	var total_chance = Environments[0][1] + Environments[1][1] + Environments[2][1] + Environments[3][1] + Environments[4][1]
@@ -55,18 +55,25 @@ func choose_biome():
 	return randi_range(1,4) #SELECT RANDOM BIOME
 	
 
+@export var Common_Enemies:Array[StatComponent]
+@export var Rare_Enemies:Array[StatComponent]
+
 var room_attempts = 25
-var interconnectivity = 2#0-10 range
+var interconnectivity = 2#0-10 range7
 var rounded = false
-var spawn_river = true### false
+var spawn_river =  false
 var flooded:bool = false
 var max_size = 15
 var min_size = 5
+var level_size:=Vector2i(30,30)
 
+var max_wandering_units := 10
 
 func open_level():
 	floor_biome = biomes[choose_biome()]
 	var biome_mods = floor_biome.get_DG_Mods()
+	Common_Enemies = floor_biome.Common_Enemies
+	Rare_Enemies = floor_biome.Rare_Enemies
 	for mod in biome_mods:
 		for entry in Affinity:
 			if entry[0] == mod[0]:
@@ -120,3 +127,9 @@ func open_level():
 	get_tree().change_scene_to_file("res://Scenes/DungeonGen/testingshit_FLOORSPAWNING.tscn")
 	pass
 	
+func dungeon_gen_testing():
+	floor_biome = biomes[choose_biome()]
+	var biome_mods = floor_biome.get_DG_Mods()
+	Common_Enemies = floor_biome.Common_Enemies
+	Rare_Enemies = floor_biome.Rare_Enemies
+	max_wandering_units = ((level_size.x + level_size.y) / 10) - 1

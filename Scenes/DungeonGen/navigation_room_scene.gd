@@ -6,12 +6,12 @@ var NavManager_ref:NavigationManager = get_parent()
 var RoomOrigin := Vector2i.ZERO
 var RoomSize := Vector2i(5,5)
 var RoomCenter := Vector2i(2,2)
-var RoomDoors:Array[Vector2i]
-var RoomFloor:Array[Vector2i]
+var RoomDoors:Array[Vector2i] = []
+var RoomFloor:Array[Vector2i] = []
 
-var UnitsInRoom:Array[Unit_Instance]
-var ItemsInRoom:Array[Node2D]
-var EnvObjectsInRoom:Array[Node2D]
+var UnitsInRoom:Array[Unit_Instance] = []
+var ItemsInRoom:Array[Node2D] = []
+var EnvObjectsInRoom:Array[Node2D] = []
 
 var ground_paths = []
 var water_paths = []
@@ -45,21 +45,56 @@ func return_path_newdoor_newroom(door_coords,path_index):
 		return new_path
 
 func init() -> void:
-	$CollisionShape2D.scale = RoomSize
+	#print("roompos: ",position," global",global_position)
+	print("position:",position," ","coord:",Global.pos_to_grid(global_position+Vector2(16,16))," size:",RoomSize)
+	position.x = 32*RoomOrigin.x
+	position.y = 32*RoomOrigin.y
+	self.scale = RoomSize
+	is_init = true
 	
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Unit_Instance:
 		UnitsInRoom.append(body)
+		print("New Unit Entered ",body.UnitStats.resource_path)
+		if body.Team == body.Teams.PLAYER:
+			NavManager_ref.ROOMS_with_player.append(self)
+			for unit in UnitsInRoom:
+				if unit.Team == unit.Teams.ENEMY:
+					unit.in_combat = true
+					unit.target_unit = body
+		elif body.Team == body.Teams.ENEMY:
+			for unit in UnitsInRoom:
+				if unit.Team == unit.Teams.PLAYER:
+					body.in_combat = true
+					body.target_unit = unit
+					break
 	#elif body is Node2D:
 	#	ItemsInRoom.append(body)
 	pass # Replace with function body.
 
+var is_init = false
+func _ready() -> void:
+	await get_tree().create_timer(3.0).timeout
+	#if ! is_init:
+	#	print("premove",position)
+	#	RoomOrigin = Vector2i(8,15)
+	#	position.x = 32*RoomOrigin.x
+	#	position.y = 32*RoomOrigin.y
+	#	await get_tree().create_timer(3.0).timeout
+	#	RoomSize = Vector2i(2,2)
+		#init()
 
 func _on_body_exited(body: Node2D) -> void:
 	if body is Unit_Instance:
+		if body.Team == body.Teams.PLAYER:
+			for unit in UnitsInRoom:
+				if unit.Team == unit.Teams.PLAYER:
+					break
+			NavManager_ref.ROOMS_with_player.erase(self)
 		UnitsInRoom.erase(body)
+		
 	#elif body is Node2D:
 	#	ItemsInRoom.erase(body)
 	pass # Replace with function body.
