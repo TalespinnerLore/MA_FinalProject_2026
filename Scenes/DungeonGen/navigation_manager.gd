@@ -52,7 +52,7 @@ func set_up_grid() -> void:
 		index +=1
 		var astar_grid:AStarGrid2D = grids[index]
 		astar_grid.region = Rect2i(Vector2i(0,0),grid_size)
-		astar_grid.cell_size = tilemaplayer_ref.tile_set.tile_size
+		astar_grid.cell_size = tilemaplayer_ref.tile_set.tile_size#Vector2i(1,1)#
 		astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
 		astar_grid.update()
 		
@@ -88,6 +88,7 @@ func set_up_grid() -> void:
 				astar_grid.set_point_solid(tile)
 			else:
 				astar_grid.set_point_weight_scale(tile,cell_path_cost)
+	print("ASTAR GRID SETUP COMPLETE")
 
 func check_for_unpassable_objects(tile):
 	if is_instance_valid(env_object_manager_ref):
@@ -98,22 +99,57 @@ func check_for_unpassable_objects(tile):
 	#		return true
 	return false
 
-func get_valid_path(start_pos:Vector2i,end_pos:Vector2i,grid_index) -> Array[Vector2i]:
+func get_valid_path_positions(start_pos:Vector2i,end_pos:Vector2i,grid_index) -> Array[Vector2i]:
 	path_array.clear()
 	var astar_grid:AStarGrid2D = grids[grid_index]
+	#print("gridref: ",astar_grid)
+	
 	for point in astar_grid.get_point_path(start_pos,end_pos,true):
 		var current_point = Vector2i(point)
 		current_point += tilemaplayer_ref.tile_set.tile_size / 2
 		path_array.append(current_point)	
+	#print("path: ",path_array, " pointpath: ",astar_grid.get_point_path(start_pos,end_pos,true))
 	return path_array
 
+func get_valid_path_tiles(start_pos:Vector2i,end_pos:Vector2i,grid_index) -> Array[Vector2i]:
+	path_array.clear()
+	var astar_grid:AStarGrid2D = grids[grid_index]
+	#print("gridref: ",astar_grid)
+	path_array = astar_grid.get_id_path(start_pos,end_pos,true)
+	return path_array
 #########################
 
 ####ROOM-TO-ROOM PATHS###
 
+func find_doorway_to_random_room_paths():
+	if ROOMS.size() <= 1:
+		return
+
+	for room in ROOMS:
+		#tilemaplayer_ref.mark_tile_bugfixing(room.RoomCenter)
+		#print("CWNTRE",room.RoomCenter)
+		var r_index = room.RoomID
+		var r_other:Array[NavigationRoom] = ROOMS.duplicate()
+		r_other.pop_at(r_index)
+		r_other.shuffle()
+		for door in room.RoomDoors:
+			var hold = r_other.pop_front()
+			r_other.append(hold)
+			#r_other.erase(target_room)
+			room.ground_paths.append(get_valid_path_tiles(door,r_other[0].RoomCenter,0))
+			#print( "room",r_index," dooor:",door," goal:",r_other[0].RoomCenter," goalroom:",r_other[0].RoomID," path:",get_valid_path_tiles(door,r_other[0].RoomCenter,0))
+			if has_water:
+				room.water_paths.append(get_valid_path_tiles(door,r_other[0].RoomCenter,1))
+			if has_lava:
+				room.lava_paths.append(get_valid_path_tiles(door,r_other[0].RoomCenter,2))
+			if has_air:
+				room.air_paths.append(get_valid_path_tiles(door,r_other[0].RoomCenter,3))
+
+	
 func find_room_to_room_paths():
 	if ROOMS.size() > 1:
 		for room in ROOMS:
+			print("doors: ",room.RoomDoors)
 			for doorway in room.RoomDoors:
 				var possible_paths_g = []
 				var possible_paths_w = []
@@ -121,15 +157,16 @@ func find_room_to_room_paths():
 				var possible_paths_a = []
 				for other_room in ROOMS:
 					if other_room != room:
-						possible_paths_g.append(get_valid_path(doorway,other_room.RoomCenter,0))
+						possible_paths_g.append(get_valid_path_tiles(doorway,other_room.RoomCenter,0))
 						if has_water:
-							possible_paths_w.append(get_valid_path(doorway,other_room.RoomCenter,1))
+							possible_paths_w.append(get_valid_path_tiles(doorway,other_room.RoomCenter,1))
 						if has_lava:
-							possible_paths_l.append(get_valid_path(doorway,other_room.RoomCenter,2))
+							possible_paths_l.append(get_valid_path_tiles(doorway,other_room.RoomCenter,2))
 						if has_air:
-							possible_paths_a.append(get_valid_path(doorway,other_room.RoomCenter,3))
-				possible_paths_g.sort_custom(sort_array_size_ascending)
+							possible_paths_a.append(get_valid_path_tiles(doorway,other_room.RoomCenter,3))
+				possible_paths_g.shuffle()#.sort_custom(sort_array_size_ascending)
 				room.ground_paths.append(possible_paths_g[0])
+				print("door: ", doorway, "gpath:",possible_paths_g[0])
 				if has_water:
 					possible_paths_w.sort_custom(sort_array_size_ascending)
 					room.ground_paths.append(possible_paths_w[0])
@@ -139,6 +176,8 @@ func find_room_to_room_paths():
 				if has_air:
 					possible_paths_a.sort_custom(sort_array_size_ascending)
 					room.ground_paths.append(possible_paths_a[0])
+	else:
+		push_error("Less than 2 rooms")
 
 
 func sort_array_size_ascending(a:Array,b:Array):
@@ -157,7 +196,7 @@ func spawn_new_room(RoomOrigin,RoomSize,RoomDoors,RoomFloor):
 	room.position = RoomOrigin*Vector2i(32,32)
 	#print("position:",room.position," ","coord:",Global.pos_to_grid(room.global_position+Vector2(16,16)))
 	room.RoomOrigin = RoomOrigin
-	room.RoomCenter = Vector2i(int(RoomOrigin.x/2),int(RoomOrigin.y/2))
+	room.RoomCenter = Vector2i(int(RoomSize.x/2),int(RoomSize.y/2)) + RoomOrigin
 	room.RoomSize = RoomSize
 	room.RoomDoors.append_array(RoomDoors)
 	room.RoomFloor.append_array(RoomFloor)
@@ -185,6 +224,8 @@ func init():
 		set_up_grid()
 		for room in tilemaplayer_ref.Rooms:
 			spawn_new_room(room[0].position,room[0].size,room[3],room[1])
+		#find_room_to_room_paths()
+		find_doorway_to_random_room_paths()
 	else:
 		push_error("Invalid reference to TileMapLayer_DungeonFloor")
 #Rect2i, floor, walls, doors

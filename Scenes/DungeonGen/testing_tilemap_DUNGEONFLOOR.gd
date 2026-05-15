@@ -831,6 +831,12 @@ func populate_tile_terrain():
 		#Connect_Doors_BRUTE(8)
 		#connect_doorways()
 		pass
+	for door in PermDoors:
+		pass #double checking door placement
+		#set_cell(Vector2i(door.x,door.y),0, Vector2i(0,0))
+
+func mark_tile_bugfixing(tile:Vector2i):
+	set_cell(tile,0, Vector2i(1,1))
 
 func Connect_Doors_BRUTE(room_index):
 	var room = Rooms[room_index]

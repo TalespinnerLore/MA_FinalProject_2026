@@ -3,6 +3,8 @@ extends Area2D
 
 var NavManager_ref:NavigationManager = get_parent()
 
+var RoomID := 0
+
 var RoomOrigin := Vector2i.ZERO
 var RoomSize := Vector2i(5,5)
 var RoomCenter := Vector2i(2,2)
@@ -17,6 +19,35 @@ var ground_paths = []
 var water_paths = []
 var lava_paths = []
 var air_paths = []
+
+
+func path_doorway_to_room(last_door:Vector2i,grid_index:int):
+	var dnum
+	if last_door == Vector2i(-1,-1):
+		match grid_index:
+			0:
+				return ground_paths.pick_random()
+			1:
+				return water_paths.pick_random()
+			2:
+				return lava_paths.pick_random()
+			3:
+				return air_paths.pick_random()
+	else:
+		match grid_index:
+			0:
+				dnum = RoomDoors.find(last_door)
+				return ground_paths[dnum]
+			1:
+				dnum = RoomDoors.find(last_door)
+				return water_paths[dnum]
+			2:
+				dnum = RoomDoors.find(last_door)
+				return lava_paths[dnum]
+			3:
+				dnum = RoomDoors.find(last_door)
+				return air_paths[dnum]
+	pass
 
 
 func return_path_newdoor_newroom(door_coords,path_index):
@@ -45,20 +76,25 @@ func return_path_newdoor_newroom(door_coords,path_index):
 		return new_path
 
 func init() -> void:
+	NavManager_ref = get_parent()
+	RoomID = NavManager_ref.get_child_count()-1
 	#print("roompos: ",position," global",global_position)
 	print("position:",position," ","coord:",Global.pos_to_grid(global_position+Vector2(16,16))," size:",RoomSize)
 	position.x = 32*RoomOrigin.x
 	position.y = 32*RoomOrigin.y
 	self.scale = RoomSize
 	is_init = true
-	
+	await get_tree().create_timer(3.0).timeout
+	print(ground_paths)
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Unit_Instance:
+		body.last_door = body.last_tile
 		UnitsInRoom.append(body)
 		print("New Unit Entered ",body.UnitStats.resource_path)
 		if body.Team == body.Teams.PLAYER:
+			print("NavManager: ",NavManager_ref)
 			NavManager_ref.ROOMS_with_player.append(self)
 			for unit in UnitsInRoom:
 				if unit.Team == unit.Teams.ENEMY:

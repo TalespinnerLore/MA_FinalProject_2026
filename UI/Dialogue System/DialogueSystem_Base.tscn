@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1wqqscot73tc"]
+
+[ext_resource type="Script" path="res://UI/Dialogue System/dialogue_system_base.gd" id="1_kpsq7"]
+[ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="2_kkbyw"]
+
+[node name="DialogueSystemBase" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kpsq7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 280.0
+offset_right = 384.0
+offset_bottom = 320.0
+color = Color(1, 1, 1, 0.490196)
+
+[node name="Label2" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 32.0
+theme = ExtResource("2_kkbyw")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "136 char test test test test test test test test test test test test test test test test test test test test test test test test test test"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 2

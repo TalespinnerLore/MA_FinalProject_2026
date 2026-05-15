@@ -14,16 +14,16 @@ func randb():
 		return false
 
 @export var dir4 = [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT,Vector2i.RIGHT]
-@export var dir8 = [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT,Vector2i.RIGHT,\
-					Vector2i.UP+Vector2i.LEFT,Vector2i.UP+Vector2i.RIGHT,\
-					Vector2i.DOWN+Vector2i.LEFT,Vector2i.DOWN+Vector2i.RIGHT]
+
+@export var dir8 = [Vector2i.UP, Vector2i.UP+Vector2i.RIGHT, Vector2i.RIGHT, Vector2i.DOWN+Vector2i.RIGHT,\
+					Vector2i.DOWN,Vector2i.DOWN+Vector2i.LEFT,Vector2i.LEFT,Vector2i.UP+Vector2i.LEFT]
 
 var tile_size = 32
 
 func grid_to_pos(coord:Vector2i):
 	coord = Vector2(coord)
 	var to_pos = Vector2(coord*tile_size) + Vector2(tile_size/2,tile_size/2)
-	return(to_pos) 
+	return(to_pos)  
 
 func pos_to_grid(pos:Vector2):
 	var to_grid = (pos-Vector2(tile_size/2,tile_size/2)) / tile_size

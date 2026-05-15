@@ -27,7 +27,11 @@ var turn_actions_used = 0
 @export var in_combat:bool = false
 @export var skipping_turn:bool = false
 @export var has_shield:bool = false
+
 var facing:= Vector2i(1,0)
+var last_tile:=Vector2i(-1,-1)
+var last_door:=Vector2i(-1,-1)
+
 @export var Team:Teams = 0
 @export var TeamStrategy:Strategy = Strategy.FOLLOW
 @export var self_coords = Vector2i(0,0)
@@ -441,6 +445,42 @@ func combattext(string):
 const tile_size = 32
 var sprite_node_pos_tween: Tween
 var move_duration:= 0.185
+var movable_directions = [0,0,0,0,0,0,0,0]
+
+func check_8dir_collision():
+	movable_directions[0] = $up.is_colliding()
+	movable_directions[1] = $upright.is_colliding()
+	movable_directions[2] = $right.is_colliding()
+	movable_directions[3] = $downright.is_colliding()
+	movable_directions[4] = $down.is_colliding()
+	movable_directions[5] = $downleft.is_colliding()
+	movable_directions[6] = $left.is_colliding()
+	movable_directions[7] = $upleft.is_colliding()
+	#var u = $up.is_colliding()
+	#var ur = $upright.is_colliding()
+	#var r = $right.is_colliding()
+	#var dr = $downright.is_colliding()
+	#var d = $down.is_colliding()
+	#var dl = $downleft.is_colliding()
+	#var l = $left.is_colliding()
+	#var ul = $upleft.is_colliding()
+	#return [u,ur,r,dr,d,dl,l,ul]
+
+func check_relative_collision():
+	var valid_dirs = []
+	var dirs = [Vector2i.UP, Vector2i.UP+Vector2i.RIGHT, Vector2i.RIGHT, Vector2i.DOWN+Vector2i.RIGHT,\
+				Vector2i.DOWN,Vector2i.DOWN+Vector2i.LEFT,Vector2i.LEFT,Vector2i.UP+Vector2i.LEFT]
+	check_8dir_collision()
+	#print(movable_directions)
+	var i = 0
+	for dir in dirs:
+		if movable_directions[i] != true: #if not colliding
+			valid_dirs.append(dir)
+		else:
+			pass
+			#valid_dirs.append(Vector2i(0,-3))
+		i+=1
+	return valid_dirs
 
 func check_move_input():
 	#FOR SMOOTH MOVEMENT WITH HOLDING BUTTON, CHANGE is_action_just_pressed() FOR is_action_pressed().
@@ -486,6 +526,7 @@ func check_move_input():
 	pass
 
 func _move(dir:Vector2):
+	last_tile = self_coords
 	global_position += dir*tile_size
 	get_self_coords()
 	$Sprite2D.global_position -= dir * tile_size #lake the spirte lag behind by a tile
@@ -534,8 +575,8 @@ func init(is_player_controlled):
 		UnitStats = PlayerStats.p1_class
 		$Abilities.Slot_1 = PlayerStats.p1_equipped_abilities[0]
 		$Abilities.Slot_2 = PlayerStats.p1_equipped_abilities[1]
-		$Abilities.Slot_3 = PlayerStats.p1_equipped_abilities[0]
-		$Abilities.Slot_4 = PlayerStats.p1_equipped_abilities[1]
+		$Abilities.Slot_3 = PlayerStats.p1_equipped_abilities[2]
+		$Abilities.Slot_4 = PlayerStats.p1_equipped_abilities[3]
 		set_stats()
 		$Sprite2D.texture = UnitStats.Sprite
 		$Abilities.init()
@@ -561,6 +602,7 @@ func set_spawn(spawnpoint):
 
 
 func _ready():
+	
 	pass
 
 #######################################
@@ -617,7 +659,7 @@ func _on_turn_start() -> void:
 
 var goal_tile:Vector2i
 var target_unit:Unit_Instance
-@onready var pathfinding_manager:PathfindingManager = $"../../../PathfindingManager" #temp fix for now
+#@onready var pathfinding_manager:PathfindingManager = $"../../../PathfindingManager" #temp fix for now
 var path:Array[Vector2i] = []
 
 func AI_turn_enemy():
@@ -629,12 +671,27 @@ func AI_turn_enemy():
 		facing = Vector2i(clampi(self_coords.x - target_unit.self_coords.x,-1,1),clampi(self_coords.y - target_unit.self_coords.y,-1,1))
 		facing *= -1
 		goal_tile = target_unit.self_coords
-		if abs(goal_tile-self_coords).length() > 1.5: #if not next to target
+		var non_coll = check_relative_collision()
+		if abs(goal_tile-self_coords).length() > 1.5: #if not next to target ##check if straight line AND max range of all attacks
 			#goal_tile = pathfinding_manager.get_valid_path(self_coords,target_unit.self_coords)[0]
-			_move(facing)
+			if non_coll.has(facing):
+				#print([Vector2i.UP, Vector2i.UP+Vector2i.RIGHT, Vector2i.RIGHT, Vector2i.DOWN+Vector2i.RIGHT,\
+				#	Vector2i.DOWN,Vector2i.DOWN+Vector2i.LEFT,Vector2i.LEFT,Vector2i.UP+Vector2i.LEFT])
+				#print(Global.dir8)
+				#print("non-coll: ",non_coll, " facing: ",facing)
+				print("has facing")
+				_move(facing)
+			elif non_coll.size() <= 0:
+				print("AI unit is surrounded, can't move")
+				pass
+			else:
+				var new_dir = non_coll.pick_random()
+				facing = new_dir
+				_move(facing)
 			action_used()
 			pass
 		else:
+			#choose_ability() ##score abilities for viability, choose 1, use it.
 			emit_signal("attack_start",$Abilities.BasicAttack,self)
 			action_used()
 		pass

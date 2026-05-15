@@ -25,6 +25,7 @@ PlayerStats="*res://Utility/Player_Stats.gd"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/stretch/mode="viewport"
 
 [file_customization]
 
@@ -157,6 +158,7 @@ Ability_Trinket={
 2d_physics/layer_2="Player / Units"
 2d_physics/layer_3="Environment Objects / Stairs"
 2d_physics/layer_4="Items / Ground Objects"
+2d_physics/layer_5="Room Data"
 
 [rendering]
 
