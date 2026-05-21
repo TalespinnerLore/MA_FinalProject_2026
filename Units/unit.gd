@@ -213,6 +213,7 @@ func reroll_outcome(attempts:int, go_lower:bool, prev_outcome:float, threshold:f
 
 func ability_effect_calculations(Ability:AbilityData,Source):
 	var amount = 0
+	var amount_negated = 0
 	target_unit.combattext(str(Source," hits ",self.name))
 	print(Source," hits ",self.name)
 	var hitcrit = calc_evasion_and_crit(Source.Base_Evasion,Source.Crit_Boost)
@@ -241,13 +242,19 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 		if Ability.damaging == true:
 			target_unit.combattext(str("Before: ",HP_Current))
 			print("Before: ",HP_Current)
-			$Sprite2D/HP_module._take_damage(calc_damage(Ability.damage_type,amount,hitcrit[1],Ability.element))
+			var calcs = calc_damage(Ability.damage_type,amount,hitcrit[1],Ability.element)
+			amount = calcs[0]
+			amount_negated = calcs[1]
+			$Sprite2D/HP_module._take_damage(amount)
 			HP_Current = $Sprite2D/HP_module.hp
 			target_unit.combattext(str("After: ",HP_Current))
 			print("After: ",HP_Current)
 			in_combat = true
 		if Ability.healing:
-			calc_healing(amount,hitcrit[1],Ability.element)
+			var calcs = calc_healing(amount,hitcrit[1],Ability.element)
+			amount = -1*calcs[0]
+			amount_negated = calcs[1]
+			$Sprite2D/HP_module._take_damage(amount)
 		
 		if Ability.creates_shield: # and ! has_shield ##Shields overwrite other shields, probably plays better
 			$Sprite2D/HP_module.gain_shield(Ability,Source)
@@ -265,6 +272,8 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 	else:
 		target_unit.combattext(str("MISS!"))
 		print("MISS!")
+	#show_ability_use_result(source_unitname,hit_unitname,miss:bool,crit:bool,damage:int,damage_negated:int,effects_applied:Array[StatusEffectData])
+	dialogue_manager_ref.show_ability_use_result(Source.UnitStats.UnitName,UnitStats.UnitName,hitcrit[0],hitcrit[1],amount,amount_negated,Ability.inflict_status)
 	pass 
 
 func calc_evasion_and_crit(Accuracy,crit_boost:float): #runs on TARGETED UNIT
@@ -289,6 +298,7 @@ func calc_evasion_and_crit(Accuracy,crit_boost:float): #runs on TARGETED UNIT
 
 func calc_damage(Damage_Type:int,amount:int,crit:bool,AttackingElement:int): #runs on HIT UNIT
 	var damage_taken = 0
+	var damage_negated = 0
 	if crit == true:
 		print("CRITICAL HIT!")
 		amount *= 2 #may change to 1.5, needs testing
@@ -298,13 +308,16 @@ func calc_damage(Damage_Type:int,amount:int,crit:bool,AttackingElement:int): #ru
 	if Damage_Type == 0 or Damage_Type == 1 or Damage_Type == 2: 
 		#Phys Generic      #Phys Melee         #Phys Ranged
 		damage_taken = amount-(Base_Phys_DEF*Def_Mult)
+		damage_negated = roundi(Base_Phys_DEF*Def_Mult)
 		print("Damage negated by defense: ",roundi(Base_Phys_DEF*Def_Mult))
 	elif Damage_Type == 3 or Damage_Type == 4 or Damage_Type == 5:
 		#Magic Generic      #Magic Melee         #Magic Ranged
 		damage_taken = amount-(Base_Mag_DEF*Def_Mult)
+		damage_negated = roundi(Base_Mag_DEF*Def_Mult)
 		print("Damage negated by defense: ",roundi(Base_Mag_DEF*Def_Mult))
 	else:
 		damage_taken = amount/Def_Mult
+		damage_negated = roundi(amount - amount/Def_Mult)
 		print("Damage negated by defense: ",roundi(amount - amount/Def_Mult))
 		#totally generic damage, also here as an emergency stop so the game doesn't break in this scenario.
 	
@@ -312,13 +325,17 @@ func calc_damage(Damage_Type:int,amount:int,crit:bool,AttackingElement:int): #ru
 		damage_taken = 1 #all hits deal at least 1 damage, to ensure deadlocks can't happen in combat.
 	damage_taken = roundi(damage_taken)
 	print("Damage after defence: ",damage_taken)
-	return damage_taken
+	return [damage_taken,damage_negated]
 
 func calc_healing(amount:int,crit:bool,HealingElement:int):
+	var healed = 0
+	var negated = 0
 	if crit == true:
 		print("CRITICAL HEAL!")
 		amount *= 2 #may change to 1.5, needs testing
-	amount *= ElementalWeakness(HealingElement,ElementalAffinity)
+	healed = amount * ElementalWeakness(HealingElement,ElementalAffinity)
+	negated = abs(amount - healed)
+	return [healed,negated]
 	pass
 
 func ElementalWeakness(AttackingElement:ElementType, DefendingElement:ElementType):
@@ -403,37 +420,44 @@ func grid_to_pos(coord, pos):
 ####################################################
 
 func _physics_process(delta: float) -> void:
-	if is_active_unit and Team == Teams.PLAYER and is_team_leader and ! has_moved:
+	if is_active_unit and Team == Teams.PLAYER and is_team_leader and ! has_moved and ! has_taken_turn:
 		is_acting = true
-		check_move_input()
-		if Input.is_action_just_pressed("LeftClick"):
-			print("attempt emit signal")
-			#get_tree().get_node
-			
-			emit_signal("attack_start",$Abilities.BasicAttack,self)
-			combattext(str(self.name," uses ",$Abilities.BasicAttack.ability_name,"!"))
-			action_used()
-			#has_moved = true
-			#_on_turn_start()
-			pass #BASIC ATTACK HERE ^^^
 		
-		elif Input.is_action_just_pressed("Ability_1"):
-			emit_signal("attack_start",$Abilities.Slot_1,self)
-			combattext(str(self.name," uses ",$Abilities.Slot_1.ability_name,"!"))
-			action_used()
-		elif Input.is_action_just_pressed("Ability_2"):
-			emit_signal("attack_start",$Abilities.Slot_2,self)
-			combattext(str(self.name," uses ",$Abilities.Slot_2.ability_name,"!"))
-			action_used()
-		elif Input.is_action_just_pressed("Ability_3"):
-			emit_signal("attack_start",$Abilities.Slot_3,self)
+		if ! waiting_for_dialogue:
 			
-			combattext(str(self.name," uses ",$Abilities.Slot_3.ability_name,"!"))
-			action_used()
-		elif Input.is_action_just_pressed("Ability_4"):
-			emit_signal("attack_start",$Abilities.Slot_4,self)
-			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
-			action_used()
+			check_move_input()
+			
+			if Input.is_action_just_pressed("LeftClick"):
+				#print("attempt emit signal")
+				#get_tree().get_node
+				connect_dialogue()
+				emit_signal("attack_start",$Abilities.BasicAttack,self)
+				combattext(str(self.name," uses ",$Abilities.BasicAttack.ability_name,"!"))
+				action_used()
+				#has_moved = true
+				#_on_turn_start()
+				pass #BASIC ATTACK HERE ^^^
+			
+			elif Input.is_action_just_pressed("Ability_1"):
+				connect_dialogue()
+				emit_signal("attack_start",$Abilities.Slot_1,self)
+				combattext(str(self.name," uses ",$Abilities.Slot_1.ability_name,"!"))
+				action_used()
+			elif Input.is_action_just_pressed("Ability_2"):
+				connect_dialogue()
+				emit_signal("attack_start",$Abilities.Slot_2,self)
+				combattext(str(self.name," uses ",$Abilities.Slot_2.ability_name,"!"))
+				action_used()
+			elif Input.is_action_just_pressed("Ability_3"):
+				connect_dialogue()
+				emit_signal("attack_start",$Abilities.Slot_3,self)
+				combattext(str(self.name," uses ",$Abilities.Slot_3.ability_name,"!"))
+				action_used()
+			elif Input.is_action_just_pressed("Ability_4"):
+				connect_dialogue()
+				emit_signal("attack_start",$Abilities.Slot_4,self)
+				combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
+				action_used()
 		#if not moving:
 		#	if get_dir_input() != Vector2.ZERO:
 		#		move(get_dir_input())
@@ -550,6 +574,15 @@ func _select_direction(dir:Vector2):
 	return facing
 
 func action_used():
+	if waiting_for_dialogue:
+		#print("WAIT BEGINS")
+		#print("signal 'wainint on dialogue' emitting now")
+		emit_signal("waiting_on_dialogue")
+		
+		await dialogue_manager_ref.action_complete
+		#print("WAIT COMPLETE")
+		waiting_for_dialogue = false
+	
 	if is_team_leader and Team == Teams.PLAYER:
 		pass
 		#await get_tree().create_timer(1.0).timeout
@@ -557,7 +590,7 @@ func action_used():
 		pass
 		#await get_tree().create_timer(0.1).timeout
 	turn_actions_used+=1
-	if turn_actions_used>=max_turn_actions:
+	if turn_actions_used>=max_turn_actions:	
 		end_turn()
 #######################################
 #SPAWN CODE
@@ -590,6 +623,8 @@ func init(is_player_controlled):
 		$Sprite2D/HP_module.maxhp = HP_Max
 		$Sprite2D.texture = UnitStats.Sprite
 	target_unit = get_tree().get_first_node_in_group("Player")
+	dialogue_manager_ref = get_tree().get_first_node_in_group("DIALOGUE_MANAGER")
+
 	#position = position.snapped(Vector2.ONE * tile_size)
 	#position += Vector2.ONE * tile_size/2
 	get_self_coords()
@@ -602,7 +637,7 @@ func set_spawn(spawnpoint):
 
 
 func _ready():
-	
+
 	pass
 
 #######################################
@@ -646,7 +681,7 @@ func _on_turn_start() -> void:
 	
 	if Team == Teams.PLAYER or Team == Teams.ALLY:
 		if is_team_leader:
-			emit_signal("waiting_for_instructions",self_coords)
+			#emit_signal("waiting_for_instructions",self_coords)
 			
 			pass #wait for instructions
 		else:
@@ -692,6 +727,8 @@ func AI_turn_enemy():
 			pass
 		else:
 			#choose_ability() ##score abilities for viability, choose 1, use it.
+			print("AI attacks")
+			connect_dialogue()
 			emit_signal("attack_start",$Abilities.BasicAttack,self)
 			action_used()
 		pass
@@ -744,3 +781,12 @@ func end_turn():
 
 func cleartext():
 	$CombatText.text = ""
+
+@export var dialogue_manager_ref:DialogueManager
+var waiting_for_dialogue: = false
+signal waiting_on_dialogue
+
+func connect_dialogue():
+	print("connecting to dialogue")
+	waiting_for_dialogue = true
+	dialogue_manager_ref.connect_to_unit(self)

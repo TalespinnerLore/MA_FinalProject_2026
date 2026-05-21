@@ -124,9 +124,8 @@ func open_level():
 		var max_size = 15
 		var min_size = 5
 	
-	get_tree().change_scene_to_file("res://Scenes/DungeonGen/testingshit_FLOORSPAWNING.tscn")
-	pass
-	
+	get_tree().change_scene_to_file("res://Scenes/DungeonGen/DungeonSceneStructure.tscn")
+	pass	
 func dungeon_gen_testing():
 	floor_biome = biomes[choose_biome()]
 	var biome_mods = floor_biome.get_DG_Mods()

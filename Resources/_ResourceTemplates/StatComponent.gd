@@ -4,6 +4,7 @@ extends Resource
 
 @export var Sprite:Texture2D
 @export var BasicAttack:AbilityData
+@export var UnitName:String
 
 @export_category('Level-Up Stats')
 @export var STR_up:int = 0

@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjnq3b6x2yw1e"]
+[gd_scene load_steps=7 format=3 uid="uid://bjnq3b6x2yw1e"]
 
 [ext_resource type="Texture2D" uid="uid://m6qgl74us38r" path="res://Art/EnvironmentSprites/Stairs.png" id="1_vaon5"]
 [ext_resource type="Script" path="res://Objects/EnvironmentObjects/dungeon_stairs.gd" id="2_m41wm"]
+[ext_resource type="Texture2D" uid="uid://m6sk7hjt5ypo" path="res://Art/VFX Sprites/vfx_light.png" id="3_77p8q"]
+[ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="4_5cdn4"]
+[ext_resource type="Texture2D" uid="uid://jg5fc0geer0a" path="res://Art/VFX Sprites/vfx_dark.png" id="5_6h5yq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0npy"]
 size = Vector2(8, 8)
@@ -17,4 +20,72 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_o0npy")
 
+[node name="YesButton" type="TextureButton" parent="."]
+visible = false
+offset_left = -64.0
+offset_top = 116.0
+offset_bottom = 180.0
+texture_normal = ExtResource("3_77p8q")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="YesButton"]
+custom_minimum_size = Vector2(32, 64)
+layout_mode = 0
+offset_left = 16.0
+offset_right = 48.0
+offset_bottom = 60.0
+theme = ExtResource("4_5cdn4")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "YES"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="NoButton" type="TextureButton" parent="."]
+visible = false
+offset_top = 116.0
+offset_right = 64.0
+offset_bottom = 180.0
+texture_normal = ExtResource("5_6h5yq")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="NoButton"]
+custom_minimum_size = Vector2(32, 64)
+layout_mode = 0
+offset_left = 16.0
+offset_right = 48.0
+offset_bottom = 60.0
+theme = ExtResource("4_5cdn4")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "NO"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Proceed" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(64, 0)
+offset_left = -32.0
+offset_top = 88.0
+offset_right = 32.0
+offset_bottom = 152.0
+theme = ExtResource("4_5cdn4")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "Proceed?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="pressed" from="YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="NoButton" to="." method="_on_no_button_pressed"]

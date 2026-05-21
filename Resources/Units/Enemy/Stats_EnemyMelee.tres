@@ -8,6 +8,7 @@
 script = ExtResource("1_ie0ch")
 Sprite = ExtResource("2_t0dgr")
 BasicAttack = ExtResource("1_xx2me")
+UnitName = "MeleeEnemy"
 STR_up = 3
 DEX_up = 1
 VIT_up = 2

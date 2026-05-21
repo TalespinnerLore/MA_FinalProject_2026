@@ -43,11 +43,9 @@ is_team_leader = true
 is_active_unit = true
 UnitStats = ExtResource("8_wjf6b")
 
-[node name="DialogueSystemBase" parent="Unit_Manager/Player_Group/Unit" instance=ExtResource("9_444lq")]
-offset_left = -80.0
-offset_top = -48.0
-offset_right = -80.0
-offset_bottom = -48.0
-
 [node name="Enemy_Group" type="Node2D" parent="Unit_Manager"]
 script = ExtResource("6_u102x")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueSystemBase" parent="CanvasLayer" instance=ExtResource("9_444lq")]

@@ -8,6 +8,7 @@
 script = ExtResource("1_egh68")
 Sprite = ExtResource("2_du2ht")
 BasicAttack = ExtResource("1_y08ut")
+UnitName = "Ranger"
 STR_up = 5
 DEX_up = 5
 VIT_up = 0

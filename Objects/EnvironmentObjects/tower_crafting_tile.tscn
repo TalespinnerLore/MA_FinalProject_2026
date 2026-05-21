@@ -12,7 +12,7 @@ disable_mode = 1
 script = ExtResource("1_mu53l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, 8)
 texture = ExtResource("1_nclts")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

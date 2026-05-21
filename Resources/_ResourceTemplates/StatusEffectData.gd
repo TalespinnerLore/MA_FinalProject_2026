@@ -1,6 +1,7 @@
 class_name StatusEffectData
 extends Resource
 
+@export var icon:Texture2D
 @export var vfx:Texture2D
 @export var effect_name = "[DEFAULT]"
 @export var is_negative = false

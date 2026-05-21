@@ -20,7 +20,7 @@ func init() -> void:
 	UnitManager = self.get_parent()
 	#print("UNIT ",self.name," INITIALIZED")
 	for child in get_children():
-		print(child)
+		#print(child)
 		init_child(child)
 		UnitManager.Active_Units.append(child)
 	
@@ -69,7 +69,7 @@ func take_turn_team() -> void:
 func _step_turn() -> void:
 	#await get_tree().create_timer(TURN_COOLDOWN).timeout
 	if is_player_controlled:
-		print('player turn')
+		#print('player turn')
 		_step_turn_player()
 	else:
 		#print("ai turns not implemented yet")
@@ -147,19 +147,20 @@ func connect_current_unit_signals() -> void:
 	pass
 
 func disconnect_current_unit_signals() -> void:
-	current_unit.attack_start.disconnect(_process_ability)
-	current_unit.turn_complete.disconnect(_step_unit)
+	if is_instance_valid(current_unit):
+		current_unit.attack_start.disconnect(_process_ability)
+		current_unit.turn_complete.disconnect(_step_unit)
 	pass
 
 func _process_attack(ActionDef): #DEPRECIATED
 	pass
 
 func _process_ability(Ability:AbilityData,Source):#Ability,Source
-	print("attack signal emitted ",Ability.ability_name,Source)
+	#print("attack signal emitted ",Ability.ability_name,Source)
 	emit_signal("AbilityUsed",Ability,Source)
 
 func _step_unit():
-	print('STEPPING UNIT NOW')
+	#print('STEPPING UNIT NOW')
 	disconnect_current_unit_signals()
 	_step_turn()
 	pass

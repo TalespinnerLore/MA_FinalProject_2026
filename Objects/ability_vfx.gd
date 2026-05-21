@@ -8,6 +8,6 @@ func timeout():
 	queue_free()
 
 func _ready() -> void:
-	print(Global.pos_to_grid(self.global_position), "VFX GRID LOC")
+	#print(Global.pos_to_grid(self.global_position), "VFX GRID LOC")
 	timeout()
 	pass

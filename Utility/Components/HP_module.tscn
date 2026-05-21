@@ -1,14 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dp6qyj1ggegbu"]
+[gd_scene load_steps=8 format=3 uid="uid://dp6qyj1ggegbu"]
 
 [ext_resource type="Script" path="res://Utility/Components/HP_module.gd" id="1_xqi16"]
 [ext_resource type="FontFile" uid="uid://bme72xoxft30d" path="res://Art/Tiny5-Regular.ttf" id="2_mfqbq"]
 [ext_resource type="Texture2D" uid="uid://cwxksh0qnuw5s" path="res://Art/2D_images/BasicCharacter_shieldbar.png" id="3_h0lv4"]
 [ext_resource type="Texture2D" uid="uid://dcplcxb71odtk" path="res://Art/2D_images/BasicCharacter_healthbar_2.png" id="3_lo4il"]
+[ext_resource type="Texture2D" uid="uid://dn51ssv6ypx8" path="res://Art/UnitUI/statuseffect_n_burned.png" id="5_3fkgk"]
+[ext_resource type="Texture2D" uid="uid://bp1yfwy4yqnpq" path="res://Art/UnitUI/statuseffect_n_poisoned.png" id="6_npug0"]
+[ext_resource type="Texture2D" uid="uid://bb6idmlcfgdjg" path="res://Art/UnitUI/statuseffect_p_regen.png" id="7_ev4nh"]
 
 [node name="HP_module" type="Node2D"]
 script = ExtResource("1_xqi16")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 z_index = 6
 position = Vector2(0, -11)
 texture = ExtResource("3_lo4il")
@@ -53,11 +57,81 @@ auto_translate_mode = 2
 visible = false
 z_index = 5
 texture_filter = 1
-offset_right = 54.0
-offset_bottom = 18.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -7.0
+offset_right = 70.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.25, 0.25)
 localize_numeral_system = false
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_mfqbq")
-text = "999/999"
+text = "UNIT NAME"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect_HP" type="NinePatchRect" parent="."]
+offset_left = -16.0
+offset_top = -27.0
+offset_right = 16.0
+offset_bottom = 5.0
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("3_lo4il")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="NinePatchRect_Shield" type="NinePatchRect" parent="."]
+visible = false
+self_modulate = Color(0.839216, 0.803922, 0.592157, 1)
+offset_left = -16.0
+offset_top = -32.0
+offset_right = 16.0
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("3_h0lv4")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 3
+patch_margin_top = 24
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="GridContainer_StatusEffects" type="GridContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -14.0
+offset_right = 17.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(16, 11)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer_StatusEffects"]
+layout_mode = 2
+texture = ExtResource("5_3fkgk")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="GridContainer_StatusEffects"]
+layout_mode = 2
+texture = ExtResource("6_npug0")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="GridContainer_StatusEffects"]
+layout_mode = 2
+texture = ExtResource("7_ev4nh")
+stretch_mode = 2

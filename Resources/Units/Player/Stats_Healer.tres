@@ -8,6 +8,7 @@
 script = ExtResource("1_tsatv")
 Sprite = ExtResource("2_i68s1")
 BasicAttack = ExtResource("1_32wjw")
+UnitName = "Healer"
 STR_up = 0
 DEX_up = 0
 VIT_up = 5

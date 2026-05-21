@@ -26,6 +26,7 @@ var turn_counter = 0
 
 @export var Active_Units:Array[Unit_Instance]
 @export var nav_manager_ref:NavigationManager
+@export var dialogue_manager_ref:DialogueManager
 
 ##########################
 ########## INIT ##########
@@ -34,6 +35,7 @@ func init() -> void:
 	#print("UNIT MANAGER INITIALIZED")
 	tilemaplayer_ref = get_tree().get_first_node_in_group("TILEMAP")
 	nav_manager_ref = get_tree().get_first_node_in_group("NAVIGATION_MANAGER") 
+	dialogue_manager_ref = get_tree().get_first_node_in_group("DIALOGUE_MANAGER")
 	for child in get_children():
 		child.init()
 		all_groups.append(child)
@@ -61,15 +63,16 @@ func spawn_unit(group:Unit_Group):
 		else:
 			print(DungeonData.Common_Enemies)
 			new_unit.UnitStats = DungeonData.Common_Enemies.pick_random()
-		print("Basicattack", new_unit.UnitStats)
+#		print("Basicattack", new_unit.UnitStats)
 		var placing = false
 		while placing == false:
 			placing = true
-			print("null test tilemap ref",tilemaplayer_ref)
+#			print("null test tilemap ref",tilemaplayer_ref)
 			var try = tilemaplayer_ref.AllRoomTiles.pick_random()
 			for unit in Active_Units:
-				if unit.self_coords == try:
-					placing = false
+				if is_instance_valid(unit):
+					if unit.self_coords == try:
+						placing = false
 			new_unit.position = Global.grid_to_pos(try)
 		Active_Units.append(new_unit)
 		group.add_child(new_unit)
@@ -84,10 +87,10 @@ func _step_turn() -> void:
 	var holding_variable = 0
 	holding_variable = current_group_index
 	current_group_index = wrapi(current_group_index + 1, 0, all_groups.size())
-	print("group index: ",current_group_index)
+#	print("group index: ",current_group_index)
 	previous_group_index = holding_variable
 	current_group = all_groups[current_group_index]
-	print("group: ",current_group)
+#	print("group: ",current_group)
 	if current_group.get_active_units().size() <= 0:
 		print("empty group, skip")
 		#SPAWN ENEMY IF NOT PLAYER_CONTROLLED, ELSE, STOP FUNCTION
@@ -103,12 +106,12 @@ func _begin_turn() -> void:
 	turn_counter += 1
 	if turn_counter%20 == 0 and $Enemy_Group.get_child_count() < DungeonData.max_wandering_units:
 		spawn_unit(all_groups[1]) #enemy group
-	print("HITS MANAGER BEGIN TURN")
+#	print("HITS MANAGER BEGIN TURN")
 	current_group.take_turn_team()
 
 
 func _on_turn_complete() -> void:
-	print('manager on group turn complete hit')
+#	print('manager on group turn complete hit')
 	_step_turn()
 	return
 
@@ -124,20 +127,22 @@ func _on_group_defeated(_is_player: bool):
 const Ability_vfx = preload("res://Objects/AbilityVFX.tscn")
 
 func _process_ability(Ability:AbilityData,Source):
-	print(Source.name," uses ",Ability.ability_name,"!")
+	print(Source.UnitStats.UnitName," uses ",Ability.ability_name,"!")
+	dialogue_manager_ref.show_unit_using_ability(Source.UnitStats.UnitName,Ability.ability_name)
 	var hit_tiles = calc_hit_tiles(Ability.targeting,Ability.range+Source.Range_Boost,Source.facing,Source.self_coords)
 	#print(hit_tiles)
 	var units_to_check:Array[Unit_Instance]
 	var does_pierce = false
+	var hits_nothing = true
 	if Ability.targeting != 0: #FRONT
 		does_pierce = true
-	print("Hit Tiles: ",hit_tiles)
+#	print("Hit Tiles: ",hit_tiles)
 	for tile in hit_tiles:
 		#print("Hit Tile: ",tile)
 		#if does_pierce:
 		var vfx = Ability_vfx.instantiate()
 		vfx.texture = Ability.vfx
-		print(Ability.vfx.get_size())
+#		print(Ability.vfx.get_size())
 		vfx.position = Global.grid_to_pos(tile)
 		$"../VFX".add_child(vfx)
 		for group in all_groups:
@@ -148,6 +153,7 @@ func _process_ability(Ability:AbilityData,Source):
 					if Source.Team == child.Team and Ability.valid_target != 0: 
 					#if same team and can hit ally, any or self, do hit.
 						child.ability_effect_calculations(Ability,Source)
+						hits_nothing = false
 						if ! does_pierce:
 							#print("not pierce swewsvsdivusiuvhsdivhs8dhv")
 							var new_vfx = Ability_vfx.instantiate()
@@ -160,12 +166,18 @@ func _process_ability(Ability:AbilityData,Source):
 					elif Source.Team != child.Team and Ability.valid_target != 1 and Ability.valid_target != 3:
 					#if different team and can hit enemy or any, do hit.
 						child.ability_effect_calculations(Ability,Source)
+						hits_nothing = false
 						if ! does_pierce:
 								#print("not pierce swewsvsdivusiuvhsdivhs8dhv")
 								var neww_vfx = Ability_vfx.instantiate()
 								neww_vfx.global_position = Global.grid_to_pos(tile)
 								$"../VFX".add_child(neww_vfx)
 								break
+	if hits_nothing:
+		print("that hit nothing")
+	#	if 
+	#	await Source.waiting_on_dialogue
+		dialogue_manager_ref.hit_nothing()
 	pass
 
 
@@ -177,9 +189,9 @@ func _process_ability(Ability:AbilityData,Source):
 func calc_hit_tiles(targeting:int, range:int, facing:Vector2i, source_coord:Vector2i):
 	var targettypes = ["Front", "Line", "Cone", "Circle", "Specify"]
 	var target = targettypes[targeting]
-	print("Targeting: ",target,"Range: ",range,"Facing: ",facing,"SourceCoord",source_coord)
+	#print("Targeting: ",target,"Range: ",range,"Facing: ",facing,"SourceCoord",source_coord)
 	var relative_tiles = []
-	print(targeting,target)
+	#print(targeting,target)
 	match target: #Front, Line, Cone, Circle, Specify
 		"Front":
 			for i in range:
@@ -190,9 +202,9 @@ func calc_hit_tiles(targeting:int, range:int, facing:Vector2i, source_coord:Vect
 			while fin == false:
 				i+=1
 				var tile = source_coord+(facing*i)
-				print("LINE_TILE: ",tile)
+	#			print("LINE_TILE: ",tile)
 				var tile_type = tilegrid.what_is_this_tile(tile.x,tile.y)
-				print(tile_type)
+	#			print(tile_type)
 				if  tile_type == 'FLOOR' or tile_type == 'WATER': #if the next tile isn't a Wall, continue.
 					relative_tiles.append((facing*i))
 				else:
@@ -228,7 +240,7 @@ func calc_hit_tiles(targeting:int, range:int, facing:Vector2i, source_coord:Vect
 		"Self":
 			relative_tiles.append[Vector2i(0,0)]
 			pass
-	print("Sourcecoord: ",source_coord,"relative tiles: ",relative_tiles)
+	#print("Sourcecoord: ",source_coord,"relative tiles: ",relative_tiles)
 	var real_tiles = []
 	for tile in relative_tiles:
 		real_tiles.append(tile+source_coord)

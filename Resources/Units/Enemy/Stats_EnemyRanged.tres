@@ -8,6 +8,7 @@
 script = ExtResource("1_fgudt")
 Sprite = ExtResource("2_7ylcg")
 BasicAttack = ExtResource("1_lg36o")
+UnitName = "RangedEnemy"
 STR_up = 3
 DEX_up = 3
 VIT_up = 2

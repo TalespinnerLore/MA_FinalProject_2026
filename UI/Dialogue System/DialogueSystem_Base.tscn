@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://UI/Dialogue System/dialogue_system_base.gd" id="1_kpsq7"]
 [ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="2_kkbyw"]
 
-[node name="DialogueSystemBase" type="Control"]
+[node name="DialogueSystemBase" type="Control" groups=["DIALOGUE_MANAGER"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

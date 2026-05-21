@@ -747,7 +747,8 @@ func place_stairs():
 	var new_stairs = stairs.instantiate()
 	new_stairs.global_position = Global.grid_to_pos(stairs_coords)
 	add_child(new_stairs)
-	get_child(0).player_found_stairs.connect(found_stairs)
+	#get_child(0).player_found_stairs.connect(found_stairs)
+	get_child(0).player_proceeding.connect(next_floor)
 	get_child(0).init()
 	pass
 
@@ -1054,3 +1055,8 @@ func _physics_process(delta: float) -> void:
 func found_stairs():
 	pass #SEND SIGNAL? maybe call this on signal? update dungeon data, then call new level?
 	
+
+func next_floor():
+	PlayerStats
+	DungeonData.open_level()
+	pass

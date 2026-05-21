@@ -38,7 +38,9 @@ texture = ExtResource("5_aevor")
 [node name="Camera2D" type="Camera2D" parent="Sprite2D"]
 
 [node name="HP_module" parent="Sprite2D" instance=ExtResource("3_1q7qa")]
-position = Vector2(0, -24)
+z_index = 5
+y_sort_enabled = true
+position = Vector2(0, -19)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
@@ -112,6 +114,7 @@ hit_from_inside = true
 collide_with_areas = true
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -304.0
 offset_top = 136.0
 offset_right = -168.0
@@ -123,10 +126,14 @@ Left Mouse to basic attack.
 1 and 2 to use other attacks."
 
 [node name="CombatText" type="Label" parent="."]
+visible = false
 offset_left = -64.0
 offset_top = 136.0
 offset_right = 64.0
 offset_bottom = 168.0
 theme = ExtResource("10_gh1p6")
 theme_override_constants/outline_size = 4
+text = "wfe7twefuefuhwefuwhefuhw
+
+wwwwwwwwwwwwwwwwwwwww"
 autowrap_mode = 3

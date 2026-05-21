@@ -8,6 +8,7 @@
 script = ExtResource("1_1q2fq")
 Sprite = ExtResource("2_2a6y6")
 BasicAttack = ExtResource("1_icnkg")
+UnitName = "MageEnemy"
 STR_up = 1
 DEX_up = 3
 VIT_up = 2
