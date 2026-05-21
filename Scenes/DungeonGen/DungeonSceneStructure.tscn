@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bj1i2ct8r8gpt"]
+[gd_scene load_steps=11 format=4 uid="uid://bj1i2ct8r8gpt"]
 
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_7fd7v"]
 [ext_resource type="Script" path="res://Scenes/DungeonGen/testing_tilemap_DUNGEONFLOOR.gd" id="2_sai8a"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bge6c34betll2" path="res://Units/unit.tscn" id="7_tlo0d"]
 [ext_resource type="Resource" uid="uid://ht133k0aitwq" path="res://Resources/Units/Player/Stats_Mage.tres" id="8_wjf6b"]
 [ext_resource type="PackedScene" uid="uid://d1wqqscot73tc" path="res://UI/Dialogue System/DialogueSystem_Base.tscn" id="9_444lq"]
+[ext_resource type="PackedScene" uid="uid://dx2lsk1ghwoaq" path="res://UI/Dialogue System/yes_no_ui.tscn" id="10_xpc0h"]
 
 [node name="DungeonSceneStructure" type="Node2D"]
 
@@ -49,3 +50,5 @@ script = ExtResource("6_u102x")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="DialogueSystemBase" parent="CanvasLayer" instance=ExtResource("9_444lq")]
+
+[node name="Yes_No_UI" parent="CanvasLayer" groups=["Yes_No_UI"] instance=ExtResource("10_xpc0h")]

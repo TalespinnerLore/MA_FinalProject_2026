@@ -14,14 +14,16 @@ texture = ExtResource("1_vaon5")
 script = ExtResource("2_m41wm")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 4
+collision_layer = 4
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_o0npy")
 
 [node name="YesButton" type="TextureButton" parent="."]
 visible = false
+z_index = 10
+y_sort_enabled = true
 offset_left = -64.0
 offset_top = 116.0
 offset_bottom = 180.0
@@ -29,6 +31,8 @@ texture_normal = ExtResource("3_77p8q")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="YesButton"]
+z_index = 10
+y_sort_enabled = true
 custom_minimum_size = Vector2(32, 64)
 layout_mode = 0
 offset_left = 16.0
@@ -46,6 +50,8 @@ autowrap_mode = 3
 
 [node name="NoButton" type="TextureButton" parent="."]
 visible = false
+z_index = 10
+y_sort_enabled = true
 offset_top = 116.0
 offset_right = 64.0
 offset_bottom = 180.0
@@ -53,6 +59,8 @@ texture_normal = ExtResource("5_6h5yq")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="NoButton"]
+z_index = 10
+y_sort_enabled = true
 custom_minimum_size = Vector2(32, 64)
 layout_mode = 0
 offset_left = 16.0
@@ -70,6 +78,8 @@ autowrap_mode = 3
 
 [node name="Proceed" type="Label" parent="."]
 visible = false
+z_index = 10
+y_sort_enabled = true
 custom_minimum_size = Vector2(64, 0)
 offset_left = -32.0
 offset_top = 88.0
