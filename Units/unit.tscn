@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bge6c34betll2"]
+[gd_scene load_steps=15 format=3 uid="uid://bge6c34betll2"]
 
 [ext_resource type="Script" path="res://Units/unit.gd" id="1_g2b4t"]
 [ext_resource type="Resource" uid="uid://oygkar1j0gy3" path="res://Resources/Units/Player/Stats_Warrior.tres" id="2_d6r3d"]
@@ -8,8 +8,11 @@
 [ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/Cone_of_Embers.tres" id="5_4miw2"]
 [ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="5_aevor"]
 [ext_resource type="Resource" uid="uid://cv14lef7fcshm" path="res://Resources/Abilities/DEX_base/Piercing_Shot.tres" id="6_6q1lq"]
+[ext_resource type="Script" path="res://Units/equipment.gd" id="7_5nig8"]
 [ext_resource type="Script" path="res://Units/status_effects_manager.gd" id="7_vti38"]
 [ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="10_gh1p6"]
+[ext_resource type="Texture2D" uid="uid://c4u8f5l3g4xbx" path="res://Art/VFX Sprites/vfx_force.png" id="11_ryu8l"]
+[ext_resource type="Texture2D" uid="uid://kao3fahuvc7r" path="res://Art/2D_images/pointer.png" id="12_ii820"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85qmf"]
 size = Vector2(16, 16)
@@ -29,6 +32,9 @@ Slot_2 = ExtResource("6_6q1lq")
 Slot_3 = ExtResource("5_4miw2")
 Slot_4 = ExtResource("5_4miw2")
 
+[node name="Equipment" type="Node" parent="."]
+script = ExtResource("7_5nig8")
+
 [node name="StatusEffects" type="Node" parent="."]
 script = ExtResource("7_vti38")
 
@@ -41,6 +47,30 @@ texture = ExtResource("5_aevor")
 z_index = 5
 y_sort_enabled = true
 position = Vector2(0, -19)
+
+[node name="Button1" type="Button" parent="Sprite2D"]
+visible = false
+offset_left = -176.0
+offset_top = 112.0
+offset_right = -78.0
+offset_bottom = 152.0
+theme = ExtResource("10_gh1p6")
+text = "Cone of Embers"
+icon = ExtResource("11_ryu8l")
+
+[node name="Button2" type="Button" parent="Sprite2D"]
+visible = false
+offset_left = 80.0
+offset_top = 112.0
+offset_right = 178.0
+offset_bottom = 152.0
+theme = ExtResource("10_gh1p6")
+text = "Cone of Embers"
+icon = ExtResource("11_ryu8l")
+
+[node name="pointer" type="Sprite2D" parent="Sprite2D"]
+texture = ExtResource("12_ii820")
+offset = Vector2(9, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")

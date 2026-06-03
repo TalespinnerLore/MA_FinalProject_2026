@@ -1,0 +1,191 @@
+[gd_scene load_steps=5 format=3 uid="uid://whnmxcba77ab"]
+
+[ext_resource type="Texture2D" uid="uid://ctthoe2yrl0mu" path="res://Art/UI_Art/modifier2_base.png" id="1_4xh3b"]
+[ext_resource type="Texture2D" uid="uid://yx0sw1cij6ne" path="res://Art/UI_Art/modifier2.png" id="2_2pdsj"]
+[ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="3_o7siq"]
+[ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="4_bv3il"]
+
+[node name="PlayerInventory_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 64.0
+offset_right = 552.0
+offset_bottom = 320.0
+texture = ExtResource("1_4xh3b")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 72.0
+offset_right = 288.0
+offset_bottom = 312.0
+texture = ExtResource("2_2pdsj")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Label" type="Label" parent="NinePatchRect2"]
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 23.0
+theme = ExtResource("3_o7siq")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 16
+text = "INVENTORY [##/##]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 289.0
+offset_top = 184.0
+offset_right = 544.0
+offset_bottom = 312.0
+texture = ExtResource("2_2pdsj")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="ShowItem" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 72.0
+offset_right = 544.0
+offset_bottom = 183.0
+texture = ExtResource("2_2pdsj")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="ShowItem"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 20.0
+offset_right = 128.0
+offset_bottom = 84.0
+texture = ExtResource("4_bv3il")
+
+[node name="NameLabel" type="Label" parent="ShowItem"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 84.0
+offset_right = 184.0
+offset_bottom = 107.0
+theme = ExtResource("3_o7siq")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "ITEM NAME GOES HERE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="ShowItem"]
+layout_mode = 0
+offset_left = -56.0
+offset_top = 120.0
+offset_right = 88.0
+offset_bottom = 232.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "########################
+Description goes here.
+1
+2
+3
+4
+5
+6
+########################"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DescriptionLabel2" type="Label" parent="ShowItem"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 120.0
+offset_right = 184.0
+offset_bottom = 232.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "##############
+Stat Requirements:
+STR - 000
+DEX - 000
+VIT - 000
+MAG - 000
+DEF - 000
+LUK - 000
+##############"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Options" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 289.0
+offset_top = 72.0
+offset_right = 351.0
+offset_bottom = 183.0
+texture = ExtResource("2_2pdsj")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 289.0
+offset_top = 72.0
+offset_right = 352.0
+offset_bottom = 184.0
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "USE"
+flat = true
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "GIVE"
+flat = true
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "DROP"
+flat = true
+
+[node name="Button4" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "THROW"
+flat = true

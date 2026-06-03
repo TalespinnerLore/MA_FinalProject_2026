@@ -58,6 +58,7 @@ func what_is_this_tile(x,y):
 		pass
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	TileGrid.clear()
 	for x in 23:
 		TileGrid.append([])

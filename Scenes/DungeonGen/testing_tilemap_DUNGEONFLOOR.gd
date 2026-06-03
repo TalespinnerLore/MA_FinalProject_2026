@@ -31,6 +31,8 @@ var cells_Lava = []    ##
 var cells_Air = []     ##
 #########################
 
+var monster_house = false
+
 ######MANAGER SCENE REFERENCES######
 @onready var nav_manager_ref:NavigationManager =  get_tree().get_first_node_in_group("NAVIGATION_MANAGER")
 ####################################
@@ -139,6 +141,65 @@ func RandomRooms(): #GENERATE RANDOM ROOMS ON THE GRID.
 	Max_Extra_Doorways = Rooms.size()*ceili(Interconnectivity/2.0) #just making sure this goes off
 	pass
 
+func Monster_House():
+	DungeonData.monster_house_count -= 1
+	var startx = 1
+	var starty = 1
+	var width = Width_X-2
+	var length = Height_Y-2
+	
+	if startx+width>=Width_X:
+		width = (Width_X-1)-startx
+	if starty+length>=Height_Y:
+		length = (Height_Y-1)-starty
+	
+	if TileGrid[startx][starty] != 'ROOM_WALL' and TileGrid[startx+width][starty+length] != 'ROOM_WALL' and TileGrid[startx][starty+length] != 'ROOM_WALL' and TileGrid[startx+width][starty] != 'ROOM_WALL' \
+	and TileGrid[startx][starty] != 'FLOOR' and TileGrid[startx+width][starty+length] != 'FLOOR' and TileGrid[startx][starty+length] != 'FLOOR' and TileGrid[startx+width][starty] != 'FLOOR'\
+	and TileGrid[startx+int(width/2)][starty] != 'ROOM_WALL' and TileGrid[startx+width][starty+int(length/2)] != 'ROOM_WALL' and TileGrid[startx][starty+int(length/2)] != 'ROOM_WALL' and TileGrid[startx+int(width/2)][starty+length] != 'ROOM_WALL' \
+	and TileGrid[startx+int(width/2)][starty] != 'FLOOR' and TileGrid[startx+width][starty+int(length/2)] != 'FLOOR' and TileGrid[startx][starty+int(length/2)] != 'FLOOR' and TileGrid[startx+int(width/2)][starty+length] != 'FLOOR':
+	#if the corners do not intersect with a present room, add it.
+		var NewRoom = Rect2i(startx, starty, width, length)
+		for x in range(NewRoom.position.x,NewRoom.end.x):
+			for y in range(NewRoom.position.y,NewRoom.end.y):
+				TileGrid[x][y] = 'FLOOR'
+				AllRoomTiles.append(Vector2i(x,y))
+				pass
+		var RoomWalls = []
+		var RoomFloor = []
+		for x in range(NewRoom.position.x-1,NewRoom.end.x+1):
+			if x == NewRoom.position.x-1 or x == NewRoom.end.x:
+				for y in range(NewRoom.position.y,NewRoom.end.y):
+					TileGrid[x][y] = 'ROOM_WALL'
+					RoomWalls.append(Vector2i(x,y))
+			else:
+				RoomWalls.append(Vector2i(x,NewRoom.position.y-1))
+				RoomWalls.append(Vector2i(x,NewRoom.end.y))
+				TileGrid[x][NewRoom.position.y-1] = 'ROOM_WALL'
+				TileGrid[x][NewRoom.end.y] = 'ROOM_WALL'
+		if Rounded == true:
+			var new_walls = Roundify_Room(NewRoom)
+			RoomWalls+=new_walls
+		for x in range(NewRoom.position.x-1,NewRoom.end.x+1):
+			for y in range(NewRoom.position.y-1,NewRoom.end.y+1):
+				if TileGrid[x][y] == 'ROOM_WALL' and FindNearbyFloorTiles(x,y) < 1:
+					TileGrid[x][y] = 'WALL'
+					RoomWalls.erase(Vector2i(x,y))
+				elif TileGrid[x][y] == 'FLOOR':
+					RoomFloor.append(Vector2i(x,y))
+		Rooms.append([NewRoom, RoomFloor, RoomWalls,[]])
+			#[Rect2i, Vec2i Array, Vec2i Array, Doors?]
+		#if Rounded != true and Rounded != false:
+		#	Rounded = Global.randb()
+	for x in Width_X:
+		for y in Height_Y:
+			if TileGrid[x][y] == 'ROOM_WALL' and FindNearbyFloorTiles(x,y) < 1:
+				TileGrid[x][y] = 'WALL'
+				AllRoomTiles.erase(Vector2i(x,y))
+			elif TileGrid[x][y] == 'ROOM_WALL':
+				AllRoomWalls.append(Vector2i(x,y))
+				
+	Max_Extra_Doorways = Rooms.size()*ceili(Interconnectivity/2.0) #just making sure this goes off
+	pass
 
 func Roundify_Room(room:Rect2i):
 	var horizontal_fill = floori(room.size.x / 4)
@@ -666,91 +727,99 @@ func generateRiver():
 
 
 func FillGrid(): #once the rooms are decided, this fills in the rest of the level
-	RandomRooms()
-	FindUnusedTiles()
+	if DungeonData.monster_house_count > 0 \
+	and DungeonData.current_floor+DungeonData.monster_house_count >= DungeonData.max_floors:
+		Monster_House()
+		monster_house = true
+	else:
+		RandomRooms()
 	
-	while UnusedTiles.size() > 0:
-		Hallways_FloodFill()
-	ExtendDeadEnds()
-	FindPossibleDoors()
-	ConnectLevel_NEW()
-	ExtraDoors()
+		FindUnusedTiles()
 		
-	var rooms_missing_door = []
-	var roomindex = -1
-	for room in Rooms:
-		roomindex +=1
-		var hasdoor = false
-		for tile in PermDoors:
-			if room[2].has(tile):
-				print("Room ",roomindex," door: ",tile)
-				hasdoor = true
-		if not hasdoor:
-			rooms_missing_door.append(room)
-			print("Room ",roomindex," has no door")
-		else:
-			print("room ",roomindex," has a door")
-	print("missing doors num: ",rooms_missing_door.size())
-	for room in rooms_missing_door:
-		var intersect = []
-		for door in AllPossibleDoors:
-			if room[2].has(door):
-				intersect.append(door)
-		var emergency_door = intersect.pick_random()
-		PermDoors.append(emergency_door)
-		print(emergency_door,"<-emergencydoor")
-		TileGrid[emergency_door.x][emergency_door.y] = 'FLOOR'
-	
-	#after all extra doors are made,
-	for room in Rooms: #take every room,
-		var toPop = []
-		for possible_door in room[3]: #go through all the possible doors,
-			if TileGrid[possible_door.x][possible_door.y] != 'FLOOR':
-				toPop.append(possible_door) #find the unused doors in the list,
-		for unused in toPop: #then erase them from the list, so I have a list of actual doors, connected to room data.
-			room[3].erase(unused)
-		print("doors: ",room[3])
-	
-	#print(DeadEnds.size())
-	Simple_FillDeadEnds(Max_DeadEnds)
-	#print(DeadEnds.size())
-	#print(DeadEnds)
-	for i in DeadEnds:
-		set_cell(Vector2i(i[0].x,i[0].y),0, Vector2i(0,2))
+		while UnusedTiles.size() > 0:
+			Hallways_FloodFill()
+		ExtendDeadEnds()
+		FindPossibleDoors()
+		ConnectLevel_NEW()
+		ExtraDoors()
+			
+		var rooms_missing_door = []
+		var roomindex = -1
+		for room in Rooms:
+			roomindex +=1
+			var hasdoor = false
+			for tile in PermDoors:
+				if room[2].has(tile):
+					print("Room ",roomindex," door: ",tile)
+					hasdoor = true
+			if not hasdoor:
+				rooms_missing_door.append(room)
+				print("Room ",roomindex," has no door")
+			else:
+				print("room ",roomindex," has a door")
+		print("missing doors num: ",rooms_missing_door.size())
+		for room in rooms_missing_door:
+			var intersect = []
+			for door in AllPossibleDoors:
+				if room[2].has(door):
+					intersect.append(door)
+			var emergency_door = intersect.pick_random()
+			PermDoors.append(emergency_door)
+			print(emergency_door,"<-emergencydoor")
+			TileGrid[emergency_door.x][emergency_door.y] = 'FLOOR'
 		
-	##FillDeadEnds(Max_DeadEnds)
-	#print(AllHallTiles.size(),"?")
-	if SpawnRiver == true:
-		generateRiver()
-		for tile in AllHallTiles:
-			print("checking hall tiles")
-			if what_is_this_tile(tile.x,tile.y) == 'WATER':
-				TileGrid[tile.x][tile.y] = 'FLOOR'
-	
+		#after all extra doors are made,
+		for room in Rooms: #take every room,
+			var toPop = []
+			for possible_door in room[3]: #go through all the possible doors,
+				if TileGrid[possible_door.x][possible_door.y] != 'FLOOR':
+					toPop.append(possible_door) #find the unused doors in the list,
+			for unused in toPop: #then erase them from the list, so I have a list of actual doors, connected to room data.
+				room[3].erase(unused)
+			print("doors: ",room[3])
+		
+		#print(DeadEnds.size())
+		Simple_FillDeadEnds(Max_DeadEnds)
+		#print(DeadEnds.size())
+		#print(DeadEnds)
+		for i in DeadEnds:
+			set_cell(Vector2i(i[0].x,i[0].y),0, Vector2i(0,2))
+			
+		##FillDeadEnds(Max_DeadEnds)
+		#print(AllHallTiles.size(),"?")
+		if SpawnRiver == true:
+			generateRiver()
+			for tile in AllHallTiles:
+				print("checking hall tiles")
+				if what_is_this_tile(tile.x,tile.y) == 'WATER':
+					TileGrid[tile.x][tile.y] = 'FLOOR'
+		
 	
 	
 func place_stairs():
-	var stairs = load("res://Objects/EnvironmentObjects/dungeon_stairs.tscn")
-	var stairs_coords:Vector2i
-	var valid = false
-	while valid == false:
-		var tile = AllRoomTiles.pick_random()
-		if cells_Ground.has(tile):
-			stairs_coords = tile
-			valid = true
-	var i = -1
-	for room in Rooms:
-		i+=1
-		if room[1].has(stairs_coords):
-			Rooms[i][3].append(stairs_coords)
-			break
-	var new_stairs = stairs.instantiate()
-	new_stairs.global_position = Global.grid_to_pos(stairs_coords)
-	add_child(new_stairs)
-	#get_child(0).player_found_stairs.connect(found_stairs)
-	get_child(0).player_proceeding.connect(next_floor)
-	get_child(0).init()
-	pass
+	if ! DungeonData.current_floor == DungeonData.max_floors:
+
+		var stairs = load("res://Objects/EnvironmentObjects/dungeon_stairs.tscn")
+		var stairs_coords:Vector2i
+		var valid = false
+		while valid == false:
+			var tile = AllRoomTiles.pick_random()
+			if cells_Ground.has(tile):
+				stairs_coords = tile
+				valid = true
+		var i = -1
+		for room in Rooms:
+			i+=1
+			if room[1].has(stairs_coords):
+				Rooms[i][3].append(stairs_coords)
+				break
+		var new_stairs = stairs.instantiate()
+		new_stairs.global_position = Global.grid_to_pos(stairs_coords)
+		add_child(new_stairs)
+		#get_child(0).player_found_stairs.connect(found_stairs)
+		get_child(0).player_proceeding.connect(next_floor)
+		get_child(0).init()
+		pass
 
 	######################
 	#MAKE FLOOR NAVIGABLE#
@@ -1035,16 +1104,21 @@ func _ready() -> void:
 	DungeonData.dungeon_gen_testing()
 	
 	if get_tree().get_first_node_in_group("UNIT_MANAGER") != null:
-		$"../Unit_Manager".init()
+		unit_manager_ref = $"../Unit_Manager"
+		if monster_house == true:
+			unit_manager_ref.monster_house = true
+		unit_manager_ref.init()
 	if get_tree().get_first_node_in_group("NAVIGATION_MANAGER") != null:
 		nav_manager_ref = $"../Navigation_Manager"
 		nav_manager_ref.init()
+	
+	temp_items()
 	#var i = -1
 	#for room in Rooms:
-	#	i+=1
+	#	i+=1m
 	#	print("room ",i," doors:",room[3])
 
-
+var unit_manager_ref:Unit_Manager
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -1057,6 +1131,29 @@ func found_stairs():
 	
 
 func next_floor():
-	PlayerStats
+	print("playerhp",get_tree().get_first_node_in_group("Player").HP_Current)
+	PlayerStats.p1_HP = get_tree().get_first_node_in_group("Player").HP_Current
 	DungeonData.open_level()
 	pass
+
+func temp_items():
+	var item = preload("res://Objects/Items/GroundItem.tscn")
+	
+	for i in randi_range(int(3*DungeonData.item_mult),int(9*DungeonData.item_mult)):
+		var new = item.instantiate()
+		var gold_chance = randf_range(0,DungeonData.gold_chance + DungeonData.pot_chance)
+		if gold_chance <= DungeonData.gold_chance:
+			new.is_gold = true
+		else:
+			new.is_gold = false
+		var coords:Vector2i
+		var valid = false
+		while valid == false:
+			var tile = AllRoomTiles.pick_random()
+			if cells_Ground.has(tile):
+				coords = tile
+				valid = true
+		new.global_position = Global.grid_to_pos(coords)
+		add_child(new)
+		get_child(-1)._init()
+		

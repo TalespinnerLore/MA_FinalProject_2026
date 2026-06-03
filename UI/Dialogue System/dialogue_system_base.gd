@@ -7,6 +7,7 @@ func _ready() -> void:
 	#if get_parent().get_parent() != get_tree().get_first_node_in_group("Player"):
 	#	push_error("Dialogue not on player.")
 	#	queue_free()
+	reset_display_text()
 	pass
 
 enum ITEM_ACTION{CONSUME,EQUIP,DROP}
@@ -26,7 +27,8 @@ func connect_to_unit(unit):
 	connected_unit = unit
 
 func disconnect_unit():
-	connected_unit.waiting_on_dialogue.disconnect(signal_complete)
+	if is_instance_valid(connected_unit):
+		connected_unit.waiting_on_dialogue.disconnect(signal_complete)
 
 func signal_complete():
 	#print("recived signal now")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bbmv4nicxv3mu"]
+[gd_scene load_steps=40 format=4 uid="uid://bbmv4nicxv3mu"]
 
 [ext_resource type="Script" path="res://UI/PlaytestUI/choose_class_playtest_ui.gd" id="1_ak3xp"]
 [ext_resource type="FontFile" uid="uid://bme72xoxft30d" path="res://Art/Tiny5-Regular.ttf" id="1_b33gh"]
@@ -20,17 +20,25 @@
 [ext_resource type="Resource" uid="uid://cv14lef7fcshm" path="res://Resources/Abilities/DEX_base/Piercing_Shot.tres" id="14_2c50t"]
 [ext_resource type="Resource" uid="uid://rfa1oc5gpu6h" path="res://Resources/Abilities/DEX_base/Venom_Strike.tres" id="15_5ldxw"]
 [ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/Cone_of_Embers.tres" id="16_bi1ew"]
-[ext_resource type="Resource" uid="uid://bsl8f6nvn0fw" path="res://Resources/Abilities/MAG_base/Incinerate.tres" id="17_5i1p3"]
-[ext_resource type="Resource" uid="uid://b3vlgoi6d1u1t" path="res://Resources/Abilities/VIT_base/Healing_Touch.tres" id="18_3nxrb"]
+[ext_resource type="Resource" uid="uid://cqc4lv8ck3ypo" path="res://Resources/Abilities/MAG_base/EmberBurst.tres" id="17_y812q"]
+[ext_resource type="Resource" uid="uid://cix2h68uqcx3c" path="res://Resources/Abilities/MAG_base/Tiny_Smite.tres" id="18_3b2wq"]
 [ext_resource type="Resource" uid="uid://dguinja0it7mu" path="res://Resources/Abilities/DEF_base/Healing_Bubble.tres" id="19_imja6"]
-[ext_resource type="Resource" uid="uid://djndl3e5gc6vi" path="res://Resources/Abilities/LUK_base/Increase_Precision.tres" id="20_h37xk"]
-[ext_resource type="Resource" uid="uid://dxodo2cl2dq07" path="res://Resources/Abilities/LUK_base/Enchant_Weapon_Gale.tres" id="21_y8yta"]
+[ext_resource type="Resource" uid="uid://bp0anynyd4ewq" path="res://Resources/Abilities/LUK_base/WildWinds.tres" id="20_u6qll"]
+[ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="22_p564o"]
+[ext_resource type="Script" path="res://tile_map_layer.gd" id="23_aymox"]
 [ext_resource type="Texture2D" uid="uid://byt11lv3l0usu" path="res://Art/UnitSprites/BasicCharacter_vanguard.png" id="23_rwlyq"]
 [ext_resource type="Texture2D" uid="uid://b4x3wup30pxxh" path="res://Art/UnitSprites/BasicCharacter_warrior.png" id="27_eplt2"]
 [ext_resource type="Texture2D" uid="uid://cma54lo0lvcps" path="res://Art/UnitSprites/BasicCharacter_ranger.png" id="28_wuydf"]
 [ext_resource type="Texture2D" uid="uid://bixa6lgv0t1kx" path="res://Art/UnitSprites/BasicCharacter_mage.png" id="29_uwajm"]
 [ext_resource type="Texture2D" uid="uid://dscvo6hslhk00" path="res://Art/UnitSprites/BasicCharacter_healer.png" id="30_raq5o"]
 [ext_resource type="Texture2D" uid="uid://ccysrrr4x4jfo" path="res://Art/UnitSprites/BasicCharacter_jester.png" id="31_eb6p2"]
+[ext_resource type="Texture2D" uid="uid://jg5fc0geer0a" path="res://Art/VFX Sprites/vfx_dark.png" id="34_wia5b"]
+[ext_resource type="Texture2D" uid="uid://dmgwhlft4rjab" path="res://Art/VFX Sprites/vfx_earth.png" id="35_rh660"]
+[ext_resource type="Texture2D" uid="uid://c4u8f5l3g4xbx" path="res://Art/VFX Sprites/vfx_force.png" id="36_gxuo0"]
+[ext_resource type="Texture2D" uid="uid://cbr4mrsgqpdhc" path="res://Art/VFX Sprites/vfx_wind.png" id="37_5en22"]
+[ext_resource type="Texture2D" uid="uid://dssgt1n5mnc5k" path="res://Art/VFX Sprites/vfx_fire.png" id="38_raade"]
+[ext_resource type="Texture2D" uid="uid://m6sk7hjt5ypo" path="res://Art/VFX Sprites/vfx_light.png" id="39_o4wiv"]
+[ext_resource type="Texture2D" uid="uid://jo8g6xyk6vmd" path="res://Art/VFX Sprites/vfx_water.png" id="40_lfo4b"]
 
 [node name="ChooseClassPlaytestUi" type="Control"]
 layout_mode = 3
@@ -44,18 +52,23 @@ script = ExtResource("1_ak3xp")
 class_data = Array[ExtResource("2_wamp1")]([ExtResource("3_jvy8r"), ExtResource("4_jdh2o"), ExtResource("5_4j3c7"), ExtResource("6_s8fcy"), ExtResource("7_gkdhf"), ExtResource("8_5wy0c")])
 v_abilities = Array[ExtResource("9_vgbsk")]([ExtResource("10_3pa68"), ExtResource("11_w4vo4")])
 w_abilities = Array[ExtResource("9_vgbsk")]([ExtResource("12_mw2ig"), ExtResource("13_gapgv")])
-r_abilities = Array[ExtResource("9_vgbsk")]([ExtResource("14_2c50t"), ExtResource("15_5ldxw")])
-m_abilities = Array[ExtResource("9_vgbsk")]([ExtResource("16_bi1ew"), ExtResource("17_5i1p3")])
-h_abilities = Array[ExtResource("9_vgbsk")]([ExtResource("18_3nxrb"), ExtResource("19_imja6")])
-j_abilities = Array[ExtResource("9_vgbsk")]([ExtResource("20_h37xk"), ExtResource("21_y8yta")])
+r_abilities = Array[ExtResource("9_vgbsk")]([ExtResource("14_2c50t"), ExtResource("15_5ldxw"), null])
+m_abilities = Array[ExtResource("9_vgbsk")]([ExtResource("16_bi1ew"), ExtResource("17_y812q")])
+h_abilities = Array[ExtResource("9_vgbsk")]([ExtResource("18_3b2wq"), ExtResource("19_imja6")])
+j_abilities = Array[ExtResource("9_vgbsk")]([ExtResource("20_u6qll"), ExtResource("13_gapgv")])
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD/////AAABAAEAAAD//wAAAQACAAoAAAD//wEAAQACAAoAAAD//wIAAQACAAoAAAD//wYAAQACAAoAAAD//wcAAQACAAoAAAAAAP//AQABAAsAAAABAP//AQABAAsAAAACAP//AQABAAsAAAADAP//AQABAAsAAAAEAP//AQABAAsAAAAFAP//AQABAAsAAAAGAP//AQABAAsAAAAHAP//AQABAAsAAAAIAP//AQABAAsAAAAJAP//AQABAAsAAAAKAP//AQABAAsAAAALAP//AQABAAsAAAAMAP//AQABAAsAAAANAP//AQABAAsAAAAOAP//AQABAAsAAAAPAP//AQABAAsAAAAQAP//AQABAAsAAAARAP//AQABAAsAAAD//wkAAQACAAoAAAD//wgAAQACAAoAAAD//woAAQACAAoAAAD//wMAAQACAAoAAAD//wQAAQACAAoAAAD//wUAAQACAAoAAAASAP//AQABAAsAAAATAAsAAQABAAkAAAD//wsAAAABAAEAAAAAAAsAAQABAAkAAAABAAsAAQABAAkAAAACAAsAAQABAAkAAAADAAsAAQABAAkAAAAEAAsAAQABAAkAAAAFAAsAAQABAAkAAAAGAAsAAQABAAkAAAAHAAsAAQABAAkAAAAIAAsAAQABAAkAAAAJAAsAAQABAAkAAAAKAAsAAQABAAkAAAALAAsAAQABAAkAAAAMAAsAAQABAAkAAAANAAsAAQABAAkAAAAOAAsAAQABAAkAAAAPAAsAAQABAAkAAAAQAAsAAQABAAkAAAARAAsAAQABAAkAAAASAAsAAQABAAkAAAAUAAoAAQAAAAoAAAAUAAsAAAABAAEAAAATAP//AQABAAsAAAAUAP//AAABAAEAAAAUAAAAAQAAAAoAAAAUAAEAAQAAAAoAAAAUAAIAAQAAAAoAAAAUAAQAAQAAAAoAAAAUAAUAAQAAAAoAAAAUAAYAAQAAAAoAAAAUAAcAAQAAAAoAAAAUAAgAAQAAAAoAAAAUAAkAAQAAAAoAAAAUAAMAAQAAAAoAAAAAAAUAAQAKAAEAAAABAAUAAQAKAAEAAAACAAUAAQAKAAEAAAADAAUAAQAKAAEAAAAEAAUAAQAKAAEAAAAFAAUAAQAKAAEAAAAGAAUAAQAKAAEAAAAHAAUAAQAKAAEAAAAIAAUAAQAKAAEAAAAJAAUAAQAKAAEAAAAKAAUAAQAKAAEAAAALAAUAAQAKAAEAAAAMAAUAAQAKAAEAAAANAAUAAQAKAAEAAAAOAAUAAQAKAAEAAAAPAAUAAQAKAAEAAAAQAAUAAQAKAAEAAAARAAUAAQAKAAEAAAASAAUAAQAKAAEAAAATAAUAAQAKAAEAAAAAAAYAAQAJABAAAAAAAAcAAQALAAEAAAAAAAgAAQALAAEAAAAAAAkAAQALAAEAAAAAAAoAAQAJABEAAAABAAYAAQAKAAIAAAABAAcAAQADAAAAAAABAAgAAQADAAEAAAABAAkAAQADAAIAAAABAAoAAQAKAAAAAAACAAYAAQAKAAIAAAACAAcAAQAEAAAAAAACAAgAAQAEAAEAAAACAAkAAQAEAAIAAAACAAoAAQAKAAAAAAADAAYAAQAKAAIAAAADAAcAAQAEAAAAAAADAAgAAQAEAAEAAAADAAkAAQAEAAIAAAADAAoAAQAKAAAAAAAEAAYAAQAKAAIAAAAEAAcAAQAEAAAAAAAEAAgAAQAEAAEAAAAEAAkAAQAEAAIAAAAEAAoAAQAKAAAAAAAFAAYAAQAKAAIAAAAFAAcAAQAEAAAAAAAFAAgAAQAEAAEAAAAFAAkAAQAEAAIAAAAFAAoAAQAKAAAAAAAGAAYAAQAKAAIAAAAGAAcAAQAEAAAAAAAGAAgAAQAEAAEAAAAGAAkAAQAEAAIAAAAGAAoAAQAKAAAAAAAHAAYAAQAKAAIAAAAHAAcAAQAEAAAAAAAHAAgAAQAEAAEAAAAHAAkAAQAEAAIAAAAHAAoAAQAKAAAAAAAIAAYAAQAKAAIAAAAIAAcAAQAFAAAAAAAIAAgAAQAFAAEAAAAIAAkAAQAFAAIAAAAIAAoAAQAKAAAAAAAJAAYAAQAKABAAAAAJAAcAAQAJAAEAAAAJAAgAAQAJAAEAAAAJAAkAAQAJAAEAAAAJAAoAAQAKABEAAAAKAAYAAgAJABAAAAAKAAcAAgALAAEAAAAKAAgAAgALAAEAAAAKAAkAAgALAAEAAAAKAAoAAgAJABEAAAALAAYAAgAKAAIAAAALAAcAAgADAAAAAAALAAgAAgADAAEAAAALAAkAAgADAAIAAAALAAoAAgAKAAAAAAAMAAYAAgAKAAIAAAAMAAcAAgAEAAAAAAAMAAgAAgAEAAEAAAAMAAkAAgAEAAIAAAAMAAoAAgAKAAAAAAANAAYAAgAKAAIAAAANAAcAAgAEAAAAAAANAAgAAgAEAAEAAAANAAkAAgAEAAIAAAANAAoAAgAKAAAAAAAOAAYAAgAKAAIAAAAOAAcAAgAEAAAAAAAOAAgAAgAEAAEAAAAOAAkAAgAEAAIAAAAOAAoAAgAKAAAAAAAPAAYAAgAKAAIAAAAPAAcAAgAEAAAAAAAPAAgAAgAEAAEAAAAPAAkAAgAEAAIAAAAPAAoAAgAKAAAAAAAQAAYAAgAKAAIAAAAQAAcAAgAEAAAAAAAQAAgAAgAEAAEAAAAQAAkAAgAEAAIAAAAQAAoAAgAKAAAAAAARAAYAAgAKAAIAAAARAAcAAgAEAAAAAAARAAgAAgAEAAEAAAARAAkAAgAEAAIAAAARAAoAAgAKAAAAAAASAAYAAgAKAAIAAAASAAcAAgAFAAAAAAASAAgAAgAFAAEAAAASAAkAAgAFAAIAAAASAAoAAgAKAAAAAAATAAYAAgAKABAAAAATAAcAAgAJAAEAAAATAAgAAgAJAAEAAAATAAkAAgAJAAEAAAATAAoAAgAKABEAAAAAAAAAAwAJABAAAAAAAAEAAwALAAEAAAAAAAIAAwALAAEAAAAAAAMAAwALAAEAAAAAAAQAAwAJABEAAAABAAAAAwAKAAIAAAABAAEAAwADAAAAAAABAAIAAwADAAEAAAABAAMAAwADAAIAAAABAAQAAwAKAAAAAAACAAAAAwAKAAIAAAACAAEAAwAEAAAAAAACAAIAAwAEAAEAAAACAAMAAwAEAAIAAAACAAQAAwAKAAAAAAADAAAAAwAKAAIAAAADAAEAAwAEAAAAAAADAAIAAwAEAAEAAAADAAMAAwAEAAIAAAADAAQAAwAKAAAAAAAEAAAAAwAKAAIAAAAEAAEAAwAEAAAAAAAEAAIAAwAEAAEAAAAEAAMAAwAEAAIAAAAEAAQAAwAKAAAAAAAFAAAAAwAKAAIAAAAFAAEAAwAEAAAAAAAFAAIAAwAEAAEAAAAFAAMAAwAEAAIAAAAFAAQAAwAKAAAAAAAGAAAAAwAKAAIAAAAGAAEAAwAEAAAAAAAGAAIAAwAEAAEAAAAGAAMAAwAEAAIAAAAGAAQAAwAKAAAAAAAHAAAAAwAKAAIAAAAHAAEAAwAEAAAAAAAHAAIAAwAEAAEAAAAHAAMAAwAEAAIAAAAHAAQAAwAKAAAAAAAIAAAAAwAKAAIAAAAIAAEAAwAFAAAAAAAIAAIAAwAFAAEAAAAIAAMAAwAFAAIAAAAIAAQAAwAKAAAAAAAJAAAAAwAKABAAAAAJAAEAAwAJAAEAAAAJAAIAAwAJAAEAAAAJAAMAAwAJAAEAAAAJAAQAAwAKABEAAAAKAAAABAAJABAAAAAKAAEABAALAAEAAAAKAAIABAALAAEAAAAKAAMABAALAAEAAAAKAAQABAAJABEAAAALAAAABAAKAAIAAAALAAEABAADAAAAAAALAAIABAADAAEAAAALAAMABAADAAIAAAALAAQABAAKAAAAAAAMAAAABAAKAAIAAAAMAAEABAAEAAAAAAAMAAIABAAEAAEAAAAMAAMABAAEAAIAAAAMAAQABAAKAAAAAAANAAAABAAKAAIAAAANAAEABAAEAAAAAAANAAIABAAEAAEAAAANAAMABAAEAAIAAAANAAQABAAKAAAAAAAOAAAABAAKAAIAAAAOAAEABAAEAAAAAAAOAAIABAAEAAEAAAAOAAMABAAEAAIAAAAOAAQABAAKAAAAAAAPAAAABAAKAAIAAAAPAAEABAAEAAAAAAAPAAIABAAEAAEAAAAPAAMABAAEAAIAAAAPAAQABAAKAAAAAAAQAAAABAAKAAIAAAAQAAEABAAEAAAAAAAQAAIABAAEAAEAAAAQAAMABAAEAAIAAAAQAAQABAAKAAAAAAARAAAABAAKAAIAAAARAAEABAAEAAAAAAARAAIABAAEAAEAAAARAAMABAAEAAIAAAARAAQABAAKAAAAAAASAAAABAAKAAIAAAASAAEABAAFAAAAAAASAAIABAAFAAEAAAASAAMABAAFAAIAAAASAAQABAAKAAAAAAATAAAABAAKABAAAAATAAEABAAJAAEAAAATAAIABAAJAAEAAAATAAMABAAJAAEAAAATAAQABAAKABEAAAA=")
+tile_set = ExtResource("22_p564o")
+script = ExtResource("23_aymox")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(80, 75)
 layout_mode = 0
 offset_left = 58.0
-offset_top = 128.0
+offset_top = 107.0
 offset_right = 143.0
-offset_bottom = 215.0
+offset_bottom = 194.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -93,9 +106,9 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(80, 75)
 layout_mode = 0
 offset_left = 145.0
-offset_top = 128.0
+offset_top = 107.0
 offset_right = 230.0
-offset_bottom = 215.0
+offset_bottom = 194.0
 
 [node name="Label" type="Label" parent="VBoxContainer2"]
 layout_mode = 2
@@ -133,9 +146,9 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(80, 75)
 layout_mode = 0
 offset_left = 234.0
-offset_top = 128.0
+offset_top = 107.0
 offset_right = 319.0
-offset_bottom = 215.0
+offset_bottom = 194.0
 
 [node name="Label" type="Label" parent="VBoxContainer3"]
 layout_mode = 2
@@ -173,9 +186,9 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(80, 75)
 layout_mode = 0
 offset_left = 322.0
-offset_top = 128.0
+offset_top = 107.0
 offset_right = 407.0
-offset_bottom = 215.0
+offset_bottom = 194.0
 
 [node name="Label" type="Label" parent="VBoxContainer4"]
 layout_mode = 2
@@ -213,9 +226,9 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(80, 75)
 layout_mode = 0
 offset_left = 410.0
-offset_top = 128.0
+offset_top = 107.0
 offset_right = 495.0
-offset_bottom = 215.0
+offset_bottom = 194.0
 
 [node name="Label" type="Label" parent="VBoxContainer5"]
 layout_mode = 2
@@ -253,9 +266,9 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(80, 75)
 layout_mode = 0
 offset_left = 498.0
-offset_top = 128.0
+offset_top = 107.0
 offset_right = 583.0
-offset_bottom = 215.0
+offset_bottom = 194.0
 
 [node name="Label" type="Label" parent="VBoxContainer6"]
 layout_mode = 2
@@ -290,6 +303,7 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 147.0
 offset_top = 40.0
@@ -304,17 +318,221 @@ horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 147.0
-offset_top = 257.0
-offset_right = 492.0
-offset_bottom = 317.0
+offset_left = 320.0
+offset_top = 301.0
+offset_right = 640.0
+offset_bottom = 361.0
 theme = ExtResource("4_o01tj")
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 16
-text = "Move: WASD / Arrow Keys
-Interact / Basic Attack: Left-Click
-Other Attacks: 1 & 2"
+theme_override_font_sizes/font_size = 8
+text = "
+
+Basic Attack: Left-Click
+Ability Buttons: 1 & 2"
 horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_top = 301.0
+offset_right = 320.0
+offset_bottom = 361.0
+theme = ExtResource("4_o01tj")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "
+
+Move: WASD / Arrow Keys
+Face a Direction: Hold CTRL + Move
+"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_top = 10.0
+offset_right = 640.0
+offset_bottom = 67.0
+theme = ExtResource("4_o01tj")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "MA GAMES FINAL PROJECT
+- Untitled Dungeon Crawler/Crafter -
+ (Prototype 1)"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 192.0
+offset_right = 142.0
+offset_bottom = 254.0
+theme = ExtResource("4_o01tj")
+text = "Intimidating
+Shout:
+
+Cone spell,
+low damage."
+icon = ExtResource("34_wia5b")
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 254.0
+offset_right = 142.0
+offset_bottom = 316.0
+theme = ExtResource("4_o01tj")
+text = "Pebble
+Guard:
+
+Shields self
+with earth."
+icon = ExtResource("35_rh660")
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 192.0
+offset_right = 232.0
+offset_bottom = 254.0
+theme = ExtResource("4_o01tj")
+text = "Cleave:
+
+Front attack,
+high damage."
+icon = ExtResource("34_wia5b")
+
+[node name="Button4" type="Button" parent="."]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 254.0
+offset_right = 230.0
+offset_bottom = 316.0
+theme = ExtResource("4_o01tj")
+text = "Stunning
+Blow:
+
+May stun
+enemy for
+a turn."
+icon = ExtResource("36_gxuo0")
+
+[node name="Button5" type="Button" parent="."]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 192.0
+offset_right = 320.0
+offset_bottom = 254.0
+theme = ExtResource("4_o01tj")
+text = "Piercing
+Shot:
+
+Line attack,
+stopped
+by walls."
+icon = ExtResource("37_5en22")
+
+[node name="Button6" type="Button" parent="."]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 254.0
+offset_right = 320.0
+offset_bottom = 316.0
+theme = ExtResource("4_o01tj")
+text = "Venom
+Strike:
+
+Front attack,
+medium
+damage."
+icon = ExtResource("34_wia5b")
+
+[node name="Button7" type="Button" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 192.0
+offset_right = 408.0
+offset_bottom = 254.0
+theme = ExtResource("4_o01tj")
+text = "Cone of
+Embers:
+
+Cone spell,
+medium
+damage."
+icon = ExtResource("38_raade")
+
+[node name="Button8" type="Button" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 254.0
+offset_right = 408.0
+offset_bottom = 316.0
+theme = ExtResource("4_o01tj")
+text = "Ember
+Burst:
+
+Circle spell,
+medium
+damage."
+icon = ExtResource("38_raade")
+
+[node name="Button9" type="Button" parent="."]
+layout_mode = 0
+offset_left = 408.0
+offset_top = 192.0
+offset_right = 496.0
+offset_bottom = 254.0
+theme = ExtResource("4_o01tj")
+text = "Tiny Smite:
+
+Front attack,
+medium
+damage."
+icon = ExtResource("39_o4wiv")
+
+[node name="Button10" type="Button" parent="."]
+layout_mode = 0
+offset_left = 408.0
+offset_top = 254.0
+offset_right = 496.0
+offset_bottom = 316.0
+theme = ExtResource("4_o01tj")
+text = "Healing
+Bubble:
+
+Shields self
+with water.
+Slight heal."
+icon = ExtResource("40_lfo4b")
+
+[node name="Button11" type="Button" parent="."]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 192.0
+offset_right = 586.0
+offset_bottom = 254.0
+theme = ExtResource("4_o01tj")
+text = "Stunning
+Blow:
+
+May stun
+enemy for
+a turn."
+icon = ExtResource("36_gxuo0")
+
+[node name="Button12" type="Button" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 254.0
+offset_right = 584.0
+offset_bottom = 316.0
+theme = ExtResource("4_o01tj")
+text = "Wild
+Winds:
+
+Circle spell,
+hits ALL units
+in range."
+icon = ExtResource("37_5en22")
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed_"]
 [connection signal="pressed" from="VBoxContainer2/Button" to="." method="_on_button_pressed2"]

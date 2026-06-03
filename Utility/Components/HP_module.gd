@@ -24,11 +24,13 @@ func add_status_icon(Effect:StatusEffectData):
 			$GridContainer_StatusEffects.add_child(icon)
 
 func remove_status_icon(Effect:StatusEffectData):
-	var index = statuseeffects.find(StatusEffectData)
-	if index != -1:
+	if statuseeffects.has(Effect):
+		var index = statuseeffects.find(Effect)
 		var topop = $GridContainer_StatusEffects.get_child(index)
 		topop.queue_free()
 		statuseeffects.pop_at(index)
+	else:
+		push_error("this unis is not ",Effect.effect_name)
 
 
 func gain_shield(Ability:AbilityData,Source):
@@ -70,7 +72,11 @@ func _take_damage(damage):
 			parent._on_death()
 	return hp
 
-
+func new_level_refresh(current_hp,max_hp) -> void:
+	hp = current_hp
+	maxhp = max_hp
+	var barscale = clampf(hp/maxhp,0,1)
+	hp_bar.size.x = clampf(barscale*32, 0, 32)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

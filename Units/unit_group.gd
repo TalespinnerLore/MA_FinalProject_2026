@@ -15,6 +15,8 @@ var current_unit:Unit_Instance
 #signal major events
 
 var UnitManager:Unit_Manager
+var player_dead = false
+
 
 func init() -> void:
 	UnitManager = self.get_parent()
@@ -32,6 +34,7 @@ func init() -> void:
 	
 	if get_children().size() > 0:
 		current_unit = get_children()[0]
+		connect_current_unit_signals()
 	#take_turn_team()
 
 func init_child(child):
@@ -67,23 +70,25 @@ func take_turn_team() -> void:
 	_step_turn()
 
 func _step_turn() -> void:
-	#await get_tree().create_timer(TURN_COOLDOWN).timeout
-	if is_player_controlled:
-		#print('player turn')
-		_step_turn_player()
-	else:
-		#print("ai turns not implemented yet")
-		_step_turn_ai()
-		pass
+	if ! player_dead:
+		#await get_tree().create_timer(TURN_COOLDOWN).timeout
+		if is_player_controlled:
+			#print('player turn')
+			_step_turn_player()
+		else:
+			#print("ai turns not implemented yet")
+			_step_turn_ai()
+			pass
 
 
 
 func _step_turn_player() -> void:
-	print("stepped turn player")
+	#print("stepped turn player")
 	#check for end of turn
+	pass
 	
 	var waiting_units = get_waiting_units()
-	print(waiting_units)
+	#print(waiting_units)
 	if waiting_units.size() <= 0:
 		print("END player GROUP TURN")
 		_end_group_turn()
@@ -99,7 +104,8 @@ func _step_turn_player() -> void:
 
 	
 func _step_turn_ai() -> void:
-	disconnect_current_unit_signals()
+	if current_unit_index > 0:
+		disconnect_current_unit_signals()
 	#while true:
 	current_unit_index+=1
 	if current_unit_index >= get_child_count():
@@ -148,8 +154,10 @@ func connect_current_unit_signals() -> void:
 
 func disconnect_current_unit_signals() -> void:
 	if is_instance_valid(current_unit):
-		current_unit.attack_start.disconnect(_process_ability)
-		current_unit.turn_complete.disconnect(_step_unit)
+		if current_unit.is_connected("attack_start",_process_ability):
+			current_unit.attack_start.disconnect(_process_ability)
+		if current_unit.is_connected("turn_complete",_step_unit):
+			current_unit.turn_complete.disconnect(_step_unit)
 	pass
 
 func _process_attack(ActionDef): #DEPRECIATED

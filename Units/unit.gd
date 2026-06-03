@@ -43,12 +43,23 @@ enum ElementType {FIRE,WATER,EARTH,AIR,FORCE,LIGHT,DARK}
 enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_Ranged,Other}
 
 @export_category("GEAR")
+
+@onready var ABILITIES:unit_equipped_abilities = $Abilities
+@onready var EQUIPMENT:Unit_Equipment_Inventory = $Equipment
+
 @export var ARMOUR:ItemData
 @export var WEAPON:ItemData
 @export var TRINKET:ItemData
 
 @export var HeldItem:ItemData
 @export var HeldItem_stacksize := 0
+
+@export var held_gold := 0
+
+@export var drop_held_weapon := false
+@export var drop_held_armour := false
+@export var drop_held_trinket := false
+
 ####################################################
 #CHARACTER/UNIT STATISTICS
 ####################################################
@@ -226,7 +237,7 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 				amount = Source.Base_Phys_ATK
 			1:
 				amount = Source.Base_Phys_ATK * Source.Melee_Mult
-				print(Source.Base_Phys_ATK, " * ",Source.Melee_Mult," = ",amount)
+				#print(Source.Base_Phys_ATK, " * ",Source.Melee_Mult," = ",amount)
 			2:
 				amount = Source.Base_Phys_ATK * Source.Ranged_Mult
 			3:
@@ -245,8 +256,8 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 			var calcs = calc_damage(Ability.damage_type,amount,hitcrit[1],Ability.element)
 			amount = calcs[0]
 			amount_negated = calcs[1]
-			$Sprite2D/HP_module._take_damage(amount)
-			HP_Current = $Sprite2D/HP_module.hp
+			HP_Module._take_damage(amount)
+			HP_Current = HP_Module.hp
 			target_unit.combattext(str("After: ",HP_Current))
 			print("After: ",HP_Current)
 			in_combat = true
@@ -254,21 +265,21 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 			var calcs = calc_healing(amount,hitcrit[1],Ability.element)
 			amount = -1*calcs[0]
 			amount_negated = calcs[1]
-			$Sprite2D/HP_module._take_damage(amount)
+			HP_Module._take_damage(amount)
 		
 		if Ability.creates_shield: # and ! has_shield ##Shields overwrite other shields, probably plays better
-			$Sprite2D/HP_module.gain_shield(Ability,Source)
+			HP_Module.gain_shield(Ability,Source)
+			print("MAKES SHIELD")
 		
 		if Ability.inflict_status.size() > 0:
-			for s_e in Ability.inflict_status:
-				if ! s_e.can_stack:
-					if ! $StatusEffects.has_stack(s_e.effect_name):
-						var s_e_i = StatusEffect_instance.instantiate()
-						s_e_i.source_unit = Source
-						$StatusEffects.add_child(s_e_i)
-				var s_e_i = StatusEffect_instance.instantiate()
-				s_e_i.source_unit = Source
-				$StatusEffects.add_child(s_e_i)
+			for s_effect in Ability.inflict_status:
+				if ! $StatusEffects.has_stack(s_effect.effect_name):
+					var s_instance = StatusEffect_instance.instantiate()
+					s_instance.source_unit = Source
+					s_instance.StatusData = s_effect
+					$StatusEffects.add_child(s_instance)
+				elif s_effect.can_stack:
+					$StatusEffects.add_stack(s_effect.effect_name)
 	else:
 		target_unit.combattext(str("MISS!"))
 		print("MISS!")
@@ -550,6 +561,7 @@ func check_move_input():
 	pass
 
 func _move(dir:Vector2):
+	$Sprite2D/pointer.look_at(self.global_position+(dir*Vector2(32,32)))
 	last_tile = self_coords
 	global_position += dir*tile_size
 	get_self_coords()
@@ -571,6 +583,7 @@ func _move(dir:Vector2):
 
 func _select_direction(dir:Vector2):
 	facing = Vector2i(dir)
+	$Sprite2D/pointer.look_at(self.global_position+(dir*Vector2(32,32)))
 	return facing
 
 func action_used():
@@ -599,31 +612,47 @@ func action_used():
 
 func init(is_player_controlled):
 	#print(self," INITIALIZED")
-	
+	HP_Module = $Sprite2D/HP_module
 	#print("unit ", self.name, " INITIALIZED")
 	
 	if is_player_controlled:
 		Team = Teams.PLAYER
-
+		
 		UnitStats = PlayerStats.p1_class
 		$Abilities.Slot_1 = PlayerStats.p1_equipped_abilities[0]
 		$Abilities.Slot_2 = PlayerStats.p1_equipped_abilities[1]
-		$Abilities.Slot_3 = PlayerStats.p1_equipped_abilities[2]
-		$Abilities.Slot_4 = PlayerStats.p1_equipped_abilities[3]
+		$Abilities.Slot_3 = PlayerStats.p1_equipped_abilities[0] #testing
+		$Abilities.Slot_4 = PlayerStats.p1_equipped_abilities[1] #testing
+		$Sprite2D/Button1.visible = true
+		$Sprite2D/Button2.visible = true
+		$Sprite2D/Button1.icon = $Abilities.Slot_1.vfx
+		$Sprite2D/Button1.text = str("1: ",$Abilities.Slot_1.ability_name)
+		$Sprite2D/Button2.icon = $Abilities.Slot_2.vfx
+		$Sprite2D/Button2.text = str("2: ",$Abilities.Slot_2.ability_name)
 		set_stats()
 		$Sprite2D.texture = UnitStats.Sprite
 		$Abilities.init()
-		$Sprite2D/HP_module.hp = HP_Max
-		$Sprite2D/HP_module.maxhp = HP_Max
+		print("floornum ", DungeonData.current_floor)
+		if DungeonData.current_floor > 1:
+			HP_Current = PlayerStats.p1_HP
+			HP_Module.hp = HP_Current
+			HP_Module.maxhp = HP_Max
+			print("currentHP: ",HP_Current," maxHP",HP_Max)
+			await get_tree().create_timer(0.15).timeout
+			HP_Module.new_level_refresh(HP_Current,HP_Max)
+		else:
+			HP_Module.hp = HP_Max
+			HP_Module.maxhp = HP_Max
 	else: #FIX THIS LATER TO ACCOUNT FOR NPC AND ALLY UNITS
 		$Label.visible = false
 		Team = Teams.ENEMY
 		$Abilities.init()
-		$Sprite2D/HP_module.hp = HP_Max
-		$Sprite2D/HP_module.maxhp = HP_Max
+		HP_Module.hp = HP_Max
+		HP_Module.maxhp = HP_Max
 		$Sprite2D.texture = UnitStats.Sprite
 	target_unit = get_tree().get_first_node_in_group("Player")
 	dialogue_manager_ref = get_tree().get_first_node_in_group("DIALOGUE_MANAGER")
+	
 
 	#position = position.snapped(Vector2.ONE * tile_size)
 	#position += Vector2.ONE * tile_size/2
@@ -634,7 +663,7 @@ func set_spawn(spawnpoint):
 	position = grid_to_pos(spawnpoint,Vector2(0,0))[1] #the [1] gtes just the grid position
 
 
-
+@onready var HP_Module = $Sprite2D/HP_module
 
 func _ready():
 
@@ -643,18 +672,45 @@ func _ready():
 #######################################
 #DEATH CODE
 #######################################
+signal player_died
+
+var goldscene = preload("res://Objects/Items/GroundItem.tscn")
 
 func _on_death():
 	if Team == Teams.ENEMY:
+		if UnitStats.UnitName != "MiniBoss":
+			var gold = goldscene.instantiate()
+			gold.global_position = self.global_position
+			$"../../../GroundItem_Manager".add_child(gold)
+			$"../../../GroundItem_Manager".get_child(-1)._init()
+			queue_free()
+		else:
+			await get_tree().create_timer(2).timeout
+			self.process_mode = Node.PROCESS_MODE_ALWAYS
+			var unit_manager_ref = get_tree().get_first_node_in_group("UNIT_MANAGER")
+			unit_manager_ref.player_dead = true
+			unit_manager_ref.get_child(1).player_dead = true
+			await $"../../../CanvasLayer/DialogueSystemBase".action_complete
+			get_tree().paused = true
+			get_tree().change_scene_to_file("res://Scenes/StaticLevels/HubScene_Playtesting.tscn")
 		#Award EXP
 		#Roll Dropchance --- random pool
 		#Roll Dropchance --- equipped gear
 		pass
 	else:
+		#emit_signal("player_died")
+		self.process_mode = Node.PROCESS_MODE_ALWAYS
+		var unit_manager_ref = get_tree().get_first_node_in_group("UNIT_MANAGER")
+		unit_manager_ref.player_dead = true
+		unit_manager_ref.get_child(1).player_dead = true
+		await $"../../../CanvasLayer/DialogueSystemBase".action_complete
+		get_tree().paused = true
+		get_tree().change_scene_to_file("res://Scenes/StaticLevels/HubScene_Playtesting.tscn")
+		#await get_tree().create_timer(2).timeout
 		pass
 	#Play Death ANIMATION
-	#
-	queue_free()
+	
+	#queue_free()
 
 
 #######################################
@@ -698,11 +754,11 @@ var target_unit:Unit_Instance
 var path:Array[Vector2i] = []
 
 func AI_turn_enemy():
-	print("################# enemy AI turn start ####################")
+	#print("################# enemy AI turn start ####################")
 	if in_combat:
-		print("enemy AI is in combat")
+		#print("enemy AI is in combat")
 		#target_unit = get_tree().get_first_node_in_group("Player")
-		print("self: ",self_coords," player: ",target_unit.self_coords)
+		#print("self: ",self_coords," player: ",target_unit.self_coords)
 		facing = Vector2i(clampi(self_coords.x - target_unit.self_coords.x,-1,1),clampi(self_coords.y - target_unit.self_coords.y,-1,1))
 		facing *= -1
 		goal_tile = target_unit.self_coords
@@ -714,7 +770,7 @@ func AI_turn_enemy():
 				#	Vector2i.DOWN,Vector2i.DOWN+Vector2i.LEFT,Vector2i.LEFT,Vector2i.UP+Vector2i.LEFT])
 				#print(Global.dir8)
 				#print("non-coll: ",non_coll, " facing: ",facing)
-				print("has facing")
+				#print("has facing")
 				_move(facing)
 			elif non_coll.size() <= 0:
 				print("AI unit is surrounded, can't move")
@@ -722,12 +778,14 @@ func AI_turn_enemy():
 			else:
 				var new_dir = non_coll.pick_random()
 				facing = new_dir
+				$Sprite2D/pointer.look_at(self.global_position+(Vector2(facing)*Vector2(32,32)))
 				_move(facing)
 			action_used()
 			pass
 		else:
+			$Sprite2D/pointer.look_at(self.global_position+(Vector2(facing)*Vector2(32,32)))
 			#choose_ability() ##score abilities for viability, choose 1, use it.
-			print("AI attacks")
+			#print("AI attacks")
 			connect_dialogue()
 			emit_signal("attack_start",$Abilities.BasicAttack,self)
 			action_used()
@@ -757,6 +815,7 @@ func path_random_tile():
 		if valid.has(target_tile):
 			facing = target_tile - Vector2i(self_coords)
 			break
+	$Sprite2D/pointer.look_at(self.global_position+(Vector2(facing)*Vector2(32,32)))
 	_move(facing)
 
 
@@ -777,6 +836,8 @@ func reset_turn():
 func end_turn():
 	has_taken_turn = true
 	#cleartext()
+	if Team == Teams.PLAYER:
+		print("PLAYER END TURN SVBNEROMERPVOM")
 	emit_signal("turn_complete")
 
 func cleartext():
@@ -789,4 +850,5 @@ signal waiting_on_dialogue
 func connect_dialogue():
 	print("connecting to dialogue")
 	waiting_for_dialogue = true
-	dialogue_manager_ref.connect_to_unit(self)
+	if self != null:
+		dialogue_manager_ref.connect_to_unit(self)

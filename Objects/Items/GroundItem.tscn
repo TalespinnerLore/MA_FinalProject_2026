@@ -1,16 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://dxak4lcj7n2l1"]
 
-[ext_resource type="Texture2D" uid="uid://kecoy3onkl54" path="res://Art/VFX Sprites/Flare00_pxl.png" id="1_ty1ig"]
+[ext_resource type="Texture2D" uid="uid://bg6vju54amv13" path="res://Art/2D_images/temp_hp_pot.png" id="1_vv6n8"]
 [ext_resource type="Script" path="res://Objects/Items/ground_item.gd" id="2_o0egd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsj26"]
 size = Vector2(8, 8)
 
 [node name="GroundItem" type="Sprite2D"]
-texture = ExtResource("1_ty1ig")
+texture = ExtResource("1_vv6n8")
 script = ExtResource("2_o0egd")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_bsj26")

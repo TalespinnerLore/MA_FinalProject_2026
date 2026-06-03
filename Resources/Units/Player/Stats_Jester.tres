@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=4 format=3 uid="uid://ctebyg43v4gie"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=5 format=3 uid="uid://ctebyg43v4gie"]
 
 [ext_resource type="Resource" uid="uid://d02ns3e6v636q" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres" id="1_1voga"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_nerkr"]
 [ext_resource type="Texture2D" uid="uid://ccysrrr4x4jfo" path="res://Art/UnitSprites/BasicCharacter_jester.png" id="2_ohgv2"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="4_imt58"]
 
 [resource]
 script = ExtResource("1_nerkr")
 Sprite = ExtResource("2_ohgv2")
 BasicAttack = ExtResource("1_1voga")
 UnitName = "Jester"
+unit_specific_drops = Array[ExtResource("4_imt58")]([])
 STR_up = 0
 DEX_up = 0
 VIT_up = 0

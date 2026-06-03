@@ -24,6 +24,11 @@ var current_group_index: int = -1
 var previous_group_index: int = -1
 var turn_counter = 0
 
+var player_dead = false
+var monster_house = false
+
+@export var temp_miniboss:StatComponent
+
 @export var Active_Units:Array[Unit_Instance]
 @export var nav_manager_ref:NavigationManager
 @export var dialogue_manager_ref:DialogueManager
@@ -42,6 +47,14 @@ func init() -> void:
 		child.AbilityUsed.connect(_process_ability)
 		child.group_turn_completed.connect(_on_turn_complete)
 		#child.defeated.connect(_on_group_defeated)
+	if monster_house:
+		monster_house = false
+		if DungeonData.current_floor == DungeonData.max_floors:
+			pass
+		else:
+			for i in range(DungeonData.max_wandering_units):
+				spawn_unit(all_groups[1])
+	
 	_step_turn()
 
 func _ready():
@@ -61,7 +74,7 @@ func spawn_unit(group:Unit_Group):
 		if rare_chance > 0.95:
 			new_unit.UnitStats = DungeonData.Rare_Enemies.pick_random()
 		else:
-			print(DungeonData.Common_Enemies)
+			#print(DungeonData.Common_Enemies)
 			new_unit.UnitStats = DungeonData.Common_Enemies.pick_random()
 #		print("Basicattack", new_unit.UnitStats)
 		var placing = false
@@ -83,24 +96,24 @@ func spawn_unit(group:Unit_Group):
 ########## TURNS ##########
 
 func _step_turn() -> void:
-	
-	var holding_variable = 0
-	holding_variable = current_group_index
-	current_group_index = wrapi(current_group_index + 1, 0, all_groups.size())
-#	print("group index: ",current_group_index)
-	previous_group_index = holding_variable
-	current_group = all_groups[current_group_index]
-#	print("group: ",current_group)
-	if current_group.get_active_units().size() <= 0:
-		print("empty group, skip")
-		#SPAWN ENEMY IF NOT PLAYER_CONTROLLED, ELSE, STOP FUNCTION
-		_step_turn()
-		return
-		#print("breaks here")
-	if current_group_index == previous_group_index:
-		push_error('Only one group found')
-	#	break
-	_begin_turn()
+	if ! player_dead:
+		var holding_variable = 0
+		holding_variable = current_group_index
+		current_group_index = wrapi(current_group_index + 1, 0, all_groups.size())
+	#	print("group index: ",current_group_index)
+		previous_group_index = holding_variable
+		current_group = all_groups[current_group_index]
+	#	print("group: ",current_group)
+		if current_group.get_active_units().size() <= 0:
+			print("empty group, skip")
+			#SPAWN ENEMY IF NOT PLAYER_CONTROLLED, ELSE, STOP FUNCTION
+			_step_turn()
+			return
+			#print("breaks here")
+		if current_group_index == previous_group_index:
+			push_error('Only one group found')
+		#	break
+		_begin_turn()
 
 func _begin_turn() -> void:
 	turn_counter += 1
@@ -130,7 +143,7 @@ func _process_ability(Ability:AbilityData,Source):
 	print(Source.UnitStats.UnitName," uses ",Ability.ability_name,"!")
 	dialogue_manager_ref.show_unit_using_ability(Source.UnitStats.UnitName,Ability.ability_name)
 	var hit_tiles = calc_hit_tiles(Ability.targeting,Ability.range+Source.Range_Boost,Source.facing,Source.self_coords)
-	#print(hit_tiles)
+	#print("HITTILES",hit_tiles)
 	var units_to_check:Array[Unit_Instance]
 	var does_pierce = false
 	var hits_nothing = true
@@ -187,7 +200,7 @@ func _process_ability(Ability:AbilityData,Source):
 @onready var tilegrid = $"../TileMapLayer"########GET REFERENCE TO GRID
 
 func calc_hit_tiles(targeting:int, range:int, facing:Vector2i, source_coord:Vector2i):
-	var targettypes = ["Front", "Line", "Cone", "Circle", "Specify"]
+	var targettypes = ["Front", "Line", "Cone", "Circle", "Self"]
 	var target = targettypes[targeting]
 	#print("Targeting: ",target,"Range: ",range,"Facing: ",facing,"SourceCoord",source_coord)
 	var relative_tiles = []
@@ -238,7 +251,8 @@ func calc_hit_tiles(targeting:int, range:int, facing:Vector2i, source_coord:Vect
 			relative_tiles.erase(source_coord)
 			pass
 		"Self":
-			relative_tiles.append[Vector2i(0,0)]
+			print("SELF TARGET")
+			relative_tiles.append(Vector2i(0,0))
 			pass
 	#print("Sourcecoord: ",source_coord,"relative tiles: ",relative_tiles)
 	var real_tiles = []

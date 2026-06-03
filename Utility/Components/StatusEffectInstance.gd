@@ -5,22 +5,32 @@ enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_R
 enum ElementType {FIRE,WATER,EARTH,AIR,FORCE,LIGHT,DARK}
 
 const Ability_vfx = preload("res://Objects/AbilityVFX.tscn")
-@onready var owning_unit = self.get_parent().get_parent() #will be in status effect container node
-var source_unit:Unit_Instance
+@onready var owning_unit:Unit_Instance = self.get_parent().get_parent() #will be in status effect container node
+@export var source_unit:Unit_Instance
+@onready var manager:StatusEffectManager = get_parent()
+
+var stack_amount = 1
 
 var turns_left:int = 0
-var effect_name = StatusData.effect_name
-var is_negative = StatusData.is_negative
-var base_damage = StatusData.base_damage
-var damage_type = StatusData.DamageType
-var element = StatusData.element
+var effect_name:String #StatusData.effect_name
+var is_negative:bool #StatusData.is_negative
+var base_damage:int #StatusData.base_damage
+var damage_type:StatusEffectData.DamageType #StatusData.DamageType
+var element:StatusEffectData.ElementType
 var crit = false
 var multiplier = 1.0
 
 var affecting_value = 0.0
 
 func _ready() -> void:
-	multiplier = source_unit.Heal_Buff_Multiplier
+	turns_left = StatusData.turn_duration
+	effect_name = StatusData.effect_name
+	is_negative = StatusData.is_negative
+	base_damage = StatusData.base_damage
+	damage_type = StatusData.damage_type
+	element = StatusData.element
+	multiplier = source_unit.Heal_Buff_Mult
+	
 	match StatusData.stat_multiplier:
 		StatusData.mult_stat.STR:
 			multiplier += (source_unit.STR+source_unit.STR_boost)*0.01
@@ -34,36 +44,47 @@ func _ready() -> void:
 			multiplier += (source_unit.MAG+source_unit.MAG_boost)*0.01
 		StatusData.mult_stat.LUK:
 			multiplier += (source_unit.LUK+source_unit.LUK_boost)*0.01
-	turns_left = StatusData.turn_duration
-	effect_name = StatusData.effect_name
+	
 	owning_unit.turn_complete.connect(end_turn) #make end turn triggers happen on end_turn signal from attached unit.
 	owning_unit.turn_start.connect(start_turn) #same as above, but fot turn start
 	owning_unit.damaged.connect(on_get_hit)
 	owning_unit.hit_other_unit.connect(on_hitting)
 	on_gain()
 
+#func change_stack(num:int):
+#	stack_amount+=num
+	
+
 func apply_damage():
-	owning_unit.calc_damage(damage_type,base_damage,crit,element)
+	var calcs = owning_unit.calc_damage(damage_type,int(base_damage*multiplier*stack_amount),crit,element)
+	var pre = owning_unit.HP_Module.hp
+	owning_unit.HP_Module._take_damage(calcs[0]) 
+	var post = owning_unit.HP_Module.hp
+	print("HP Before and After: ",pre," ",post," Turns remaining:",turns_left)
 
 func apply_healing():
-	owning_unit.calc_healing(base_damage,crit,element)
+	owning_unit.calc_healing(int(base_damage*multiplier*stack_amount),crit,element)
 	
 func spawn_vfx():
+	print("SPAWIN VFX = ",effect_name)
 	var vfx = Ability_vfx.instantiate()
 	vfx.texture = StatusData.vfx
 	vfx.position = owning_unit.position
-	$"../VFX".add_child(vfx)
+	var vfx_container = get_tree().get_first_node_in_group("VFX_container") 
+	vfx_container.add_child(vfx)
 
 func periodic_effect():
 	spawn_vfx()
+	print("PERIODIC===EFFECT")
 	match effect_name:
 		'[DEFAULT]':
 			print("How the hecka are you seeing this? Bug report this.")
 			pass
 		'Burning':
 			apply_damage()
-		'Poison':
+		'Poisoned':
 			apply_damage()
+			print("Poison perdiodic effect applied")
 		'Regeneration':
 			apply_healing()
 		'Stunned': #50% chance / multiplier to skip a stunned unit's turn
@@ -75,6 +96,7 @@ func periodic_effect():
 				queue_free()
 
 func on_gain():
+	owning_unit.HP_Module.add_status_icon(StatusData)
 	if is_negative:
 		print(owning_unit," was ",effect_name,"!")
 	else:
@@ -106,6 +128,11 @@ func on_gain():
 	#######################################
 	if StatusData.trigger_periodic_on_gain:
 		periodic_effect()
+	var index = -1
+	for se in manager.get_children():
+		index+=1
+		print("index:",index," ",se.effect_name," can_stack: ",se.StatusData.can_stack)
+
 
 func on_timeout():
 	match effect_name:
@@ -130,6 +157,15 @@ func on_timeout():
 	#############################################################
 	if StatusData.periodic_effect_trigger == trigger.EFFECT_LOST:
 		periodic_effect()
+	owning_unit.HP_Module.remove_status_icon(StatusData)
+	
+	owning_unit.turn_complete.disconnect(end_turn) #make end turn triggers happen on end_turn signal from attached unit.
+	owning_unit.turn_start.disconnect(start_turn) #same as above, but fot turn start
+	owning_unit.damaged.disconnect(on_get_hit)
+	owning_unit.hit_other_unit.disconnect(on_hitting)
+	
+	manager.lose_effect_dialogue(StatusData)
+	
 
 
 func on_get_hit():
@@ -145,12 +181,13 @@ func start_turn():
 		periodic_effect()
 
 func end_turn():
+	turns_left -= 1
+	print("if this is zero, this should delete now: ",turns_left)
 	if StatusData.has_periodic_effect and StatusData.periodic_effect_trigger == trigger.TURN_END:
 		periodic_effect()
-	
-	turns_left -= 1
+		
 	if turns_left <= 0:
-		on_timeout()
+		on_timeout() #await 
 		queue_free()
 	
 

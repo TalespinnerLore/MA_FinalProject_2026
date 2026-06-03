@@ -1,4 +1,5 @@
 extends Node
+class_name unit_equipped_abilities
 
 @export var BasicAttack:AbilityData= load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")
 

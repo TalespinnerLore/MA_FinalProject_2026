@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_1q2fq"]
 [ext_resource type="Resource" uid="uid://dygpdjty37286" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres" id="1_icnkg"]
-[ext_resource type="Texture2D" uid="uid://iuxuthmy31rr" path="res://Art/UnitSprites/BasicCharacter_enemy.png" id="2_2a6y6"]
+[ext_resource type="Texture2D" uid="uid://d16ekei1j7qu8" path="res://Art/UnitSprites/BasicCharacter_enemymage.png" id="2_00mq1"]
 
 [resource]
 script = ExtResource("1_1q2fq")
-Sprite = ExtResource("2_2a6y6")
+Sprite = ExtResource("2_00mq1")
 BasicAttack = ExtResource("1_icnkg")
 UnitName = "MageEnemy"
 STR_up = 1
@@ -16,7 +16,7 @@ MAG_up = 3
 DEF_up = 1
 LUK_up = 0
 Free_Stats = 0
-Base_HP = 10
+Base_HP = 11
 STR = 1
 DEX = 3
 VIT = 2

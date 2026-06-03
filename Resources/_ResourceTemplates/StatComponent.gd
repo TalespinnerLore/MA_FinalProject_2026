@@ -6,6 +6,9 @@ extends Resource
 @export var BasicAttack:AbilityData
 @export var UnitName:String
 
+#@export var drop_held_equipment := false
+@export var unit_specific_drops:Array[ItemData]
+
 @export_category('Level-Up Stats')
 @export var STR_up:int = 0
 @export var DEX_up:int = 0

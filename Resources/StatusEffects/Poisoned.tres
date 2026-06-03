@@ -1,20 +1,22 @@
-[gd_resource type="Resource" script_class="StatusEffectData" load_steps=3 format=3 uid="uid://v7gy1dfehh8o"]
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=4 format=3 uid="uid://v7gy1dfehh8o"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_43mg8"]
-[ext_resource type="Texture2D" uid="uid://kecoy3onkl54" path="res://Art/VFX Sprites/Flare00_pxl.png" id="2_bo5g0"]
+[ext_resource type="Texture2D" uid="uid://bp1yfwy4yqnpq" path="res://Art/UnitUI/statuseffect_n_poisoned.png" id="1_cmqqk"]
+[ext_resource type="Texture2D" uid="uid://jg5fc0geer0a" path="res://Art/VFX Sprites/vfx_dark.png" id="3_q3htd"]
 
 [resource]
 script = ExtResource("1_43mg8")
-vfx = ExtResource("2_bo5g0")
-effect_name = "Poison"
+icon = ExtResource("1_cmqqk")
+vfx = ExtResource("3_q3htd")
+effect_name = "Poisoned"
 is_negative = true
-turn_duration = 3
+turn_duration = 2
 has_periodic_effect = true
 trigger_periodic_on_gain = true
 trigger_effect_on_timeout = false
 periodic_effect_trigger = 1
 element = 6
 damage_type = 6
-base_damage = 5
+base_damage = 3
 can_stack = false
 stat_multiplier = 1

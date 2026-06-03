@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dp6qyj1ggegbu"]
+[gd_scene load_steps=5 format=3 uid="uid://dp6qyj1ggegbu"]
 
 [ext_resource type="Script" path="res://Utility/Components/HP_module.gd" id="1_xqi16"]
 [ext_resource type="FontFile" uid="uid://bme72xoxft30d" path="res://Art/Tiny5-Regular.ttf" id="2_mfqbq"]
 [ext_resource type="Texture2D" uid="uid://cwxksh0qnuw5s" path="res://Art/2D_images/BasicCharacter_shieldbar.png" id="3_h0lv4"]
 [ext_resource type="Texture2D" uid="uid://dcplcxb71odtk" path="res://Art/2D_images/BasicCharacter_healthbar_2.png" id="3_lo4il"]
-[ext_resource type="Texture2D" uid="uid://dn51ssv6ypx8" path="res://Art/UnitUI/statuseffect_n_burned.png" id="5_3fkgk"]
-[ext_resource type="Texture2D" uid="uid://bp1yfwy4yqnpq" path="res://Art/UnitUI/statuseffect_n_poisoned.png" id="6_npug0"]
-[ext_resource type="Texture2D" uid="uid://bb6idmlcfgdjg" path="res://Art/UnitUI/statuseffect_p_regen.png" id="7_ev4nh"]
 
 [node name="HP_module" type="Node2D"]
 script = ExtResource("1_xqi16")
@@ -120,18 +117,3 @@ size_flags_vertical = 4
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 3
-
-[node name="TextureRect" type="TextureRect" parent="GridContainer_StatusEffects"]
-layout_mode = 2
-texture = ExtResource("5_3fkgk")
-stretch_mode = 2
-
-[node name="TextureRect2" type="TextureRect" parent="GridContainer_StatusEffects"]
-layout_mode = 2
-texture = ExtResource("6_npug0")
-stretch_mode = 2
-
-[node name="TextureRect3" type="TextureRect" parent="GridContainer_StatusEffects"]
-layout_mode = 2
-texture = ExtResource("7_ev4nh")
-stretch_mode = 2

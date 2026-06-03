@@ -69,7 +69,25 @@ var level_size:=Vector2i(30,30)
 
 var max_wandering_units := 10
 
+var max_floors: = 3
+var current_floor: = 0
+var monster_house_count: = 1
+
+var gold_chance = 1.0
+var pot_chance = 1.0
+var item_mult = 1.0
+
+var minibossdata:StatComponent = preload("res://Resources/Units/Enemy/MiniBoss.tres")
+
 func open_level():
+	if current_floor == 1:
+		monster_house_count = Special_Features[1][1]
+	current_floor += 1
+	
+	if current_floor == max_floors:
+		monster_house_count = 1
+		max_wandering_units = 1
+
 	floor_biome = biomes[choose_biome()]
 	var biome_mods = floor_biome.get_DG_Mods()
 	Common_Enemies = floor_biome.Common_Enemies
@@ -124,11 +142,25 @@ func open_level():
 		var max_size = 15
 		var min_size = 5
 	
+	gold_chance += (0.25*Loot[0][1])
+	pot_chance += (0.25*Loot[2][1])
+	item_mult += (0.05*Loot[1][1])
+	
 	get_tree().change_scene_to_file("res://Scenes/DungeonGen/DungeonSceneStructure.tscn")
 	pass	
+
+
 func dungeon_gen_testing():
 	floor_biome = biomes[choose_biome()]
 	var biome_mods = floor_biome.get_DG_Mods()
 	Common_Enemies = floor_biome.Common_Enemies
 	Rare_Enemies = floor_biome.Rare_Enemies
 	max_wandering_units = ((level_size.x + level_size.y) / 10) - 1
+	
+	if current_floor == max_floors:
+		monster_house_count = 1
+		max_wandering_units = 1
+		Common_Enemies.clear()
+		Rare_Enemies.clear()
+		Common_Enemies.append(load("res://Resources/Units/Enemy/MiniBoss.tres"))
+		Rare_Enemies.append(load("res://Resources/Units/Enemy/MiniBoss.tres"))
