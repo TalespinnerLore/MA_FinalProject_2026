@@ -6,8 +6,9 @@ enum ITEM_TYPE {GOLD,TILE,CONSUMABLE,GEAR,LOCKBOX,KEY_ITEM}
 enum CLASS {NONE,VANGUARD,WARRIOR,MAGE,ROGUE,HEALER,JESTER}
 
 enum GEAR_TYPE {N_A,ARMOUR,WEAPON,TRINKET}
-enum CONS_TYPE {N_A,EDIBLE,KEY,OTHER}
+enum CONS_TYPE {N_A,EDIBLE,THROWING,KEY,OTHER}
 
+@export var ItemName := ''
 @export var max_stack:= 1
 @export var icon:Texture2D
 @export var ITEM_ID:int

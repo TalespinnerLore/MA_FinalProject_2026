@@ -1,9 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://whnmxcba77ab"]
+[gd_scene load_steps=14 format=4 uid="uid://whnmxcba77ab"]
 
 [ext_resource type="Texture2D" uid="uid://ctthoe2yrl0mu" path="res://Art/UI_Art/modifier2_base.png" id="1_4xh3b"]
+[ext_resource type="Script" path="res://UI/Menus/player_inventory_ui.gd" id="1_8rh85"]
 [ext_resource type="Texture2D" uid="uid://yx0sw1cij6ne" path="res://Art/UI_Art/modifier2.png" id="2_2pdsj"]
 [ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="3_o7siq"]
 [ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="4_bv3il"]
+[ext_resource type="TileSet" uid="uid://ty37cym0krxg" path="res://Crafting/tower_crafting_ui.tres" id="4_kekg7"]
+[ext_resource type="Texture2D" uid="uid://wrmygyrayqm7" path="res://Art/UI_Art/modifier1.png" id="4_p7woc"]
+[ext_resource type="Texture2D" uid="uid://c7f2l6gudwhlw" path="res://Art/2D_images/gold_counter.png" id="5_rvrpf"]
+[ext_resource type="Texture2D" uid="uid://bb6idmlcfgdjg" path="res://Art/UnitUI/statuseffect_p_regen.png" id="5_vn4jy"]
+[ext_resource type="Texture2D" uid="uid://d26g6cgvhcqaf" path="res://Art/UI_Art/arrow_tile_left.png" id="8_e2e37"]
+[ext_resource type="Texture2D" uid="uid://b4i6a72h02ho" path="res://Art/UI_Art/arrow_tile_right.png" id="9_74j63"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h0eiw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uat17"]
+texture = ExtResource("4_p7woc")
+texture_margin_left = 3.0
+texture_margin_top = 1.0
+texture_margin_right = 3.0
+texture_margin_bottom = 1.0
+region_rect = Rect2(0, 0, 48, 24)
 
 [node name="PlayerInventory_UI" type="Control"]
 layout_mode = 3
@@ -12,8 +29,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_8rh85")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="BackgroundTexture_9PR" type="NinePatchRect" parent="."]
 layout_mode = 0
 offset_left = 88.0
 offset_top = 64.0
@@ -25,7 +43,7 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+[node name="InventoryBox" type="NinePatchRect" parent="."]
 layout_mode = 0
 offset_left = 96.0
 offset_top = 72.0
@@ -37,18 +55,320 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="Label" type="Label" parent="NinePatchRect2"]
+[node name="ItemContainer" type="VBoxContainer" parent="InventoryBox"]
 layout_mode = 0
-offset_right = 192.0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 184.0
+offset_bottom = 200.0
+theme_override_constants/separation = 5
+
+[node name="Button" type="Button" parent="InventoryBox/ItemContainer"]
+material = SubResource("CanvasItemMaterial_h0eiw")
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
+text = "Health Potion"
+icon = ExtResource("5_vn4jy")
+
+[node name="Label" type="Label" parent="InventoryBox/ItemContainer/Button"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 168.0
+offset_bottom = 13.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[5/5]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="InventoryBox/ItemContainer"]
+material = SubResource("CanvasItemMaterial_h0eiw")
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
+text = "Health Potion"
+icon = ExtResource("5_vn4jy")
+
+[node name="Label" type="Label" parent="InventoryBox/ItemContainer/Button2"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 168.0
+offset_bottom = 13.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[5/5]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button3" type="Button" parent="InventoryBox/ItemContainer"]
+material = SubResource("CanvasItemMaterial_h0eiw")
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
+text = "Health Potion"
+icon = ExtResource("5_vn4jy")
+
+[node name="Label" type="Label" parent="InventoryBox/ItemContainer/Button3"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 168.0
+offset_bottom = 13.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[5/5]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button4" type="Button" parent="InventoryBox/ItemContainer"]
+material = SubResource("CanvasItemMaterial_h0eiw")
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
+text = "Health Potion"
+icon = ExtResource("5_vn4jy")
+
+[node name="Label" type="Label" parent="InventoryBox/ItemContainer/Button4"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 168.0
+offset_bottom = 13.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[5/5]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button5" type="Button" parent="InventoryBox/ItemContainer"]
+material = SubResource("CanvasItemMaterial_h0eiw")
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
+text = "Health Potion"
+icon = ExtResource("5_vn4jy")
+
+[node name="Label" type="Label" parent="InventoryBox/ItemContainer/Button5"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 168.0
+offset_bottom = 13.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[5/5]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button6" type="Button" parent="InventoryBox/ItemContainer"]
+material = SubResource("CanvasItemMaterial_h0eiw")
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
+text = "Health Potion"
+icon = ExtResource("5_vn4jy")
+
+[node name="Label" type="Label" parent="InventoryBox/ItemContainer/Button6"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 168.0
+offset_bottom = 13.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[5/5]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button7" type="Button" parent="InventoryBox/ItemContainer"]
+material = SubResource("CanvasItemMaterial_h0eiw")
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
+text = "Health Potion"
+icon = ExtResource("5_vn4jy")
+
+[node name="Label" type="Label" parent="InventoryBox/ItemContainer/Button7"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 168.0
+offset_bottom = 13.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[5/5]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button8" type="Button" parent="InventoryBox/ItemContainer"]
+material = SubResource("CanvasItemMaterial_h0eiw")
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
+text = "Health Potion"
+icon = ExtResource("5_vn4jy")
+
+[node name="Label" type="Label" parent="InventoryBox/ItemContainer/Button8"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 168.0
+offset_bottom = 13.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[5/5]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button9" type="Button" parent="InventoryBox/ItemContainer"]
+material = SubResource("CanvasItemMaterial_h0eiw")
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
+text = "Health Potion"
+icon = ExtResource("5_vn4jy")
+
+[node name="Label" type="Label" parent="InventoryBox/ItemContainer/Button9"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 168.0
+offset_bottom = 13.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[5/5]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button10" type="Button" parent="InventoryBox/ItemContainer"]
+material = SubResource("CanvasItemMaterial_h0eiw")
+layout_mode = 2
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
+text = "Health Potion"
+icon = ExtResource("5_vn4jy")
+
+[node name="Label" type="Label" parent="InventoryBox/ItemContainer/Button10"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 168.0
+offset_bottom = 13.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[5/5]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TileMapLayer" type="TileMapLayer" parent="InventoryBox"]
+visible = false
+position = Vector2(16, 0)
+tile_map_data = PackedByteArray("AAAAAAEAAgABAAAAAAABAAEAAgACAAAAAAACAAEAAgAAAAEAAAADAAEAAgABAAEAAAAEAAEAAgACAAEAAAAAAAIAAgAAAAIAAAABAAIAAgABAAIAAAACAAIAAgACAAIAAAADAAIAAgAAAAMAAAAEAAIAAgABAAMAAAAAAAMAAgACAAMAAAABAAMAAgAAAAQAAAACAAMAAgABAAQAAAADAAMAAgACAAQAAAAEAAMAAgAAAAUAAAAAAAQAAgABAAUAAAABAAQAAgACAAUAAAA=")
+tile_set = ExtResource("4_kekg7")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="InventoryBox"]
+visible = false
+position = Vector2(16, 0)
+tile_map_data = PackedByteArray("AAADAAkAAgAAAAoAAAADAAoAAgAAAAoAAAADAAsAAgAAAAoAAAADAAwAAgAAAAoAAAABAAEAAgABAAYAAAACAAEAAgACAAYAAAADAAEAAgAAAAcAAAAAAAEAAgAAAAYAAAAEAAEAAgABAAcAAAABAAIAAgAAAAgAAAACAAIAAgABAAgAAAADAAIAAgACAAgAAAAAAAIAAgACAAcAAAAEAAIAAgAAAAkAAAABAAMAAgACAAkAAAACAAMAAgAAAAoAAAADAAMAAgABAAoAAAAAAAMAAgABAAkAAAAEAAMAAgACAAoAAAABAAQAAgABAAsAAAACAAQAAgACAAsAAAADAAQAAgAAAAwAAAAAAAQAAgAAAAsAAAAEAAQAAgABAAwAAAABAAUAAgAAAA0AAAACAAUAAgABAA0AAAADAAUAAgACAA0AAAAAAAUAAgACAAwAAAA=")
+tile_set = ExtResource("4_kekg7")
+
+[node name="TileMapLayer3" type="TileMapLayer" parent="InventoryBox"]
+visible = false
+position = Vector2(16, 0)
+tile_map_data = PackedByteArray("AAAAAAEAAgAAAA4AAAABAAEAAgABAA4AAAACAAEAAgACAA4AAAADAAEAAgAAAA8AAAAEAAEAAgABAA8AAAAAAAIAAgACAA8AAAABAAIAAgAAABAAAAACAAIAAgABABAAAAADAAIAAgACABAAAAAEAAIAAgAAABEAAAAAAAMAAgABABEAAAABAAMAAgACABEAAAA=")
+tile_set = ExtResource("4_kekg7")
+
+[node name="InventoryLabel" type="Label" parent="InventoryBox"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 193.0
 offset_bottom = 23.0
 theme = ExtResource("3_o7siq")
-theme_override_constants/outline_size = 8
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 16
-text = "INVENTORY [##/##]"
+text = "INVENTORY [100/100] Pg. 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NinePatchRect3" type="NinePatchRect" parent="."]
+[node name="GoldCounter" type="TextureRect" parent="InventoryBox"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 204.0
+offset_right = 112.0
+offset_bottom = 236.0
+texture = ExtResource("5_rvrpf")
+stretch_mode = 3
+
+[node name="GoldAmountLabel" type="Label" parent="InventoryBox/GoldCounter"]
+layout_mode = 0
+offset_right = 33.0
+offset_bottom = 28.0
+theme = ExtResource("3_o7siq")
+theme_override_constants/outline_size = 4
+text = "999999"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="LeftButton" type="TextureButton" parent="InventoryBox"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 204.0
+offset_right = 40.0
+offset_bottom = 236.0
+texture_normal = ExtResource("8_e2e37")
+texture_pressed = ExtResource("8_e2e37")
+texture_hover = ExtResource("8_e2e37")
+texture_disabled = ExtResource("8_e2e37")
+texture_focused = ExtResource("8_e2e37")
+
+[node name="BackLabel" type="Label" parent="InventoryBox/LeftButton"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+theme = ExtResource("3_o7siq")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "T1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightButton" type="TextureButton" parent="InventoryBox"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 204.0
+offset_right = 184.0
+offset_bottom = 236.0
+texture_normal = ExtResource("9_74j63")
+texture_pressed = ExtResource("9_74j63")
+texture_hover = ExtResource("9_74j63")
+texture_disabled = ExtResource("9_74j63")
+texture_focused = ExtResource("9_74j63")
+
+[node name="NextLabel" type="Label" parent="InventoryBox/RightButton"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+theme = ExtResource("3_o7siq")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionBox" type="NinePatchRect" parent="."]
 layout_mode = 0
 offset_left = 289.0
 offset_top = 184.0
@@ -60,7 +380,53 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="ShowItem" type="NinePatchRect" parent="."]
+[node name="DescriptionLabel" type="Label" parent="DescriptionBox"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 151.0
+offset_bottom = 120.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "==================================
+Description goes here.
+1
+2
+3
+4
+5
+6
+==================================
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StatReqLabel" type="Label" parent="DescriptionBox"]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 8.0
+offset_right = 247.0
+offset_bottom = 120.0
+theme = ExtResource("3_o7siq")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "=====================
+Stat Requirements:
+STR - 000
+DEX - 000
+VIT - 000
+MAG - 000
+DEF - 000
+LUK - 000
+=====================
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ShowItemBox" type="NinePatchRect" parent="."]
 layout_mode = 0
 offset_left = 352.0
 offset_top = 72.0
@@ -72,7 +438,7 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="TextureRect" type="TextureRect" parent="ShowItem"]
+[node name="TextureRect" type="TextureRect" parent="ShowItemBox"]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 20.0
@@ -80,7 +446,7 @@ offset_right = 128.0
 offset_bottom = 84.0
 texture = ExtResource("4_bv3il")
 
-[node name="NameLabel" type="Label" parent="ShowItem"]
+[node name="NameLabel" type="Label" parent="ShowItemBox"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 84.0
@@ -93,51 +459,7 @@ text = "ITEM NAME GOES HERE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="ShowItem"]
-layout_mode = 0
-offset_left = -56.0
-offset_top = 120.0
-offset_right = 88.0
-offset_bottom = 232.0
-theme = ExtResource("3_o7siq")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 8
-text = "########################
-Description goes here.
-1
-2
-3
-4
-5
-6
-########################"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="DescriptionLabel2" type="Label" parent="ShowItem"]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 120.0
-offset_right = 184.0
-offset_bottom = 232.0
-theme = ExtResource("3_o7siq")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 8
-text = "##############
-Stat Requirements:
-STR - 000
-DEX - 000
-VIT - 000
-MAG - 000
-DEF - 000
-LUK - 000
-##############"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="Options" type="NinePatchRect" parent="."]
+[node name="OptionsBox" type="NinePatchRect" parent="."]
 layout_mode = 0
 offset_left = 289.0
 offset_top = 72.0
@@ -149,16 +471,14 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsBox"]
 layout_mode = 0
-offset_left = 289.0
-offset_top = 72.0
-offset_right = 352.0
-offset_bottom = 184.0
+offset_right = 63.0
+offset_bottom = 112.0
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="OptionsBox/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_o7siq")
 theme_override_constants/outline_size = 4
@@ -166,7 +486,7 @@ theme_override_font_sizes/font_size = 16
 text = "USE"
 flat = true
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="Button2" type="Button" parent="OptionsBox/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_o7siq")
 theme_override_constants/outline_size = 4
@@ -174,7 +494,7 @@ theme_override_font_sizes/font_size = 16
 text = "GIVE"
 flat = true
 
-[node name="Button3" type="Button" parent="VBoxContainer"]
+[node name="Button3" type="Button" parent="OptionsBox/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_o7siq")
 theme_override_constants/outline_size = 4
@@ -182,10 +502,13 @@ theme_override_font_sizes/font_size = 16
 text = "DROP"
 flat = true
 
-[node name="Button4" type="Button" parent="VBoxContainer"]
+[node name="Button4" type="Button" parent="OptionsBox/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_o7siq")
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 16
 text = "THROW"
 flat = true
+
+[connection signal="pressed" from="InventoryBox/LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="InventoryBox/RightButton" to="." method="_on_right_button_pressed"]

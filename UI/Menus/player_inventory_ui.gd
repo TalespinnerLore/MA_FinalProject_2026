@@ -1,0 +1,132 @@
+extends Control
+class_name PlayerInventoryUI
+
+@export var inv_page = 0
+var inv_page_max_items = 10
+var tile_pages_max = 3
+@export var tile_page = 0
+var inv_content = PlayerStats.player_inventory
+@onready var inv_container = $InventoryBox/ItemContainer
+
+var weapon_icon = preload("res://Art/UI_Art/ui_icon_weapon.png")
+var armour_icon = preload("res://Art/UI_Art/ui_icon_armour.png")
+var trinket_icon = preload("res://Art/UI_Art/ui_icon_trinket.png")
+
+var edible_icon = preload("res://Art/UI_Art/ui_icon_edible.png")
+var throwing_icon = preload("res://Art/UI_Art/ui_icon_other.png")
+var key_icon = preload("res://Art/UI_Art/ui_icon_key.png")
+var other_icon = preload("res://Art/UI_Art/ui_icon_other.png")
+
+var lockbox_icon = preload("res://Art/UI_Art/ui_icon_lockbox.png")
+var key_item_icon = preload("res://Art/UI_Art/ui_icon_keyitem.png")
+
+func _ready() -> void:
+	_on_left_button_pressed()
+	load_item_inventory()
+	
+
+func load_item_inventory():
+	for i in range(0,4):
+		$InventoryBox.get_child(i).visible = false
+	inv_container.visible = true
+	var index = 0
+	for item in inv_container.get_children():
+		if (inv_page*inv_page_max_items)+index > inv_content.size() - 1:
+			item.visible = false
+		else:
+			item.visible = true
+			var data = inv_content[(inv_page*inv_page_max_items)+index][0] #ItemData
+			var stack_count = inv_content[(inv_page*inv_page_max_items)+index][1] #stack_size
+			item.icon = get_item_icon(data)
+			item.text = data.ItemName
+			if data.max_stack > 1:
+				item.get_child(0).visible = true
+				item.get_child(0).text = str("[",stack_count,"/",data.max_stack,"]")
+			else:
+				item.get_child(0).visible = false
+		index+=1
+
+func get_item_icon(data:ItemData):
+	if data.GearType != ItemData.GEAR_TYPE.N_A:
+		match data.GearType:
+			ItemData.GEAR_TYPE.ARMOUR:
+				return weapon_icon
+			ItemData.GEAR_TYPE.WEAPON:
+				return armour_icon
+			ItemData.GEAR_TYPE.TRINKET:
+				return trinket_icon
+	elif data.ConsType != ItemData.CONS_TYPE.N_A:
+		match data.ConsType:
+			ItemData.CONS_TYPE.EDIBLE:
+				return edible_icon
+			ItemData.CONS_TYPE.THROWING:
+				return throwing_icon
+			ItemData.CONS_TYPE.KEY:
+				return key_icon
+			ItemData.CONS_TYPE.OTHER:
+				return other_icon
+	else:
+		match data.ItemType:
+			ItemData.ITEM_TYPE.LOCKBOX:
+				return lockbox_icon
+			ItemData.ITEM_TYPE.KEY_ITEM:
+				return key_item_icon
+	#enum ITEM_TYPE {GOLD,TILE,CONSUMABLE,GEAR,LOCKBOX,KEY_ITEM}
+	pass
+
+func load_tile_inventory():
+	for i in range(0,4):
+		$InventoryBox.get_child(i).visible = false
+	$InventoryBox.get_child(tile_page).visible = true
+	pass
+
+
+func _on_left_button_pressed() -> void:
+	if inv_page > 0 and tile_page < 1:
+		inv_page -= 1
+		load_item_inventory()
+		$InventoryBox/RightButton/NextLabel.text = str(inv_page+1)
+		if inv_page == 0:
+			$InventoryBox/LeftButton/BackLabel.text = ""#str("T",tile_pages_max)
+		else:
+			$InventoryBox/LeftButton/BackLabel.text = str(inv_page-1)
+	else:
+		tile_page = clampi(tile_page-1,0,3)
+		if tile_page == 0:
+			load_item_inventory()
+			if inv_page == 0:
+				$InventoryBox/LeftButton/BackLabel.text = ""
+			else:
+				$InventoryBox/LeftButton/BackLabel.text = str(inv_page)
+			$InventoryBox/RightButton/NextLabel.text = str("T",1)
+		else:
+			load_tile_inventory()
+			if tile_page == 1:
+				$InventoryBox/LeftButton/BackLabel.text = str(inv_page)
+			else:
+				$InventoryBox/LeftButton/BackLabel.text = str("T",tile_page-1)
+			$InventoryBox/RightButton/NextLabel.text = str("T",tile_page+1)
+	pass # Replace with function body.
+
+
+func _on_right_button_pressed() -> void:
+	if inv_page < int(inv_content.size()/10)-1:
+		inv_page = clampi(inv_page + 1,0,int(inv_content.size()/10)-1)
+		load_item_inventory()
+		$InventoryBox/LeftButton/BackLabel.text = str(inv_page-1)
+		if inv_page == int(inv_content.size()/10)-1:
+			$InventoryBox/LeftButton/NextLabel.text = str("T",1)
+			
+		else:
+			$InventoryBox/LeftButton/NextLabel.text = str(inv_page+1)
+	elif tile_page < 3:
+		tile_page += 1
+		load_tile_inventory()
+		if tile_page < 3:
+			$InventoryBox/RightButton/NextLabel.text = str("T",tile_page+1)
+		else:
+			$InventoryBox/RightButton/NextLabel.text = ''
+		$InventoryBox/LeftButton/BackLabel.text = str("T",tile_page-1)
+		if tile_page == 1:
+			$InventoryBox/LeftButton/BackLabel.text = str(inv_page)
+		pass #tileinventorybox not implemented yet
