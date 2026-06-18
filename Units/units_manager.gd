@@ -87,12 +87,13 @@ func spawn_unit(group:Unit_Group):
 					if unit.self_coords == try:
 						placing = false
 			new_unit.position = Global.grid_to_pos(try)
+		new_unit.UnitLevel = DungeonData.AREA_LEVEL+DungeonData.UNIT_LEVEL_Boost
 		Active_Units.append(new_unit)
 		group.add_child(new_unit)
 		group.get_child(-1).init(group.is_player_controlled)
 	pass
 
-##########################
+###########################
 ########## TURNS ##########
 
 func _step_turn() -> void:

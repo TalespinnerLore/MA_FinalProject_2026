@@ -65,7 +65,7 @@ enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_R
 ####################################################
 #Experience
 @export_category('XP Stats')
-@export var Level:int = 0
+@export var UnitLevel:int = 0
 @export var XP:int = 0
 @export var XP_to_Level:int = 50
 #var XP_to_Level_0to1 = 50
@@ -75,14 +75,14 @@ enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_R
 @export var BaseXP = 5
 
 func Calc_XP_to_Level():
-	return(XP_to_Level*(1.0+(0.1*(Level-1))))
+	return(XP_to_Level*(1.0+(0.1*(UnitLevel-1))))
 
 func Calc_XP_to_Reward():
-	return (((BaseXP*(Level-1)/10) + BaseXP)*XP_Mult)
+	return (((BaseXP*(UnitLevel-1)/10) + BaseXP)*XP_Mult)
 
 func Attempt_LevelUp():
 	if XP >= XP_to_Level:
-		Level+=1
+		UnitLevel+=1
 		IncreaseStats(UnitStats.STR_up,UnitStats.DEX_up,UnitStats.VIT_up,UnitStats.MAG_up,UnitStats.DEF_up,UnitStats.LUK_up,UnitStats.Free_Stats)
 		XP-=XP_to_Level
 		XP_to_Level = Calc_XP_to_Level()
@@ -96,7 +96,7 @@ func IncreaseStats(str:int,dex:int,vit:int,mag:int,def:int,luk:int,free:int):
 	MAG+=mag
 	DEF+=def
 	LUK+=luk
-	FREE_STATS = FREE_STATS-str-dex-vit-mag-def-luk+free
+	FREE_STATS = FREE_STATS+free #-str-dex-vit-mag-def-luk
 	pass
 
 @export_category('UnitStats')
@@ -154,26 +154,28 @@ var Range_Boost = 0 #extra tile range for abilities
 
 
 func set_stats():
+	var lvlUp_stats = UnitStats.get_levelup_stats(UnitLevel)
 	UnitStats.calc_template_stats()
 	HP_Max = UnitStats.HP_Max
 	HP_Current = HP_Max
-	STR = UnitStats.STR
-	DEX = UnitStats.DEX
-	VIT = UnitStats.VIT
-	MAG = UnitStats.MAG
-	DEF = UnitStats.DEF
-	LUK = UnitStats.LUK
-	HP_Max = UnitStats.HP_Max
-	Base_Phys_ATK = UnitStats.Base_Phys_ATK
-	Base_Mag_ATK = UnitStats.Base_Mag_ATK
-	Base_Phys_DEF = UnitStats.Base_Phys_DEF
-	Base_Mag_DEF = UnitStats.Base_Mag_DEF
-	Base_Evasion = UnitStats.Base_Evasion
-	Heal_Buff_Mult = UnitStats.Heal_Buff_Mult
-	Melee_Mult = UnitStats.Melee_Mult
-	Ranged_Mult = UnitStats.Ranged_Mult
-	Def_Mult = UnitStats.Def_Mult
-	Reroll_Chance = UnitStats.Reroll_Chance
+	STR = UnitStats.STR + lvlUp_stats[0]
+	DEX = UnitStats.DEX + lvlUp_stats[1]
+	VIT = UnitStats.VIT + lvlUp_stats[2]
+	MAG = UnitStats.MAG + lvlUp_stats[3]
+	DEF = UnitStats.DEF + lvlUp_stats[4]
+	LUK = UnitStats.LUK + lvlUp_stats[5]
+	
+	HP_Max_boost += UnitStats.HP_Max_boost
+	Phys_ATK_boost += UnitStats.Phys_ATK_boost
+	Mag_ATK_boost += UnitStats.Mag_ATK_boost
+	Phys_DEF_boost += UnitStats.Phys_DEF_boost
+	Mag_DEF_boost += UnitStats.Mag_DEF_boost 
+	Evasion_boost += UnitStats.Evasion_boost 
+	Heal_Buff_Mult_boost += UnitStats.Heal_Buff_Mult_boost 
+	Melee_Mult_boost += UnitStats.Melee_Mult_boost
+	Ranged_Mult_boost += UnitStats.Ranged_Mult_boost
+	Def_Mult_boost += UnitStats.Def_Mult_boost
+	Reroll_Chance_boost += UnitStats.Reroll_Chance_boost
 
 func calc_stats_with_boost():
 	HP_Max = UnitStats.Base_HP + 5*(VIT+VIT_boost)
@@ -450,29 +452,43 @@ func _physics_process(delta: float) -> void:
 				pass #BASIC ATTACK HERE ^^^
 			
 			elif Input.is_action_just_pressed("Ability_1"):
-				connect_dialogue()
-				emit_signal("attack_start",$Abilities.Slot_1,self)
-				combattext(str(self.name," uses ",$Abilities.Slot_1.ability_name,"!"))
-				action_used()
+				use_ability(0)
 			elif Input.is_action_just_pressed("Ability_2"):
-				connect_dialogue()
-				emit_signal("attack_start",$Abilities.Slot_2,self)
-				combattext(str(self.name," uses ",$Abilities.Slot_2.ability_name,"!"))
-				action_used()
+				use_ability(1)
 			elif Input.is_action_just_pressed("Ability_3"):
-				connect_dialogue()
-				emit_signal("attack_start",$Abilities.Slot_3,self)
-				combattext(str(self.name," uses ",$Abilities.Slot_3.ability_name,"!"))
-				action_used()
+				use_ability(2)
 			elif Input.is_action_just_pressed("Ability_4"):
-				connect_dialogue()
-				emit_signal("attack_start",$Abilities.Slot_4,self)
-				combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
-				action_used()
+				use_ability(3)
 		#if not moving:
 		#	if get_dir_input() != Vector2.ZERO:
 		#		move(get_dir_input())
 		#	
+
+func use_ability(index):
+	connect_dialogue()
+	match index:
+		0:
+			emit_signal("attack_start",$Abilities.Slot_1,self)
+			combattext(str(self.name," uses ",$Abilities.Slot_1.ability_name,"!"))
+		1:
+			emit_signal("attack_start",$Abilities.Slot_2,self)
+			combattext(str(self.name," uses ",$Abilities.Slot_2.ability_name,"!"))
+		2:
+			emit_signal("attack_start",$Abilities.Slot_3,self)
+			combattext(str(self.name," uses ",$Abilities.Slot_3.ability_name,"!"))
+		3:
+			emit_signal("attack_start",$Abilities.Slot_4,self)
+			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
+		4:
+			emit_signal("attack_start",$Abilities.WeaponAbility,self)
+			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
+		5:
+			emit_signal("attack_start",$Abilities.ArmourAbility,self)
+			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
+		6:
+			emit_signal("attack_start",$Abilities.TrinketAbility,self)
+			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
+	action_used()
 
 func combattext(string):
 	$CombatText.text = str(string +"\n")
@@ -623,12 +639,12 @@ func init(is_player_controlled):
 		$Abilities.Slot_2 = PlayerStats.p1_equipped_abilities[1]
 		$Abilities.Slot_3 = PlayerStats.p1_equipped_abilities[0] #testing
 		$Abilities.Slot_4 = PlayerStats.p1_equipped_abilities[1] #testing
-		$Sprite2D/Button1.visible = true
-		$Sprite2D/Button2.visible = true
-		$Sprite2D/Button1.icon = $Abilities.Slot_1.vfx
-		$Sprite2D/Button1.text = str("1: ",$Abilities.Slot_1.ability_name)
-		$Sprite2D/Button2.icon = $Abilities.Slot_2.vfx
-		$Sprite2D/Button2.text = str("2: ",$Abilities.Slot_2.ability_name)
+#		$Sprite2D/Button1.visible = true
+#		$Sprite2D/Button2.visible = true
+#		$Sprite2D/Button1.icon = $Abilities.Slot_1.vfx
+#		$Sprite2D/Button1.text = str("1: ",$Abilities.Slot_1.ability_name)
+#		$Sprite2D/Button2.icon = $Abilities.Slot_2.vfx
+#		$Sprite2D/Button2.text = str("2: ",$Abilities.Slot_2.ability_name)
 		set_stats()
 		$Sprite2D.texture = UnitStats.Sprite
 		$Abilities.init()

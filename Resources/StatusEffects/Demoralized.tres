@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="StatusEffectData" load_steps=3 format=3 uid="uid://ddu1mb15e71kr"]
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=4 format=3 uid="uid://ddu1mb15e71kr"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_8iqk5"]
-[ext_resource type="Texture2D" uid="uid://kecoy3onkl54" path="res://Art/VFX Sprites/Flare00_pxl.png" id="2_mtgbg"]
+[ext_resource type="Texture2D" uid="uid://bcdfabd7318cg" path="res://Art/UnitUI/statuseffect_n_demoralized.png" id="1_l4kkn"]
+[ext_resource type="Texture2D" uid="uid://jg5fc0geer0a" path="res://Art/VFX Sprites/vfx_dark.png" id="3_w6jcs"]
 
 [resource]
 script = ExtResource("1_8iqk5")
-vfx = ExtResource("2_mtgbg")
+icon = ExtResource("1_l4kkn")
+vfx = ExtResource("3_w6jcs")
 effect_name = "Demoralized"
 is_negative = true
 turn_duration = 2

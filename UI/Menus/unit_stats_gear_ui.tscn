@@ -1,0 +1,905 @@
+[gd_scene load_steps=28 format=3 uid="uid://s0jii18fk7d6"]
+
+[ext_resource type="Script" path="res://UI/Menus/unit_stats_gear_ui.gd" id="1_yfitp"]
+[ext_resource type="Texture2D" uid="uid://b3pex2aw1g2mg" path="res://Art/UI_Art/Frames/ui_bg_blueoutline.png" id="2_ltrji"]
+[ext_resource type="Texture2D" uid="uid://bl85iqf1ey42v" path="res://Art/UI_Art/Frames/ui_bg_yellowdark.png" id="3_41eq5"]
+[ext_resource type="Texture2D" uid="uid://yx0sw1cij6ne" path="res://Art/UI_Art/modifier2.png" id="3_m55q7"]
+[ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="4_75ayx"]
+[ext_resource type="Texture2D" uid="uid://ck6mkv5078fi5" path="res://Art/UI_Art/temp_weapons.png" id="5_ksq6m"]
+[ext_resource type="Texture2D" uid="uid://cy11uqig8rqrf" path="res://Art/UI_Art/temp_armour.png" id="6_7q1lg"]
+[ext_resource type="Script" path="res://UI/Menus/ui_stat_box.gd" id="6_cblyr"]
+[ext_resource type="Texture2D" uid="uid://b7ll0ajpmwci8" path="res://Art/UI_Art/temp_trinket.png" id="7_b4d8v"]
+[ext_resource type="Texture2D" uid="uid://vtw0q5vupesy" path="res://Art/UI_Art/12x12minus.png" id="7_vbrtv"]
+[ext_resource type="Texture2D" uid="uid://cdsr7x70gmwos" path="res://Art/UI_Art/12x12plus.png" id="8_7a4yo"]
+[ext_resource type="Texture2D" uid="uid://cu3lk0k4qo1aj" path="res://Art/UI_Art/Frames/ui_bg_thin.png" id="9_wjtch"]
+[ext_resource type="Script" path="res://UI/Menus/ui_ability_box.gd" id="11_djyr7"]
+[ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="11_h154a"]
+[ext_resource type="Texture2D" uid="uid://d3xgf11emdh0b" path="res://Art/UI_Art/ui_elem_dark.png" id="12_f3gfe"]
+[ext_resource type="Texture2D" uid="uid://bppu6xovcjr5k" path="res://Art/UI_Art/ui_elem_light.png" id="13_8wd6g"]
+[ext_resource type="Texture2D" uid="uid://cwfi6r14nnakd" path="res://Art/UI_Art/Frames/ui_bg_thinblue_3.png" id="13_36dcx"]
+[ext_resource type="Texture2D" uid="uid://cmtdkudyucs5o" path="res://Art/UI_Art/AbilityType/ui_mag_generic.png" id="13_eo8xl"]
+[ext_resource type="Texture2D" uid="uid://dyujfophr4wij" path="res://Art/UI_Art/ui_elem_fire.png" id="14_cu0wd"]
+[ext_resource type="Texture2D" uid="uid://de1joagwyuvmh" path="res://Art/UI_Art/AoE/ui_aoe_front.png" id="14_s7mt7"]
+[ext_resource type="Texture2D" uid="uid://bi8o4wvd5x7fd" path="res://Art/UI_Art/ui_elem_wind.png" id="15_5epki"]
+[ext_resource type="Texture2D" uid="uid://xbm0r636tkfl" path="res://Art/UI_Art/AbilityType/ui_other_buff-debuff.png" id="16_n2f5g"]
+[ext_resource type="Texture2D" uid="uid://co1plajimoqu6" path="res://Art/UI_Art/AoE/ui_aoe_circle.png" id="17_34xmf"]
+[ext_resource type="Texture2D" uid="uid://0g5i5s07mb2x" path="res://Art/UI_Art/AbilityType/ui_mag_ranged.png" id="19_b82e2"]
+[ext_resource type="Texture2D" uid="uid://bjb3o6mmrr0uu" path="res://Art/UI_Art/AoE/ui_aoe_cone.png" id="20_03t5d"]
+[ext_resource type="Texture2D" uid="uid://bndblypkjtmdm" path="res://Art/UI_Art/AbilityType/ui_phys_ranged.png" id="22_ujqjo"]
+[ext_resource type="Texture2D" uid="uid://0l35ou02nh7y" path="res://Art/UI_Art/AoE/ui_aoe_line.png" id="23_d0vw7"]
+
+[node name="CharacterScreen_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yfitp")
+
+[node name="BackgroundTexture_9PR" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 64.0
+offset_right = 552.0
+offset_bottom = 320.0
+texture = ExtResource("2_ltrji")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="gearInventoryBox" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 72.0
+offset_right = 240.0
+offset_bottom = 312.0
+texture = ExtResource("3_41eq5")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="NameClassLabel" type="Label" parent="gearInventoryBox"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 152.0
+offset_bottom = 42.0
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "CharName
+LVL 99 ClassName"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PortraitTextureRect" type="TextureRect" parent="gearInventoryBox"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 64.0
+offset_right = 104.0
+offset_bottom = 128.0
+texture = ExtResource("11_h154a")
+
+[node name="WeaponTextureSlot" type="TextureRect" parent="gearInventoryBox"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 176.0
+offset_right = 104.0
+offset_bottom = 208.0
+texture = ExtResource("5_ksq6m")
+
+[node name="WeaponTexture" type="TextureRect" parent="gearInventoryBox/WeaponTextureSlot"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("5_ksq6m")
+
+[node name="ArmourTextureSlot" type="TextureRect" parent="gearInventoryBox"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 176.0
+offset_right = 72.0
+offset_bottom = 208.0
+texture = ExtResource("6_7q1lg")
+
+[node name="ArmourTexture" type="TextureRect" parent="gearInventoryBox/ArmourTextureSlot"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("6_7q1lg")
+
+[node name="TrinketTextureSlot" type="TextureRect" parent="gearInventoryBox"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 144.0
+offset_right = 88.0
+offset_bottom = 176.0
+texture = ExtResource("7_b4d8v")
+
+[node name="TrinketTexture" type="TextureRect" parent="gearInventoryBox/TrinketTextureSlot"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("7_b4d8v")
+
+[node name="StatAbilityBox" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 72.0
+offset_right = 392.0
+offset_bottom = 312.0
+texture = ExtResource("3_41eq5")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="StatPageLabel" type="Label" parent="StatAbilityBox"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 144.0
+offset_bottom = 39.0
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatPageLabel2" type="Label" parent="StatAbilityBox"]
+layout_mode = 0
+offset_top = 150.0
+offset_right = 143.0
+offset_bottom = 168.0
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "Abilities"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatBoxContainer" type="VBoxContainer" parent="StatAbilityBox"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 29.0
+offset_right = 136.0
+offset_bottom = 149.0
+theme_override_constants/separation = 1
+
+[node name="StatBox" type="NinePatchRect" parent="StatAbilityBox/StatBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = ExtResource("9_wjtch")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("6_cblyr")
+
+[node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 64.0
+offset_bottom = 16.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "STR - "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox"]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 112.0
+offset_bottom = 16.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "000"
+vertical_alignment = 1
+
+[node name="minusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture_normal = ExtResource("7_vbrtv")
+texture_pressed = ExtResource("7_vbrtv")
+stretch_mode = 3
+
+[node name="plusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox"]
+layout_mode = 0
+offset_left = 112.0
+offset_right = 128.0
+offset_bottom = 16.0
+texture_normal = ExtResource("8_7a4yo")
+texture_pressed = ExtResource("8_7a4yo")
+stretch_mode = 3
+
+[node name="StatBox2" type="NinePatchRect" parent="StatAbilityBox/StatBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = ExtResource("9_wjtch")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("6_cblyr")
+stat = 1
+
+[node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox2"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 64.0
+offset_bottom = 16.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "DEX - "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox2"]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 112.0
+offset_bottom = 16.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "000"
+vertical_alignment = 1
+
+[node name="minusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox2"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture_normal = ExtResource("7_vbrtv")
+texture_pressed = ExtResource("7_vbrtv")
+stretch_mode = 3
+
+[node name="plusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox2"]
+layout_mode = 0
+offset_left = 112.0
+offset_right = 128.0
+offset_bottom = 16.0
+texture_normal = ExtResource("8_7a4yo")
+texture_pressed = ExtResource("8_7a4yo")
+stretch_mode = 3
+
+[node name="StatBox3" type="NinePatchRect" parent="StatAbilityBox/StatBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = ExtResource("9_wjtch")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("6_cblyr")
+stat = 2
+
+[node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox3"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 64.0
+offset_bottom = 16.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "VIT - "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox3"]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 112.0
+offset_bottom = 16.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "000"
+vertical_alignment = 1
+
+[node name="minusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox3"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture_normal = ExtResource("7_vbrtv")
+texture_pressed = ExtResource("7_vbrtv")
+stretch_mode = 3
+
+[node name="plusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox3"]
+layout_mode = 0
+offset_left = 112.0
+offset_right = 128.0
+offset_bottom = 16.0
+texture_normal = ExtResource("8_7a4yo")
+texture_pressed = ExtResource("8_7a4yo")
+stretch_mode = 3
+
+[node name="StatBox4" type="NinePatchRect" parent="StatAbilityBox/StatBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = ExtResource("9_wjtch")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("6_cblyr")
+stat = 3
+
+[node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox4"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 64.0
+offset_bottom = 16.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "MAG - "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox4"]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 112.0
+offset_bottom = 16.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "000"
+vertical_alignment = 1
+
+[node name="minusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox4"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture_normal = ExtResource("7_vbrtv")
+texture_pressed = ExtResource("7_vbrtv")
+stretch_mode = 3
+
+[node name="plusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox4"]
+layout_mode = 0
+offset_left = 112.0
+offset_right = 128.0
+offset_bottom = 16.0
+texture_normal = ExtResource("8_7a4yo")
+texture_pressed = ExtResource("8_7a4yo")
+stretch_mode = 3
+
+[node name="StatBox5" type="NinePatchRect" parent="StatAbilityBox/StatBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = ExtResource("9_wjtch")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("6_cblyr")
+stat = 4
+
+[node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox5"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 64.0
+offset_bottom = 16.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "DEF - "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox5"]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 112.0
+offset_bottom = 16.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "000"
+vertical_alignment = 1
+
+[node name="minusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox5"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture_normal = ExtResource("7_vbrtv")
+texture_pressed = ExtResource("7_vbrtv")
+stretch_mode = 3
+
+[node name="plusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox5"]
+layout_mode = 0
+offset_left = 112.0
+offset_right = 128.0
+offset_bottom = 16.0
+texture_normal = ExtResource("8_7a4yo")
+texture_pressed = ExtResource("8_7a4yo")
+stretch_mode = 3
+
+[node name="StatBox6" type="NinePatchRect" parent="StatAbilityBox/StatBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = ExtResource("9_wjtch")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("6_cblyr")
+stat = 5
+
+[node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox6"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 64.0
+offset_bottom = 16.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "LUK - "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox6"]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 112.0
+offset_bottom = 16.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "005"
+vertical_alignment = 1
+
+[node name="minusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox6"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture_normal = ExtResource("7_vbrtv")
+texture_pressed = ExtResource("7_vbrtv")
+stretch_mode = 3
+
+[node name="plusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox6"]
+layout_mode = 0
+offset_left = 112.0
+offset_right = 128.0
+offset_bottom = 16.0
+texture_normal = ExtResource("8_7a4yo")
+texture_pressed = ExtResource("8_7a4yo")
+stretch_mode = 3
+
+[node name="StatBox7" type="NinePatchRect" parent="StatAbilityBox/StatBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = ExtResource("13_36dcx")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox7"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 112.0
+offset_bottom = 16.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free Stats: 000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="minusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox7"]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture_normal = ExtResource("7_vbrtv")
+texture_pressed = ExtResource("7_vbrtv")
+stretch_mode = 3
+
+[node name="plusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox7"]
+visible = false
+layout_mode = 0
+offset_left = 112.0
+offset_right = 128.0
+offset_bottom = 16.0
+texture_normal = ExtResource("8_7a4yo")
+texture_pressed = ExtResource("8_7a4yo")
+stretch_mode = 3
+
+[node name="AbilityBoxContainer" type="VBoxContainer" parent="StatAbilityBox"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 168.0
+offset_right = 136.0
+offset_bottom = 235.0
+theme_override_constants/separation = 1
+
+[node name="AbilityBox" type="NinePatchRect" parent="StatAbilityBox/AbilityBoxContainer"]
+custom_minimum_size = Vector2(128, 16)
+layout_mode = 2
+texture = ExtResource("9_wjtch")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("11_djyr7")
+
+[node name="elemTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 15.0
+offset_bottom = 16.0
+texture = ExtResource("12_f3gfe")
+stretch_mode = 3
+
+[node name="abilityTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox"]
+layout_mode = 0
+offset_left = 14.0
+offset_right = 28.0
+offset_bottom = 16.0
+texture = ExtResource("13_eo8xl")
+stretch_mode = 3
+
+[node name="aoeTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox"]
+layout_mode = 0
+offset_left = 27.0
+offset_right = 41.0
+offset_bottom = 16.0
+texture = ExtResource("14_s7mt7")
+stretch_mode = 3
+
+[node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 1.0
+offset_right = 125.0
+offset_bottom = 17.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[99/99]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox"]
+layout_mode = 0
+offset_left = 42.0
+offset_right = 96.0
+offset_bottom = 18.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
+text = "Name of Ability Goes Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AbilityBox2" type="NinePatchRect" parent="StatAbilityBox/AbilityBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = ExtResource("9_wjtch")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("11_djyr7")
+
+[node name="elemTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox2"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 15.0
+offset_bottom = 16.0
+texture = ExtResource("13_8wd6g")
+stretch_mode = 3
+
+[node name="abilityTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox2"]
+layout_mode = 0
+offset_left = 14.0
+offset_right = 28.0
+offset_bottom = 16.0
+texture = ExtResource("16_n2f5g")
+stretch_mode = 3
+
+[node name="aoeTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox2"]
+layout_mode = 0
+offset_left = 27.0
+offset_right = 41.0
+offset_bottom = 16.0
+texture = ExtResource("17_34xmf")
+stretch_mode = 3
+
+[node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox2"]
+offset_left = 100.0
+offset_top = 1.0
+offset_right = 125.0
+offset_bottom = 17.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[99/99]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox2"]
+offset_left = 42.0
+offset_right = 96.0
+offset_bottom = 18.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
+text = "Name of Ability Goes Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AbilityBox3" type="NinePatchRect" parent="StatAbilityBox/AbilityBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = ExtResource("9_wjtch")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("11_djyr7")
+
+[node name="elemTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox3"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 15.0
+offset_bottom = 16.0
+texture = ExtResource("14_cu0wd")
+stretch_mode = 3
+
+[node name="abilityTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox3"]
+layout_mode = 0
+offset_left = 14.0
+offset_right = 28.0
+offset_bottom = 16.0
+texture = ExtResource("19_b82e2")
+stretch_mode = 3
+
+[node name="aoeTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox3"]
+layout_mode = 0
+offset_left = 27.0
+offset_right = 41.0
+offset_bottom = 16.0
+texture = ExtResource("20_03t5d")
+stretch_mode = 3
+
+[node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox3"]
+offset_left = 100.0
+offset_top = 1.0
+offset_right = 125.0
+offset_bottom = 17.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[99/99]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox3"]
+offset_left = 42.0
+offset_right = 96.0
+offset_bottom = 18.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
+text = "Name of Ability Goes Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AbilityBox4" type="NinePatchRect" parent="StatAbilityBox/AbilityBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+texture = ExtResource("9_wjtch")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("11_djyr7")
+
+[node name="elemTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox4"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 15.0
+offset_bottom = 16.0
+texture = ExtResource("15_5epki")
+stretch_mode = 3
+
+[node name="abilityTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox4"]
+layout_mode = 0
+offset_left = 14.0
+offset_right = 28.0
+offset_bottom = 16.0
+texture = ExtResource("22_ujqjo")
+stretch_mode = 3
+
+[node name="aoeTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox4"]
+layout_mode = 0
+offset_left = 27.0
+offset_right = 41.0
+offset_bottom = 16.0
+texture = ExtResource("23_d0vw7")
+stretch_mode = 3
+
+[node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox4"]
+offset_left = 100.0
+offset_top = 1.0
+offset_right = 125.0
+offset_bottom = 17.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[99/99]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox4"]
+offset_left = 42.0
+offset_right = 96.0
+offset_bottom = 18.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
+text = "Name of Ability Goes Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DescriptionBox" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 72.0
+offset_right = 544.0
+offset_bottom = 312.0
+texture = ExtResource("3_41eq5")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="ShowItemBox2" type="NinePatchRect" parent="DescriptionBox"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 48.0
+offset_right = 136.0
+offset_bottom = 232.0
+texture = ExtResource("9_wjtch")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 4
+
+[node name="NameOfThingLabel]" type="Label" parent="DescriptionBox"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 144.0
+offset_bottom = 42.0
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "-CATEGORY-
+Description"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="DescriptionBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 56.0
+offset_right = 128.0
+offset_bottom = 224.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "Strength (STR) provides the base value for a unit's PHYSICAL damage equal to total points invested. \\n
+It also provides a 2% multiplier to MELEE damage per point invested. \\n
+"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="StatReqLabel" type="Label" parent="DescriptionBox"]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 520.0
+offset_right = 175.0
+offset_bottom = 632.0
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "=====================
+Stat Requirements:
+STR - 000
+DEX - 000
+VIT - 000
+MAG - 000
+DEF - 000
+LUK - 000
+=====================
+==============================
+Description goes here.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+=============================="
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ShowItemBox" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 336.0
+offset_top = -128.0
+offset_right = 528.0
+offset_bottom = -17.0
+texture = ExtResource("3_m55q7")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="NameLabel" type="Label" parent="ShowItemBox"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 84.0
+offset_right = 184.0
+offset_bottom = 107.0
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "ITEM NAME GOES HERE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsBox" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 672.0
+offset_top = 128.0
+offset_right = 734.0
+offset_bottom = 239.0
+texture = ExtResource("3_m55q7")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsBox"]
+layout_mode = 0
+offset_right = 63.0
+offset_bottom = 112.0
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Button" type="Button" parent="OptionsBox/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "USE"
+flat = true
+
+[node name="Button2" type="Button" parent="OptionsBox/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "GIVE"
+flat = true
+
+[node name="Button3" type="Button" parent="OptionsBox/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "DROP"
+flat = true
+
+[node name="Button4" type="Button" parent="OptionsBox/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "THROW"
+flat = true

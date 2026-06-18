@@ -13,6 +13,7 @@ valid_target = 3
 targeting = 4
 range = 1
 base_value = 10
+max_uses = 10
 damage_type = 6
 damaging = false
 healing = false

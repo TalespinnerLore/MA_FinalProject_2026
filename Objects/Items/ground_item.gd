@@ -20,6 +20,7 @@ func _init() -> void:
 	else:
 		amount = 5
 		texture = load("res://Art/2D_images/temp_hp_pot.png")
+		ITEM_DATA = load("res://Resources/Items/Consumables/HealthPotion.tres")
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Unit_Instance:
@@ -28,6 +29,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				var gold_counter:GoldCounter = get_tree().get_first_node_in_group("Gold_Counter")
 				PlayerStats.player_gold += amount
 				gold_counter.increase_counter(amount)
+				queue_free()
 			else:
 				#body.ability_effect_calculations(load("res://Resources/Abilities/_basic_attacks/Healing_Potion.tres"),body)
 			#queue_free()

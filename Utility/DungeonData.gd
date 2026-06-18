@@ -58,6 +58,8 @@ func choose_biome():
 @export var Common_Enemies:Array[StatComponent]
 @export var Rare_Enemies:Array[StatComponent]
 
+@export var Unique_Rooms:Array[UniqueRoomData]
+
 var room_attempts = 25
 var interconnectivity = 2#0-10 range7
 var rounded = false
@@ -73,22 +75,51 @@ var max_floors: = 3
 var current_floor: = 0
 var monster_house_count: = 1
 
+var AREA_LEVEL := 1
+var UNIT_LEVEL_Boost := 0
+
 var gold_chance = 1.0
 var pot_chance = 1.0
 var item_mult = 1.0
 
+var current_biome
+
 var minibossdata:StatComponent = preload("res://Resources/Units/Enemy/MiniBoss.tres")
+
+var room_chance = 1.0
+
+func spawn_unique_room_chance(remaining:int,roomdata:UniqueRoomData):
+	var added = 0
+	if current_floor == max_floors - 1:
+		for i in remaining:
+			Unique_Rooms.append(roomdata)
+			added+=1
+	else:
+		var spread = floori((max_floors-1) / remaining)
+		var roll = randi_range(1,spread)
+		if roll == 1:
+			Unique_Rooms.append(roomdata)
+			added+=1
+	return added
 
 func open_level():
 	if current_floor == 1:
 		monster_house_count = Special_Features[1][1]
 	current_floor += 1
 	
-	if current_floor == max_floors:
+	if Special_Features[0][1] > 0:
+		var spawned = spawn_unique_room_chance(Special_Features[0][1],load("res://Resources/DungeonGen/UniqueRooms/Resources/TREASURE_ROOM.tres"))
+		Special_Features[0][1] -= spawned
+	if Special_Features[3][1] > 0:
+		var spawned = spawn_unique_room_chance(Special_Features[3][1],load("res://Resources/DungeonGen/UniqueRooms/Resources/MINI_BOSS.tres"))
+		Special_Features[3][1] -= spawned
+	
+	if current_floor == max_floors: #temp monster house w/mini boss as final floor
 		monster_house_count = 1
 		max_wandering_units = 1
 
 	floor_biome = biomes[choose_biome()]
+	current_biome = floor_biome#
 	var biome_mods = floor_biome.get_DG_Mods()
 	Common_Enemies = floor_biome.Common_Enemies
 	Rare_Enemies = floor_biome.Rare_Enemies

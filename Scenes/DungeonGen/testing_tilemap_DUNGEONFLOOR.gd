@@ -32,6 +32,11 @@ var cells_Air = []     ##
 #########################
 
 var monster_house = false
+var Unique_Rooms:Array[UniqueRoomData]
+var HallwayStartpoints:Array[Vector2i]
+var multiple_stairs:=false
+var stairs_spawnloc:Array[Vector2i]
+var unq_rooms_data = []
 
 ######MANAGER SCENE REFERENCES######
 @onready var nav_manager_ref:NavigationManager =  get_tree().get_first_node_in_group("NAVIGATION_MANAGER")
@@ -83,6 +88,57 @@ func FindNearbyEmptyTiles(x,y): #CHECKS FOR NUMBER OF ADJACENT EMPTY TILES.
 	return count
 
 func RandomRooms(): #GENERATE RANDOM ROOMS ON THE GRID.
+	if Unique_Rooms.size() > 0:
+		for room_data in Unique_Rooms:
+			var tiles = room_data.get_tiles() #expects data returned as TileMapLayer
+			var roomsize = Rect2i(tiles.get_used_rect()) #check if origin is always (0,0
+			var topleftcorner:Vector2i
+			var key_item_palcement:Array[Vector2i]
+			var doors:Array[Vector2i]
+			var floors:Array[Vector2i]
+			if room_data.randomly_placed:
+				topleftcorner = Vector2i(randi_range(2,Width_X-2-roomsize.end.x),randi_range(2,Height_Y-2-roomsize.end.y))
+			else:
+				topleftcorner = room_data.top_left_corner_position
+			for tile in tiles.get_used_cells():
+				var tdata = tiles.get_cell_tile_data(tile)
+				match tdata.terrain:
+					0:
+						TileGrid[tile.x][tile.y] = 'ROOM_WALL'
+					1:
+						TileGrid[tile.x][tile.y] = 'FLOOR'
+						floors.append(tile)
+					2:
+						TileGrid[tile.x][tile.y] = 'WATER'
+					3:
+						TileGrid[tile.x][tile.y] = 'LAVA'
+					4:
+						TileGrid[tile.x][tile.y] = 'AIR'
+					5:
+						TileGrid[tile.x][tile.y] = 'FLOOR'
+						key_item_palcement.append(tile)
+						floors.append(tile)
+					6:
+						TileGrid[tile.x][tile.y] = 'FLOOR'
+						HallwayStartpoints.append(tile)
+						floors.append(tile)
+					7:
+						TileGrid[tile.x][tile.y] = 'FLOOR'
+						floors.append(tile)
+						if room_data.spawn_stairs_here:
+							stairs_spawnloc.append(tile)
+							if room_data.spawn_extra_stairs:
+								multiple_stairs = true
+					8:
+						TileGrid[tile.x][tile.y] = 'FLOOR'
+						doors.append(tile)
+						floors.append(tile)
+			for i in range(key_item_palcement.size()):
+				spawn_key_item(room_data.key_item_list[i],key_item_palcement[i])
+			unq_rooms_data.append([topleftcorner,roomsize.end,doors,floors])
+			
+	
+	
 	for i in Room_Attempts:
 		var startx = randi_range(1,Width_X-(2+Min_Size))
 		var starty = randi_range(1,Height_Y-(2+Min_Size))
@@ -287,7 +343,13 @@ func Hallways_FloodFill(): #AFTER HAVING ROOMS, USE A FLOOD-FILL MAZE ALGORITHM 
 		var WaterNum = 0
 		var OtherBlocks = 0
 		dir.shuffle()
-		current = Vector2i(toCheck.back())
+		
+		if HallwayStartpoints.size() > 0:
+			current = Vector2i(HallwayStartpoints[0])
+			HallwayStartpoints.pop_front()
+		else:
+			current = Vector2i(toCheck.back())
+			
 		for i in 4:
 			
 			var bridgetile = current+dir[i]
@@ -732,6 +794,10 @@ func FillGrid(): #once the rooms are decided, this fills in the rest of the leve
 		Monster_House()
 		monster_house = true
 	else:
+		
+		Unique_Rooms = DungeonData.Unique_Rooms
+			
+		
 		RandomRooms()
 	
 		FindUnusedTiles()
@@ -1156,4 +1222,11 @@ func temp_items():
 		new.global_position = Global.grid_to_pos(coords)
 		add_child(new)
 		get_child(-1)._init()
-		
+
+func spawn_key_item(data:ItemData,loc:Vector2i):
+	var item = preload("res://Objects/Items/GroundItem.tscn")
+	var new = item.instantiate()
+	new.ITEM_DATA = data
+	new.global_position = Global.grid_to_pos(loc)
+	add_child(new)
+	get_child(-1)._init()

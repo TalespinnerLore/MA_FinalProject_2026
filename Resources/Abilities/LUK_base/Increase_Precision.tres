@@ -7,15 +7,16 @@
 
 [resource]
 script = ExtResource("1_ia3vy")
-ability_name = "IncreasePrecision"
+ability_name = "Increase Precision"
 vfx = ExtResource("4_qcjaq")
 element = 5
 valid_target = 1
 targeting = 3
 range = 2
 base_value = 0
+max_uses = 15
 damage_type = 6
-damaging = true
+damaging = false
 healing = false
 creates_shield = false
 inflict_status = Array[ExtResource("2_t3rlh")]([ExtResource("2_ccy02")])

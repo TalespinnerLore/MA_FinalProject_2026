@@ -69,7 +69,8 @@ extends Resource
 
 func get_levelup_stats(level):
 	var BaseStats = [STR,DEX,VIT,MAG,DEF,LUK]
-	BaseStats*=level
+	for stat in BaseStats:
+		stat*=level
 	return BaseStats
 
 func calc_template_stats():

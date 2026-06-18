@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://i2ad4iyjg7e6"]
+
+[ext_resource type="Texture2D" uid="uid://do7xtfbiq5htq" path="res://Art/2D_images/gold_stack_large.png" id="1_e8d1h"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="2_rw0n7"]
+
+[resource]
+script = ExtResource("2_rw0n7")
+ItemName = "Gold"
+max_stack = 999
+icon = ExtResource("1_e8d1h")
+ITEM_ID = 0
+TILE_ID = 0
+throw_range = 1
+DESCRIPTION = "Currency used to buy things."
+rarity = 0
+ItemType = 0
+GearType = 0
+ConsType = 0
+Class_Bias = 0
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = false
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

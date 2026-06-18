@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://blqh447xv3txm"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://blqh447xv3txm"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_3lemq"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_kcoca"]
+[ext_resource type="Resource" uid="uid://ddu1mb15e71kr" path="res://Resources/StatusEffects/Demoralized.tres" id="3_65lae"]
 [ext_resource type="Texture2D" uid="uid://jg5fc0geer0a" path="res://Art/VFX Sprites/vfx_dark.png" id="4_rvrts"]
 
 [resource]
@@ -13,11 +14,12 @@ valid_target = 0
 targeting = 2
 range = 3
 base_value = 1
+max_uses = 15
 damage_type = 5
-damaging = true
+damaging = false
 healing = false
 creates_shield = false
-inflict_status = Array[ExtResource("2_kcoca")]([])
+inflict_status = Array[ExtResource("2_kcoca")]([ExtResource("3_65lae")])
 STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
 BaseStats_required = [0, 0, 0, 0, 0, 0]
 Abilities_required = Array[ExtResource("1_3lemq")]([])

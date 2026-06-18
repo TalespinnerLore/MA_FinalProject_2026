@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://dguinja0it7mu"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://dguinja0it7mu"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_fruhc"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_yx6fj"]
+[ext_resource type="Resource" uid="uid://eivq82k3cb6i" path="res://Resources/StatusEffects/Regeneration.tres" id="3_4p2b3"]
 [ext_resource type="Texture2D" uid="uid://jo8g6xyk6vmd" path="res://Art/VFX Sprites/vfx_water.png" id="4_ungg1"]
 
 [resource]
@@ -13,11 +14,12 @@ valid_target = 3
 targeting = 4
 range = 1
 base_value = 4
+max_uses = 10
 damage_type = 6
 damaging = false
-healing = true
+healing = false
 creates_shield = true
-inflict_status = Array[ExtResource("2_yx6fj")]([])
+inflict_status = Array[ExtResource("2_yx6fj")]([ExtResource("3_4p2b3")])
 STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
 BaseStats_required = [0, 0, 0, 0, 0, 0]
 Abilities_required = Array[ExtResource("1_fruhc")]([])

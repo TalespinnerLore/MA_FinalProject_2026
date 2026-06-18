@@ -8,6 +8,8 @@ var tile_pages_max = 3
 var inv_content = PlayerStats.player_inventory
 @onready var inv_container = $InventoryBox/ItemContainer
 
+@export var selected_item:ItemData
+
 var weapon_icon = preload("res://Art/UI_Art/ui_icon_weapon.png")
 var armour_icon = preload("res://Art/UI_Art/ui_icon_armour.png")
 var trinket_icon = preload("res://Art/UI_Art/ui_icon_trinket.png")
@@ -21,12 +23,38 @@ var lockbox_icon = preload("res://Art/UI_Art/ui_icon_lockbox.png")
 var key_item_icon = preload("res://Art/UI_Art/ui_icon_keyitem.png")
 
 func _ready() -> void:
+	self.visible = false
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	on_item_selected(selected_item)
 	_on_left_button_pressed()
 	load_item_inventory()
-	
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("Inventory"):
+		open_close()
+
+var gold_val := 0
+
+func open_close():
+	self.visible = ! self.visible
+	pause_level()
+
+func pause_level():
+	if is_instance_valid(get_tree()):
+		await get_tree().create_timer(0.1).timeout
+		get_tree().paused = ! get_tree().paused
+
+func load_values():
+	gold_val = PlayerStats.player_gold
+	$InventoryBox/GoldCounter/GoldAmountLabel.text = str(gold_val)
+	if tile_page == 0:
+		$InventoryBox/InventoryLabel.text = str("INVENTORY [",PlayerStats.player_inventory.size(),"/",PlayerStats.inventory_size,"] Pg. ",inv_page)
+	else:
+		$InventoryBox/InventoryLabel.text = str("TILE INVENTORY Pg. ",tile_page)
+
 
 func load_item_inventory():
-	for i in range(0,4):
+	for i in range(0,4): #hides all pages
 		$InventoryBox.get_child(i).visible = false
 	inv_container.visible = true
 	var index = 0
@@ -106,6 +134,7 @@ func _on_left_button_pressed() -> void:
 			else:
 				$InventoryBox/LeftButton/BackLabel.text = str("T",tile_page-1)
 			$InventoryBox/RightButton/NextLabel.text = str("T",tile_page+1)
+	load_values()
 	pass # Replace with function body.
 
 
@@ -129,4 +158,23 @@ func _on_right_button_pressed() -> void:
 		$InventoryBox/LeftButton/BackLabel.text = str("T",tile_page-1)
 		if tile_page == 1:
 			$InventoryBox/LeftButton/BackLabel.text = str(inv_page)
-		pass #tileinventorybox not implemented yet
+	load_values()
+	pass #tileinventorybox not implemented yet
+
+
+func on_item_selected(data:ItemData):
+	selected_item = data
+	print(data)
+	$ShowItemBox/TextureRect.texture = data.icon
+	$ShowItemBox/NameLabel.text = data.ItemName #=====================\n
+	$DescriptionBox/StatReqLabel.text = str('Stat Requirements:\nSTR - ',data.STR_NEEDED,\
+	'\nDEX - ',data.DEX_NEEDED,'\nVIT - ',data.VIT_NEEDED,'\nMAG - ',data.MAG_NEEDED,\
+	'\nDEF - ',data.DEF_NEEDED,'\nLUK - ',data.LUK_NEEDED,)#'\n=====================')
+	$DescriptionBox/DescriptionLabel.text = str(data.DESCRIPTION,'\n',#'==================================\n',
+	'\n',
+	'Rarity Itemtype\n',
+	'\n',
+	'Gear/Consumable subtype\n',
+	#5 I SHOULD HAVE MADE RESOURCE SUBTYPE FUUUUUUUCK
+	#6 \add affinity text here at some point
+	)

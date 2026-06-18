@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bj1i2ct8r8gpt"]
+[gd_scene load_steps=25 format=4 uid="uid://bj1i2ct8r8gpt"]
 
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_7fd7v"]
 [ext_resource type="Script" path="res://Scenes/DungeonGen/testing_tilemap_DUNGEONFLOOR.gd" id="2_sai8a"]
@@ -14,6 +14,16 @@
 [ext_resource type="Script" path="res://Scenes/DungeonGen/gold_counter.gd" id="11_i32ve"]
 [ext_resource type="Texture2D" uid="uid://c7f2l6gudwhlw" path="res://Art/2D_images/gold_counter.png" id="12_ojpwo"]
 [ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="13_jpkop"]
+[ext_resource type="PackedScene" uid="uid://whnmxcba77ab" path="res://UI/Menus/player_inventory_ui.tscn" id="15_2a8p0"]
+[ext_resource type="Texture2D" uid="uid://b3cg8kwm8w2ob" path="res://Art/2D_images/temp_loadscreen.png" id="15_yyivg"]
+[ext_resource type="PackedScene" uid="uid://s0jii18fk7d6" path="res://UI/Menus/unit_stats_gear_ui.tscn" id="16_ed1a7"]
+[ext_resource type="Script" path="res://Scenes/DungeonGen/loadscreen.gd" id="16_wlj7n"]
+[ext_resource type="Script" path="res://Scenes/DungeonGen/ability_ui.gd" id="19_gu8xj"]
+[ext_resource type="Texture2D" uid="uid://cu3lk0k4qo1aj" path="res://Art/UI_Art/Frames/ui_bg_thin.png" id="20_ka3vg"]
+[ext_resource type="Script" path="res://UI/Menus/ui_ability_box.gd" id="21_o7ocf"]
+[ext_resource type="Texture2D" uid="uid://d3xgf11emdh0b" path="res://Art/UI_Art/ui_elem_dark.png" id="22_7aike"]
+[ext_resource type="Texture2D" uid="uid://cmtdkudyucs5o" path="res://Art/UI_Art/AbilityType/ui_mag_generic.png" id="23_00hj8"]
+[ext_resource type="Texture2D" uid="uid://de1joagwyuvmh" path="res://Art/UI_Art/AoE/ui_aoe_front.png" id="24_n0k73"]
 
 [node name="DungeonSceneStructure" type="Node2D"]
 
@@ -131,3 +141,353 @@ Basic Attack: Left-Click
 Ability Buttons: 1 & 2
 Buttons: Mouse/Touchpad Left-Click"
 horizontal_alignment = 1
+
+[node name="PlayerInventory_UI" parent="CanvasLayer" instance=ExtResource("15_2a8p0")]
+
+[node name="CharacterScreen_UI" parent="CanvasLayer" instance=ExtResource("16_ed1a7")]
+visible = false
+
+[node name="AbilityUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 356.0
+script = ExtResource("19_gu8xj")
+
+[node name="Button" type="Button" parent="CanvasLayer/AbilityUI"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 301.0
+offset_right = 304.0
+offset_bottom = 317.0
+
+[node name="Button2" type="Button" parent="CanvasLayer/AbilityUI"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 284.0
+offset_right = 384.0
+offset_bottom = 300.0
+
+[node name="abilitynameLabel" type="Label" parent="CanvasLayer/AbilityUI/Button2"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 1.0
+offset_right = 125.0
+offset_bottom = 17.0
+theme = ExtResource("13_jpkop")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[99/99]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="uselimitLabel" type="Label" parent="CanvasLayer/AbilityUI/Button2"]
+layout_mode = 0
+offset_left = 42.0
+offset_right = 96.0
+offset_bottom = 18.0
+theme = ExtResource("13_jpkop")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
+text = "Name of Ability Goes Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Button3" type="Button" parent="CanvasLayer/AbilityUI"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 318.0
+offset_right = 384.0
+offset_bottom = 334.0
+
+[node name="Button4" type="Button" parent="CanvasLayer/AbilityUI"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 301.0
+offset_right = 464.0
+offset_bottom = 317.0
+
+[node name="Boxes" type="Control" parent="CanvasLayer/AbilityUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AbilityBox" type="NinePatchRect" parent="CanvasLayer/AbilityUI/Boxes"]
+custom_minimum_size = Vector2(128, 16)
+layout_mode = 0
+offset_left = 176.0
+offset_top = 301.0
+offset_right = 304.0
+offset_bottom = 317.0
+mouse_filter = 1
+texture = ExtResource("20_ka3vg")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("21_o7ocf")
+
+[node name="elemTexture" type="TextureRect" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 15.0
+offset_bottom = 16.0
+texture = ExtResource("22_7aike")
+stretch_mode = 3
+
+[node name="abilityTexture" type="TextureRect" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox"]
+layout_mode = 0
+offset_left = 14.0
+offset_right = 28.0
+offset_bottom = 16.0
+texture = ExtResource("23_00hj8")
+stretch_mode = 3
+
+[node name="aoeTexture" type="TextureRect" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox"]
+layout_mode = 0
+offset_left = 27.0
+offset_right = 41.0
+offset_bottom = 16.0
+texture = ExtResource("24_n0k73")
+stretch_mode = 3
+
+[node name="uselimitLabel" type="Label" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 1.0
+offset_right = 125.0
+offset_bottom = 17.0
+theme = ExtResource("13_jpkop")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[99/99]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="abilitynameLabel" type="Label" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox"]
+layout_mode = 0
+offset_left = 42.0
+offset_right = 96.0
+offset_bottom = 18.0
+theme = ExtResource("13_jpkop")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
+text = "Name of Ability Goes Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AbilityBox2" type="NinePatchRect" parent="CanvasLayer/AbilityUI/Boxes"]
+custom_minimum_size = Vector2(128, 16)
+layout_mode = 0
+offset_left = 256.0
+offset_top = 284.0
+offset_right = 384.0
+offset_bottom = 300.0
+mouse_filter = 1
+texture = ExtResource("20_ka3vg")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("21_o7ocf")
+
+[node name="elemTexture" type="TextureRect" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox2"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 15.0
+offset_bottom = 16.0
+texture = ExtResource("22_7aike")
+stretch_mode = 3
+
+[node name="abilityTexture" type="TextureRect" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox2"]
+layout_mode = 0
+offset_left = 14.0
+offset_right = 28.0
+offset_bottom = 16.0
+texture = ExtResource("23_00hj8")
+stretch_mode = 3
+
+[node name="aoeTexture" type="TextureRect" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox2"]
+layout_mode = 0
+offset_left = 27.0
+offset_right = 41.0
+offset_bottom = 16.0
+texture = ExtResource("24_n0k73")
+stretch_mode = 3
+
+[node name="uselimitLabel" type="Label" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox2"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 1.0
+offset_right = 125.0
+offset_bottom = 17.0
+theme = ExtResource("13_jpkop")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[99/99]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="abilitynameLabel" type="Label" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox2"]
+layout_mode = 0
+offset_left = 42.0
+offset_right = 96.0
+offset_bottom = 18.0
+theme = ExtResource("13_jpkop")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
+text = "Name of Ability Goes Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AbilityBox3" type="NinePatchRect" parent="CanvasLayer/AbilityUI/Boxes"]
+custom_minimum_size = Vector2(128, 16)
+layout_mode = 0
+offset_left = 256.0
+offset_top = 318.0
+offset_right = 384.0
+offset_bottom = 334.0
+mouse_filter = 1
+texture = ExtResource("20_ka3vg")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("21_o7ocf")
+
+[node name="elemTexture" type="TextureRect" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox3"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 15.0
+offset_bottom = 16.0
+texture = ExtResource("22_7aike")
+stretch_mode = 3
+
+[node name="abilityTexture" type="TextureRect" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox3"]
+layout_mode = 0
+offset_left = 14.0
+offset_right = 28.0
+offset_bottom = 16.0
+texture = ExtResource("23_00hj8")
+stretch_mode = 3
+
+[node name="aoeTexture" type="TextureRect" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox3"]
+layout_mode = 0
+offset_left = 27.0
+offset_right = 41.0
+offset_bottom = 16.0
+texture = ExtResource("24_n0k73")
+stretch_mode = 3
+
+[node name="uselimitLabel" type="Label" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox3"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 1.0
+offset_right = 125.0
+offset_bottom = 17.0
+theme = ExtResource("13_jpkop")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[99/99]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="abilitynameLabel" type="Label" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox3"]
+layout_mode = 0
+offset_left = 42.0
+offset_right = 96.0
+offset_bottom = 18.0
+theme = ExtResource("13_jpkop")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
+text = "Name of Ability Goes Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AbilityBox4" type="NinePatchRect" parent="CanvasLayer/AbilityUI/Boxes"]
+custom_minimum_size = Vector2(128, 16)
+layout_mode = 0
+offset_left = 336.0
+offset_top = 301.0
+offset_right = 464.0
+offset_bottom = 317.0
+mouse_filter = 1
+texture = ExtResource("20_ka3vg")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("21_o7ocf")
+
+[node name="elemTexture" type="TextureRect" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox4"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 15.0
+offset_bottom = 16.0
+texture = ExtResource("22_7aike")
+stretch_mode = 3
+
+[node name="abilityTexture" type="TextureRect" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox4"]
+layout_mode = 0
+offset_left = 14.0
+offset_right = 28.0
+offset_bottom = 16.0
+texture = ExtResource("23_00hj8")
+stretch_mode = 3
+
+[node name="aoeTexture" type="TextureRect" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox4"]
+layout_mode = 0
+offset_left = 27.0
+offset_right = 41.0
+offset_bottom = 16.0
+texture = ExtResource("24_n0k73")
+stretch_mode = 3
+
+[node name="uselimitLabel" type="Label" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox4"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 1.0
+offset_right = 125.0
+offset_bottom = 17.0
+theme = ExtResource("13_jpkop")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[99/99]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="abilitynameLabel" type="Label" parent="CanvasLayer/AbilityUI/Boxes/AbilityBox4"]
+layout_mode = 0
+offset_left = 42.0
+offset_right = 96.0
+offset_bottom = 18.0
+theme = ExtResource("13_jpkop")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
+text = "Name of Ability Goes Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Loadscreen" type="TextureRect" parent="CanvasLayer"]
+visible = false
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("15_yyivg")
+script = ExtResource("16_wlj7n")
+
+[node name="LoadscreenLabel" type="Label" parent="CanvasLayer/Loadscreen"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+theme = ExtResource("13_jpkop")
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 24
+text = "BIOME NAME
+FLOOR #/#"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/AbilityUI/Button" to="CanvasLayer/AbilityUI" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/AbilityUI/Button2" to="CanvasLayer/AbilityUI" method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/AbilityUI/Button3" to="CanvasLayer/AbilityUI" method="_on_button_3_pressed"]
+[connection signal="pressed" from="CanvasLayer/AbilityUI/Button4" to="CanvasLayer/AbilityUI" method="_on_button_4_pressed"]

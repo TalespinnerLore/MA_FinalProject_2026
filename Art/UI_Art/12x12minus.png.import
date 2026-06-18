@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dngq1ki03hoi5"
-path="res://.godot/imported/podium_tile.png-a6a8b64efa1a5371d023594ca5216d9d.ctex"
+uid="uid://vtw0q5vupesy"
+path="res://.godot/imported/12x12minus.png-e34060dc9a9c25e9d08254a11c80c265.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/EnvironmentSprites/podium_tile.png"
-dest_files=["res://.godot/imported/podium_tile.png-a6a8b64efa1a5371d023594ca5216d9d.ctex"]
+source_file="res://Art/UI_Art/12x12minus.png"
+dest_files=["res://.godot/imported/12x12minus.png-e34060dc9a9c25e9d08254a11c80c265.ctex"]
 
 [params]
 

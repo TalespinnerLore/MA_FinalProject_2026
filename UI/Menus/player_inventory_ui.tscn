@@ -1,21 +1,23 @@
-[gd_scene load_steps=14 format=4 uid="uid://whnmxcba77ab"]
+[gd_scene load_steps=16 format=4 uid="uid://whnmxcba77ab"]
 
-[ext_resource type="Texture2D" uid="uid://ctthoe2yrl0mu" path="res://Art/UI_Art/modifier2_base.png" id="1_4xh3b"]
 [ext_resource type="Script" path="res://UI/Menus/player_inventory_ui.gd" id="1_8rh85"]
-[ext_resource type="Texture2D" uid="uid://yx0sw1cij6ne" path="res://Art/UI_Art/modifier2.png" id="2_2pdsj"]
+[ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Items/Other/Gold.tres" id="2_l24b1"]
+[ext_resource type="Texture2D" uid="uid://b3pex2aw1g2mg" path="res://Art/UI_Art/Frames/ui_bg_blueoutline.png" id="2_vjver"]
 [ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="3_o7siq"]
+[ext_resource type="Texture2D" uid="uid://bl85iqf1ey42v" path="res://Art/UI_Art/Frames/ui_bg_yellowdark.png" id="3_u546i"]
 [ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="4_bv3il"]
 [ext_resource type="TileSet" uid="uid://ty37cym0krxg" path="res://Crafting/tower_crafting_ui.tres" id="4_kekg7"]
-[ext_resource type="Texture2D" uid="uid://wrmygyrayqm7" path="res://Art/UI_Art/modifier1.png" id="4_p7woc"]
+[ext_resource type="Texture2D" uid="uid://t2qoqqdl3jkp" path="res://Art/UI_Art/Frames/ui_bg_short.png" id="5_3fc4x"]
 [ext_resource type="Texture2D" uid="uid://c7f2l6gudwhlw" path="res://Art/2D_images/gold_counter.png" id="5_rvrpf"]
 [ext_resource type="Texture2D" uid="uid://bb6idmlcfgdjg" path="res://Art/UnitUI/statuseffect_p_regen.png" id="5_vn4jy"]
 [ext_resource type="Texture2D" uid="uid://d26g6cgvhcqaf" path="res://Art/UI_Art/arrow_tile_left.png" id="8_e2e37"]
 [ext_resource type="Texture2D" uid="uid://b4i6a72h02ho" path="res://Art/UI_Art/arrow_tile_right.png" id="9_74j63"]
+[ext_resource type="Texture2D" uid="uid://cu3lk0k4qo1aj" path="res://Art/UI_Art/Frames/ui_bg_thin.png" id="11_xx4ry"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h0eiw"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uat17"]
-texture = ExtResource("4_p7woc")
+texture = ExtResource("5_3fc4x")
 texture_margin_left = 3.0
 texture_margin_top = 1.0
 texture_margin_right = 3.0
@@ -30,6 +32,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8rh85")
+selected_item = ExtResource("2_l24b1")
 
 [node name="BackgroundTexture_9PR" type="NinePatchRect" parent="."]
 layout_mode = 0
@@ -37,11 +40,11 @@ offset_left = 88.0
 offset_top = 64.0
 offset_right = 552.0
 offset_bottom = 320.0
-texture = ExtResource("1_4xh3b")
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
+texture = ExtResource("2_vjver")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
 
 [node name="InventoryBox" type="NinePatchRect" parent="."]
 layout_mode = 0
@@ -49,11 +52,11 @@ offset_left = 96.0
 offset_top = 72.0
 offset_right = 288.0
 offset_bottom = 312.0
-texture = ExtResource("2_2pdsj")
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
+texture = ExtResource("3_u546i")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
 
 [node name="ItemContainer" type="VBoxContainer" parent="InventoryBox"]
 layout_mode = 0
@@ -276,30 +279,31 @@ vertical_alignment = 1
 [node name="TileMapLayer" type="TileMapLayer" parent="InventoryBox"]
 visible = false
 position = Vector2(16, 0)
-tile_map_data = PackedByteArray("AAAAAAEAAgABAAAAAAABAAEAAgACAAAAAAACAAEAAgAAAAEAAAADAAEAAgABAAEAAAAEAAEAAgACAAEAAAAAAAIAAgAAAAIAAAABAAIAAgABAAIAAAACAAIAAgACAAIAAAADAAIAAgAAAAMAAAAEAAIAAgABAAMAAAAAAAMAAgACAAMAAAABAAMAAgAAAAQAAAACAAMAAgABAAQAAAADAAMAAgACAAQAAAAEAAMAAgAAAAUAAAAAAAQAAgABAAUAAAABAAQAAgACAAUAAAA=")
+tile_map_data = PackedByteArray("AAAAAAEAAgABAAAAAAABAAEAAgACAAAAAAAAAAIAAgAAAAIAAAABAAIAAgABAAIAAAADAAEAAgAAAAEAAAADAAIAAgACAAIAAAAEAAEAAgABAAEAAAAEAAIAAgAAAAMAAAACAAEAAgACAAEAAAABAAQAAgAAAAQAAAABAAUAAgAAAAUAAAACAAQAAgABAAQAAAACAAUAAgABAAUAAAADAAQAAgACAAQAAAADAAUAAgACAAUAAAAAAAMAAgACAAMAAAAEAAMAAgABAAMAAAA=")
 tile_set = ExtResource("4_kekg7")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="InventoryBox"]
 visible = false
 position = Vector2(16, 0)
-tile_map_data = PackedByteArray("AAADAAkAAgAAAAoAAAADAAoAAgAAAAoAAAADAAsAAgAAAAoAAAADAAwAAgAAAAoAAAABAAEAAgABAAYAAAACAAEAAgACAAYAAAADAAEAAgAAAAcAAAAAAAEAAgAAAAYAAAAEAAEAAgABAAcAAAABAAIAAgAAAAgAAAACAAIAAgABAAgAAAADAAIAAgACAAgAAAAAAAIAAgACAAcAAAAEAAIAAgAAAAkAAAABAAMAAgACAAkAAAACAAMAAgAAAAoAAAADAAMAAgABAAoAAAAAAAMAAgABAAkAAAAEAAMAAgACAAoAAAABAAQAAgABAAsAAAACAAQAAgACAAsAAAADAAQAAgAAAAwAAAAAAAQAAgAAAAsAAAAEAAQAAgABAAwAAAABAAUAAgAAAA0AAAACAAUAAgABAA0AAAADAAUAAgACAA0AAAAAAAUAAgACAAwAAAA=")
+tile_map_data = PackedByteArray("AAADAAkAAgAAAAoAAAADAAoAAgAAAAoAAAADAAsAAgAAAAoAAAADAAwAAgAAAAoAAAAAAAEAAgAAAAYAAAAAAAIAAgACAAYAAAABAAEAAgABAAYAAAABAAIAAgAAAAcAAAAAAAMAAgABAAcAAAABAAMAAgACAAcAAAADAAEAAgAAAAgAAAADAAIAAgACAAgAAAADAAMAAgABAAkAAAAEAAEAAgABAAgAAAAEAAIAAgAAAAkAAAAEAAMAAgACAAkAAAADAAQAAgABAAwAAAADAAUAAgABAA0AAAAEAAQAAgACAAwAAAAEAAUAAgACAA0AAAAAAAQAAgAAAAoAAAAAAAUAAgAAAAsAAAABAAQAAgAAAAwAAAABAAUAAgAAAA0AAAACAAEAAgABAAoAAAACAAIAAgABAAsAAAACAAQAAgACAAoAAAACAAUAAgACAAsAAAA=")
 tile_set = ExtResource("4_kekg7")
 
 [node name="TileMapLayer3" type="TileMapLayer" parent="InventoryBox"]
 visible = false
 position = Vector2(16, 0)
-tile_map_data = PackedByteArray("AAAAAAEAAgAAAA4AAAABAAEAAgABAA4AAAACAAEAAgACAA4AAAADAAEAAgAAAA8AAAAEAAEAAgABAA8AAAAAAAIAAgACAA8AAAABAAIAAgAAABAAAAACAAIAAgABABAAAAADAAIAAgACABAAAAAEAAIAAgAAABEAAAAAAAMAAgABABEAAAABAAMAAgACABEAAAA=")
+tile_map_data = PackedByteArray("AAAAAAEAAgABAA4AAAACAAMAAgABABEAAAABAAQAAgABABAAAAADAAIAAgACAA8AAAADAAQAAgAAABAAAAABAAIAAgABAA8AAAAAAAUAAgAAABEAAAAEAAUAAgACABEAAAAEAAMAAgACABAAAAAAAAMAAgAAAA8AAAACAAEAAgAAAA4AAAAEAAEAAgACAA4AAAA=")
 tile_set = ExtResource("4_kekg7")
 
 [node name="InventoryLabel" type="Label" parent="InventoryBox"]
 layout_mode = 0
 offset_left = 1.0
+offset_top = 4.0
 offset_right = 193.0
-offset_bottom = 23.0
+offset_bottom = 27.0
 theme = ExtResource("3_o7siq")
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 16
-text = "INVENTORY [100/100] Pg. 1"
+text = "INVENTORY [99/99] Pg. 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -341,7 +345,6 @@ offset_bottom = 32.0
 theme = ExtResource("3_o7siq")
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 16
-text = "T1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -374,11 +377,35 @@ offset_left = 289.0
 offset_top = 184.0
 offset_right = 544.0
 offset_bottom = 312.0
-texture = ExtResource("2_2pdsj")
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
+texture = ExtResource("3_u546i")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="DescriptionOutline" type="NinePatchRect" parent="DescriptionBox"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 151.0
+offset_bottom = 120.0
+texture = ExtResource("11_xx4ry")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="DescriptionOutline2" type="NinePatchRect" parent="DescriptionBox"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 8.0
+offset_right = 248.0
+offset_bottom = 120.0
+texture = ExtResource("11_xx4ry")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
 
 [node name="DescriptionLabel" type="Label" parent="DescriptionBox"]
 layout_mode = 0
@@ -389,15 +416,13 @@ offset_bottom = 120.0
 theme = ExtResource("3_o7siq")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
-text = "==================================
-Description goes here.
+text = "Description goes here.
 1
 2
 3
 4
 5
 6
-==================================
 "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -412,16 +437,13 @@ offset_bottom = 120.0
 theme = ExtResource("3_o7siq")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
-text = "=====================
-Stat Requirements:
+text = "Stat Requirements:
 STR - 000
 DEX - 000
 VIT - 000
 MAG - 000
 DEF - 000
-LUK - 000
-=====================
-"
+LUK - 000"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -432,11 +454,11 @@ offset_left = 352.0
 offset_top = 72.0
 offset_right = 544.0
 offset_bottom = 183.0
-texture = ExtResource("2_2pdsj")
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
+texture = ExtResource("3_u546i")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
 
 [node name="TextureRect" type="TextureRect" parent="ShowItemBox"]
 layout_mode = 0
@@ -465,11 +487,11 @@ offset_left = 289.0
 offset_top = 72.0
 offset_right = 351.0
 offset_bottom = 183.0
-texture = ExtResource("2_2pdsj")
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
+texture = ExtResource("3_u546i")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsBox"]
 layout_mode = 0

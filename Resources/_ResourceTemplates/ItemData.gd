@@ -17,6 +17,8 @@ enum CONS_TYPE {N_A,EDIBLE,THROWING,KEY,OTHER}
 @export var ItemAbility:AbilityData
 @export var throw_range:= 3
 
+@export var DESCRIPTION = 'Replace this with actual description...'
+
 @export var rarity:RARITIES
 @export var ItemType:ITEM_TYPE
 @export var GearType:GEAR_TYPE

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m6qgl74us38r"
-path="res://.godot/imported/Stairs.png-901c024520988161f175d96d1a2e1741.ctex"
+uid="uid://bjb3o6mmrr0uu"
+path="res://.godot/imported/ui_aoe_cone.png-94b8b0c9cef1a75df926ad2abdcc4d39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/EnvironmentSprites/Stairs.png"
-dest_files=["res://.godot/imported/Stairs.png-901c024520988161f175d96d1a2e1741.ctex"]
+source_file="res://Art/UI_Art/AoE/ui_aoe_cone.png"
+dest_files=["res://.godot/imported/ui_aoe_cone.png-94b8b0c9cef1a75df926ad2abdcc4d39.ctex"]
 
 [params]
 

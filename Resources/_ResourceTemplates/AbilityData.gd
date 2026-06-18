@@ -14,6 +14,7 @@ enum Validity {Enemy, Ally, Any, Self}
 @export var targeting:TargetType = 0 #Front, Line, Cone, Circle, Specify
 @export var range:int = 1
 @export var base_value:int = 0
+@export var max_uses:int = 999
 @export var damage_type:DamageType = 0
 @export var damaging:bool = true
 @export var healing:bool = false

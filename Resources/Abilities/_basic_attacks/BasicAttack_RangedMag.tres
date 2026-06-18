@@ -1,19 +1,24 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://d02ns3e6v636q"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://d02ns3e6v636q"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_w3hca"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_kl3ev"]
 [ext_resource type="Texture2D" uid="uid://c4u8f5l3g4xbx" path="res://Art/VFX Sprites/vfx_force.png" id="2_lx8sy"]
 
 [resource]
 script = ExtResource("1_w3hca")
-ability_name = "BasicAttack_RangedMag"
+ability_name = "Basic Attack"
 vfx = ExtResource("2_lx8sy")
 element = 4
 valid_target = 2
 targeting = 0
 range = 2
+base_value = 0
+max_uses = 999
 damage_type = 5
 damaging = true
-inflict_status = Array[Resource]([])
-STR_DEX_VIT_MAG_DEF_LUK = null
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_kl3ev")]([])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
 BaseStats_required = [0, 0, 0, 0, 0, 0]
 Abilities_required = Array[ExtResource("1_w3hca")]([])

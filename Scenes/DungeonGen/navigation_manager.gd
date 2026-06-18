@@ -189,7 +189,7 @@ func sort_array_size_ascending(a:Array,b:Array):
 
 #####SPAWN NEW ROOMS#####
 const room_scene = preload("res://Scenes/DungeonGen/navigation_room_scene.tscn")
-
+###FIX HITBIX FOR ROUND ROOMS AT SOME POINT!!!!!!!!!
 func spawn_new_room(RoomOrigin,RoomSize,RoomDoors,RoomFloor):
 	var room = room_scene.instantiate()
 	#print("origin:",RoomOrigin)
@@ -224,6 +224,8 @@ func init():
 		set_up_grid()
 		for room in tilemaplayer_ref.Rooms:
 			spawn_new_room(room[0].position,room[0].size,room[3],room[1])
+		for room in tilemaplayer_ref.unq_rooms_data:
+			spawn_new_room(room[0],room[1],room[2],room[3])
 		#find_room_to_room_paths()
 		find_doorway_to_random_room_paths()
 	else:

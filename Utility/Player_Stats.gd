@@ -2,19 +2,24 @@ extends Node
 
 
 var p1_class:StatComponent = load("res://Resources/Units/Player/Stats_Warrior.tres")
-var p1_weapon:Resource
-var p1_armour:Resource
-var p1_trinket:Resource
+var p1_weapon:ItemData
+var p1_armour:ItemData
+var p1_trinket:ItemData
 var p1_equipped_abilities:Array[AbilityData] = [load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")]
+var p1_ability_uses1234WAT:Array[int] = [0,0,0,0,0,0,0] #1234WAT
 var p1_HP:int
+var p1_investedStrDexVitMagDefLuk:Array[int] = [0,0,0,0,0,0]
+var p1_free_stats := 0
 #var p1_statuseffects:Array
 
 var p2_class:StatComponent
-var p2_weapon:Resource
-var p2_armour:Resource
-var p2_trinket:Resource
+var p2_weapon:ItemData
+var p2_armour:ItemData
+var p2_trinket:ItemData
 var p2_equipped_abilities:Array[AbilityData] = [load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")]
 var p2_HP:int
+var p2_investedStrDexVitMagDefLuk:Array[int] = [0,0,0,0,0,0]
+var p2_free_stats := 0
 #var p2_statuseffects:Array
 
 var player_inventory = [] #[ITEM_ID,AMOUNT]

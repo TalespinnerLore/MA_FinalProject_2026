@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cfwhb7u03fvhb"]
 
 [ext_resource type="Script" path="res://Objects/EnvironmentObjects/tower_crafting_tile.gd" id="1_mu53l"]
-[ext_resource type="Texture2D" uid="uid://dngq1ki03hoi5" path="res://Art/EnvironmentSprites/podium_tile.png" id="1_nclts"]
+[ext_resource type="Texture2D" uid="uid://dngq1ki03hoi5" path="res://Art/UI_Art/EnvironmentSprites/podium_tile.png" id="1_nclts"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gb6pr"]
 
