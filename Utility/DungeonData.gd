@@ -103,9 +103,17 @@ func spawn_unique_room_chance(remaining:int,roomdata:UniqueRoomData):
 	return added
 
 func open_level():
+	current_floor += 1
+	
 	if current_floor == 1:
 		monster_house_count = Special_Features[1][1]
-	current_floor += 1
+		for i in range(8):
+			PlayerStats.fill_ability_usesB1234WAT(0,i)
+	else:
+		PlayerStats.p1_ability_usesB1234WAT = $Unit_Manager/Player_Group.get_child(0).ability_usesB1234WAT
+	
+	
+	
 	
 	if Special_Features[0][1] > 0:
 		var spawned = spawn_unique_room_chance(Special_Features[0][1],load("res://Resources/DungeonGen/UniqueRooms/Resources/TREASURE_ROOM.tres"))

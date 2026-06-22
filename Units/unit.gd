@@ -440,25 +440,26 @@ func _physics_process(delta: float) -> void:
 			
 			check_move_input()
 			
-			if Input.is_action_just_pressed("LeftClick"):
+			if Input.is_action_just_pressed("LeftClick") and ! Input.is_key_pressed(KEY_Q):
+				use_ability(0)
 				#print("attempt emit signal")
 				#get_tree().get_node
-				connect_dialogue()
-				emit_signal("attack_start",$Abilities.BasicAttack,self)
-				combattext(str(self.name," uses ",$Abilities.BasicAttack.ability_name,"!"))
-				action_used()
+				#connect_dialogue()
+				#emit_signal("attack_start",$Abilities.BasicAttack,self)
+				#combattext(str(self.name," uses ",$Abilities.BasicAttack.ability_name,"!"))
+				#action_used()
 				#has_moved = true
 				#_on_turn_start()
 				pass #BASIC ATTACK HERE ^^^
 			
 			elif Input.is_action_just_pressed("Ability_1"):
-				use_ability(0)
-			elif Input.is_action_just_pressed("Ability_2"):
 				use_ability(1)
-			elif Input.is_action_just_pressed("Ability_3"):
+			elif Input.is_action_just_pressed("Ability_2"):
 				use_ability(2)
-			elif Input.is_action_just_pressed("Ability_4"):
+			elif Input.is_action_just_pressed("Ability_3"):
 				use_ability(3)
+			elif Input.is_action_just_pressed("Ability_4"):
+				use_ability(4)
 		#if not moving:
 		#	if get_dir_input() != Vector2.ZERO:
 		#		move(get_dir_input())
@@ -468,24 +469,27 @@ func use_ability(index):
 	connect_dialogue()
 	match index:
 		0:
+			emit_signal("attack_start",$Abilities.BasicAttack,self)
+			combattext(str(self.name," uses ",$Abilities.BasicAttack.ability_name,"!"))
+		1:
 			emit_signal("attack_start",$Abilities.Slot_1,self)
 			combattext(str(self.name," uses ",$Abilities.Slot_1.ability_name,"!"))
-		1:
+		2:
 			emit_signal("attack_start",$Abilities.Slot_2,self)
 			combattext(str(self.name," uses ",$Abilities.Slot_2.ability_name,"!"))
-		2:
+		3:
 			emit_signal("attack_start",$Abilities.Slot_3,self)
 			combattext(str(self.name," uses ",$Abilities.Slot_3.ability_name,"!"))
-		3:
+		4:
 			emit_signal("attack_start",$Abilities.Slot_4,self)
 			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
-		4:
+		5:
 			emit_signal("attack_start",$Abilities.WeaponAbility,self)
 			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
-		5:
+		6:
 			emit_signal("attack_start",$Abilities.ArmourAbility,self)
 			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
-		6:
+		7:
 			emit_signal("attack_start",$Abilities.TrinketAbility,self)
 			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
 	action_used()
@@ -637,8 +641,8 @@ func init(is_player_controlled):
 		UnitStats = PlayerStats.p1_class
 		$Abilities.Slot_1 = PlayerStats.p1_equipped_abilities[0]
 		$Abilities.Slot_2 = PlayerStats.p1_equipped_abilities[1]
-		$Abilities.Slot_3 = PlayerStats.p1_equipped_abilities[0] #testing
-		$Abilities.Slot_4 = PlayerStats.p1_equipped_abilities[1] #testing
+		$Abilities.Slot_3 = PlayerStats.p1_equipped_abilities[2] #testing
+		$Abilities.Slot_4 = PlayerStats.p1_equipped_abilities[3] #testing
 #		$Sprite2D/Button1.visible = true
 #		$Sprite2D/Button2.visible = true
 #		$Sprite2D/Button1.icon = $Abilities.Slot_1.vfx

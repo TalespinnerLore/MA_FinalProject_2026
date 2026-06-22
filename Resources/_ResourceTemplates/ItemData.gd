@@ -14,7 +14,7 @@ enum CONS_TYPE {N_A,EDIBLE,THROWING,KEY,OTHER}
 @export var ITEM_ID:int
 @export var TILE_ID:= 0
 
-@export var ItemAbility:AbilityData
+@export var ItemAbility:AbilityData = preload("res://Resources/Abilities/_ItemAbilities/---.tres")
 @export var throw_range:= 3
 
 @export var DESCRIPTION = 'Replace this with actual description...'

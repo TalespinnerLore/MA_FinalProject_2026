@@ -9,13 +9,18 @@ func _ready() -> void:
 	#self.visible = false
 	#process_mode = Node.PROCESS_MODE_ALWAYS
 	await get_tree().create_timer(0.5).timeout
+	open_close()
 	load_data()
 	pass
 
 func _process(delta: float) -> void:
+	#if Input.is_action_just_pressed("Abilities"):
+	#	open_close()
 	if Input.is_action_just_pressed("Abilities"):
 		open_close()
-
+	if Input.is_action_just_released("Abilities"):
+		if visible:
+			open_close()
 
 func open_close():
 	self.visible = ! self.visible
@@ -33,45 +38,52 @@ func load_data():
 		Pnum.P1:
 			connected_unit = $"../../Unit_Manager/Player_Group".get_child(0) #1,2,3 for party member
 			var index = 0
-			print(PlayerStats.p1_equipped_abilities.size())
-			print(PlayerStats.p1_ability_uses1234WAT.size())
+			#print(PlayerStats.p1_equipped_abilities.size())
+			#print(PlayerStats.p1_ability_usesB1234WAT.size())
 			for box:UI_abilitybox in $Boxes.get_children():
 				print("index: ",index)
 				box.data = PlayerStats.p1_equipped_abilities[index]
-				box.uses_remaining = PlayerStats.p1_ability_uses1234WAT[index]
+				box.uses_remaining = PlayerStats.p1_ability_usesB1234WAT[index+1]
 				box.set_textures()
 				index+=1
 			
 	pass
 
 func _on_button_pressed() -> void:
-	match PlayerUnit:
-		Pnum.P1: # <<< probably dont need this match, remove later
-			connected_unit.use_ability(0)
-			var box:AbilityUI = $Button.get_child(0)
-			box.uses_remaining = clampi(box.uses_remaining-1,0,999)
-			box.set_textures()
+	print("b1 pressed")
+	#match PlayerUnit:
+	#	Pnum.P1: # <<< probably dont need this match, remove later
+	connected_unit.use_ability(1)
+	var box:UI_abilitybox = $Boxes.get_child(0)
+	box.uses_remaining = clampi(box.uses_remaining-1,0,999)
+	box.set_textures()
+	open_close()
 
 func _on_button_2_pressed() -> void:
-	match PlayerUnit:
-		Pnum.P1:
-			connected_unit.use_ability(1)
-			var box:AbilityUI = $Button2.get_child(0)
-			box.uses_remaining = clampi(box.uses_remaining-1,0,999)
-			box.set_textures()
-			
+	print("b2 pressed")
+
+	connected_unit.use_ability(2)
+	var box:UI_abilitybox = $Boxes.get_child(1)
+	box.uses_remaining = clampi(box.uses_remaining-1,0,999)
+	box.set_textures()
+	open_close()
+
+
 func _on_button_3_pressed() -> void:
-	match PlayerUnit:
-		Pnum.P1:
-			connected_unit.use_ability(2)
-			var box:AbilityUI = $Button3.get_child(0)
-			box.uses_remaining = clampi(box.uses_remaining-1,0,999)
-			box.set_textures()
-			
+	print("b3 pressed")
+
+	connected_unit.use_ability(3)
+	var box:UI_abilitybox = $Boxes.get_child(2)
+	box.uses_remaining = clampi(box.uses_remaining-1,0,999)
+	box.set_textures()
+	open_close()
+
+
 func _on_button_4_pressed() -> void:
-	match PlayerUnit:
-		Pnum.P1:
-			connected_unit.use_ability(3)
-			var box:AbilityUI = $Button4.get_child(0)
-			box.uses_remaining = clampi(box.uses_remaining-1,0,999)
-			box.set_textures()
+	print("b4 pressed")
+
+	connected_unit.use_ability(4)
+	var box:UI_abilitybox = $Boxes.get_child(3)
+	box.uses_remaining = clampi(box.uses_remaining-1,0,999)
+	box.set_textures()
+	open_close()

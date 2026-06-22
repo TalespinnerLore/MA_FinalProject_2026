@@ -603,6 +603,7 @@ texture = ExtResource("17_34xmf")
 stretch_mode = 3
 
 [node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox2"]
+layout_mode = 0
 offset_left = 100.0
 offset_top = 1.0
 offset_right = 125.0
@@ -614,6 +615,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox2"]
+layout_mode = 0
 offset_left = 42.0
 offset_right = 96.0
 offset_bottom = 18.0
@@ -660,6 +662,7 @@ texture = ExtResource("20_03t5d")
 stretch_mode = 3
 
 [node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox3"]
+layout_mode = 0
 offset_left = 100.0
 offset_top = 1.0
 offset_right = 125.0
@@ -671,6 +674,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox3"]
+layout_mode = 0
 offset_left = 42.0
 offset_right = 96.0
 offset_bottom = 18.0
@@ -717,6 +721,7 @@ texture = ExtResource("23_d0vw7")
 stretch_mode = 3
 
 [node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox4"]
+layout_mode = 0
 offset_left = 100.0
 offset_top = 1.0
 offset_right = 125.0
@@ -728,6 +733,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox4"]
+layout_mode = 0
 offset_left = 42.0
 offset_right = 96.0
 offset_bottom = 18.0

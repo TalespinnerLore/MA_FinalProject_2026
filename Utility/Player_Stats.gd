@@ -2,11 +2,11 @@ extends Node
 
 
 var p1_class:StatComponent = load("res://Resources/Units/Player/Stats_Warrior.tres")
-var p1_weapon:ItemData
-var p1_armour:ItemData
-var p1_trinket:ItemData
+var p1_weapon:ItemData_Gear
+var p1_armour:ItemData_Gear
+var p1_trinket:ItemData_Gear
 var p1_equipped_abilities:Array[AbilityData] = [load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")]
-var p1_ability_uses1234WAT:Array[int] = [0,0,0,0,0,0,0] #1234WAT
+var p1_ability_usesB1234WAT:Array[int] = [999,0,0,0,0,0,0,0] #1234WAT
 var p1_HP:int
 var p1_investedStrDexVitMagDefLuk:Array[int] = [0,0,0,0,0,0]
 var p1_free_stats := 0
@@ -57,3 +57,27 @@ func Add_to_Player_Inv_stack(Item:ItemData,stack_size:int):
 				return [success,remaining_stack]
 	success = false
 	return [success,remaining_stack]
+
+func fill_ability_usesB1234WAT(playerindex,moveindex):
+		match playerindex:
+			0:
+				match moveindex:
+					0:
+						p1_ability_usesB1234WAT[0] = 999
+					1:
+						p1_ability_usesB1234WAT[1] = p1_equipped_abilities[0].max_uses
+					2:
+						p1_ability_usesB1234WAT[2] = p1_equipped_abilities[1].max_uses
+					3:
+						p1_ability_usesB1234WAT[3] = p1_equipped_abilities[2].max_uses
+					4:
+						p1_ability_usesB1234WAT[4] = p1_equipped_abilities[3].max_uses
+					5:
+						if p1_weapon != null:
+							p1_ability_usesB1234WAT[5] = p1_weapon.ItemAbility.max_uses
+					6:
+						if p1_armour != null:
+							p1_ability_usesB1234WAT[6] = p1_armour.ItemAbility.max_uses
+					7:
+						if p1_trinket != null:
+							p1_ability_usesB1234WAT[7] = p1_trinket.ItemAbility.max_uses
