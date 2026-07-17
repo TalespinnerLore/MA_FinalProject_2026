@@ -51,5 +51,5 @@ func _on_button_pressed5() -> void:
 
 func _on_button_pressed6() -> void:
 	PlayerStats.p1_class = class_data[5]
-	PlayerStats.p1_equipped_abilities.append_array(j_abilities)
+	PlayerStats.p1_equipped_abilities = j_abilities
 	timeout()

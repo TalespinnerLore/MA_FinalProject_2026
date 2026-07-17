@@ -15,12 +15,15 @@ class_name unit_equipped_abilities
 @export var ability_usesB1234WAT:Array[int] = [0,0,0,0,0,0,0,0]
 
 func init():
-	BasicAttack = get_parent().UnitStats.BasicAttack
+	
 	var parent:Unit_Instance = get_parent()
 	if parent.Team == parent.Teams.PLAYER:
+		print("abilities; is player unit")
 		if parent.is_team_leader:
 			ability_usesB1234WAT = PlayerStats.p1_ability_usesB1234WAT
 	else:
+		print("abilities; is enemy unit")
+
 		ability_usesB1234WAT[0] = 999
 		ability_usesB1234WAT[1] = Slot_1.max_uses
 		ability_usesB1234WAT[2] = Slot_2.max_uses
@@ -29,4 +32,5 @@ func init():
 		ability_usesB1234WAT[5] = WeaponAbility.max_uses
 		ability_usesB1234WAT[6] = ArmourAbility.max_uses
 		ability_usesB1234WAT[7] = TrinketAbility.max_uses
-	pass
+	
+	BasicAttack = get_parent().UnitStats.BasicAttack

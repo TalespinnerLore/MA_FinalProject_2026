@@ -35,12 +35,12 @@ func _process(delta: float) -> void:
 			print("is in dropzone? ",ref_dropzone)
 			#print("has slot_filled? ","slot_filled" in ref_dropzone)
 			if is_inside_dropzone and "slot_filled" in ref_dropzone:
-				print("HAS SLOTFILLED")
+				print("HAS SLOTFILLED VAR")
 				#print("TileRarity:",rarity," SlotRarity:",ref_dropzone.rarity," IsFilled?:",ref_dropzone.slot_filled)
 				if ! ref_dropzone.slot_filled and ref_dropzone.rarity >= rarity:
 					tween.tween_property(self,"global_position",ref_dropzone.global_position,0.1).set_ease(tween.EASE_OUT)
 					ref_dropzone.slot_filled = true
-					ref_dropzone.take_data(data,spritedata)
+					ref_dropzone.take_data(data,spritedata,Source)
 					print("found dropzone, delivered data")
 					queue_free()
 				

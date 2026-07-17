@@ -3,16 +3,18 @@ class_name DungeonCraftingTile
 
 @export var data:DUNGEON_CRAFTING_TILE_DATA
 
-@export var num_in_inventory = 2
+@export var num_in_inventory = 0
 
 var is_draggable = false
 
 func drag_failed():
 	print("DRAG FAILED")
 	num_in_inventory+=1
+	get_parent().TileID_NamedInventory[data.TILE_ID][1] += 1
 	check_visible()
 
 func check_visible():
+	$Label.text = str(num_in_inventory)
 	if num_in_inventory > 0:
 		self.visible = true
 	else:
@@ -35,6 +37,7 @@ func _process(delta: float) -> void:
 			Drag_Drop.global_position = cursor_offset
 			get_tree().root.add_child(Drag_Drop)
 			num_in_inventory -= 1
+			get_parent().TileID_NamedInventory[data.TILE_ID][1] -= 1
 			check_visible()
 
 

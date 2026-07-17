@@ -12,6 +12,8 @@ var t1_grid3_tileoffset = [Vector2(-1,0),Vector2(1,0),Vector2(0,-1),Vector2(0,1)
 						Vector2(-1,-1),Vector2(1,1),Vector2(1,-1),Vector2(-1,1)]
 var t1_grid3_rarities = [R.RARE,R.RARE,R.RARE,R.RARE,R.BASIC,R.BASIC,R.BASIC,R.BASIC,R.ELITE]
 
+var t1_grid3_rarities_unique = [R.RARE,R.RARE,R.RARE,R.RARE,R.BASIC,R.BASIC,R.BASIC,R.BASIC,R.UNIQUE]
+
 var t2_edge8_tileoffset = [Vector2(-1,0),Vector2(1,0),Vector2(0,-1),Vector2(0,1),\
 						Vector2(-1,-1),Vector2(1,1),Vector2(1,-1),Vector2(-1,1),\
 						Vector2(-2,0),Vector2(2,0),Vector2(0,-2),Vector2(0,2),\
@@ -19,14 +21,14 @@ var t2_edge8_tileoffset = [Vector2(-1,0),Vector2(1,0),Vector2(0,-1),Vector2(0,1)
 var t2_edge8_rarities = [R.RARE,R.RARE,R.RARE,R.RARE,R.BASIC,R.BASIC,R.BASIC,R.BASIC,\
 						R.BASIC,R.BASIC,R.BASIC,R.BASIC,R.ELITE,R.ELITE,R.ELITE,R.ELITE,R.UNIQUE]
 
-var t2_5_rarities = [[R.ELITE,R.ELITE,R.ELITE,R.ELITE,R.BASIC,R.BASIC,R.BASIC,R.BASIC,\
-						R.BASIC,R.BASIC,R.BASIC,R.BASIC,R.UNIQUE,R.UNIQUE,R.UNIQUE,R.UNIQUE,R.UNIQUE]]
+var t2_5_rarities = [R.ELITE,R.ELITE,R.ELITE,R.ELITE,R.RARE,R.RARE,R.RARE,R.RARE,\
+						R.RARE,R.RARE,R.RARE,R.RARE,R.UNIQUE,R.UNIQUE,R.UNIQUE,R.UNIQUE,R.UNIQUE]
 
 var t3_expansion_tileoffset = [Vector2(-1,0),Vector2(1,0),Vector2(0,-1),Vector2(0,1),\
 						Vector2(-1,-1),Vector2(1,1),Vector2(1,-1),Vector2(-1,1),\
 						Vector2(-2,0),Vector2(2,0),Vector2(0,-2),Vector2(0,2),\
 						Vector2(-2,-2),Vector2(2,2),Vector2(2,-2),Vector2(-2,2),\
-						Vector2(-3,0),Vector2(3,0),Vector2(0,-3),Vector2(0,3),\
+						Vector2(-4,0),Vector2(4,0),Vector2(0,-4),Vector2(0,4),\
 						Vector2(-3,-2),Vector2(3,2),Vector2(-2,-3),Vector2(2,3),
 						Vector2(3,-2),Vector2(-3,2),Vector2(2,-3),Vector2(-2,3)]
 var t3_expansion_rarities = [R.RARE,R.RARE,R.RARE,R.RARE,R.BASIC,R.BASIC,R.BASIC,R.BASIC,\
@@ -34,14 +36,54 @@ var t3_expansion_rarities = [R.RARE,R.RARE,R.RARE,R.RARE,R.BASIC,R.BASIC,R.BASIC
 						R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,\
 						R.UNIQUE]
 
-var zonelists = [t0_cross_tileoffset,t1_grid3_tileoffset,t2_edge8_tileoffset,t2_edge8_tileoffset,t3_expansion_tileoffset]
-var zonerarities = [t0_cross_rarities,t1_grid3_rarities,t2_edge8_rarities,t2_5_rarities,t3_expansion_rarities]
+@onready var bg_0 = $TileMapLayer_Base/TileMapLayer_Slots0
+@onready var bg_1 = $TileMapLayer_Base/TileMapLayer_Slots1
+@onready var bg_2 = $TileMapLayer_Base/TileMapLayer_Slots2
+@onready var bg_3 = $TileMapLayer_Base/TileMapLayer_Slots3
+
+var zone_bgs = [bg_0,bg_1,bg_1,bg_2,bg_2,bg_3]
+var zonelists = [t0_cross_tileoffset,t1_grid3_tileoffset,t1_grid3_tileoffset,t2_edge8_tileoffset,t2_edge8_tileoffset,t3_expansion_tileoffset]
+var zonerarities = [t0_cross_rarities,t1_grid3_rarities,t1_grid3_rarities_unique,t2_edge8_rarities,t2_5_rarities,t3_expansion_rarities]
+
+@export var t1_forceboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
+@export var t1_fireboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
+@export var t1_waterboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
+@export var t1_earthboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
+@export var t1_airboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
+
+var preset_recipes = [t1_fireboss_recipe,t1_waterboss_recipe,t1_earthboss_recipe,t1_airboss_recipe,t1_forceboss_recipe]
+
+func check_for_preset_recipes():
+	var valid_recipe = false
+	var zones = $DROPZONES.get_children()
+	var return_preset:DCTData_Preset
+	for recipe in preset_recipes:
+		
+		#valid_recipe = true
+		var index = 0
+		var data:DUNGEON_CRAFTING_TILE_DATA #stored data in dropzones
+		for tile in recipe:
+			data = zones[index].CRAFTING_TILE_DATA
+			if index <= zones.get_size()-1:
+				if data != tile:
+					valid_recipe = false
+					break
+			else:
+				return_preset = recipe#[-1] #the actual data we care about being returned.
+				valid_recipe = true
+		if valid_recipe:
+			print("this should be a valid recipe")
+			break
+	if valid_recipe:
+		return return_preset
+	else:
+		return null
 
 var dropzone_scene = preload("res://Crafting/tile_dropzone.tscn")
 
 func set_dropzones(Tier:gridTier):
 	for n in $DROPZONES.get_children():
-		$DROPZONES.remove_child(n)
+		n.queue_free()
 	var coords = []
 	var rarities = zonerarities[Tier]
 	for tile in zonelists[Tier]:
@@ -53,5 +95,28 @@ func set_dropzones(Tier:gridTier):
 		var zone = dropzone_scene.instantiate()
 		zone.global_position = pos
 		zone.rarity = rarities[i]
-		
+		$DROPZONES.add_child(zone)
 		pass
+	#await get_tree().create_timer(0.8).timeout
+	for n in zone_bgs:
+		print(n)
+		if n == zone_bgs[Tier]:
+			n.visible = true
+		else:
+			n.visible = false
+
+@export var grid_level = 0
+
+func _ready() -> void:
+	grid_level = clampi(grid_level,0,5)
+	bg_0 = $TileMapLayer_Base/TileMapLayer_Slots0
+	bg_1 = $TileMapLayer_Base/TileMapLayer_Slots1
+	bg_2 = $TileMapLayer_Base/TileMapLayer_Slots2
+	bg_3 = $TileMapLayer_Base/TileMapLayer_Slots3
+	zone_bgs = [bg_0,bg_1,bg_1,bg_2,bg_2,bg_3]
+	print(zone_bgs)
+	set_dropzones(grid_level)
+
+func change_data(data:DUNGEON_CRAFTING_TILE_DATA,adding:bool):
+	$TileInventory.change_data(data,adding)
+	pass

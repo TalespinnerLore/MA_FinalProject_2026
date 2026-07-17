@@ -1,6 +1,8 @@
 extends NinePatchRect
 class_name UI_abilitybox
 
+signal show_abilitydata(data)
+
 @export var data:AbilityData
 @export var uses_remaining:int
 #enum ElementType {FIRE,WATER,EARTH,AIR,FORCE,LIGHT,DARK}
@@ -33,9 +35,15 @@ func set_textures():
 	
 	$aoeTexture.texture = aoeUI[data.targeting]
 	$abilitynameLabel.text = data.ability_name
-	print("maxuses: ",data.max_uses)
+	#print("maxuses: ",data.max_uses)
 	if data.max_uses < 999:
 		$uselimitLabel.text = str("[",uses_remaining,"/",data.max_uses,"]")
 	else:
 		$uselimitLabel.text = '[INF]'
 	pass
+
+
+func _on_mouse_entered() -> void:
+	#emit_signal("show_abilitydata",data)
+	print("showing ability desc")
+	get_tree().call_group("description", "ability_description",data)

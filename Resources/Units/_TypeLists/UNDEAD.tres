@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TypeList" load_steps=3 format=3 uid="uid://bcukutqijhb0r"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_xt34d"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/EnemyTypeList.gd" id="2_0skn2"]
+
+[resource]
+script = ExtResource("2_0skn2")
+CreatureType = 1
+Common_Enemies = Array[ExtResource("1_xt34d")]([])
+Rare_Enemies = Array[ExtResource("1_xt34d")]([])
+MiniBoss_Enemies = Array[ExtResource("1_xt34d")]([])

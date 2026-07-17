@@ -24,6 +24,7 @@ enum RARITIES {BASIC,RARE,ELITE,UNIQUE}
 @export var EnvFeature_Flooded = 0
 @export var EnvFeature_Barren = 0
 
+@export var Halls_DeadEnds = 0
 @export var Rooms_Round = 0
 @export var Rooms_DenseLayout = 0
 @export var Rooms_SparceLayout = 0
@@ -79,9 +80,90 @@ enum RARITIES {BASIC,RARE,ELITE,UNIQUE}
 @export var Boss_T2_QuadElement = 0
 @export var Boss_T2_Force = 0
 
+@export var extra_floors = 0
+@export var has_boss = false
 #var Crafting_Mods = [Boss_T0_Roaming]
 
+func combine_data(data:DUNGEON_CRAFTING_TILE_DATA,adding:bool):
+	var i = 1
+	if ! adding:
+		i = -1
+	Affinity_Fire += i*data.Affinity_Fire
+	Affinity_Water += i*data.Affinity_Water
+	Affinity_Earth += i*data.Affinity_Earth
+	Affinity_Air += i*data.Affinity_Air
+	Affinity_Force += i*data.Affinity_Force
+	Affinity_Light += i*data.Affinity_Light
+	Affinity_Dark += i*data.Affinity_Dark
 
+	Biome_Test += i*data.Biome_Test
+	Biome_Volcano += i*data.Biome_Volcano
+	Biome_Island += i*data.Biome_Island
+	Biome_Mesa += i*data.Biome_Mesa
+	Biome_Skyland += i*data.Biome_Skyland
+
+	EnvFeature_River += i*data.EnvFeature_River
+	EnvFeature_Lake += i*data.EnvFeature_Lake
+	EnvFeature_Flooded += i*data.EnvFeature_Flooded
+	EnvFeature_Barren += i*data.EnvFeature_Barren
+
+	Halls_DeadEnds += i*data.Halls_DeadEnds
+	Rooms_Round += i*data.Rooms_Round
+	Rooms_DenseLayout += i*data.Rooms_DenseLayout
+	Rooms_SparceLayout += i*data.Rooms_SparceLayout
+	Rooms_AlternatingSize += i*data.Rooms_AlternatingSize
+	Rooms_Small += i*data.Rooms_Small
+	Rooms_Large += i*data.Rooms_Large
+
+	ItemType_Gold += i*data.ItemType_Gold
+	ItemType_Tiles += i*data.ItemType_Tiles
+	ItemType_Consumable += i*data.ItemType_Consumable
+	ItemType_Gear += i*data.ItemType_Gear
+	ItemType_Lockboxes += i*data.ItemType_Lockboxes
+	ItemType_KeyItem += i*data.ItemType_KeyItem
+
+	ItemMods_SpawnRate += i*data.ItemMods_SpawnRate
+
+	GearType_Weapon += i*data.GearType_Weapon
+	GearType_Armour += i*data.GearType_Armour
+	GearType_Trinket += i*data.GearType_Trinket
+
+	Class_Vanguard += i*data.Class_Vanguard
+	Class_Warrior += i*data.Class_Warrior
+	Class_Mage += i*data.Class_Mage
+	Class_Rogue += i*data.Class_Rogue
+	Class_Healer += i*data.Class_Healer
+	Class_Jester += i*data.Class_Jester
+
+	MobType_Beast += i*data.MobType_Beast
+	MobType_Elemental += i*data.MobType_Elemental
+	MobType_Undead += i*data.MobType_Undead
+	MobType_Construct += i*data.MobType_Construct
+	MobType_Mortal += i*data.MobType_Mortal
+	MobType_Wildling += i*data.MobType_Wildling
+
+	MobMods_SpawnRate += i*data.MobMods_SpawnRate
+	MobMods_Level += i*data.MobMods_Level
+	MobMods_EXP += i*data.MobMods_EXP
+	MobMods_Gold += i*data.MobMods_Gold
+	MobMods_Gear += i*data.MobMods_Gear
+
+	UniqueRooms_TreasureVault += i*data.UniqueRooms_TreasureVault
+	UniqueRooms_MonsterHouse += i*data.UniqueRooms_MonsterHouse
+
+	Boss_T0_Roaming += i*data.Boss_T0_Roaming
+	Boss_T0_Mini += i*data.Boss_T0_Mini
+	Boss_T1_Generic += i*data.Boss_T1_Generic
+	Boss_T1_Fire += i*data.Boss_T1_Fire
+	Boss_T1_Water += i*data.Boss_T1_Water
+	Boss_T1_Earth += i*data.Boss_T1_Earth
+	Boss_T1_Wind += i*data.Boss_T1_Wind
+	Boss_T1_Force += i*data.Boss_T1_Force
+	Boss_T2_Generic += i*data.Boss_T2_Generic
+	Boss_T2_QuadElement += i*data.Boss_T2_QuadElement
+	Boss_T2_Force += i*data.Boss_T2_Force
+	extra_floors += i*data.extra_floors
+	
 
 var Tile_Crafting_Mods: Dictionary = {"TEST":
 								{"ID": 0,

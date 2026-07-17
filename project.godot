@@ -54,6 +54,7 @@ NAVIGATION_MANAGER=""
 DIALOGUE_MANAGER=""
 Yes_No_UI=""
 VFX_container=""
+ITEM_MANAGER=""
 
 [input]
 

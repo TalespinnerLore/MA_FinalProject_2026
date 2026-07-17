@@ -6,10 +6,10 @@ class_name Biome
 @export var Unique_Rooms:Array[Resource]
 @export var Common_Enemies:Array[StatComponent]
 @export var Rare_Enemies:Array[StatComponent]
-@export var Common_Items:Array[Resource]
-@export var Rare_Items:Array[Resource]
+@export var Common_Items:Array[ItemData]
+@export var Rare_Items:Array[ItemData]
 
-@export var Mini_Boss:bool = false
+@export var Mini_Boss:StatComponent
 @export var Wandering_Boss:bool = false
 @export var Flooded:bool = false
 @export var FloodTile:FLOOD_TILE
@@ -21,7 +21,7 @@ class_name Biome
 enum BIOMES{test,VOLCANO,ISLAND,MESA,SKY_ISLAND}
 enum ENV_FEATURES{RIVER,LAKE,FLOODED,BARREN}
 enum FLOOD_TILE{WATER,LAVA,AIR}
-enum RIVER_TILE{WATER,LAVA}
+enum RIVER_TILE{WATER,LAVA,AIR}
 enum ROOM_SIZE{ALTERNATING_SIZE_ROOMS,SMALL_ROOMS,LARGE_ROOMS}
 enum ROOM_DENSITY{AVERAGE_LAYOUT,DENSE_LAYOUT,SPARSE_LAYOUT}
 #enum GEAR_TYPE{WEAPON,ARMOUR,TRINKET}

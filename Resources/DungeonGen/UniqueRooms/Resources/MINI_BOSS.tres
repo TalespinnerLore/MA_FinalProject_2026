@@ -1,17 +1,19 @@
-[gd_resource type="Resource" script_class="UniqueRoomData" load_steps=4 format=3 uid="uid://pmf5ls6spbfm"]
+[gd_resource type="Resource" script_class="UniqueRoomData" load_steps=5 format=3 uid="uid://pmf5ls6spbfm"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="1_ltkoy"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="2_5umet"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/UniqueRoomData.gd" id="3_80wy1"]
+[ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="3_u552p"]
 
 [resource]
 script = ExtResource("3_80wy1")
-tilemap_name = 0
-mobs_to_spawn = Array[ExtResource("2_5umet")]([])
+tilemap_name = 1
+mobs_to_spawn = Array[ExtResource("2_5umet")]([ExtResource("3_u552p")])
 items_to_spawn = Array[ExtResource("1_ltkoy")]([])
 key_item_list = Array[ExtResource("1_ltkoy")]([])
-item_num = 1
-spawn_stairs_here = false
+item_num = 0
+spawn_stairs_here = true
 spawn_extra_stairs = false
 randomly_placed = true
 top_left_corner_position = Vector2i(0, 0)
+has_preset_spawn = false

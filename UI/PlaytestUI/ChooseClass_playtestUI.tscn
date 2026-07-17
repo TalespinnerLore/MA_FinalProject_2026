@@ -356,7 +356,7 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 24
 text = "MA GAMES FINAL PROJECT
 - Untitled Dungeon Crawler/Crafter -
- (Prototype 1)"
+ (Prototype 1.1)"
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="."]
@@ -370,7 +370,8 @@ text = "Intimidating
 Shout:
 
 Cone spell,
-low damage."
+damage 
+debuff."
 icon = ExtResource("34_wia5b")
 
 [node name="Button2" type="Button" parent="."]
@@ -441,8 +442,8 @@ text = "Venom
 Strike:
 
 Front attack,
-medium
-damage."
+poisons
+enemy."
 icon = ExtResource("34_wia5b")
 
 [node name="Button7" type="Button" parent="."]
@@ -493,7 +494,7 @@ icon = ExtResource("39_o4wiv")
 layout_mode = 0
 offset_left = 408.0
 offset_top = 254.0
-offset_right = 496.0
+offset_right = 500.0
 offset_bottom = 316.0
 theme = ExtResource("4_o01tj")
 text = "Healing
@@ -501,7 +502,7 @@ Bubble:
 
 Shields self
 with water.
-Slight heal."
+Apply regen."
 icon = ExtResource("40_lfo4b")
 
 [node name="Button11" type="Button" parent="."]
@@ -521,17 +522,17 @@ icon = ExtResource("36_gxuo0")
 
 [node name="Button12" type="Button" parent="."]
 layout_mode = 0
-offset_left = 496.0
+offset_left = 500.0
 offset_top = 254.0
-offset_right = 584.0
+offset_right = 590.0
 offset_bottom = 316.0
 theme = ExtResource("4_o01tj")
 text = "Wild
 Winds:
 
 Circle spell,
-hits ALL units
-in range."
+hits ALL 
+units in range."
 icon = ExtResource("37_5en22")
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed_"]

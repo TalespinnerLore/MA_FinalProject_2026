@@ -7,10 +7,10 @@ extends TileMapLayer
 @export var Min_Size = 5
 @export var Room_Attempts = 25
 @export var TileGrid = []
-@export var Rooms = [] #Rect2i, FloorTiles, WallTiles
+@export var Rooms = [] #Rect2i,[1]FloorTiles,[2]WallTiles,[3]Doors,[4]preset_spawn
 var Hallways = []
-@export var Interconnectivity = 2 #0-10
-var Max_Extra_Doorways = Rooms.size()*ceili(Interconnectivity/2.0) 
+@export var Interconnectivity = 4 #0-10
+var Max_Extra_Doorways = Rooms.size()*ceili(Interconnectivity/4.0) 
 @export var Max_DeadEnds = 0 #in Interconnectivity is 5, max extra doors = 3*number of rooms
 @export var Rounded = false
 
@@ -37,12 +37,16 @@ var HallwayStartpoints:Array[Vector2i]
 var multiple_stairs:=false
 var stairs_spawnloc:Array[Vector2i]
 var unq_rooms_data = []
+var boss_spawn_loc:Vector2i
 
 ######MANAGER SCENE REFERENCES######
-@onready var nav_manager_ref:NavigationManager =  get_tree().get_first_node_in_group("NAVIGATION_MANAGER")
+#@onready 
+var nav_manager_ref:NavigationManager #=  get_tree().get_first_node_in_group("NAVIGATION_MANAGER")
+var unit_manager_ref:Unit_Manager
+var item_manager_ref:GroundItemManager
 ####################################
 
-
+var player_spawnpoint:= Vector2i(-1,-1)
 
 func InitializeGrid():
 	self.clear()
@@ -90,12 +94,15 @@ func FindNearbyEmptyTiles(x,y): #CHECKS FOR NUMBER OF ADJACENT EMPTY TILES.
 func RandomRooms(): #GENERATE RANDOM ROOMS ON THE GRID.
 	if Unique_Rooms.size() > 0:
 		for room_data in Unique_Rooms:
-			var tiles = room_data.get_tiles() #expects data returned as TileMapLayer
+			var tiles_path = load(room_data.get_tiles()) #expects data returned as \\\String\\\TileMapLayer
+			var tiles:TileMapLayer = tiles_path.instantiate()
 			var roomsize = Rect2i(tiles.get_used_rect()) #check if origin is always (0,0
 			var topleftcorner:Vector2i
-			var key_item_palcement:Array[Vector2i]
+			var key_item_placement:Array[Vector2i]
 			var doors:Array[Vector2i]
 			var floors:Array[Vector2i]
+			var walls:Array[Vector2i]
+			var preset_spawn:Vector2i
 			if room_data.randomly_placed:
 				topleftcorner = Vector2i(randi_range(2,Width_X-2-roomsize.end.x),randi_range(2,Height_Y-2-roomsize.end.y))
 			else:
@@ -116,27 +123,64 @@ func RandomRooms(): #GENERATE RANDOM ROOMS ON THE GRID.
 						TileGrid[tile.x][tile.y] = 'AIR'
 					5:
 						TileGrid[tile.x][tile.y] = 'FLOOR'
-						key_item_palcement.append(tile)
+						key_item_placement.append(tile)
 						floors.append(tile)
 					6:
 						TileGrid[tile.x][tile.y] = 'FLOOR'
 						HallwayStartpoints.append(tile)
 						floors.append(tile)
+						doors.append(tile)
 					7:
+						TileGrid[tile.x][tile.y] = 'FLOOR'
+						floors.append(tile)
+						preset_spawn = tile
+						player_spawnpoint = tile
+						#print("preset player spawn set at ",tile)
+					8:
 						TileGrid[tile.x][tile.y] = 'FLOOR'
 						floors.append(tile)
 						if room_data.spawn_stairs_here:
 							stairs_spawnloc.append(tile)
 							if room_data.spawn_extra_stairs:
 								multiple_stairs = true
-					8:
+					9:
 						TileGrid[tile.x][tile.y] = 'FLOOR'
-						doors.append(tile)
 						floors.append(tile)
-			for i in range(key_item_palcement.size()):
-				spawn_key_item(room_data.key_item_list[i],key_item_palcement[i])
+						boss_spawn_loc = tile
+						print("boss spawn loc: ",tile)
+					
+			for i in range(key_item_placement.size()):
+				spawn_key_item(room_data.key_item_list[i],key_item_placement[i])
+			for i in room_data.item_num:
+				var itemtile = floors.pick_random()
+				if i < room_data.items_to_spawn.size():
+					if room_data.items_to_spawn[i].ItemName == 'Gold':
+						item_manager_ref.drop_item(itemtile,room_data.items_to_spawn[i],\
+						randi_range(10+DungeonData.AREA_LEVEL*2,20+DungeonData.AREA_LEVEL*4))
+						#between max and twice max gold stack for the floor
+					else:
+						item_manager_ref.drop_item(itemtile,room_data.items_to_spawn[i],\
+						randi_range(1,floori(room_data.items_to_spawn[i].max_stack/3.0)))
+				else:
+					var loot_pool
+					if 0.05 >= randf_range(0,1):
+						loot_pool = DungeonData.Rare_Items
+					else:
+						loot_pool = DungeonData.Common_Items
+					item_manager_ref.spawn_item(itemtile,loot_pool)
+			#print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHH")
 			unq_rooms_data.append([topleftcorner,roomsize.end,doors,floors])
+			#Rect2i,[1]FloorTiles,[2]WallTiles,[3]Doors,[4]preset_spawn
+			#print([roomsize,floors,walls,doors,preset_spawn],\
+			#"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+			if preset_spawn != null:
+				Rooms.append([roomsize,floors,walls,doors,preset_spawn])
+			else:
+				Rooms.append([roomsize,floors,walls,doors])
+			AllRoomTiles.append_array(floors)
+			WallTiles.append_array(walls)
 			
+			tiles.queue_free()
 	
 	
 	for i in Room_Attempts:
@@ -182,6 +226,12 @@ func RandomRooms(): #GENERATE RANDOM ROOMS ON THE GRID.
 						RoomWalls.erase(Vector2i(x,y))
 					elif TileGrid[x][y] == 'FLOOR':
 						RoomFloor.append(Vector2i(x,y))
+			var templist = []
+			for tile in RoomFloor:
+				if RoomWalls.has(tile):
+					templist.append(tile)
+			for tile in templist:
+				RoomFloor.erase(tile)
 			Rooms.append([NewRoom, RoomFloor, RoomWalls,[]])
 				#[Rect2i, Vec2i Array, Vec2i Array, Doors?]
 			#if Rounded != true and Rounded != false:
@@ -194,11 +244,11 @@ func RandomRooms(): #GENERATE RANDOM ROOMS ON THE GRID.
 			elif TileGrid[x][y] == 'ROOM_WALL':
 				AllRoomWalls.append(Vector2i(x,y))
 				
-	Max_Extra_Doorways = Rooms.size()*ceili(Interconnectivity/2.0) #just making sure this goes off
+	Max_Extra_Doorways = Rooms.size()*ceili(Interconnectivity/4.0) #just making sure this goes off
 	pass
 
 func Monster_House():
-	DungeonData.monster_house_count -= 1
+	#DungeonData.monster_house_count -= 1
 	var startx = 1
 	var starty = 1
 	var width = Width_X-2
@@ -254,7 +304,7 @@ func Monster_House():
 			elif TileGrid[x][y] == 'ROOM_WALL':
 				AllRoomWalls.append(Vector2i(x,y))
 				
-	Max_Extra_Doorways = Rooms.size()*ceili(Interconnectivity/2.0) #just making sure this goes off
+	Max_Extra_Doorways = Rooms.size()*ceili(Interconnectivity/4.0) #just making sure this goes off
 	pass
 
 func Roundify_Room(room:Rect2i):
@@ -361,7 +411,7 @@ func Hallways_FloodFill(): #AFTER HAVING ROOMS, USE A FLOOD-FILL MAZE ALGORITHM 
 				if i == 3:
 					if Hallways[-1].size() == 1:
 						if River_Tiles_list.has(current):
-							TileGrid[current.x][current.y] = 'WATER'
+							TileGrid[current.x][current.y] = DungeonData.river_tile
 							print("FOUND WATER DAMMIT")
 						else:
 							TileGrid[current.x][current.y] = 'ROOM_WALL'
@@ -455,14 +505,14 @@ func Simple_FillDeadEnds(max_ends):
 	for i in DeadEnds:
 		checklist.append(i[0])
 	
-	while DeadEnds.size() > max_ends:
+	while DeadEnds.size() > absi(max_ends):
 		DeadEnds.shuffle()
 		var tile = DeadEnds[0][0]
 		ToPop.append(DeadEnds[0])
 		AllHallTiles.erase(tile)
 		checklist.erase(tile)
 		if River_Tiles_list.has(tile):
-			TileGrid[tile.x][tile.y] = 'STAIRS'#'WATER'
+			TileGrid[tile.x][tile.y] = DungeonData.river_tile #'WATER'#'STAIRS'#
 		else:
 			TileGrid[tile.x][tile.y] = 'WALL'#'WALL'
 		
@@ -494,7 +544,7 @@ func FillDeadEndHallway(tile):
 			for tiles in ToFill:
 				AllHallTiles.erase(tiles)
 				if River_Tiles_list.has(tiles):
-					TileGrid[tiles.x][tiles.y] = 'WATER'
+					TileGrid[tiles.x][tiles.y] = DungeonData.river_tile
 				else:
 					TileGrid[tiles.x][tiles.y] = 'WALL'
 			is_DeadEnd = false
@@ -661,7 +711,7 @@ func ExtraDoors(): #makes extra doors to prevent perfection in the map
 		var count = 0
 		if 0<tile.x and tile.x<Width_X-1 and 0<tile.y and tile.y<Height_Y-1 and FindNearbyFloorTiles(tile.x,tile.y) == 2\
 		 and FinalDoors.has(tile) != true and FindNearbyDoors(tile.x,tile.y) < 1 and Max_Extra_Doorways > len(Extra):
-				if randi_range(1,100) <= 10+floori(2.5*Interconnectivity):
+				if randi_range(1,100) <= 10+floori(1.25*Interconnectivity):
 					TileGrid[tile.x][tile.y] = 'FLOOR'
 					Extra.append(tile)
 	
@@ -767,15 +817,15 @@ func generateRiver():
 			riverwidth = clampi(randi_range(prev_width-1,prev_width+1),1,River_MaxAddedWidth)
 			var checktile = currentpoint+next_dir
 			checktile.clamp(Vector2i(0,0),Vector2i(Width_X-1,Height_Y-1))
-			if River_Tiles.has(checktile) or TileGrid[checktile.x][checktile.y] == 'WATER': #is the next point already water?
-				print("FOUND WATER")
+			if River_Tiles.has(checktile) or TileGrid[checktile.x][checktile.y] == DungeonData.river_tile: #is the next point already water?
+				print("FOUND river")
 				break #is water is found, break out of the loop for this river branch.
 	
 	River_Tiles.append_array(expand_tiles)
 	River_Tiles_list.append_array(River_Tiles)
 	for tile in River_Tiles:
 		#push_error("ERROR - RiverIndex: ",River_Tiles.find(tile),", tile: ", tile)
-		TileGrid[tile.x][tile.y] = 'WATER'
+		TileGrid[tile.x][tile.y] = DungeonData.river_tile
 	print("endpoints: ",num_ends, ", end1 ",river_end1,", end2 ",river_end2,", end3 ",river_end3)
 	#for tile in test_tiles:
 	#	push_error("ERROR - testIndex: ",test_tiles.find(tile),\
@@ -789,15 +839,13 @@ func generateRiver():
 
 
 func FillGrid(): #once the rooms are decided, this fills in the rest of the level
-	if DungeonData.monster_house_count > 0 \
-	and DungeonData.current_floor+DungeonData.monster_house_count >= DungeonData.max_floors:
+	if DungeonData.current_floor == DungeonData.max_floors:
+		RandomRooms()
+	elif DungeonData.floors_special_features[DungeonData.current_floor - 1].has('MONSTER_HOUSE'):
 		Monster_House()
 		monster_house = true
 	else:
-		
-		Unique_Rooms = DungeonData.Unique_Rooms
-			
-		
+		#print("testprint fillgrid")
 		RandomRooms()
 	
 		FindUnusedTiles()
@@ -830,9 +878,10 @@ func FillGrid(): #once the rooms are decided, this fills in the rest of the leve
 				if room[2].has(door):
 					intersect.append(door)
 			var emergency_door = intersect.pick_random()
-			PermDoors.append(emergency_door)
-			print(emergency_door,"<-emergencydoor")
-			TileGrid[emergency_door.x][emergency_door.y] = 'FLOOR'
+			if emergency_door != null:
+				PermDoors.append(emergency_door)
+				print(emergency_door,"<-emergencydoor")
+				TileGrid[emergency_door.x][emergency_door.y] = 'FLOOR'
 		
 		#after all extra doors are made,
 		for room in Rooms: #take every room,
@@ -857,7 +906,7 @@ func FillGrid(): #once the rooms are decided, this fills in the rest of the leve
 			generateRiver()
 			for tile in AllHallTiles:
 				print("checking hall tiles")
-				if what_is_this_tile(tile.x,tile.y) == 'WATER':
+				if what_is_this_tile(tile.x,tile.y) == 'WATER' or what_is_this_tile(tile.x,tile.y) == 'LAVA' or what_is_this_tile(tile.x,tile.y) == 'AIR':
 					TileGrid[tile.x][tile.y] = 'FLOOR'
 		
 	
@@ -885,8 +934,22 @@ func place_stairs():
 		#get_child(0).player_found_stairs.connect(found_stairs)
 		get_child(0).player_proceeding.connect(next_floor)
 		get_child(0).init()
-		pass
-
+	
+	else:
+		var portal = load("res://Objects/EnvironmentObjects/home_portal.tscn")
+		var portal_coords:Vector2i
+		var new_portal = portal.instantiate()
+		
+		new_portal.global_position = Global.grid_to_pos(stairs_spawnloc[0])
+		if DungeonData.max_wandering_units > 0:
+			new_portal.visible = false
+			new_portal.collision
+		add_child(new_portal)
+		get_child(0).player_proceeding.connect(next_floor)
+		get_child(0).init()
+		
+			
+	
 	######################
 	#MAKE FLOOR NAVIGABLE#
 	######################
@@ -944,23 +1007,51 @@ func populate_tile_terrain():
 				cells_Wall.append(Vector2i(x,y))
 			elif TileGrid[x][y] == 'WALL':
 				if DungeonData.flooded:
-					cells_Water.append(Vector2i(x,y))
+					match DungeonData.flood_tile:
+						'WATER':
+							cells_Water.append(Vector2i(x,y))
+						'LAVA':
+							cells_Lava.append(Vector2i(x,y))
+						'AIR':
+							cells_Air.append(Vector2i(x,y))
 				else:
 					cells_Wall.append(Vector2i(x,y))
 			elif TileGrid[x][y] == 'FLOOR':
 				cells_Ground.append(Vector2i(x,y))
-			elif TileGrid[x][y] == 'WATER' or River_Tiles_list.has(Vector2i(x,y)):
+			elif TileGrid[x][y] == 'WATER':
 				cells_Water.append(Vector2i(x,y))
+			elif TileGrid[x][y] == 'LAVA':
+				cells_Lava.append(Vector2i(x,y))
+			elif TileGrid[x][y] == 'AIR':
+				cells_Air.append(Vector2i(x,y))
 			for tile in DeadEnds:
 				set_cell(Vector2i(tile[0].x,tile[0].y),0, Vector2i(0,2))
+	DungeonData.set_river_and_flood_tiles()
 	if bugfixing != true:
 		set_cells_terrain_connect(cells_Wall,terrain_set,0,true) #makes the auto-tiling work for generated stuff.
 		set_cells_terrain_connect(cells_Ground,terrain_set,1,true)
 		set_cells_terrain_connect(cells_Water,terrain_set,2,true)
+		set_cells_terrain_connect(cells_Lava,terrain_set,3,true)
+		set_cells_terrain_connect(cells_Air,terrain_set,4,true)
 		for tile in AllHallTiles:
-			if River_Tiles_list.has(tile) or DungeonData.flooded:
-				set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(10,10)) #THIS IS THE BRIDGE TILE
+			if River_Tiles_list.has(tile):# or DungeonData.flooded:
+				match DungeonData.river_tile:
+					'WATER': #vvv THIS IS THE BRIDGE TILE vvv#
+						set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(10,10)) 
+					'LAVA':
+						set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(13,10))
+					'AIR':
+						set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(16,10))
+			elif DungeonData.flooded:
+				match DungeonData.flood_tile:
+					'WATER': #vvv THIS IS THE BRIDGE TILE vvv#
+						set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(10,10)) 
+					'LAVA':
+						set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(13,10)) 
+					'AIR':
+						set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(16,10))
 	place_stairs()
+	player_spawn_loc()
 	if River_Tiles_list.size() > 0:
 		for num in range(0,Rooms.size()):
 			Connect_Doors_BRUTE(num)
@@ -1043,7 +1134,13 @@ func Connect_Doors_BRUTE(room_index):
 					
 		for tile in connecting_path:
 				if River_Tiles_list.has(tile):
-					set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(10,10)) #THIS IS THE BRIDGE TILE
+					match DungeonData.river_tile:
+						'WATER':
+							set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(10,10)) #THIS IS THE BRIDGE TILE
+						'LAVA':
+							set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(13,10))
+						'AIR':
+							set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(16,10))
 				#set_cell(Vector2i(tile.x,tile.y),0, Vector2i(0,2)) #THIS IS THE BRIDGE TILE
 		#print("walls: ",room[2])
 		#print("path: ",connecting_path)
@@ -1124,14 +1221,85 @@ func what_is_this_tile(x,y):
 		#print("iswater")
 		return('WATER')
 		pass
-
+	if TileGrid[x][y] == 'LAVA':
+		#print("iswater")
+		return('LAVA')
+	if TileGrid[x][y] == 'AIR':
+		#print("iswater")
+		return('AIR')
 	pass
 @export var bugfixing = false	
 @export var has_units := false
 var terrain_set = 2
 
+@export var rand_seed:= false
+@export var seed_num:= 129
+
+func init_tilemap():
+	#print("testprint init tilemap")
+	if rand_seed:
+		seed(randi())
+	else:
+		seed(seed_num)
+	Max_Size = DungeonData.max_size
+	Min_Size = DungeonData.min_size
+	Width_X = DungeonData.level_size.x
+	Height_Y = DungeonData.level_size.y
+	terrain_set = DungeonData.floor_biome.BiomeID
+	Room_Attempts = DungeonData.room_attempts
+	Interconnectivity = DungeonData.interconnectivity
+	Rounded = DungeonData.rounded
+	SpawnRiver = DungeonData.spawn_river
+	Unique_Rooms = DungeonData.Unique_Rooms
+	Max_DeadEnds = clampi(randi_range(0,1)+DungeonData.Halls_DeadEnds,0,10)
+	
+	if get_tree().get_first_node_in_group("ITEM_MANAGER") != null:
+		item_manager_ref = $"../GroundItem_Manager"
+	else:
+		push_error('COULD NOT FIND item MANAGER')
+	
+	InitializeGrid()
+	FillGrid()
+	populate_tile_terrain()
+	
+	if get_tree().get_first_node_in_group("Player") != null:
+		has_units = true
+	if get_tree().get_first_node_in_group("UNIT_MANAGER") != null:
+		unit_manager_ref = $"../Unit_Manager"
+		if DungeonData.floor_is_monsterhouse:
+			unit_manager_ref.monster_house = true
+		unit_manager_ref.player_spawnpoint = player_spawnpoint
+		unit_manager_ref.init()
+	else:
+		push_error('COULD NOT FIND unit MANAGER')
+	if get_tree().get_first_node_in_group("NAVIGATION_MANAGER") != null:
+		nav_manager_ref = $"../Navigation_Manager"
+		nav_manager_ref.init()
+	else:
+		push_error('COULD NOT FIND navigation MANAGER')
+		
+	if is_instance_valid(item_manager_ref):
+		item_manager_ref.init_items()
+	
+	print("RIVERTILE:",DungeonData.river_tile," FLOODTILE:",DungeonData.flood_tile)
+	#pass
+	
+	#if DungeonData.floors_special_features[DungeonData.current_floor].size()> 0:
+	#	for sf in DungeonData.floors_special_features[DungeonData.current_floor]:
+	#		match sf:
+	#			'MONSTER_HOUSE':
+	#				monster_house = true
+	#			'MINI_BOSS':
+	#				pass	
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	return
+	
+	DungeonData.set_river_and_flood_tiles()
+	#Input.MOUSE_MODE_HIDDEN
 	terrain_set = DungeonData.floor_biome.BiomeID
 	#Max_Size = DungeonData.max_size
 	#Min_Size = DungeonData.min_size
@@ -1178,13 +1346,12 @@ func _ready() -> void:
 		nav_manager_ref = $"../Navigation_Manager"
 		nav_manager_ref.init()
 	
-	temp_items()
+	#temp_items()
 	#var i = -1
 	#for room in Rooms:
 	#	i+=1m
 	#	print("room ",i," doors:",room[3])
 
-var unit_manager_ref:Unit_Manager
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -1194,13 +1361,28 @@ func _physics_process(delta: float) -> void:
 
 func found_stairs():
 	pass #SEND SIGNAL? maybe call this on signal? update dungeon data, then call new level?
+
+func player_spawn_loc():
+	if player_spawnpoint == Vector2i(-1,-1):
+		#print("playerspawnloc; Rooms:",Rooms)
+		var room_index = randi_range(0,Rooms.size()-1)
+		var spawnroom = Rooms[room_index]
+		var spawnpoint = spawnroom[1].pick_random()
+		#print("walls:",spawnpoint[2])
+		Rooms[room_index][3].append(spawnpoint)
+		player_spawnpoint = spawnpoint
+		#print("PLAYER SPAWNPOINT ",spawnpoint)
 	
 
 func next_floor():
-	print("playerhp",get_tree().get_first_node_in_group("Player").HP_Current)
-	PlayerStats.p1_HP = get_tree().get_first_node_in_group("Player").HP_Current
-	DungeonData.open_level()
-	pass
+	if DungeonData.current_floor == DungeonData.max_floors:
+		DungeonData.finish_dungeon()
+	else:
+		print("playerhp",get_tree().get_first_node_in_group("Player").HP_Current)
+		#PlayerStats.p1_HP = get_tree().get_first_node_in_group("Player").HP_Current
+		DungeonData.save_player_data()
+		DungeonData.open_level_new()
+		pass
 
 func temp_items():
 	var item = preload("res://Objects/Items/GroundItem.tscn")
@@ -1210,6 +1392,7 @@ func temp_items():
 		var gold_chance = randf_range(0,DungeonData.gold_chance + DungeonData.pot_chance)
 		if gold_chance <= DungeonData.gold_chance:
 			new.is_gold = true
+			new.stack_size = randi_range(1,10)#+DungeonData.AREA_LEVEL)
 		else:
 			new.is_gold = false
 		var coords:Vector2i
@@ -1220,13 +1403,14 @@ func temp_items():
 				coords = tile
 				valid = true
 		new.global_position = Global.grid_to_pos(coords)
-		add_child(new)
-		get_child(-1)._init()
+		
+		$"../GroundItem_Manager".add_child(new)
+		$"../GroundItem_Manager".get_child(-1)._init()
 
 func spawn_key_item(data:ItemData,loc:Vector2i):
 	var item = preload("res://Objects/Items/GroundItem.tscn")
 	var new = item.instantiate()
 	new.ITEM_DATA = data
 	new.global_position = Global.grid_to_pos(loc)
-	add_child(new)
-	get_child(-1)._init()
+	$"../GroundItem_Manager".add_child(new)
+	$"../GroundItem_Manager".get_child(-1)._init()

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=11 format=3 uid="uid://cvxeww234qyuw"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_5vpkm"]
+[ext_resource type="Resource" uid="uid://dgm8dna5mwt7q" path="res://Resources/Units/Enemy/Stats_EnemyMagic.tres" id="2_owjx2"]
+[ext_resource type="Resource" uid="uid://dunj0e8tqw7uv" path="res://Resources/Units/Enemy/Stats_EnemyMelee.tres" id="3_xrpiv"]
+[ext_resource type="Resource" uid="uid://brn8pf5kf160g" path="res://Resources/Units/Enemy/Stats_EnemyRanged.tres" id="4_xnkws"]
+[ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion.tres" id="5_0gl05"]
+[ext_resource type="Resource" uid="uid://b1mex6jfj2b7r" path="res://Resources/Units/Enemy/Stats_RareEnemyTest.tres" id="5_vf5or"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/Biome.gd" id="6_4e5jn"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="6_fsiy7"]
+[ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Other/Gold.tres" id="6_ltjou"]
+[ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="7_tcqu0"]
+
+[resource]
+script = ExtResource("6_4e5jn")
+BiomeID = 0
+Unique_Rooms = Array[Resource]([])
+Common_Enemies = Array[ExtResource("1_5vpkm")]([ExtResource("2_owjx2"), ExtResource("3_xrpiv"), ExtResource("4_xnkws")])
+Rare_Enemies = Array[ExtResource("1_5vpkm")]([ExtResource("5_vf5or"), ExtResource("7_tcqu0")])
+Common_Items = Array[ExtResource("6_fsiy7")]([ExtResource("6_ltjou"), ExtResource("5_0gl05")])
+Rare_Items = Array[ExtResource("6_fsiy7")]([])
+Wandering_Boss = true
+Flooded = true
+FloodTile = 1
+RiverTile = 0
+RoomDensity = 0
+RoomSize = 0
+RoundRooms = true

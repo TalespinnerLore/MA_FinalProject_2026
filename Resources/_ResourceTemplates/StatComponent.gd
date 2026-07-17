@@ -5,9 +5,14 @@ extends Resource
 @export var Sprite:Texture2D
 @export var BasicAttack:AbilityData
 @export var UnitName:String
-
+enum TYPE{MORTAL,UNDEAD,ELEMENTAL,CONSTRUCT,BEAST,WILDLING}
+@export var CreatureType:TYPE
+enum ElementType {FIRE,WATER,EARTH,AIR,FORCE,LIGHT,DARK}
+@export var Element:ElementType = ElementType.FORCE
 #@export var drop_held_equipment := false
 @export var unit_specific_drops:Array[ItemData]
+
+@export var elem_palettes:Array[Texture2D]
 
 @export_category('Level-Up Stats')
 @export var STR_up:int = 0
@@ -68,9 +73,12 @@ extends Resource
 
 
 func get_levelup_stats(level):
-	var BaseStats = [STR,DEX,VIT,MAG,DEF,LUK]
+	var BaseStats = [STR_up,DEX_up,VIT_up,MAG_up,DEF_up,LUK_up]
 	for stat in BaseStats:
 		stat*=level
+	var base = [STR,DEX,VIT,MAG,DEF,LUK]
+	for i in range(6):
+		BaseStats[i]+=base[i]
 	return BaseStats
 
 func calc_template_stats():

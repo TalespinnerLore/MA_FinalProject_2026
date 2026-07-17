@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxak4lcj7n2l1"]
+[gd_scene load_steps=6 format=3 uid="uid://dxak4lcj7n2l1"]
 
 [ext_resource type="Texture2D" uid="uid://do7xtfbiq5htq" path="res://Art/2D_images/gold_stack_large.png" id="1_x68m1"]
 [ext_resource type="Script" path="res://Objects/Items/ground_item.gd" id="2_o0egd"]
+[ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="3_bcnga"]
+[ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Other/Gold.tres" id="3_opqph"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsj26"]
 size = Vector2(8, 8)
@@ -9,6 +11,7 @@ size = Vector2(8, 8)
 [node name="GroundItem" type="Sprite2D"]
 texture = ExtResource("1_x68m1")
 script = ExtResource("2_o0egd")
+ITEM_DATA = ExtResource("3_opqph")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
@@ -16,5 +19,18 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_bsj26")
+debug_color = Color(0.960217, 2.59906e-06, 0.51727, 0.42)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+theme = ExtResource("3_bcnga")
+theme_override_constants/outline_size = 4
+text = "2"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

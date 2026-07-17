@@ -65,7 +65,7 @@ enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_R
 ####################################################
 #Experience
 @export_category('XP Stats')
-@export var UnitLevel:int = 0
+@export var UnitLevel:int = 1
 @export var XP:int = 0
 @export var XP_to_Level:int = 50
 #var XP_to_Level_0to1 = 50
@@ -186,7 +186,7 @@ func calc_stats_with_boost():
 	Ranged_Mult = 1.0 + 0.02*(DEX+DEX_boost)
 	Base_Mag_ATK = MAG+MAG_boost
 	Base_Phys_DEF = DEF+DEF_boost
-	Base_Mag_DEF = (Base_Mag_ATK/2.0) + (Base_Phys_DEF/2.0)
+	Base_Mag_DEF = (Base_Mag_ATK*0.75) + (Base_Phys_DEF*0.25)
 	Def_Mult = 1.0 + 0.02*(DEF+DEF_boost)
 	Reroll_Chance = 0.01*(LUK+LUK_boost)
 	apply_calc_stat_boosts()
@@ -466,37 +466,44 @@ func _physics_process(delta: float) -> void:
 		#	
 
 func use_ability(index):
-	connect_dialogue()
-	match index:
-		0:
-			emit_signal("attack_start",$Abilities.BasicAttack,self)
-			combattext(str(self.name," uses ",$Abilities.BasicAttack.ability_name,"!"))
-		1:
-			emit_signal("attack_start",$Abilities.Slot_1,self)
-			combattext(str(self.name," uses ",$Abilities.Slot_1.ability_name,"!"))
-		2:
-			emit_signal("attack_start",$Abilities.Slot_2,self)
-			combattext(str(self.name," uses ",$Abilities.Slot_2.ability_name,"!"))
-		3:
-			emit_signal("attack_start",$Abilities.Slot_3,self)
-			combattext(str(self.name," uses ",$Abilities.Slot_3.ability_name,"!"))
-		4:
-			emit_signal("attack_start",$Abilities.Slot_4,self)
-			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
-		5:
-			emit_signal("attack_start",$Abilities.WeaponAbility,self)
-			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
-		6:
-			emit_signal("attack_start",$Abilities.ArmourAbility,self)
-			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
-		7:
-			emit_signal("attack_start",$Abilities.TrinketAbility,self)
-			combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
-	action_used()
+	if Abilities.ability_usesB1234WAT[index] > 0:
+		if Abilities.ability_usesB1234WAT[index] < 100:
+			Abilities.ability_usesB1234WAT[index] -= 1
+		connect_dialogue()
+		match index:
+			0:
+				emit_signal("attack_start",$Abilities.BasicAttack,self)
+				combattext(str(self.name," uses ",$Abilities.BasicAttack.ability_name,"!"))
+			1:
+				emit_signal("attack_start",$Abilities.Slot_1,self)
+				combattext(str(self.name," uses ",$Abilities.Slot_1.ability_name,"!"))
+			2:
+				emit_signal("attack_start",$Abilities.Slot_2,self)
+				combattext(str(self.name," uses ",$Abilities.Slot_2.ability_name,"!"))
+			3:
+				emit_signal("attack_start",$Abilities.Slot_3,self)
+				combattext(str(self.name," uses ",$Abilities.Slot_3.ability_name,"!"))
+			4:
+				emit_signal("attack_start",$Abilities.Slot_4,self)
+				combattext(str(self.name," uses ",$Abilities.Slot_4.ability_name,"!"))
+			5:
+				emit_signal("attack_start",$Abilities.WeaponAbility,self)
+				combattext(str(self.name," uses ",$Abilities.WeaponAbility.ability_name,"!"))
+			6:
+				emit_signal("attack_start",$Abilities.ArmourAbility,self)
+				combattext(str(self.name," uses ",$Abilities.ArmourAbility.ability_name,"!"))
+			7:
+				emit_signal("attack_start",$Abilities.TrinketAbility,self)
+				combattext(str(self.name," uses ",$Abilities.TrinketAbility.ability_name,"!"))
+		action_used()
+	else:
+		push_error("Ability Out of Uses!")
+		pass
 
 func combattext(string):
 	$CombatText.text = str(string +"\n")
 
+const move_durations_onsc_offsc = [0.185,0.005]
 const tile_size = 32
 var sprite_node_pos_tween: Tween
 var move_duration:= 0.185
@@ -545,36 +552,36 @@ func check_move_input():
 		if Input.is_key_pressed(KEY_SHIFT):
 			if Input.is_action_pressed("up") and Input.is_action_pressed("left"):
 				_select_direction(Vector2.UP+Vector2.LEFT)
-				if ! $upleft.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+				if ! $upleft.is_colliding() and ! Input.is_key_pressed(KEY_TAB) and ! Input.is_key_pressed(KEY_CTRL):
 					_move(Vector2.UP+Vector2.LEFT)
 			elif Input.is_action_pressed("up") and Input.is_action_pressed("right"):
 				_select_direction(Vector2.UP+Vector2.RIGHT)
-				if ! $upright.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+				if ! $upright.is_colliding() and ! Input.is_key_pressed(KEY_TAB) and ! Input.is_key_pressed(KEY_CTRL):
 					_move(Vector2.UP+Vector2.RIGHT)
 			elif Input.is_action_pressed("down") and Input.is_action_pressed("left"):
 				_select_direction(Vector2.DOWN+Vector2.LEFT)
-				if ! $downleft.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+				if ! $downleft.is_colliding() and ! Input.is_key_pressed(KEY_TAB) and ! Input.is_key_pressed(KEY_CTRL):
 					_move(Vector2.DOWN+Vector2.LEFT)
 			elif Input.is_action_pressed("down") and Input.is_action_pressed("right"):
 				_select_direction(Vector2.DOWN+Vector2.RIGHT)
-				if ! $downright.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+				if ! $downright.is_colliding() and ! Input.is_key_pressed(KEY_TAB) and ! Input.is_key_pressed(KEY_CTRL):
 					_move(Vector2.DOWN+Vector2.RIGHT)
 		else:
 			if Input.is_action_pressed("up"):
 				_select_direction(Vector2.UP)
-				if ! $up.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+				if ! $up.is_colliding() and ! Input.is_key_pressed(KEY_TAB) and ! Input.is_key_pressed(KEY_CTRL):
 					_move(Vector2.UP)
 			elif Input.is_action_pressed("down"):
 				_select_direction(Vector2.DOWN)
-				if ! $down.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+				if ! $down.is_colliding() and ! Input.is_key_pressed(KEY_TAB) and ! Input.is_key_pressed(KEY_CTRL):
 					_move(Vector2.DOWN)
 			elif Input.is_action_pressed("left"):
 				_select_direction(Vector2.LEFT)
-				if ! $left.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+				if ! $left.is_colliding() and ! Input.is_key_pressed(KEY_TAB) and ! Input.is_key_pressed(KEY_CTRL):
 					_move(Vector2.LEFT)
 			elif Input.is_action_pressed("right"):
 				_select_direction(Vector2.RIGHT)
-				if ! $right.is_colliding() and ! Input.is_key_pressed(KEY_TAB):
+				if ! $right.is_colliding() and ! Input.is_key_pressed(KEY_TAB) and ! Input.is_key_pressed(KEY_CTRL):
 					_move(Vector2.RIGHT)
 			pass
 	
@@ -685,8 +692,12 @@ func set_spawn(spawnpoint):
 
 @onready var HP_Module = $Sprite2D/HP_module
 
-func _ready():
+@onready var Abilities = $Abilities
 
+func _ready():
+	if ! $VisibleOnScreenNotifier2D.is_on_screen():
+		_on_visible_on_screen_notifier_2d_screen_exited()
+	
 	pass
 
 #######################################
@@ -761,7 +772,7 @@ func _on_turn_start() -> void:
 			
 			pass #wait for instructions
 		else:
-			print("team AI turn not yet implemented")
+			print("player team AI turn not yet implemented")
 			pass
 	else:
 		await get_tree().create_timer(0.05).timeout
@@ -791,6 +802,7 @@ func AI_turn_enemy():
 				#print(Global.dir8)
 				#print("non-coll: ",non_coll, " facing: ",facing)
 				#print("has facing")
+				print("enemAI; onscreen-",$VisibleOnScreenNotifier2D.is_on_screen()," moverate-",move_duration)
 				_move(facing)
 			elif non_coll.size() <= 0:
 				print("AI unit is surrounded, can't move")
@@ -799,6 +811,7 @@ func AI_turn_enemy():
 				var new_dir = non_coll.pick_random()
 				facing = new_dir
 				$Sprite2D/pointer.look_at(self.global_position+(Vector2(facing)*Vector2(32,32)))
+				print("enemAI; onscreen-",$VisibleOnScreenNotifier2D.is_on_screen()," moverate-",move_duration)
 				_move(facing)
 			action_used()
 			pass
@@ -807,8 +820,7 @@ func AI_turn_enemy():
 			#choose_ability() ##score abilities for viability, choose 1, use it.
 			#print("AI attacks")
 			connect_dialogue()
-			emit_signal("attack_start",$Abilities.BasicAttack,self)
-			action_used()
+			use_ability(0)
 		pass
 	else:
 		#if path.size() < 1:
@@ -872,3 +884,11 @@ func connect_dialogue():
 	waiting_for_dialogue = true
 	if self != null:
 		dialogue_manager_ref.connect_to_unit(self)
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	move_duration = move_durations_onsc_offsc[0]
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	move_duration = move_durations_onsc_offsc[1]

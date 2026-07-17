@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=4 format=3 uid="uid://ht133k0aitwq"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=5 format=3 uid="uid://ht133k0aitwq"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_b5sfj"]
 [ext_resource type="Resource" uid="uid://d02ns3e6v636q" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres" id="1_n4n4l"]
 [ext_resource type="Texture2D" uid="uid://bixa6lgv0t1kx" path="res://Art/UnitSprites/BasicCharacter_mage.png" id="2_xv6od"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="4_phm35"]
 
 [resource]
 script = ExtResource("1_b5sfj")
 Sprite = ExtResource("2_xv6od")
 BasicAttack = ExtResource("1_n4n4l")
 UnitName = "Mage"
+unit_specific_drops = Array[ExtResource("4_phm35")]([])
 STR_up = 0
 DEX_up = 5
 VIT_up = 0
@@ -18,9 +20,9 @@ LUK_up = 0
 Free_Stats = 5
 Base_HP = 25
 STR = 5
-DEX = 10
+DEX = 5
 VIT = 5
-MAG = 10
+MAG = 5
 DEF = 5
 LUK = 5
 HP_Max = 10

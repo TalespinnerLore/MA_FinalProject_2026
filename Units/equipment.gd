@@ -21,38 +21,44 @@ func Attempt_Equip_to_Unit(Item:ItemData,ItemSource:SOURCE):
 			equipped_item = equipped_trinket
 		Item.GEAR_TYPE.N_A:
 			equipped_item = equipped_trinket
-		
+	print("check for equip attempt")
 	if check_has_equip_stats(Item):
-		if equipped_item != null:
-			if unit.Team == unit.Teams.PLAYER:
-				match ItemSource:
-					SOURCE.GROUND:
-						if PlayerStats.player_inventory.size() < PlayerStats.inventory_size:
-							PlayerStats.player_inventory.append([equipped_item,1])
-							match Item.GearType:
-								Item.GEAR_TYPE.ARMOUR:
-									equipped_armour = Item
-								Item.GEAR_TYPE.WEAPON:
-									equipped_weapon = Item
-								Item.GEAR_TYPE.TRINKET:
-									equipped_trinket = Item
-								Item.GEAR_TYPE.N_A:
-									equipped_trinket = Item
-						else:
-							print("Inventory is too full to unequip!")
-							success = false
-					SOURCE.INVENTORY:
-						PlayerStats.player_inventory.erase([Item,1])
-						PlayerStats.PlayerStats.player_inventory.append([equipped_item,1])
-						match Item.GearType:
-							Item.GEAR_TYPE.ARMOUR:
-								equipped_armour = Item
-							Item.GEAR_TYPE.WEAPON:
-								equipped_weapon = Item
-							Item.GEAR_TYPE.TRINKET:
-								equipped_trinket = Item
-							Item.GEAR_TYPE.N_A:
-								equipped_trinket = Item
+		print("meets stat conditions")
+		if unit.Team == unit.Teams.PLAYER:
+			print("is player unit")
+			match ItemSource:
+				#SOURCE.GROUND:
+				#	if PlayerStats.player_inventory.size() < PlayerStats.inventory_size:
+				#		if equipped_item != null:
+				#			PlayerStats.player_inventory.append([equipped_item,1])
+				#		match Item.GearType:
+				#			Item.GEAR_TYPE.ARMOUR:
+				#				equipped_armour = Item
+				#			Item.GEAR_TYPE.WEAPON:
+				#				equipped_weapon = Item
+				#			Item.GEAR_TYPE.TRINKET:
+				#				equipped_trinket = Item
+				#			Item.GEAR_TYPE.N_A:
+				#				equipped_trinket = Item
+				#	else:
+				#		print("Inventory is too full to unequip!")
+				#		success = false
+				SOURCE.INVENTORY:
+					#PlayerStats.player_inventory.erase([Item,1])
+					#PlayerStats.PlayerStats.player_inventory.append([equipped_item,1])
+					
+					PlayerStats.EquipGear_Player(Item,0)
+					match Item.GearType:
+						Item.GEAR_TYPE.ARMOUR:
+							equipped_armour = Item
+						Item.GEAR_TYPE.WEAPON:
+							equipped_weapon = Item
+						Item.GEAR_TYPE.TRINKET:
+							equipped_trinket = Item
+						Item.GEAR_TYPE.N_A:
+							equipped_trinket = Item
+					success = true
+			
 	else:
 		print("Not enought stats to equip this!")
 		success = false
@@ -73,7 +79,7 @@ func add_to_equip_slot(Item:ItemData):
 			equipped_trinket = Item
 			unit.ABILITIES.TrinketAbility = Item.ItemAbility
 
-	
+
 
 
 func check_has_equip_stats(Item:ItemData):
@@ -87,5 +93,5 @@ func check_has_equip_stats(Item:ItemData):
 	else:
 		return false
 
-func drop_item_on_floor(Item:ItemData):
-	pass
+func drop_item_on_floor_NOTinUSE(Item:ItemData):
+	pass #unnneeded

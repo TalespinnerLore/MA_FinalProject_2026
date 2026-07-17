@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=4 uid="uid://whnmxcba77ab"]
 
 [ext_resource type="Script" path="res://UI/Menus/player_inventory_ui.gd" id="1_8rh85"]
-[ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Items/Other/Gold.tres" id="2_l24b1"]
+[ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Other/Gold.tres" id="2_l24b1"]
 [ext_resource type="Texture2D" uid="uid://b3pex2aw1g2mg" path="res://Art/UI_Art/Frames/ui_bg_blueoutline.png" id="2_vjver"]
 [ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="3_o7siq"]
 [ext_resource type="Texture2D" uid="uid://bl85iqf1ey42v" path="res://Art/UI_Art/Frames/ui_bg_yellowdark.png" id="3_u546i"]
@@ -500,7 +500,7 @@ offset_bottom = 112.0
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Button" type="Button" parent="OptionsBox/VBoxContainer"]
+[node name="useButton" type="Button" parent="OptionsBox/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_o7siq")
 theme_override_constants/outline_size = 4
@@ -508,7 +508,7 @@ theme_override_font_sizes/font_size = 16
 text = "USE"
 flat = true
 
-[node name="Button2" type="Button" parent="OptionsBox/VBoxContainer"]
+[node name="giveButton" type="Button" parent="OptionsBox/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_o7siq")
 theme_override_constants/outline_size = 4
@@ -516,7 +516,7 @@ theme_override_font_sizes/font_size = 16
 text = "GIVE"
 flat = true
 
-[node name="Button3" type="Button" parent="OptionsBox/VBoxContainer"]
+[node name="dropButton" type="Button" parent="OptionsBox/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_o7siq")
 theme_override_constants/outline_size = 4
@@ -524,7 +524,8 @@ theme_override_font_sizes/font_size = 16
 text = "DROP"
 flat = true
 
-[node name="Button4" type="Button" parent="OptionsBox/VBoxContainer"]
+[node name="throwButton" type="Button" parent="OptionsBox/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("3_o7siq")
 theme_override_constants/outline_size = 4
@@ -532,5 +533,18 @@ theme_override_font_sizes/font_size = 16
 text = "THROW"
 flat = true
 
+[connection signal="pressed" from="InventoryBox/ItemContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="InventoryBox/ItemContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="InventoryBox/ItemContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="InventoryBox/ItemContainer/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="InventoryBox/ItemContainer/Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="InventoryBox/ItemContainer/Button6" to="." method="_on_button_6_pressed"]
+[connection signal="pressed" from="InventoryBox/ItemContainer/Button7" to="." method="_on_button_7_pressed"]
+[connection signal="pressed" from="InventoryBox/ItemContainer/Button8" to="." method="_on_button_8_pressed"]
+[connection signal="pressed" from="InventoryBox/ItemContainer/Button9" to="." method="_on_button_9_pressed"]
+[connection signal="pressed" from="InventoryBox/ItemContainer/Button10" to="." method="_on_button_10_pressed"]
 [connection signal="pressed" from="InventoryBox/LeftButton" to="." method="_on_left_button_pressed"]
 [connection signal="pressed" from="InventoryBox/RightButton" to="." method="_on_right_button_pressed"]
+[connection signal="pressed" from="OptionsBox/VBoxContainer/useButton" to="." method="_on_use_button_pressed"]
+[connection signal="pressed" from="OptionsBox/VBoxContainer/giveButton" to="." method="_on_give_button_pressed"]
+[connection signal="pressed" from="OptionsBox/VBoxContainer/dropButton" to="." method="_on_drop_button_pressed"]

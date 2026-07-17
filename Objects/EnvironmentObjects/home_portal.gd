@@ -1,0 +1,42 @@
+class_name HomePortal
+extends Sprite2D
+
+signal player_found_portal
+signal player_proceeding
+
+func enable_disable():
+	$Area2D/CollisionShape2D.set_deferred("disabled", ! $Area2D/CollisionShape2D.disabled)
+	visible = ! visible
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is Unit_Instance:
+		if body.Team == body.Teams.PLAYER:
+			emit_signal("player_found_portal")
+
+			pass #SHOW DO YOU WANT TO GO TO THE NEXT FLOOR POPUP
+	pass # Replace with function body.
+
+@onready var env_object_manager_ref:EnvironmentObjectManager = get_tree().get_first_node_in_group("ENVIRONMENT_OBJECT_MANAGER")
+@onready var yn_UI:yes_no_UI = get_tree().get_first_node_in_group("Yes_No_UI")
+
+func init() -> void:
+	yn_UI = get_tree().get_first_node_in_group("Yes_No_UI")
+	yn_UI.connect_portal(self)
+	yn_UI
+	env_object_manager_ref.portal_ref = self
+	if env_object_manager_ref != null:
+		self.reparent(env_object_manager_ref)
+		#env_object_manager_ref.unpassable_tiles.append(Global.pos_to_grid(self.global_position))
+		#^^^unneeded, all units may walk over the stairs.
+
+
+
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	return #why does this function exist?
+	if body is Unit_Instance:
+		if body.Team == body.Teams.PLAYER:
+			emit_signal("player_found_portal")
+
+	pass # Replace with function body.

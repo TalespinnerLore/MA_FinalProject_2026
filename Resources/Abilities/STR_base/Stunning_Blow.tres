@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://53jlaccfbifb"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://53jlaccfbifb"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_8qidh"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_5an6i"]
 [ext_resource type="Texture2D" uid="uid://c4u8f5l3g4xbx" path="res://Art/VFX Sprites/vfx_force.png" id="3_gbfjw"]
+[ext_resource type="Resource" uid="uid://b4fce3e1vs38n" path="res://Resources/StatusEffects/Stunned.tres" id="3_q6wq3"]
 
 [resource]
 script = ExtResource("1_8qidh")
@@ -18,7 +19,7 @@ damage_type = 1
 damaging = true
 healing = false
 creates_shield = false
-inflict_status = Array[ExtResource("2_5an6i")]([])
+inflict_status = Array[ExtResource("2_5an6i")]([ExtResource("3_q6wq3")])
 STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
 BaseStats_required = [0, 0, 0, 0, 0, 0]
 Abilities_required = Array[ExtResource("1_8qidh")]([])

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://csh5chvdaqi2u"]
+
+[ext_resource type="Texture2D" uid="uid://d1722j20hns2m" path="res://Art/2D_images/temp_portal.png" id="1_c1egi"]
+[ext_resource type="Script" path="res://Objects/EnvironmentObjects/home_portal.gd" id="2_ja0lq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0npy"]
+size = Vector2(8, 8)
+
+[node name="HomePortal" type="Sprite2D"]
+texture = ExtResource("1_c1egi")
+script = ExtResource("2_ja0lq")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_o0npy")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

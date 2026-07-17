@@ -62,7 +62,8 @@ func display_text_lines(action_complete:bool):
 		$ColorRect/Label2.text = line
 		print("= ",line)
 		if line != '':
-			await get_tree().create_timer(0.25*textspeed).timeout
+			if is_instance_valid(get_tree()):
+				await get_tree().create_timer(0.25*textspeed).timeout
 	reset_display_text()
 	print("===ending dialogue===")
 	if action_complete:

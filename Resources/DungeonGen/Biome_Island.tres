@@ -1,11 +1,15 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=7 format=3 uid="uid://ba8n2gwo38syp"]
+[gd_resource type="Resource" script_class="Biome" load_steps=11 format=3 uid="uid://ba8n2gwo38syp"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/Biome.gd" id="1_cs21w"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_tmr2p"]
 [ext_resource type="Resource" uid="uid://dgm8dna5mwt7q" path="res://Resources/Units/Enemy/Stats_EnemyMagic.tres" id="2_c4iep"]
 [ext_resource type="Resource" uid="uid://dunj0e8tqw7uv" path="res://Resources/Units/Enemy/Stats_EnemyMelee.tres" id="3_xd75s"]
 [ext_resource type="Resource" uid="uid://brn8pf5kf160g" path="res://Resources/Units/Enemy/Stats_EnemyRanged.tres" id="4_loclw"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="5_lgpex"]
 [ext_resource type="Resource" uid="uid://b1mex6jfj2b7r" path="res://Resources/Units/Enemy/Stats_RareEnemyTest.tres" id="5_qb8bu"]
+[ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Other/Gold.tres" id="6_1ruva"]
+[ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion.tres" id="7_ymmp5"]
+[ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="8_nysnv"]
 
 [resource]
 script = ExtResource("1_cs21w")
@@ -13,9 +17,9 @@ BiomeID = 2
 Unique_Rooms = Array[Resource]([])
 Common_Enemies = Array[ExtResource("1_tmr2p")]([ExtResource("2_c4iep"), ExtResource("3_xd75s"), ExtResource("4_loclw")])
 Rare_Enemies = Array[ExtResource("1_tmr2p")]([ExtResource("5_qb8bu")])
-Common_Items = Array[Resource]([])
-Rare_Items = Array[Resource]([])
-Mini_Boss = false
+Common_Items = Array[ExtResource("5_lgpex")]([ExtResource("6_1ruva"), ExtResource("7_ymmp5")])
+Rare_Items = Array[ExtResource("5_lgpex")]([ExtResource("7_ymmp5")])
+Mini_Boss = ExtResource("8_nysnv")
 Wandering_Boss = false
 Flooded = true
 FloodTile = 0

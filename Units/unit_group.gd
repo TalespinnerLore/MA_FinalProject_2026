@@ -25,8 +25,8 @@ func init() -> void:
 		#print(child)
 		init_child(child)
 		UnitManager.Active_Units.append(child)
-	
-	temp_distribute()
+	if is_player_controlled:
+		temp_distribute()
 	
 	if get_children().size() < DungeonData.max_wandering_units and ! is_player_controlled:
 		for i in DungeonData.max_wandering_units/2:
@@ -49,19 +49,33 @@ func init_child(child):
 		pass
 
 func temp_distribute():
+	print("units to distribute: ",get_child_count())
 	for unit in get_children():
-		var validspawn = false
-		var spawnpoint:Vector2i
-		while validspawn == false:
-			spawnpoint = $"../../TileMapLayer".cells_Ground.pick_random()
-			if $"../../TileMapLayer".AllHallTiles.has(spawnpoint) or $"../../TileMapLayer".cells_Wall.has(spawnpoint):
-				validspawn = false
-			else:
-				#print($"../../TileMapLayer".get_cell_tile_data(spawnpoint).terrain_set, "<- terrain ID, ",spawnpoint)
-				unit.set_spawn(spawnpoint)
-				#$"../../TileMapLayer".what_is_this_tile(spawnpoint.x,spawnpoint.y)
-				validspawn = true
-
+		if is_player_controlled and DungeonData.current_floor == DungeonData.max_floors:
+			unit.set_spawn(get_parent().tilemaplayer_ref.player_spawnpoint)
+			#print("y no set player spawn? sp:",get_parent().tilemaplayer_ref.player_spawnpoint)
+		else:
+			var validspawn = false
+			var spawnpoint:Vector2i
+			while validspawn == false:
+				spawnpoint = $"../../TileMapLayer".cells_Ground.pick_random()
+				if is_player_controlled:
+					#print("isplayer, use spawnpoint")
+					spawnpoint = get_parent().player_spawnpoint
+					unit.set_spawn(spawnpoint)
+					validspawn = true
+					break
+					#print("spawnpoint: ",spawnpoint)
+					#print($"../../TileMapLayer".what_is_this_tile(spawnpoint.x,spawnpoint.y))
+				if $"../../TileMapLayer".AllHallTiles.has(spawnpoint) or $"../../TileMapLayer".cells_Wall.has(spawnpoint):
+					validspawn = false
+					print("invalidspawn")
+				else:
+					#print($"../../TileMapLayer".get_cell_tile_data(spawnpoint).terrain_set, "<- terrain ID, ",spawnpoint)
+					unit.set_spawn(spawnpoint)
+					#$"../../TileMapLayer".what_is_this_tile(spawnpoint.x,spawnpoint.y)
+					validspawn = true
+		
 
 func take_turn_team() -> void:
 	current_unit_index = -1

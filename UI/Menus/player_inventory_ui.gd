@@ -7,8 +7,12 @@ var tile_pages_max = 3
 @export var tile_page = 0
 var inv_content = PlayerStats.player_inventory
 @onready var inv_container = $InventoryBox/ItemContainer
-
+@onready var ItemManager:GroundItemManager = $"../../GroundItem_Manager"
 @export var selected_item:ItemData
+@export var selected_inv_slot:= 0
+
+@onready var unit_manager_ref:Unit_Manager =  get_tree().get_first_node_in_group("UNIT_MANAGER")
+var player:Unit_Instance
 
 var weapon_icon = preload("res://Art/UI_Art/ui_icon_weapon.png")
 var armour_icon = preload("res://Art/UI_Art/ui_icon_armour.png")
@@ -25,6 +29,8 @@ var key_item_icon = preload("res://Art/UI_Art/ui_icon_keyitem.png")
 func _ready() -> void:
 	self.visible = false
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	unit_manager_ref = get_tree().get_first_node_in_group("UNIT_MANAGER")
+	player = unit_manager_ref.get_child(0).get_child(0)
 	on_item_selected(selected_item)
 	_on_left_button_pressed()
 	load_item_inventory()
@@ -36,6 +42,13 @@ func _process(delta: float) -> void:
 var gold_val := 0
 
 func open_close():
+	load_item_inventory()
+	if inv_content.size() > 0:
+		selected_item = inv_content[0][0]
+		selected_inv_slot = 0
+	else:
+		selected_item = load("res://Resources/Items/Other/Gold.tres")
+		selected_inv_slot = 0
 	self.visible = ! self.visible
 	pause_level()
 
@@ -178,3 +191,63 @@ func on_item_selected(data:ItemData):
 	#5 I SHOULD HAVE MADE RESOURCE SUBTYPE FUUUUUUUCK
 	#6 \add affinity text here at some point
 	)
+
+
+func _on_use_button_pressed() -> void:
+	if selected_item.ConsType != ItemData.CONS_TYPE.N_A:
+		player.ability_effect_calculations(selected_item.ItemAbility,player)
+		PlayerStats.player_inventory[selected_inv_slot][1] -= 1
+		if PlayerStats.player_inventory[selected_inv_slot][1] <= 0:
+			PlayerStats.Remove_from_Player_Inv_stack(selected_item,selected_inv_slot)
+		open_close()
+	pass # Replace with function body.
+
+
+func _on_give_button_pressed() -> void:
+	if selected_item.ItemName != 'Gold':
+		print("attempt equip")
+		player.EQUIPMENT.Attempt_Equip_to_Unit(selected_item,player.EQUIPMENT.SOURCE.INVENTORY)
+		load_item_inventory()
+	#solve the issue of stcking consumables having the whole stack deleted later.
+	##make stack amount = ability uses for the comsumable on the UI or something
+	pass # Replace with function body.
+
+
+func _on_drop_button_pressed() -> void:
+	if selected_item.ItemName != 'Gold':
+		var dropped = ItemManager.drop_item(player.self_coords+player.facing,selected_item,\
+		PlayerStats.player_inventory[selected_inv_slot][1])
+
+		
+		if dropped:
+			PlayerStats.Remove_from_Player_Inv_stack(selected_item,selected_inv_slot)
+			load_item_inventory()
+		else:
+			print("There's no space to drop this!")
+	pass # Replace with function body.
+
+
+func _on_button_mouse_entered() -> void:
+	pass # Replace with function body.
+
+
+func _on_button_pressed() -> void:
+	on_item_selected(inv_content[10*inv_page + 0][0])
+func _on_button_2_pressed() -> void:
+	on_item_selected(inv_content[10*inv_page + 1][0])
+func _on_button_3_pressed() -> void:
+	on_item_selected(inv_content[10*inv_page + 2][0])
+func _on_button_4_pressed() -> void:
+	on_item_selected(inv_content[10*inv_page + 3][0])
+func _on_button_5_pressed() -> void:
+	on_item_selected(inv_content[10*inv_page + 4][0])
+func _on_button_6_pressed() -> void:
+	on_item_selected(inv_content[10*inv_page + 5][0])
+func _on_button_7_pressed() -> void:
+	on_item_selected(inv_content[10*inv_page + 6][0])
+func _on_button_8_pressed() -> void:
+	on_item_selected(inv_content[10*inv_page + 7][0])
+func _on_button_9_pressed() -> void:
+	on_item_selected(inv_content[10*inv_page + 8][0])
+func _on_button_10_pressed() -> void:
+	on_item_selected(inv_content[10*inv_page + 9][0])

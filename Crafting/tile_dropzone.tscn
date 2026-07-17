@@ -4,9 +4,10 @@
 [ext_resource type="Script" path="res://Crafting/tile_dropzone.gd" id="1_rfhjc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cypve"]
-size = Vector2(16, 16)
+size = Vector2(21.3333, 21.3333)
 
 [node name="TileDropzone" type="StaticBody2D" groups=["dropzone"]]
+input_pickable = true
 script = ExtResource("1_rfhjc")
 rarity = 2
 
@@ -19,6 +20,7 @@ vframes = 2
 [node name="filled_sprite" type="Sprite2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["dropzone"]]
+position = Vector2(-3.57628e-07, -3.57628e-07)
 scale = Vector2(0.75, 0.75)
 shape = SubResource("RectangleShape2D_cypve")
 

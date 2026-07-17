@@ -1,10 +1,11 @@
 extends TextureRect
-
+class_name Loadscreen
 enum TEST{TEST1,TEST2}
 
 func _ready() -> void:
 	var test = TEST.keys()
-	var biomedata:Biome = DungeonData.current_biome
+	var biomedata:Biome = DungeonData.floor_biome
+	print(biomedata)
 	var bname = Biome.BIOMES.keys()[biomedata.BiomeID] 
 	$LoadscreenLabel.text = str(bname,"\n","FLOOR ",DungeonData.current_floor,"/",DungeonData.max_floors)
 	#ENUM_NAME.keys()[enum_val]

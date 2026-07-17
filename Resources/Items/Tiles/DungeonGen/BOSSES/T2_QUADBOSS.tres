@@ -68,3 +68,4 @@ Boss_T1_Force = 0
 Boss_T2_Generic = 0
 Boss_T2_QuadElement = 1
 Boss_T2_Force = 0
+has_boss = true

@@ -33,11 +33,13 @@ var monster_house = false
 @export var nav_manager_ref:NavigationManager
 @export var dialogue_manager_ref:DialogueManager
 
+var player_spawnpoint:Vector2i
 ##########################
 ########## INIT ##########
 
 func init() -> void:
-	#print("UNIT MANAGER INITIALIZED")
+	print("UNIT MANAGER INITIALIZED, floor ",DungeonData.current_floor,\
+	"maxfloors: ",DungeonData.max_floors," enem cap:",DungeonData.max_wandering_units)
 	tilemaplayer_ref = get_tree().get_first_node_in_group("TILEMAP")
 	nav_manager_ref = get_tree().get_first_node_in_group("NAVIGATION_MANAGER") 
 	dialogue_manager_ref = get_tree().get_first_node_in_group("DIALOGUE_MANAGER")
@@ -49,13 +51,26 @@ func init() -> void:
 		#child.defeated.connect(_on_group_defeated)
 	if monster_house:
 		monster_house = false
-		if DungeonData.current_floor == DungeonData.max_floors:
-			pass
-		else:
-			for i in range(DungeonData.max_wandering_units):
-				spawn_unit(all_groups[1])
-	
-	_step_turn()
+		for i in range(DungeonData.max_wandering_units):
+			spawn_unit(all_groups[1])
+	if DungeonData.current_floor == DungeonData.max_floors:
+		print("final floor[0na,1mini/boss,2monhouse]",DungeonData.final_floor)
+		#all_groups[0].get_child(0).global_position = Global.grid_to_pos(tilemaplayer_ref.player_spawnpoint)
+		match DungeonData.final_floor:
+			DungeonData.FINAL_FLOOR.N_A:
+				print("dungeon boss NA")
+			DungeonData.FINAL_FLOOR.MON_HOUSE:
+				print("monster house boss level")
+				for i in range(DungeonData.max_wandering_units):
+					spawn_unit(all_groups[1])
+			DungeonData.FINAL_FLOOR.MINI_BOSS:
+				print("dungeon miniboss spawn")
+				spawn_specific_unit(all_groups[1],DungeonData.boss,tilemaplayer_ref.boss_spawn_loc)
+			DungeonData.FINAL_FLOOR.BOSS:
+				print("dungeon boss spawn")
+				spawn_specific_unit(all_groups[1],DungeonData.boss,tilemaplayer_ref.boss_spawn_loc)
+			
+	_step_turn() 
 
 func _ready():
 	#init()
@@ -72,9 +87,11 @@ func spawn_unit(group:Unit_Group):
 	if group.is_player_controlled == false:
 		var rare_chance = randf()
 		if rare_chance > 0.95:
+			print("spawn_unit; RE:",DungeonData.Rare_Enemies)
 			new_unit.UnitStats = DungeonData.Rare_Enemies.pick_random()
 		else:
 			#print(DungeonData.Common_Enemies)
+			print("spawn_unit; CE:",DungeonData.Common_Enemies)
 			new_unit.UnitStats = DungeonData.Common_Enemies.pick_random()
 #		print("Basicattack", new_unit.UnitStats)
 		var placing = false
@@ -82,6 +99,7 @@ func spawn_unit(group:Unit_Group):
 			placing = true
 #			print("null test tilemap ref",tilemaplayer_ref)
 			var try = tilemaplayer_ref.AllRoomTiles.pick_random()
+			#print(" try coord:",try)#"all:",tilemaplayer_ref.AllRoomTiles,
 			for unit in Active_Units:
 				if is_instance_valid(unit):
 					if unit.self_coords == try:
@@ -93,6 +111,16 @@ func spawn_unit(group:Unit_Group):
 		group.get_child(-1).init(group.is_player_controlled)
 	pass
 
+func spawn_specific_unit(group:Unit_Group,unitdata:StatComponent,tile:Vector2i):
+	var new_unit:Unit_Instance = unit_scene.instantiate()
+	new_unit.UnitStats = unitdata
+	new_unit.position = Global.grid_to_pos(tile)
+	new_unit.UnitLevel = DungeonData.AREA_LEVEL+DungeonData.UNIT_LEVEL_Boost
+	Active_Units.append(new_unit)
+	group.add_child(new_unit)
+	print("spawn spec unit; name:",unitdata.UnitName)
+	group.get_child(-1).init(group.is_player_controlled)
+	pass
 ###########################
 ########## TURNS ##########
 
@@ -117,9 +145,12 @@ func _step_turn() -> void:
 		_begin_turn()
 
 func _begin_turn() -> void:
+	
 	turn_counter += 1
-	if turn_counter%20 == 0 and $Enemy_Group.get_child_count() < DungeonData.max_wandering_units:
+	#print("TURN COUNTER - ",turn_counter) #vvv triggers every 30 player turns/steps vvv
+	if turn_counter%60 == 0 and $Enemy_Group.get_child_count() < DungeonData.max_wandering_units:
 		spawn_unit(all_groups[1]) #enemy group
+		#print("Current enemies: ",$Enemy_Group.get_child_count(),", Max enemies: ",DungeonData.max_wandering_units)
 #	print("HITS MANAGER BEGIN TURN")
 	current_group.take_turn_team()
 

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dngq1ki03hoi5" path="res://Art/UI_Art/EnvironmentSprites/podium_tile.png" id="1_nclts"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gb6pr"]
+size = Vector2(20, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1f8ou"]
 
@@ -13,13 +14,15 @@ disable_mode = 1
 collision_mask = 0
 script = ExtResource("1_mu53l")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_gb6pr")
+debug_color = Color(0.918288, 6.87307e-05, 0.702664, 0.42)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 8)
 texture = ExtResource("1_nclts")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-y_sort_enabled = true
-shape = SubResource("RectangleShape2D_gb6pr")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

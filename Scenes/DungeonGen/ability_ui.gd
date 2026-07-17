@@ -25,6 +25,10 @@ func _process(delta: float) -> void:
 func open_close():
 	self.visible = ! self.visible
 	load_data()
+	if self.visible:
+		Input.MOUSE_MODE_VISIBLE
+	else:
+		Input.MOUSE_MODE_HIDDEN
 	#pause_level()
 
 func pause_level():
@@ -41,7 +45,7 @@ func load_data():
 			#print(PlayerStats.p1_equipped_abilities.size())
 			#print(PlayerStats.p1_ability_usesB1234WAT.size())
 			for box:UI_abilitybox in $Boxes.get_children():
-				print("index: ",index)
+				#print("index: ",index)
 				box.data = PlayerStats.p1_equipped_abilities[index]
 				box.uses_remaining = PlayerStats.p1_ability_usesB1234WAT[index+1]
 				box.set_textures()

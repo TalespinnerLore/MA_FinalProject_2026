@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyList" load_steps=3 format=3 uid="uid://1l2h3cnxakt"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_wg6ee"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/EnemyTypeList.gd" id="2_6bgku"]
+
+[resource]
+script = ExtResource("2_6bgku")
+CreatureType = 0
+is_rare = false
+Enemies = Array[ExtResource("1_wg6ee")]([])

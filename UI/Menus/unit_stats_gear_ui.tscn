@@ -28,7 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://bndblypkjtmdm" path="res://Art/UI_Art/AbilityType/ui_phys_ranged.png" id="22_ujqjo"]
 [ext_resource type="Texture2D" uid="uid://0l35ou02nh7y" path="res://Art/UI_Art/AoE/ui_aoe_line.png" id="23_d0vw7"]
 
-[node name="CharacterScreen_UI" type="Control"]
+[node name="CharacterScreen_UI" type="Control" groups=["description"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -72,6 +72,18 @@ theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 16
 text = "CharName
 LVL 99 ClassName"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPLabel" type="Label" parent="gearInventoryBox"]
+layout_mode = 0
+offset_top = 48.0
+offset_right = 144.0
+offset_bottom = 72.0
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 8
+text = "HP: 25/25"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -470,6 +482,7 @@ patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
+script = ExtResource("6_cblyr")
 
 [node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox7"]
 layout_mode = 0
@@ -512,6 +525,7 @@ theme_override_constants/separation = 1
 [node name="AbilityBox" type="NinePatchRect" parent="StatAbilityBox/AbilityBoxContainer"]
 custom_minimum_size = Vector2(128, 16)
 layout_mode = 2
+mouse_filter = 1
 texture = ExtResource("9_wjtch")
 patch_margin_left = 5
 patch_margin_top = 5
@@ -543,23 +557,25 @@ offset_bottom = 16.0
 texture = ExtResource("14_s7mt7")
 stretch_mode = 3
 
-[node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox"]
+[node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox"]
 layout_mode = 0
 offset_left = 100.0
 offset_top = 1.0
 offset_right = 125.0
 offset_bottom = 17.0
+mouse_filter = 1
 theme = ExtResource("4_75ayx")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "[99/99]"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox"]
+[node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox"]
 layout_mode = 0
 offset_left = 42.0
 offset_right = 96.0
 offset_bottom = 18.0
+mouse_filter = 1
 theme = ExtResource("4_75ayx")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -3
@@ -571,6 +587,7 @@ autowrap_mode = 2
 [node name="AbilityBox2" type="NinePatchRect" parent="StatAbilityBox/AbilityBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+mouse_filter = 1
 texture = ExtResource("9_wjtch")
 patch_margin_left = 5
 patch_margin_top = 5
@@ -602,23 +619,25 @@ offset_bottom = 16.0
 texture = ExtResource("17_34xmf")
 stretch_mode = 3
 
-[node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox2"]
+[node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox2"]
 layout_mode = 0
 offset_left = 100.0
 offset_top = 1.0
 offset_right = 125.0
 offset_bottom = 17.0
+mouse_filter = 1
 theme = ExtResource("4_75ayx")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "[99/99]"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox2"]
+[node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox2"]
 layout_mode = 0
 offset_left = 42.0
 offset_right = 96.0
 offset_bottom = 18.0
+mouse_filter = 1
 theme = ExtResource("4_75ayx")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -3
@@ -630,6 +649,7 @@ autowrap_mode = 2
 [node name="AbilityBox3" type="NinePatchRect" parent="StatAbilityBox/AbilityBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+mouse_filter = 1
 texture = ExtResource("9_wjtch")
 patch_margin_left = 5
 patch_margin_top = 5
@@ -661,23 +681,25 @@ offset_bottom = 16.0
 texture = ExtResource("20_03t5d")
 stretch_mode = 3
 
-[node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox3"]
+[node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox3"]
 layout_mode = 0
 offset_left = 100.0
 offset_top = 1.0
 offset_right = 125.0
 offset_bottom = 17.0
+mouse_filter = 1
 theme = ExtResource("4_75ayx")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "[99/99]"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox3"]
+[node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox3"]
 layout_mode = 0
 offset_left = 42.0
 offset_right = 96.0
 offset_bottom = 18.0
+mouse_filter = 1
 theme = ExtResource("4_75ayx")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -3
@@ -689,6 +711,7 @@ autowrap_mode = 2
 [node name="AbilityBox4" type="NinePatchRect" parent="StatAbilityBox/AbilityBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+mouse_filter = 1
 texture = ExtResource("9_wjtch")
 patch_margin_left = 5
 patch_margin_top = 5
@@ -720,7 +743,7 @@ offset_bottom = 16.0
 texture = ExtResource("23_d0vw7")
 stretch_mode = 3
 
-[node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox4"]
+[node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox4"]
 layout_mode = 0
 offset_left = 100.0
 offset_top = 1.0
@@ -732,7 +755,7 @@ text = "[99/99]"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="uselimitLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox4"]
+[node name="abilitynameLabel" type="Label" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox4"]
 layout_mode = 0
 offset_left = 42.0
 offset_right = 96.0
@@ -769,7 +792,7 @@ patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 4
 
-[node name="NameOfThingLabel]" type="Label" parent="DescriptionBox"]
+[node name="NameOfThingLabel" type="Label" parent="DescriptionBox"]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 3.0
@@ -835,6 +858,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="ShowItemBox" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 336.0
 offset_top = -128.0
@@ -860,6 +884,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="OptionsBox" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 672.0
 offset_top = 128.0
@@ -909,3 +934,11 @@ theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 16
 text = "THROW"
 flat = true
+
+[connection signal="mouse_entered" from="gearInventoryBox/WeaponTextureSlot/WeaponTexture" to="." method="_on_weapon_texture_mouse_entered"]
+[connection signal="mouse_entered" from="gearInventoryBox/ArmourTextureSlot/ArmourTexture" to="." method="_on_armour_texture_mouse_entered"]
+[connection signal="mouse_entered" from="gearInventoryBox/TrinketTextureSlot/TrinketTexture" to="." method="_on_trinket_texture_mouse_entered"]
+[connection signal="mouse_entered" from="StatAbilityBox/AbilityBoxContainer/AbilityBox" to="StatAbilityBox/AbilityBoxContainer/AbilityBox" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="StatAbilityBox/AbilityBoxContainer/AbilityBox2" to="StatAbilityBox/AbilityBoxContainer/AbilityBox2" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="StatAbilityBox/AbilityBoxContainer/AbilityBox3" to="StatAbilityBox/AbilityBoxContainer/AbilityBox3" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="StatAbilityBox/AbilityBoxContainer/AbilityBox4" to="StatAbilityBox/AbilityBoxContainer/AbilityBox4" method="_on_mouse_entered"]

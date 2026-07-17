@@ -13,14 +13,42 @@ const basetile_fixed = preload("res://Crafting/DungeonCraftingTile.tscn")
 
 @export var TileID_NamedInventory = [["TEST",0],["FIRE",4],["WATER",4],["EARTH",4],["AIR",4],["FORCE",4],\
 ["VOLCANO",4],["ISLANDS",4],["MESA",4],["SKY_ISLANDS",4],\
-["RIVER",4],["LAKE",0],["ROUND_ROOMS",4],["DENSE_LAYOUT",2],["SPARSE_LAYOUT",2],["ALTERNATING_SIZE_ROOMS",0],["SMALL_ROOMS",2],["LARGE_ROOMS",2],\
-["CONSUMABLES",2],["GEAR",0],["LOCKBOXES",0],["WEAPONS",0],["ARMOUR",0],["TRINKETS",0],\
-["VANGUARD",0],["WARRIOR",0],["MAGE",0],["ROGUE",0],["HEALER",0],["JESTER",0],\
-["INCREASED_MOB_DENSITY",0],["INCREASED_GOLD",2],["INCREASED_XP",0],["DECREASED_MOB_DENSITY",0],["DECREASED_GOLD",0],["DECREASED_XP",0],\
-["BEASTS",0],["ELEMENTALS",0],["UNDEAD",0],["CONSTRUCTS",0],["MORTALS",0],["WILDLINGS",0],\
-["TREASURE_ROOM",0],["MINI_BOSS",1],["MONSTER_HOUSE",1],\
-["T1_BOSS",0],["T1_FIREBOSS",0],["T1_WATERBOSS",0],["T1_EARTHBOSS",0],["T1_AIRBOSS",0],["T1_FORCEBOSS",0],\
-["T2_BOSS",0],["T2_QUADBOSS",0],["T2_FORCEBOSS",0]]
+["RIVER",4],["LAKE",2],["ROUND_ROOMS",4],["DENSE_LAYOUT",2],["SPARSE_LAYOUT",2],["ALTERNATING_SIZE_ROOMS",0],["SMALL_ROOMS",2],["LARGE_ROOMS",2],\
+["CONSUMABLES",2],["GEAR",2],["LOCKBOXES",2],["WEAPONS",2],["ARMOUR",2],["TRINKETS",2],\
+["VANGUARD",1],["WARRIOR",1],["MAGE",1],["ROGUE",1],["HEALER",1],["JESTER",1],\
+["INCREASED_MOB_DENSITY",2],["INCREASED_GOLD",2],["INCREASED_XP",2],["DECREASED_MOB_DENSITY",2],["DECREASED_GOLD",2],["DECREASED_XP",2],\
+["BEASTS",2],["ELEMENTALS",2],["UNDEAD",2],["CONSTRUCTS",2],["MORTALS",2],["WILDLINGS",2],\
+["TREASURE_ROOM",2],["MINI_BOSS",4],["MONSTER_HOUSE",4],\
+["T1_BOSS",1],["T1_FIREBOSS",1],["T1_WATERBOSS",1],["T1_EARTHBOSS",1],["T1_AIRBOSS",1],["T1_FORCEBOSS",4],\
+["T2_BOSS",1],["T2_QUADBOSS",0],["T2_FORCEBOSS",0]]
+
+var tile_paths = ["res://Resources/Items/Tiles/DungeonGen/Elements/TEST.tres","res://Resources/Items/Tiles/DungeonGen/Elements/FIRE.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Elements/WATER.tres","res://Resources/Items/Tiles/DungeonGen/Elements/EARTH.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Elements/AIR.tres","res://Resources/Items/Tiles/DungeonGen/Elements/FORCE.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Biome/VOLCANO.tres","res://Resources/Items/Tiles/DungeonGen/Biome/ISLAND.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Biome/MESA.tres","res://Resources/Items/Tiles/DungeonGen/Biome/SKYLAND.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Environment/RIVER_SPAWN.tres","res://Resources/Items/Tiles/DungeonGen/Environment/LAKE_SPAWN.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Rooms/ROUND_ROOMS.tres","res://Resources/Items/Tiles/DungeonGen/Rooms/DENSE_LAYOUT.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Rooms/SPARSE_LAYOUT.tres","res://Resources/Items/Tiles/DungeonGen/Rooms/ALTERNATING_SIZE_ROOMS.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Rooms/SMALL_ROOMS.tres","res://Resources/Items/Tiles/DungeonGen/Rooms/LARGE_ROOMS.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Items/CONSUMABLE.tres","res://Resources/Items/Tiles/DungeonGen/Items/GEAR.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Items/LOCKBOX.tres","res://Resources/Items/Tiles/DungeonGen/Items/WEAPON.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Items/ARMOUR.tres","res://Resources/Items/Tiles/DungeonGen/Items/TRINKET.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Classes/VANGUARD.tres","res://Resources/Items/Tiles/DungeonGen/Classes/WARRIOR.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Classes/MAGE.tres","res://Resources/Items/Tiles/DungeonGen/Classes/ROUGUE.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Classes/HEALER.tres","res://Resources/Items/Tiles/DungeonGen/Classes/JESTER.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Misq/INCREASED_MOB_DENSITY.tres","res://Resources/Items/Tiles/DungeonGen/Misq/INCREASED_GOLD.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Misq/INCREASED_XP.tres","res://Resources/Items/Tiles/DungeonGen/Misq/DECREASED_MOB_DENSITY.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Misq/DECREASED_GOLD.tres","res://Resources/Items/Tiles/DungeonGen/Misq/DECREASED_XP.tres",\
+"res://Resources/Items/Tiles/DungeonGen/MOBS/BEASTS.tres","res://Resources/Items/Tiles/DungeonGen/MOBS/ELEMENTALS.tres",\
+"res://Resources/Items/Tiles/DungeonGen/MOBS/UNDEAD.tres","res://Resources/Items/Tiles/DungeonGen/MOBS/CONSTRUCTS.tres",\
+"res://Resources/Items/Tiles/DungeonGen/MOBS/MORTALS.tres","res://Resources/Items/Tiles/DungeonGen/MOBS/WILDLINGS.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Unique Rooms/TREASURE_VAULT.tres","res://Resources/Items/Tiles/DungeonGen/BOSSES/MINI_BOSS.tres",\
+"res://Resources/Items/Tiles/DungeonGen/Unique Rooms/MONSTER_HOUSE.tres","res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_BOSS.tres",\
+"res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_FIREBOSS.tres","res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_WATERBOSS.tres",\
+"res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_EARTHBOSS.tres","res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_AIRBOSS.tres",\
+"res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_FORCEBOSS.tres","res://Resources/Items/Tiles/DungeonGen/BOSSES/T2_BOSS.tres",\
+"res://Resources/Items/Tiles/DungeonGen/BOSSES/T2_QUADBOSS.tres","res://Resources/Items/Tiles/DungeonGen/BOSSES/T2_FORCEBOSS.tres"]
 
 func populate_inventory_named():
 	print("POPULATING_named")
@@ -44,7 +72,8 @@ func populate_inventory_named_fixed():
 		and ID_index-(inventory_grid_size.x*inventory_grid_size.y*current_page) >= 0:
 			var tile = basetile_fixed.instantiate()
 			tile.position = Vector2(32+32*((ID_index-inventory_grid_size.x*inventory_grid_size.y*current_page)%inventory_grid_size.x),52+32*((ID_index-inventory_grid_size.x*inventory_grid_size.y*current_page)/inventory_grid_size.x))
-			tile.TILE_ID = ID_index
+			tile.data = load(tile_paths[ID_index])
+			tile.num_in_inventory = ID[1]
 			self.add_child(tile)
 
 func adjust_count_named_fixed(TILE_ID:int, adding:bool):
@@ -57,6 +86,31 @@ func adjust_count_named_fixed(TILE_ID:int, adding:bool):
 	var tile = get_child(3+ID-((current_page+1)*inventory_grid_size.x*inventory_grid_size.y))
 	if tile is DungeonCraftingTile and tile.data.TILE_ID == ID:
 		tile.check_visible()
+	#populate_inventory_named_fixed()
+	pass
+
+func change_page_fixed(next:bool):
+	print('@old page',current_page)
+	if next: 
+		current_page = clampi(current_page+1,0,max_page_num) 
+	else:             #clamped between 0 and max page count
+		current_page = clampi(current_page-1,0,max_page_num)
+	print('@new page',current_page)
+	for i in max_page_num+1:
+		var page = self.get_child(i)
+		if i == current_page:
+			page.visible = true
+		else:
+			page.visible = false
+	for i in range(max_page_num+1,get_child_count()):
+		get_child(i).queue_free()
+	#for child in get_children():
+	#	print(child.get_class())
+	#	if child.get_class() != 'TileMapLayer':
+	#		print("freeing ",child.get_class())
+			#queue_free()
+			#pass
+	populate_inventory_named_fixed()
 	pass
 
 func adjust_count_named(TILE_ID:int, adding:bool):
@@ -192,7 +246,8 @@ func change_page(next:bool):
 	#for child in self.get_children():
 	#	if child is CRAFTING_TILE_TOWER:
 	#		print(child.is_placed)
-	populate_inventory_named()
+	#populate_inventory_named()
+	populate_inventory_named_fixed()
 	pass
 
 
@@ -241,7 +296,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func init():
-	change_page(true)
+	#change_page(true)
+	change_page_fixed(true)
 	modifier_text()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -250,22 +306,25 @@ func _process(delta: float) -> void:
 
 
 func _on_button_pressed_left() -> void:
-	change_page(false)
+	#change_page(false)
+	change_page_fixed(false)
 
 func _on_button_pressed_right() -> void:
-	change_page(true)
+	#change_page(true)
+	change_page_fixed(true)
 
 func _on_button_start_pressed() -> void:
 	print("testing button")
-	DungeonData.Affinity = Affinity
-	DungeonData.Enemies = Enemies
-	DungeonData.Environments = Environments
-	DungeonData.Loot = Loot
-	DungeonData.Special_Features = Special_Features
-	DungeonData.choose_biome()
-	DungeonData.open_level()
+	#DungeonData.Affinity = Affinity
+	#DungeonData.Enemies = Enemies
+	#DungeonData.Environments = Environments
+	#DungeonData.Loot = Loot
+	#DungeonData.Special_Features = Special_Features
+	load_data_to_dungeon()
+	#DungeonData.choose_biome()
+	DungeonData.open_level_new()
 	
-	pass # Replace with function body.
+	pass# Replace with function body.
 
 
 
@@ -276,3 +335,383 @@ func print_mods():
 	for key in $"../ButtonSTART/TileObject".Tile_Crafting_Mods.keys():
 		pastethis+=('["'+str(key)+'",0],')
 	print(pastethis)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+func change_data(data:DUNGEON_CRAFTING_TILE_DATA,adding:bool):
+	var i = 1
+	if ! adding:
+		i = -1
+	Affinity_Fire += i*data.Affinity_Fire
+	Affinity_Water += i*data.Affinity_Water
+	Affinity_Earth += i*data.Affinity_Earth
+	Affinity_Air += i*data.Affinity_Air
+	Affinity_Force += i*data.Affinity_Force
+	Affinity_Light += i*data.Affinity_Light
+	Affinity_Dark += i*data.Affinity_Dark
+
+	Biome_Test += i*data.Biome_Test
+	Biome_Volcano += i*data.Biome_Volcano
+	Biome_Island += i*data.Biome_Island
+	Biome_Mesa += i*data.Biome_Mesa
+	Biome_Skyland += i*data.Biome_Skyland
+
+	EnvFeature_River += i*data.EnvFeature_River
+	EnvFeature_Lake += i*data.EnvFeature_Lake
+	EnvFeature_Flooded += i*data.EnvFeature_Flooded
+	EnvFeature_Barren += i*data.EnvFeature_Barren
+
+	Halls_DeadEnds += i*data.Halls_DeadEnds
+	Rooms_Round += i*data.Rooms_Round
+	Rooms_DenseLayout += i*data.Rooms_DenseLayout
+	Rooms_SparceLayout += i*data.Rooms_SparceLayout
+	Rooms_AlternatingSize += i*data.Rooms_AlternatingSize
+	Rooms_Small += i*data.Rooms_Small
+	Rooms_Large += i*data.Rooms_Large
+
+	ItemType_Gold += i*data.ItemType_Gold
+	ItemType_Tiles += i*data.ItemType_Tiles
+	ItemType_Consumable += i*data.ItemType_Consumable
+	ItemType_Gear += i*data.ItemType_Gear
+	ItemType_Lockboxes += i*data.ItemType_Lockboxes
+	ItemType_KeyItem += i*data.ItemType_KeyItem
+
+	ItemMods_SpawnRate += i*data.ItemMods_SpawnRate
+
+	GearType_Weapon += i*data.GearType_Weapon
+	GearType_Armour += i*data.GearType_Armour
+	GearType_Trinket += i*data.GearType_Trinket
+
+	Class_Vanguard += i*data.Class_Vanguard
+	Class_Warrior += i*data.Class_Warrior
+	Class_Mage += i*data.Class_Mage
+	Class_Rogue += i*data.Class_Rogue
+	Class_Healer += i*data.Class_Healer
+	Class_Jester += i*data.Class_Jester
+
+	MobType_Beast += i*data.MobType_Beast
+	MobType_Elemental += i*data.MobType_Elemental
+	MobType_Undead += i*data.MobType_Undead
+	MobType_Construct += i*data.MobType_Construct
+	MobType_Mortal += i*data.MobType_Mortal
+	MobType_Wildling += i*data.MobType_Wildling
+
+	MobMods_SpawnRate += i*data.MobMods_SpawnRate
+	MobMods_Level += i*data.MobMods_Level
+	MobMods_EXP += i*data.MobMods_EXP
+	MobMods_Gold += i*data.MobMods_Gold
+	MobMods_Gear += i*data.MobMods_Gear
+
+	UniqueRooms_TreasureVault += i*data.UniqueRooms_TreasureVault
+	UniqueRooms_MonsterHouse += i*data.UniqueRooms_MonsterHouse
+
+	Boss_T0_Roaming += i*data.Boss_T0_Roaming
+	Boss_T0_Mini += i*data.Boss_T0_Mini
+	Boss_T1_Generic += i*data.Boss_T1_Generic
+	Boss_T1_Fire += i*data.Boss_T1_Fire
+	Boss_T1_Water += i*data.Boss_T1_Water
+	Boss_T1_Earth += i*data.Boss_T1_Earth
+	Boss_T1_Wind += i*data.Boss_T1_Wind
+	Boss_T1_Force += i*data.Boss_T1_Force
+	Boss_T2_Generic += i*data.Boss_T2_Generic
+	Boss_T2_QuadElement += i*data.Boss_T2_QuadElement
+	Boss_T2_Force += i*data.Boss_T2_Force
+	extra_floors += i*data.extra_floors
+	if data.has_boss:
+		if adding:
+			has_boss = true
+		else:
+			has_boss = false
+		
+	show_data()
+	if (preset_data == null or ! adding) and data != offset_values:
+		# forced recheck when adding a tile with not preset, when you might change
+		## that preset by removing a tile, but not when removing the visual offset
+		### data that happens when the data is forwarded to DungeonData.
+		var preset = get_parent().check_for_preset_recipes()
+		if ! preset == null:
+			preset_data = preset[-1]
+			preset.pop_back()
+			offset_values = DUNGEON_CRAFTING_TILE_DATA.new()
+			for tile in preset:
+				offset_values.combine_data(tile,true)
+		else:
+			preset_data = null
+			offset_values = null
+	pass
+
+@export var Affinity_Fire = 0
+@export var Affinity_Water = 0
+@export var Affinity_Earth = 0
+@export var Affinity_Air = 0
+@export var Affinity_Force = 0
+@export var Affinity_Light = 0
+@export var Affinity_Dark = 0
+
+@export var Biome_Test = 0
+@export var Biome_Volcano = 0
+@export var Biome_Island = 0
+@export var Biome_Mesa = 0
+@export var Biome_Skyland = 0
+
+@export var EnvFeature_River = 0
+@export var EnvFeature_Lake = 0
+@export var EnvFeature_Flooded = 0
+@export var EnvFeature_Barren = 0
+
+@export var Halls_DeadEnds = 0
+@export var Rooms_Round = 0
+@export var Rooms_DenseLayout = 0
+@export var Rooms_SparceLayout = 0
+@export var Rooms_AlternatingSize = 0
+@export var Rooms_Small = 0
+@export var Rooms_Large = 0
+
+@export var ItemType_Gold = 0
+@export var ItemType_Tiles = 0
+@export var ItemType_Consumable = 0
+@export var ItemType_Gear = 0
+@export var ItemType_Lockboxes = 0
+@export var ItemType_KeyItem = 0
+
+@export var ItemMods_SpawnRate = 0
+
+@export var GearType_Weapon = 0
+@export var GearType_Armour = 0
+@export var GearType_Trinket = 0
+
+@export var Class_Vanguard = 0
+@export var Class_Warrior = 0
+@export var Class_Mage = 0
+@export var Class_Rogue = 0
+@export var Class_Healer = 0
+@export var Class_Jester = 0
+
+@export var MobType_Beast = 0
+@export var MobType_Elemental = 0
+@export var MobType_Undead = 0
+@export var MobType_Construct = 0
+@export var MobType_Mortal = 0
+@export var MobType_Wildling = 0
+
+@export var MobMods_SpawnRate = 0
+@export var MobMods_Level = 0
+@export var MobMods_EXP = 0
+@export var MobMods_Gold = 0
+@export var MobMods_Gear = 0
+
+@export var UniqueRooms_TreasureVault = 0
+@export var UniqueRooms_MonsterHouse = 0
+
+@export var Boss_T0_Roaming = 0
+@export var Boss_T0_Mini = 0
+@export var Boss_T1_Generic = 0
+@export var Boss_T1_Fire = 0
+@export var Boss_T1_Water = 0
+@export var Boss_T1_Earth = 0
+@export var Boss_T1_Wind = 0
+@export var Boss_T1_Force = 0
+@export var Boss_T2_Generic = 0
+@export var Boss_T2_QuadElement = 0
+@export var Boss_T2_Force = 0
+
+@export var extra_floors = 0
+@export var has_boss = false
+
+@export var preset_data:DCTData_Preset
+@export var offset_values:DUNGEON_CRAFTING_TILE_DATA
+
+	
+
+func show_data():
+	var aff = [Affinity_Fire,Affinity_Water,Affinity_Earth,Affinity_Air,Affinity_Force,\
+	Affinity_Light,Affinity_Dark]
+	var aff_desc = ['FIRE', 'WATER','EARTH','AIR','FORCE','LIGHT','DARK']
+	var env = [Biome_Test,Biome_Volcano,Biome_Island,Biome_Mesa,Biome_Skyland,\
+			EnvFeature_Barren,EnvFeature_Flooded,EnvFeature_Lake,EnvFeature_River,\
+			Rooms_Round,Rooms_AlternatingSize,Rooms_Large,Rooms_Small,Rooms_DenseLayout,Rooms_SparceLayout]
+	var env_desc = ['TEST_BIOME','VOLCANO BIOME','ISLANDS BIOME','MESA BIOME','SKYLANDS BIOME',\
+				'BARREN FLOOR','FLOODED FLOOR','SWAP FLOODING','RIVER SPAWNS',\
+				'ROUND ROOMS','SQUARE ROOMS','SMALL ROOMS','LARGE ROOMS','DENSE ROOM LAYOUT','SPARCE ROOM LAYOUT']
+	var enem = [MobMods_Level,MobMods_SpawnRate,MobMods_EXP,MobMods_Gold,MobMods_Gear,\
+			MobType_Beast,MobType_Elemental,MobType_Undead,MobType_Construct,MobType_Mortal,MobType_Wildling]
+	var enem_desc = ['LEVEL','SPAWN RATE','EXP DROPPED','GOLD DROPPED','SPAWN WITH GEAR',\
+				'BEAST TYPE','ELEMENTAL TYPE','UNDEAD TYPE'
+				,'CONSTRUCT TYPE','MORTAL TYPE','WILDLING TYPE']
+	var loot = [ItemMods_SpawnRate,ItemType_Gold,ItemType_Tiles,ItemType_Consumable,ItemType_Gear,ItemType_Lockboxes,ItemType_KeyItem,\
+				GearType_Armour,GearType_Weapon,GearType_Trinket,\
+				Class_Vanguard,Class_Warrior,Class_Mage,Class_Rogue,Class_Healer,Class_Jester]
+	var loot_desc =['INCREASED SPAWN RATE', 'GOLD','TILES','CONSUMABLES','GEAR','LOCKBOXES','KEY ITEMS',\
+				'- ARMOUR','- WEAPONS','- TRINKETS',\
+				'VANGUARD BIAS','WARRIOR BIAS','MAGE BIAS','ROGUE BIAS','HEALER BIAS','JESTER BIAS']
+	var spec_feat = [UniqueRooms_TreasureVault,UniqueRooms_MonsterHouse,Boss_T0_Roaming,Boss_T0_Mini,\
+				Boss_T1_Generic,Boss_T1_Fire,Boss_T1_Water,Boss_T1_Earth,Boss_T1_Wind,Boss_T1_Force,\
+				Boss_T2_Generic,Boss_T2_QuadElement,Boss_T2_Force]
+	var spec_feat_desc = ['TREASURE VAULT','MONSTER HOUSE','WANDERING ELITE','MINI-BOSS',\
+						'BOSS - TIER 1','FIRE BOSS - TIER 1','WATER BOSS - TIER 1','EARTH BOSS - TIER 1','AIR BOSS - TIER 1','FORCE BOSS - TIER 1',\
+						'BOSS - TIER 2','FINAL BOSS - ELEMENTAL LORD','SECRET BOSS - ARCANE LORD']
+	
+	var a_text = ""
+	var e_text = ""
+	var m_text = ""
+	var l_text = ""
+	var sf_text = ""
+	var index = 0
+	var pm = ''
+	for i in aff:
+		if i != 0:
+			if i>0:
+				a_text += " "+aff_desc[index]+" +"+str(aff[index])+"%\n"
+			else:
+				a_text += " "+aff_desc[index]+" "+str(aff[index])+"%\n"
+		index+=1
+	index = 0
+	for i in env:
+		if i != 0:
+			if i >0:
+				e_text += " "+env_desc[index]+" +"+str(env[index])+"%\n"
+			else:
+				e_text += " "+env_desc[index]+" "+str(env[index])+"%\n"
+		index+=1
+	index = 0
+	for i in enem:
+		if i != 0:
+			if index != 0:
+				if i > 0:
+					m_text += " "+enem_desc[index]+" +"+str(enem[index])+"%\n"
+				else:
+					m_text += " "+enem_desc[index]+" "+str(enem[index])+"%\n"
+			else:
+				if i > 0:
+					m_text += " "+enem_desc[index]+" +"+str(enem[index])+"\n"
+				else:
+					m_text += " "+enem_desc[index]+" "+str(enem[index])+"\n"
+		index+=1
+	index = 0
+	for i in loot:
+		if i != 0:
+			if i>0:
+				l_text += " "+loot_desc[index]+" +"+str(loot[index])+"%\n"
+			else:
+				l_text += " "+loot_desc[index]+" "+str(loot[index])+"%\n"
+		index+=1
+	index = 0
+	for i in spec_feat:
+		if i != 0:
+			sf_text += " "+spec_feat_desc[index]+" +"+str(spec_feat[index])+"\n"
+		index+=1
+	$"../ScrollContainer2/VBoxContainer/affinity".text = a_text
+	$"../ScrollContainer2/VBoxContainer/environment".text = e_text
+	$"../ScrollContainer2/VBoxContainer/enemies".text = m_text
+	$"../ScrollContainer2/VBoxContainer/loot".text = l_text
+	$"../ScrollContainer2/VBoxContainer/special_features".text = sf_text
+
+
+func load_data_to_dungeon():
+	if preset_data != null:
+		change_data(offset_values,false)
+		change_data(preset_data,true)
+		if preset_data.Boss_Enemy != null:
+			DungeonData.boss = preset_data.Boss_Enemy
+		if preset_data.Final_Floor != null:
+			DungeonData.final_floor_layout = preset_data.Final_Floor
+		if preset_data.Safe_Room_Floor != null:
+			DungeonData.safe_room_floor_layout = preset_data.Safe_Room_Floor
+		if preset_data.Mini_Bosses != null:
+			DungeonData.mini_bosses = preset_data.Mini_Bosses
+	#var dun_data = DUNGEON_CRAFTING_TILE_DATA.new()
+	DungeonData.Affinity_Fire = Affinity_Fire
+	DungeonData.Affinity_Water = Affinity_Water
+	DungeonData.Affinity_Earth = Affinity_Earth
+	DungeonData.Affinity_Air = Affinity_Air
+	DungeonData.Affinity_Force = Affinity_Force
+	DungeonData.Affinity_Light = Affinity_Light
+	DungeonData.Affinity_Dark= Affinity_Dark 
+
+	DungeonData.Biome_Test =Biome_Test 
+	DungeonData.Biome_Volcano= Biome_Volcano 
+	DungeonData.Biome_Island =Biome_Island
+	DungeonData.Biome_Mesa =Biome_Mesa
+	DungeonData.Biome_Skyland =Biome_Skyland
+
+	DungeonData.EnvFeature_River= EnvFeature_River
+	DungeonData.EnvFeature_Lake =EnvFeature_Lake 
+	DungeonData.EnvFeature_Flooded =EnvFeature_Flooded 
+	DungeonData.EnvFeature_Barren= EnvFeature_Barren
+
+	DungeonData.Halls_DeadEnds = Halls_DeadEnds
+	DungeonData.Rooms_Round =Rooms_Round 
+	DungeonData.Rooms_DenseLayout =Rooms_DenseLayout 
+	DungeonData.Rooms_SparceLayout =Rooms_SparceLayout
+	DungeonData.Rooms_AlternatingSize= Rooms_AlternatingSize
+	DungeonData.Rooms_Small= Rooms_Small
+	DungeonData.Rooms_Large =Rooms_Large 
+
+	DungeonData.ItemType_Gold =ItemType_Gold
+	DungeonData.ItemType_Tiles= ItemType_Tiles 
+	DungeonData.ItemType_Consumable= ItemType_Consumable
+	DungeonData.ItemType_Gear =ItemType_Gear
+	DungeonData.ItemType_Lockboxes= ItemType_Lockboxes 
+	DungeonData.ItemType_KeyItem =ItemType_KeyItem 
+
+	DungeonData.ItemMods_SpawnRate =ItemMods_SpawnRate 
+
+	DungeonData.GearType_Weapon =GearType_Weapon
+	DungeonData.GearType_Armour =GearType_Armour
+	DungeonData.GearType_Trinket =GearType_Trinket
+
+	DungeonData.Class_Vanguard =Class_Vanguard 
+	DungeonData.Class_Warrior =Class_Warrior
+	DungeonData.Class_Mage =Class_Mage
+	DungeonData.Class_Rogue =Class_Rogue
+	DungeonData.Class_Healer = Class_Healer
+	DungeonData.Class_Jester = Class_Jester
+
+	DungeonData.MobType_Beast =MobType_Beast
+	DungeonData.MobType_Elemental =MobType_Elemental
+	DungeonData.MobType_Undead =MobType_Undead 
+	DungeonData.MobType_Construct =MobType_Construct
+	DungeonData.MobType_Mortal =MobType_Mortal
+	DungeonData.MobType_Wildling =MobType_Wildling
+
+	DungeonData.MobMods_SpawnRate =MobMods_SpawnRate
+	DungeonData.MobMods_Level =MobMods_Level
+	DungeonData.MobMods_EXP =MobMods_EXP
+	DungeonData.MobMods_Gold =MobMods_Gold
+	DungeonData.MobMods_Gear =MobMods_Gear
+
+	DungeonData.UniqueRooms_TreasureVault= UniqueRooms_TreasureVault
+	DungeonData.UniqueRooms_MonsterHouse= UniqueRooms_MonsterHouse
+
+	DungeonData.Boss_T0_Roaming =Boss_T0_Roaming
+	DungeonData.Boss_T0_Mini =Boss_T0_Mini
+	DungeonData.Boss_T1_Generic =Boss_T1_Generic
+	DungeonData.Boss_T1_Fire =Boss_T1_Fire
+	DungeonData.Boss_T1_Water= Boss_T1_Water
+	DungeonData.Boss_T1_Earth =Boss_T1_Earth
+	DungeonData.Boss_T1_Wind= Boss_T1_Wind
+	DungeonData.Boss_T1_Force=Boss_T1_Force
+	DungeonData.Boss_T2_Generic =Boss_T2_Generic
+	DungeonData.Boss_T2_QuadElement =Boss_T2_QuadElement
+	DungeonData.Boss_T2_Force =Boss_T2_Force
+	
+	DungeonData.extra_floors = extra_floors
+	DungeonData.has_boss = has_boss
