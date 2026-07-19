@@ -938,12 +938,11 @@ func place_stairs():
 	else:
 		var portal = load("res://Objects/EnvironmentObjects/home_portal.tscn")
 		var portal_coords:Vector2i
-		var new_portal = portal.instantiate()
+		var new_portal:HomePortal = portal.instantiate()
 		
 		new_portal.global_position = Global.grid_to_pos(stairs_spawnloc[0])
 		if DungeonData.max_wandering_units > 0:
-			new_portal.visible = false
-			new_portal.collision
+			new_portal.enable_disable()
 		add_child(new_portal)
 		get_child(0).player_proceeding.connect(next_floor)
 		get_child(0).init()

@@ -708,6 +708,8 @@ signal player_died
 var goldscene = preload("res://Objects/Items/GroundItem.tscn")
 
 func _on_death():
+	#emit_signal("unit_defeated")
+	get_parent()._on_unit_defeated()
 	if Team == Teams.ENEMY:
 		if UnitStats.UnitName != "MiniBoss":
 			var gold = goldscene.instantiate()

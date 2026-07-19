@@ -5,6 +5,7 @@ signal AbilityUsed(Ability:AbilityData,Source)
 signal group_turn_completed
 signal unit_defeated
 signal on_turn_complete
+signal dungeon_boss_defeated
 
 #var current_unit: Unit_Instance
 var current_unit_index = 0
@@ -41,6 +42,7 @@ func init_child(child):
 	child.init(is_player_controlled)
 	child.damaged.connect(_on_unit_damaged)
 	child.unit_defeated.connect(_on_unit_defeated)
+	#print(child.)
 	
 	if is_player_controlled:
 		child.add_to_group("Player")
@@ -138,10 +140,20 @@ func _on_unit_damaged() -> void:
 	pass
 
 func _on_unit_defeated():
-	if get_active_units().size() == 0 and is_player_controlled == true:
+	print("unit defeated triggering?")
+	if get_active_units().size() == 1 and is_player_controlled == true:
 		#defeated.emit(unit_defeated)
 		pass
-	pass
+	print("active enems: ",get_active_units().size()," is player? ",is_player_controlled,\
+	" is final? ",DungeonData.current_floor >= DungeonData.max_floors)
+	#this goes off before the last unit is freed fom the queue, so 1 is correct.
+	if get_active_units().size() == 1 and is_player_controlled != true \
+	and DungeonData.current_floor >= DungeonData.max_floors:
+		print("killed boss mob")
+		emit_signal("dungeon_boss_defeated")
+	elif is_player_controlled != true:
+		print("unitgroup; defeated ",current_unit.UnitStats.UnitName)
+		pass
 
 func get_active_units():
 	var active_units=[]#:Array[Unit_Instance] = []

@@ -22,10 +22,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func init() -> void:
 	yn_UI = get_tree().get_first_node_in_group("Yes_No_UI")
 	yn_UI.connect_portal(self)
-	yn_UI
-	env_object_manager_ref.portal_ref = self
 	if env_object_manager_ref != null:
 		self.reparent(env_object_manager_ref)
+		env_object_manager_ref.portal_ref = self
 		#env_object_manager_ref.unpassable_tiles.append(Global.pos_to_grid(self.global_position))
 		#^^^unneeded, all units may walk over the stairs.
 

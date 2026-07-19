@@ -27,11 +27,15 @@ var turn_counter = 0
 var player_dead = false
 var monster_house = false
 
+@export var player_loc:Vector2i #= Active_Units[0].self_coords
+@export var spawn_tiles:Array[Vector2i] = []
+
 @export var temp_miniboss:StatComponent
 
 @export var Active_Units:Array[Unit_Instance]
 @export var nav_manager_ref:NavigationManager
 @export var dialogue_manager_ref:DialogueManager
+@export var env_manager_ref:EnvironmentObjectManager
 
 var player_spawnpoint:Vector2i
 ##########################
@@ -43,17 +47,22 @@ func init() -> void:
 	tilemaplayer_ref = get_tree().get_first_node_in_group("TILEMAP")
 	nav_manager_ref = get_tree().get_first_node_in_group("NAVIGATION_MANAGER") 
 	dialogue_manager_ref = get_tree().get_first_node_in_group("DIALOGUE_MANAGER")
+	env_manager_ref = get_tree().get_first_node_in_group("ENVIRONMENT_OBJECT_MANAGER")
 	for child in get_children():
 		child.init()
 		all_groups.append(child)
 		child.AbilityUsed.connect(_process_ability)
 		child.group_turn_completed.connect(_on_turn_complete)
 		#child.defeated.connect(_on_group_defeated)
+	get_room_spawn_tiles()
 	if monster_house:
 		monster_house = false
 		for i in range(DungeonData.max_wandering_units):
 			spawn_unit(all_groups[1])
 	if DungeonData.current_floor == DungeonData.max_floors:
+		for group:Unit_Group in all_groups:
+			if group.is_player_controlled == false:
+				group.dungeon_boss_defeated.connect(_on_boss_defeat)
 		print("final floor[0na,1mini/boss,2monhouse]",DungeonData.final_floor)
 		#all_groups[0].get_child(0).global_position = Global.grid_to_pos(tilemaplayer_ref.player_spawnpoint)
 		match DungeonData.final_floor:
@@ -72,6 +81,12 @@ func init() -> void:
 			
 	_step_turn() 
 
+func _on_boss_defeat():
+	#on the final floor, when all enemies defeated, show portal and enable collision.
+	print("unitmanager; on boss defeat triggered")
+	DungeonData.max_wandering_units = 0
+	env_manager_ref.portal_visibility()
+
 func _ready():
 	#init()
 	#_step_turn()
@@ -83,6 +98,7 @@ func _ready():
 const unit_scene = preload("res://Units/unit.tscn")
 
 func spawn_unit(group:Unit_Group):
+	
 	var new_unit:Unit_Instance = unit_scene.instantiate()
 	if group.is_player_controlled == false:
 		var rare_chance = randf()
@@ -98,12 +114,20 @@ func spawn_unit(group:Unit_Group):
 		while placing == false:
 			placing = true
 #			print("null test tilemap ref",tilemaplayer_ref)
-			var try = tilemaplayer_ref.AllRoomTiles.pick_random()
+			var try = spawn_tiles.pick_random()
 			#print(" try coord:",try)#"all:",tilemaplayer_ref.AllRoomTiles,
-			for unit in Active_Units:
-				if is_instance_valid(unit):
-					if unit.self_coords == try:
-						placing = false
+			if Active_Units.size() > 0:
+				player_loc = Active_Units[0].self_coords
+				print(Active_Units,"is player? ",Active_Units[0].Team,Active_Units[0].self_coords)
+				for unit in Active_Units:
+					if is_instance_valid(unit):
+						if unit.self_coords == try:
+							placing = false
+				if try.x > player_loc.x - 10 or try.x < player_loc.x + 10:
+					placing = false
+				elif try.y > player_loc.y - 6 or try.y < player_loc.y + 6:
+					placing = false
+				
 			new_unit.position = Global.grid_to_pos(try)
 		new_unit.UnitLevel = DungeonData.AREA_LEVEL+DungeonData.UNIT_LEVEL_Boost
 		Active_Units.append(new_unit)
@@ -120,6 +144,13 @@ func spawn_specific_unit(group:Unit_Group,unitdata:StatComponent,tile:Vector2i):
 	group.add_child(new_unit)
 	print("spawn spec unit; name:",unitdata.UnitName)
 	group.get_child(-1).init(group.is_player_controlled)
+	pass
+
+func get_room_spawn_tiles():
+	spawn_tiles.clear()
+	for tile in tilemaplayer_ref.AllRoomTiles:
+		if tilemaplayer_ref.cells_Ground.has(tile):
+			spawn_tiles.append(tile)
 	pass
 ###########################
 ########## TURNS ##########
