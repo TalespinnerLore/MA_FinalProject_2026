@@ -72,19 +72,19 @@ func ability_description(data:AbilityData):
 	desc.text+=(str(AbilityData.ElementType.keys()[data.element]))
 	match data.damage_type:
 		0:
-			desc.text += (str(' PHYSICAL attack.\n'))
+			desc.text += (str(' PHYSICAL Attack.\n'))
 		1:
-			desc.text += (str(' PHYSICAL MELEE attack.\n'))
+			desc.text += (str(' PHYSICAL MELEE Attack.\n'))
 		2:
-			desc.text += (str(' PHYSICAL RANGED attack.\n'))
+			desc.text += (str(' PHYSICAL RANGED Attack.\n'))
 		3:
-			desc.text += (str(' MAGICAL spell.\n'))
+			desc.text += (str(' MAGICAL Spell.\n'))
 		4:
-			desc.text += (str(' MAGICAL MELEE spell.\n'))
+			desc.text += (str(' MAGICAL MELEE Spell.\n'))
 		5:
-			desc.text += (str(' MAGICAL RANGED spell.\n'))
+			desc.text += (str(' MAGICAL RANGED Spell.\n'))
 		6:
-			desc.text += (str(' ability.\n'))
+			desc.text += (str(' Ability.\n'))
 	
 	desc.text += (str('Area of Effect: ',AbilityData.TargetType.keys()[data.targeting],'\n',\
 	'Range: ',data.range,'\n'))

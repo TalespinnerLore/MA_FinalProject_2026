@@ -48,13 +48,15 @@ func init() -> void:
 	nav_manager_ref = get_tree().get_first_node_in_group("NAVIGATION_MANAGER") 
 	dialogue_manager_ref = get_tree().get_first_node_in_group("DIALOGUE_MANAGER")
 	env_manager_ref = get_tree().get_first_node_in_group("ENVIRONMENT_OBJECT_MANAGER")
+	print("spawn tiles:",spawn_tiles)
+	get_room_spawn_tiles()
+	print("spawn tiles:",spawn_tiles)
 	for child in get_children():
 		child.init()
 		all_groups.append(child)
 		child.AbilityUsed.connect(_process_ability)
 		child.group_turn_completed.connect(_on_turn_complete)
 		#child.defeated.connect(_on_group_defeated)
-	get_room_spawn_tiles()
 	if monster_house:
 		monster_house = false
 		for i in range(DungeonData.max_wandering_units):
@@ -78,7 +80,9 @@ func init() -> void:
 			DungeonData.FINAL_FLOOR.BOSS:
 				print("dungeon boss spawn")
 				spawn_specific_unit(all_groups[1],DungeonData.boss,tilemaplayer_ref.boss_spawn_loc)
-			
+	
+	Active_Units[0].get_self_coords()
+	#to make the player have the correct location data before moving once.
 	_step_turn() 
 
 func _on_boss_defeat():
@@ -118,14 +122,18 @@ func spawn_unit(group:Unit_Group):
 			#print(" try coord:",try)#"all:",tilemaplayer_ref.AllRoomTiles,
 			if Active_Units.size() > 0:
 				player_loc = Active_Units[0].self_coords
-				print(Active_Units,"is player? ",Active_Units[0].Team,Active_Units[0].self_coords)
+				#print(Active_Units,"is player? ",Active_Units[0].Team,Active_Units[0].self_coords)
+				#print(player_loc,try)
+				
 				for unit in Active_Units:
 					if is_instance_valid(unit):
 						if unit.self_coords == try:
 							placing = false
-				if try.x > player_loc.x - 10 or try.x < player_loc.x + 10:
+				if try.x > player_loc.x - 10 and try.x < player_loc.x + 10:
+					print("failed in x")
 					placing = false
-				elif try.y > player_loc.y - 6 or try.y < player_loc.y + 6:
+				elif try.y > player_loc.y - 6 and try.y < player_loc.y + 6:
+					print("failed in y")
 					placing = false
 				
 			new_unit.position = Global.grid_to_pos(try)
@@ -148,6 +156,8 @@ func spawn_specific_unit(group:Unit_Group,unitdata:StatComponent,tile:Vector2i):
 
 func get_room_spawn_tiles():
 	spawn_tiles.clear()
+	print("roomtiles:",tilemaplayer_ref.AllRoomTiles)
+	print("groundtiles:",tilemaplayer_ref.cells_Ground)
 	for tile in tilemaplayer_ref.AllRoomTiles:
 		if tilemaplayer_ref.cells_Ground.has(tile):
 			spawn_tiles.append(tile)

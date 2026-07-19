@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://s0jii18fk7d6"]
+[gd_scene load_steps=30 format=3 uid="uid://s0jii18fk7d6"]
 
 [ext_resource type="Script" path="res://UI/Menus/unit_stats_gear_ui.gd" id="1_yfitp"]
 [ext_resource type="Texture2D" uid="uid://b3pex2aw1g2mg" path="res://Art/UI_Art/Frames/ui_bg_blueoutline.png" id="2_ltrji"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b7ll0ajpmwci8" path="res://Art/UI_Art/temp_trinket.png" id="7_b4d8v"]
 [ext_resource type="Texture2D" uid="uid://vtw0q5vupesy" path="res://Art/UI_Art/12x12minus.png" id="7_vbrtv"]
 [ext_resource type="Texture2D" uid="uid://cdsr7x70gmwos" path="res://Art/UI_Art/12x12plus.png" id="8_7a4yo"]
+[ext_resource type="Script" path="res://UI/Menus/stat_box_container.gd" id="9_oxhhh"]
 [ext_resource type="Texture2D" uid="uid://cu3lk0k4qo1aj" path="res://Art/UI_Art/Frames/ui_bg_thin.png" id="9_wjtch"]
 [ext_resource type="Script" path="res://UI/Menus/ui_ability_box.gd" id="11_djyr7"]
 [ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="11_h154a"]
@@ -21,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://dyujfophr4wij" path="res://Art/UI_Art/ui_elem_fire.png" id="14_cu0wd"]
 [ext_resource type="Texture2D" uid="uid://de1joagwyuvmh" path="res://Art/UI_Art/AoE/ui_aoe_front.png" id="14_s7mt7"]
 [ext_resource type="Texture2D" uid="uid://bi8o4wvd5x7fd" path="res://Art/UI_Art/ui_elem_wind.png" id="15_5epki"]
+[ext_resource type="Texture2D" uid="uid://fmymcvcoc0ph" path="res://Art/UI_Art/ui_longbutton.png" id="15_cluvc"]
 [ext_resource type="Texture2D" uid="uid://xbm0r636tkfl" path="res://Art/UI_Art/AbilityType/ui_other_buff-debuff.png" id="16_n2f5g"]
 [ext_resource type="Texture2D" uid="uid://co1plajimoqu6" path="res://Art/UI_Art/AoE/ui_aoe_circle.png" id="17_34xmf"]
 [ext_resource type="Texture2D" uid="uid://0g5i5s07mb2x" path="res://Art/UI_Art/AbilityType/ui_mag_ranged.png" id="19_b82e2"]
@@ -180,6 +182,7 @@ offset_top = 29.0
 offset_right = 136.0
 offset_bottom = 149.0
 theme_override_constants/separation = 1
+script = ExtResource("9_oxhhh")
 
 [node name="StatBox" type="NinePatchRect" parent="StatAbilityBox/StatBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
@@ -504,15 +507,28 @@ texture_normal = ExtResource("7_vbrtv")
 texture_pressed = ExtResource("7_vbrtv")
 stretch_mode = 3
 
-[node name="plusButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox7"]
-visible = false
+[node name="usepointsButton" type="TextureButton" parent="StatAbilityBox/StatBoxContainer/StatBox7"]
 layout_mode = 0
-offset_left = 112.0
-offset_right = 128.0
-offset_bottom = 16.0
-texture_normal = ExtResource("8_7a4yo")
-texture_pressed = ExtResource("8_7a4yo")
+offset_left = 102.0
+offset_top = 2.0
+offset_right = 126.0
+offset_bottom = 14.0
+texture_normal = ExtResource("15_cluvc")
+texture_pressed = ExtResource("15_cluvc")
 stretch_mode = 3
+
+[node name="Label2" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox7"]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 1.0
+offset_right = 126.0
+offset_bottom = 17.0
+mouse_filter = 1
+theme = ExtResource("4_75ayx")
+theme_override_colors/font_color = Color(0.988235, 0.945098, 0.796078, 1)
+text = " USE"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AbilityBoxContainer" type="VBoxContainer" parent="StatAbilityBox"]
 layout_mode = 0
@@ -938,6 +954,9 @@ flat = true
 [connection signal="mouse_entered" from="gearInventoryBox/WeaponTextureSlot/WeaponTexture" to="." method="_on_weapon_texture_mouse_entered"]
 [connection signal="mouse_entered" from="gearInventoryBox/ArmourTextureSlot/ArmourTexture" to="." method="_on_armour_texture_mouse_entered"]
 [connection signal="mouse_entered" from="gearInventoryBox/TrinketTextureSlot/TrinketTexture" to="." method="_on_trinket_texture_mouse_entered"]
+[connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox/minusButton" to="StatAbilityBox/StatBoxContainer/StatBox" method="_on_minus_button_pressed"]
+[connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox/plusButton" to="StatAbilityBox/StatBoxContainer/StatBox" method="_on_plus_button_pressed"]
+[connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox7/usepointsButton" to="StatAbilityBox/StatBoxContainer/StatBox7" method="_on_usepoints_button_pressed"]
 [connection signal="mouse_entered" from="StatAbilityBox/AbilityBoxContainer/AbilityBox" to="StatAbilityBox/AbilityBoxContainer/AbilityBox" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="StatAbilityBox/AbilityBoxContainer/AbilityBox2" to="StatAbilityBox/AbilityBoxContainer/AbilityBox2" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="StatAbilityBox/AbilityBoxContainer/AbilityBox3" to="StatAbilityBox/AbilityBoxContainer/AbilityBox3" method="_on_mouse_entered"]

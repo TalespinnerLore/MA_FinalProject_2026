@@ -60,7 +60,7 @@ script = ExtResource("6_u102x")
 is_player_controlled = true
 
 [node name="Unit" parent="Unit_Manager/Player_Group" groups=["Player"] instance=ExtResource("7_tlo0d")]
-position = Vector2(80, 48)
+position = Vector2(-320, -180)
 is_team_leader = true
 is_active_unit = true
 UnitStats = ExtResource("8_wjf6b")
