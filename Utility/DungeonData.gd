@@ -80,7 +80,7 @@ var max_floors: = 5
 var current_floor: = 0
 var monster_house_count: = 1
 
-var AREA_LEVEL := 1
+var AREA_LEVEL := 0
 var UNIT_LEVEL_Boost := 0
 
 var floor_is_monsterhouse := false

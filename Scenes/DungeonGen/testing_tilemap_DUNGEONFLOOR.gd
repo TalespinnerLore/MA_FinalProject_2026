@@ -135,7 +135,7 @@ func RandomRooms(): #GENERATE RANDOM ROOMS ON THE GRID.
 						floors.append(tile)
 						preset_spawn = tile
 						player_spawnpoint = tile
-						#print("preset player spawn set at ",tile)
+						print("preset player spawn set at ",tile)
 					8:
 						TileGrid[tile.x][tile.y] = 'FLOOR'
 						floors.append(tile)
@@ -908,32 +908,45 @@ func FillGrid(): #once the rooms are decided, this fills in the rest of the leve
 				print("checking hall tiles")
 				if what_is_this_tile(tile.x,tile.y) == 'WATER' or what_is_this_tile(tile.x,tile.y) == 'LAVA' or what_is_this_tile(tile.x,tile.y) == 'AIR':
 					TileGrid[tile.x][tile.y] = 'FLOOR'
+			for tile in River_Tiles_list:
+				for room in Rooms:
+					room[1].erase(tile)
 		
 	
 	
 func place_stairs():
 	if ! DungeonData.current_floor == DungeonData.max_floors:
-
-		var stairs = load("res://Objects/EnvironmentObjects/dungeon_stairs.tscn")
-		var stairs_coords:Vector2i
-		var valid = false
-		while valid == false:
-			var tile = AllRoomTiles.pick_random()
-			if cells_Ground.has(tile):
-				stairs_coords = tile
-				valid = true
-		var i = -1
-		for room in Rooms:
-			i+=1
-			if room[1].has(stairs_coords):
-				Rooms[i][3].append(stairs_coords)
-				break
-		var new_stairs = stairs.instantiate()
-		new_stairs.global_position = Global.grid_to_pos(stairs_coords)
-		add_child(new_stairs)
-		#get_child(0).player_found_stairs.connect(found_stairs)
-		get_child(0).player_proceeding.connect(next_floor)
-		get_child(0).init()
+		if (stairs_spawnloc.size() > 0 and multiple_stairs == false) \
+		or stairs_spawnloc.size() == 0:
+			var room_index = randi_range(0,Rooms.size()-1)
+			var spawnroom = Rooms[room_index]
+			var spawnpoint = spawnroom[1].pick_random()
+			#print("walls:",spawnpoint[2])
+			Rooms[room_index][3].append(spawnpoint)
+			stairs_spawnloc.append(spawnpoint)
+		#var stairs_coords:Vector2i = spawnpoint
+		
+		#var stairs_coords:Vector2i
+		#var valid = false
+		#while valid == false:
+		#	var tile = AllRoomTiles.pick_random()
+		#	if cells_Ground.has(tile):
+		#		stairs_coords = tile
+		#		valid = true
+		#var i = -1
+		#for room in Rooms:
+		#	i+=1
+		#	if room[1].has(stairs_coords):
+		#		Rooms[i][3].append(stairs_coords)
+		#		break
+		for tile in stairs_spawnloc:
+			var stairs = load("res://Objects/EnvironmentObjects/dungeon_stairs.tscn")
+			var new_stairs = stairs.instantiate()
+			new_stairs.global_position = Global.grid_to_pos(tile)
+			add_child(new_stairs)
+			#get_child(0).player_found_stairs.connect(found_stairs)
+			get_child(0).player_proceeding.connect(next_floor)
+			get_child(0).init()
 	
 	else:
 		var portal = load("res://Objects/EnvironmentObjects/home_portal.tscn")
@@ -1026,6 +1039,7 @@ func populate_tile_terrain():
 			for tile in DeadEnds:
 				set_cell(Vector2i(tile[0].x,tile[0].y),0, Vector2i(0,2))
 	DungeonData.set_river_and_flood_tiles()
+	
 	if bugfixing != true:
 		set_cells_terrain_connect(cells_Wall,terrain_set,0,true) #makes the auto-tiling work for generated stuff.
 		set_cells_terrain_connect(cells_Ground,terrain_set,1,true)
@@ -1065,6 +1079,7 @@ func mark_tile_bugfixing(tile:Vector2i):
 	set_cell(tile,0, Vector2i(1,1))
 
 func Connect_Doors_BRUTE(room_index):
+	#print('diirs cinnect brute; to connect:',Rooms[room_index][3])
 	var room = Rooms[room_index]
 	var connecting_path = []
 	var end:Vector2i
@@ -1150,6 +1165,9 @@ func Connect_Doors_BRUTE(room_index):
 		#print("both: ",temp)
 	else:
 		print("ONLY 1 DOORWAY")
+	#print('brute connecting path:',connecting_path)
+	#for tile in connecting_path:
+	#	set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(16,10)) #TESTING OBVS PATH
 
 func connect_doorways():
 	for room in Rooms:
@@ -1232,14 +1250,16 @@ func what_is_this_tile(x,y):
 var terrain_set = 2
 
 @export var rand_seed:= false
-@export var seed_num:= 129
+@export var seed_num:= 2777815196# 129
 
 func init_tilemap():
 	#print("testprint init tilemap")
 	if rand_seed:
-		seed(randi())
+		seed_num = randi()
+		seed(seed_num)
 	else:
 		seed(seed_num)
+	print("dungeon seed: ",seed_num)
 	Max_Size = DungeonData.max_size
 	Min_Size = DungeonData.min_size
 	Width_X = DungeonData.level_size.x
@@ -1268,6 +1288,7 @@ func init_tilemap():
 		if DungeonData.floor_is_monsterhouse:
 			unit_manager_ref.monster_house = true
 		unit_manager_ref.player_spawnpoint = player_spawnpoint
+		print("sent to um from tilemap; p_spawn:",player_spawnpoint)
 		unit_manager_ref.init()
 	else:
 		push_error('COULD NOT FIND unit MANAGER')
@@ -1282,7 +1303,9 @@ func init_tilemap():
 	
 	print("RIVERTILE:",DungeonData.river_tile," FLOODTILE:",DungeonData.flood_tile)
 	#pass
-	
+	print('init tilemap; roomcount:',Rooms.size())
+	if Rooms.size() == 1:
+		print('is 1 room, places of intrest:',Rooms[0][3])
 	#if DungeonData.floors_special_features[DungeonData.current_floor].size()> 0:
 	#	for sf in DungeonData.floors_special_features[DungeonData.current_floor]:
 	#		match sf:
@@ -1362,6 +1385,7 @@ func found_stairs():
 	pass #SEND SIGNAL? maybe call this on signal? update dungeon data, then call new level?
 
 func player_spawn_loc():
+	print("top player_spawn_loc; ",player_spawnpoint)
 	if player_spawnpoint == Vector2i(-1,-1):
 		#print("playerspawnloc; Rooms:",Rooms)
 		var room_index = randi_range(0,Rooms.size()-1)
@@ -1371,6 +1395,13 @@ func player_spawn_loc():
 		Rooms[room_index][3].append(spawnpoint)
 		player_spawnpoint = spawnpoint
 		#print("PLAYER SPAWNPOINT ",spawnpoint)
+	#else:
+	#	while player_spawnpoint == Vector2i(-1,-1):
+	#		var try = cells_Ground.pick_random()
+	#		if ! AllHallTiles.has(try):
+	#			player_spawnpoint = try
+	print("bottom player_spawn_loc; ",player_spawnpoint)
+
 	
 
 func next_floor():

@@ -10,7 +10,7 @@ var p1_ability_usesB1234WAT:Array[int] = [999,0,0,0,0,0,0,0] #1234WAT
 var p1_HP:int
 var p1_level:int
 var p1_investedStrDexVitMagDefLuk:Array[int] = [0,0,0,0,0,0] 
-var p1_free_stats := 0
+var p1_free_stats := 3
 #var p1_statuseffects:Array
 
 var p2_class:StatComponent

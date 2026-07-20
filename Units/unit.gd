@@ -65,7 +65,7 @@ enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_R
 ####################################################
 #Experience
 @export_category('XP Stats')
-@export var UnitLevel:int = 1
+@export var UnitLevel:int = 0
 @export var XP:int = 0
 @export var XP_to_Level:int = 50
 #var XP_to_Level_0to1 = 50
@@ -81,14 +81,21 @@ func Calc_XP_to_Reward():
 	return (((BaseXP*(UnitLevel-1)/10) + BaseXP)*XP_Mult)
 
 func Attempt_LevelUp():
+	print("ATTEMPT LEVEL-UP!")
 	if XP >= XP_to_Level:
 		UnitLevel+=1
-		IncreaseStats(UnitStats.STR_up,UnitStats.DEX_up,UnitStats.VIT_up,UnitStats.MAG_up,UnitStats.DEF_up,UnitStats.LUK_up,UnitStats.Free_Stats)
+		if Team == Teams.PLAYER:
+			match self.get_index():
+				0: #team leader/only player char for now
+					PlayerStats.p1_free_stats += UnitStats.Free_Stats
+		set_stats()
+		HP_Current = HP_Max
+		#IncreaseStats(UnitStats.STR_up,UnitStats.DEX_up,UnitStats.VIT_up,UnitStats.MAG_up,UnitStats.DEF_up,UnitStats.LUK_up,UnitStats.Free_Stats)
 		XP-=XP_to_Level
 		XP_to_Level = Calc_XP_to_Level()
 		if XP >= XP_to_Level:
 			Attempt_LevelUp()
-
+###vvv DEPRECIATED vvv###
 func IncreaseStats(str:int,dex:int,vit:int,mag:int,def:int,luk:int,free:int):
 	STR+=str
 	DEX+=dex
@@ -115,7 +122,7 @@ func IncreaseStats(str:int,dex:int,vit:int,mag:int,def:int,luk:int,free:int):
 
 @export_category('Calculated Stats')
 #CalculatedStats
-@export var HP_Max = 25
+@export var HP_Max = 5
 @export var HP_Current = HP_Max
 @export var Base_Phys_ATK = 5
 var Base_Mag_ATK = 5
@@ -154,16 +161,29 @@ var Range_Boost = 0 #extra tile range for abilities
 
 
 func set_stats():
+	print("0; hp:",HP_Current," max:",HP_Max)
+	var investedstats = [0,0,0,0,0,0]
+	if Team == Teams.PLAYER:
+		match self.get_index():
+			0: #team leader/only player char for now
+				investedstats = PlayerStats.p1_investedStrDexVitMagDefLuk
+				print("p1 base str: ",UnitStats.STR)
+				print("P1 invested stats: ",investedstats)
+				print("P1 LVL-UP stats: ",UnitStats.get_levelup_stats(UnitLevel))
+	else:
+		for i in UnitStats.Free_Stats*UnitLevel:
+			investedstats[randi_range(0,5)] += 1
 	var lvlUp_stats = UnitStats.get_levelup_stats(UnitLevel)
 	UnitStats.calc_template_stats()
-	HP_Max = UnitStats.HP_Max
-	HP_Current = HP_Max
-	STR = UnitStats.STR + lvlUp_stats[0]
-	DEX = UnitStats.DEX + lvlUp_stats[1]
-	VIT = UnitStats.VIT + lvlUp_stats[2]
-	MAG = UnitStats.MAG + lvlUp_stats[3]
-	DEF = UnitStats.DEF + lvlUp_stats[4]
-	LUK = UnitStats.LUK + lvlUp_stats[5]
+	print("p1 base str post clac: ",UnitStats.STR)
+	#HP_Max = UnitStats.HP_Max_withVIT
+	#HP_Current = HP_Max
+	STR = lvlUp_stats[0] + investedstats[0]#UnitStats.STR + 
+	DEX = lvlUp_stats[1] + investedstats[1]#UnitStats.DEX + 
+	VIT = lvlUp_stats[2] + investedstats[2]#UnitStats.VIT + 
+	MAG = lvlUp_stats[3] + investedstats[3]#UnitStats.MAG + 
+	DEF = lvlUp_stats[4] + investedstats[4]#UnitStats.DEF + 
+	LUK = lvlUp_stats[5] + investedstats[5]#UnitStats.LUK + 
 	
 	HP_Max_boost += UnitStats.HP_Max_boost
 	Phys_ATK_boost += UnitStats.Phys_ATK_boost
@@ -176,9 +196,15 @@ func set_stats():
 	Ranged_Mult_boost += UnitStats.Ranged_Mult_boost
 	Def_Mult_boost += UnitStats.Def_Mult_boost
 	Reroll_Chance_boost += UnitStats.Reroll_Chance_boost
+	
+	calc_stats_with_GearAndBuff_boost()
+	print("1; hp:",HP_Current," max:",HP_Max)
+	await get_tree().create_timer(0.15).timeout
+	HP_Module.new_level_refresh(HP_Current,HP_Max)
+	print("2; hp:",HP_Current," max:",HP_Max)
 
-func calc_stats_with_boost():
-	HP_Max = UnitStats.Base_HP + 5*(VIT+VIT_boost)
+func calc_stats_with_GearAndBuff_boost():
+	HP_Max = UnitStats.Base_HP + 2*(VIT+VIT_boost) + 2*UnitLevel
 	Heal_Buff_Mult = 1.0 + 0.02*(VIT+VIT_boost)
 	Base_Phys_ATK = STR + STR_boost
 	Melee_Mult = 1.0 + 0.02*(STR + STR_boost)
@@ -242,6 +268,9 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 				#print(Source.Base_Phys_ATK, " * ",Source.Melee_Mult," = ",amount)
 			2:
 				amount = Source.Base_Phys_ATK * Source.Ranged_Mult
+				print(" base phys ",Source.Base_Phys_ATK," str ",Source.STR," str_b ",Source.STR_boost)
+				print(" base phys ",Source.Ranged_Mult," str ",Source.DEX," str_b ",Source.DEX_boost)
+				print(Source.Base_Phys_ATK, " * ",Source.Ranged_Mult," = ",amount)
 			3:
 				amount = Source.Base_Mag_ATK
 			4:
@@ -251,6 +280,7 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 			6:
 				amount = 1
 		amount+=Ability.base_value
+		print(amount-Ability.base_value, " + ",Ability.base_value," = ",amount)
 		
 		if Ability.damaging == true:
 			target_unit.combattext(str("Before: ",HP_Current))
@@ -657,10 +687,12 @@ func init(is_player_controlled):
 #		$Sprite2D/Button2.icon = $Abilities.Slot_2.vfx
 #		$Sprite2D/Button2.text = str("2: ",$Abilities.Slot_2.ability_name)
 		set_stats()
+		#print("initial set stats on init; hp:",HP_Current," max:",HP_Max)
 		$Sprite2D.texture = UnitStats.Sprite
 		$Abilities.init()
 		print("floornum ", DungeonData.current_floor)
 		if DungeonData.current_floor > 1:
+			#print("should not trigger; hp:",HP_Current," max:",HP_Max)
 			HP_Current = PlayerStats.p1_HP
 			HP_Module.hp = HP_Current
 			HP_Module.maxhp = HP_Max
@@ -668,14 +700,15 @@ func init(is_player_controlled):
 			await get_tree().create_timer(0.15).timeout
 			HP_Module.new_level_refresh(HP_Current,HP_Max)
 		else:
-			HP_Module.hp = HP_Max
-			HP_Module.maxhp = HP_Max
+			HP_Current = HP_Max
+			HP_Module.new_level_refresh(HP_Current,HP_Max)
 	else: #FIX THIS LATER TO ACCOUNT FOR NPC AND ALLY UNITS
 		$Label.visible = false
 		Team = Teams.ENEMY
+		set_stats()
+		HP_Current = HP_Max
+		HP_Module.new_level_refresh(HP_Current,HP_Max)
 		$Abilities.init()
-		HP_Module.hp = HP_Max
-		HP_Module.maxhp = HP_Max
 		$Sprite2D.texture = UnitStats.Sprite
 	target_unit = get_tree().get_first_node_in_group("Player")
 	dialogue_manager_ref = get_tree().get_first_node_in_group("DIALOGUE_MANAGER")
@@ -686,9 +719,13 @@ func init(is_player_controlled):
 	get_self_coords()
 	#print(self,"self_coords: ",self_coords)
 
-func set_spawn(spawnpoint):
-	position = grid_to_pos(spawnpoint,Vector2(0,0))[1] #the [1] gtes just the grid position
-
+func set_spawn(spawnpoint:Vector2i):
+	print("spawned in at:",self_coords, " ",self.global_position)
+	print("going to spawnpoint: ",spawnpoint, " ",Global.grid_to_pos(spawnpoint))
+	self.global_position = Global.grid_to_pos(spawnpoint)
+	#position = grid_to_pos(spawnpoint,Vector2(0,0))[1] #the [1] gtes just the grid position
+	get_self_coords()
+	print("unitinstance setspawn; spawnpoint:",self_coords," locaction:",self.position," gp:",self.global_position)
 
 @onready var HP_Module = $Sprite2D/HP_module
 
@@ -697,7 +734,10 @@ func set_spawn(spawnpoint):
 func _ready():
 	if ! $VisibleOnScreenNotifier2D.is_on_screen():
 		_on_visible_on_screen_notifier_2d_screen_exited()
-	
+	#print("-1; hp:",HP_Current," max:",HP_Max)
+	#
+	#await get_tree().create_timer(5).timeout
+	#self.global_position = Vector2(368, 688)
 	pass
 
 #######################################

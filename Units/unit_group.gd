@@ -52,7 +52,7 @@ func init_child(child):
 
 func temp_distribute():
 	print("units to distribute: ",get_child_count())
-	for unit in get_children():
+	for unit:Unit_Instance in get_children():
 		if is_player_controlled and DungeonData.current_floor == DungeonData.max_floors:
 			unit.set_spawn(get_parent().tilemaplayer_ref.player_spawnpoint)
 			#print("y no set player spawn? sp:",get_parent().tilemaplayer_ref.player_spawnpoint)
@@ -61,7 +61,15 @@ func temp_distribute():
 			var spawnpoint:Vector2i
 			while validspawn == false:
 				spawnpoint = $"../../TileMapLayer".cells_Ground.pick_random()
-				if is_player_controlled:
+				print("spawntile:",spawnpoint," loc:",Global.grid_to_pos(spawnpoint),$"../../TileMapLayer".what_is_this_tile(spawnpoint.x,spawnpoint.y))
+				print("spawn in river?",$"../../TileMapLayer".River_Tiles_list.has(spawnpoint))
+				print("spawn in wall?",$"../../TileMapLayer".WallTiles.has(spawnpoint))
+				print("spawn terrain?",$"../../TileMapLayer".get_cell_tile_data(spawnpoint).terrain)
+				print("spawntile:",Vector2i(10, 15)," loc:",Global.grid_to_pos(Vector2i(10, 15)),$"../../TileMapLayer".what_is_this_tile(Vector2i(10, 15).x,Vector2i(10, 15).y))
+				print("spawn in river?",$"../../TileMapLayer".River_Tiles_list.has(Vector2i(10, 15)))
+				print("spawn in wall?",$"../../TileMapLayer".WallTiles.has(Vector2i(10, 15)))
+				print("spawn terrain?",$"../../TileMapLayer".get_cell_tile_data(Vector2i(10, 15)).terrain)
+				if is_player_controlled:# and DungeonData.current_floor == DungeonData.max_floors:
 					#print("isplayer, use spawnpoint")
 					spawnpoint = get_parent().player_spawnpoint
 					unit.set_spawn(spawnpoint)

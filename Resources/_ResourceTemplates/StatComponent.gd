@@ -35,7 +35,7 @@ enum ElementType {FIRE,WATER,EARTH,AIR,FORCE,LIGHT,DARK}
 
 @export_category('Calculated Stats')
 #CalculatedStats
-@export var HP_Max = 10
+@export var HP_Max_withVIT = Base_HP+(2*VIT)
 #@export var HP_Current = HP_Max
 @export var Base_Phys_ATK = 5.0
 @export var Base_Mag_ATK = 5.0
@@ -82,7 +82,7 @@ func get_levelup_stats(level):
 	return BaseStats
 
 func calc_template_stats():
-	HP_Max = Base_HP + 5*(VIT+VIT_boost)
+	HP_Max_withVIT = Base_HP + 2*(VIT+VIT_boost)
 	Heal_Buff_Mult = 1.0 + 0.02*(VIT+VIT_boost)
 	Base_Phys_ATK = STR + STR_boost
 	Melee_Mult = 1.0 + 0.02*(STR + STR_boost)
@@ -96,7 +96,7 @@ func calc_template_stats():
 	pass
 
 func apply_template_calc_stat_boosts():
-	HP_Max += HP_Max_boost
+	HP_Max_withVIT += HP_Max_boost
 	Base_Phys_ATK += Phys_ATK_boost
 	Base_Mag_ATK += Mag_ATK_boost
 	Base_Phys_DEF += Phys_DEF_boost

@@ -1,14 +1,19 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=4 format=3 uid="uid://b1mex6jfj2b7r"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=5 format=3 uid="uid://b1mex6jfj2b7r"]
 
 [ext_resource type="Resource" uid="uid://7j5xdkj4glc6" path="res://Resources/Abilities/STR_base/Cleave.tres" id="1_csy6p"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_t8vce"]
 [ext_resource type="Texture2D" uid="uid://beagb6x40mqqy" path="res://Art/UnitSprites/BasicCharacter_enemywarrior.png" id="2_m2e5i"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="4_6umak"]
 
 [resource]
 script = ExtResource("1_t8vce")
 Sprite = ExtResource("2_m2e5i")
 BasicAttack = ExtResource("1_csy6p")
 UnitName = "RareEnemyPlaceholder"
+CreatureType = 0
+Element = 4
+unit_specific_drops = Array[ExtResource("4_6umak")]([])
+elem_palettes = Array[Texture2D]([])
 STR_up = 5
 DEX_up = 0
 VIT_up = 5
@@ -16,14 +21,14 @@ MAG_up = 0
 DEF_up = 1
 LUK_up = 0
 Free_Stats = 0
-Base_HP = 11
+Base_HP = 18
 STR = 15
 DEX = 5
 VIT = 10
 MAG = 5
 DEF = 6
 LUK = 5
-HP_Max = 10
+HP_Max_withVIT = null
 Base_Phys_ATK = 5.0
 Base_Mag_ATK = 5.0
 Base_Phys_DEF = 5.0

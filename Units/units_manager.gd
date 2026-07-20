@@ -115,12 +115,14 @@ func spawn_unit(group:Unit_Group):
 			new_unit.UnitStats = DungeonData.Common_Enemies.pick_random()
 #		print("Basicattack", new_unit.UnitStats)
 		var placing = false
+		var emergency_index = 0
 		while placing == false:
 			placing = true
 #			print("null test tilemap ref",tilemaplayer_ref)
 			var try = spawn_tiles.pick_random()
 			#print(" try coord:",try)#"all:",tilemaplayer_ref.AllRoomTiles,
 			if Active_Units.size() > 0:
+				emergency_index += 1
 				player_loc = Active_Units[0].self_coords
 				#print(Active_Units,"is player? ",Active_Units[0].Team,Active_Units[0].self_coords)
 				#print(player_loc,try)
@@ -135,6 +137,10 @@ func spawn_unit(group:Unit_Group):
 				elif try.y > player_loc.y - 6 and try.y < player_loc.y + 6:
 					print("failed in y")
 					placing = false
+				print("ei:",emergency_index)
+				if emergency_index > 30: #emergency infinite loop break
+					new_unit.position = Global.grid_to_pos(try)
+					break
 				
 			new_unit.position = Global.grid_to_pos(try)
 		new_unit.UnitLevel = DungeonData.AREA_LEVEL+DungeonData.UNIT_LEVEL_Boost

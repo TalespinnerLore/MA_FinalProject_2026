@@ -4,15 +4,20 @@ class_name UnitInventoryUI
 enum Pnum {P1,P2,P3,P4}
 @export var PlayerUnit:Pnum
 @export var unit:Unit_Instance
+var autostats #= classdata.get_levelup_stats(unit.UnitLevel)
 
 func load_data():
+	$StatAbilityBox/StatBoxContainer.show_hide_plusbtns(false)
+	for i in 6:
+		$StatAbilityBox/StatBoxContainer.show_hide_minusbtn(false,i)
 	match PlayerUnit:
 		Pnum.P1:
 			var classdata = PlayerStats.p1_class
 			unit = get_tree().get_first_node_in_group("Player")
+			unit.set_stats()
 			$gearInventoryBox/HPLabel.text = str('HP: ',unit.HP_Current,'/',unit.HP_Max+unit.HP_Max_boost)
 			$gearInventoryBox/NameClassLabel.text = str('Test McTestface\n LVL ',unit.UnitLevel,' ',classdata.UnitName)
-			var autostats = classdata.get_levelup_stats(unit.UnitLevel)
+			autostats = classdata.get_levelup_stats(unit.UnitLevel)
 			$gearInventoryBox/PortraitTextureRect.texture = classdata.Sprite
 			if PlayerStats.p1_weapon != null:
 				$gearInventoryBox/WeaponTextureSlot/WeaponTexture.texture = PlayerStats.p1_weapon.icon
@@ -135,7 +140,7 @@ It also provides a 2% multiplier to MELEE damage per point invested. \n"
 var desc_dex = "Dexterity (DEX) provides the base value for a unit's evasion and critical hit rate according to the difference between two units. \n
 It also provides a 2% multiplier to RANGED damage per point invested. \n"
 
-var desc_vit = "Vitality (VIT) provides 5 additional HP to a unit per point invested. \n
+var desc_vit = "Vitality (VIT) provides 2 additional HP to a unit per point invested. \n
 It also provides a 2% multiplier to HEALING, BUFF, and DEBUFF abilities. \n"
 
 var desc_mag = "Magic (MAG) provides the base value for a unit's MAGICAL damage equal to total points invested. \n

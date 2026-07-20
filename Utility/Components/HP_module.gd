@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name HP_module
 
 
 var hp:float = 2.0

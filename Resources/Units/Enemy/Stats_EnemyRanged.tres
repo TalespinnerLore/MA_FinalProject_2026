@@ -1,14 +1,19 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=4 format=3 uid="uid://brn8pf5kf160g"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=5 format=3 uid="uid://brn8pf5kf160g"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_fgudt"]
 [ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="1_lg36o"]
 [ext_resource type="Texture2D" uid="uid://dk3bsrh054bs7" path="res://Art/UnitSprites/BasicCharacter_enemyranger.png" id="2_vvisp"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="4_om8wu"]
 
 [resource]
 script = ExtResource("1_fgudt")
 Sprite = ExtResource("2_vvisp")
 BasicAttack = ExtResource("1_lg36o")
 UnitName = "RangedEnemy"
+CreatureType = 0
+Element = 4
+unit_specific_drops = Array[ExtResource("4_om8wu")]([])
+elem_palettes = Array[Texture2D]([])
 STR_up = 3
 DEX_up = 3
 VIT_up = 2
@@ -16,14 +21,14 @@ MAG_up = 1
 DEF_up = 1
 LUK_up = 0
 Free_Stats = 0
-Base_HP = 9
+Base_HP = 12
 STR = 3
 DEX = 3
 VIT = 2
 MAG = 1
 DEF = 1
 LUK = 5
-HP_Max = 10
+HP_Max_withVIT = null
 Base_Phys_ATK = 5.0
 Base_Mag_ATK = 5.0
 Base_Phys_DEF = 5.0

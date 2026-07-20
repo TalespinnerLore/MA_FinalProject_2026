@@ -122,7 +122,7 @@ var Range_Boost = 0 #extra tile range for abilities
 
 func set_stats():
 	UnitStats.calc_template_stats()
-	HP_Max = UnitStats.HP_Max
+	HP_Max = UnitStats.HP_Max_withVIT
 	HP_Current = HP_Max
 	STR = UnitStats.STR
 	DEX = UnitStats.DEX
@@ -130,7 +130,7 @@ func set_stats():
 	MAG = UnitStats.MAG
 	DEF = UnitStats.DEF
 	LUK = UnitStats.LUK
-	HP_Max = UnitStats.HP_Max
+	HP_Max = UnitStats.HP_Max_withVIT
 	Base_Phys_ATK = UnitStats.Base_Phys_ATK
 	Base_Mag_ATK = UnitStats.Base_Mag_ATK
 	Base_Phys_DEF = UnitStats.Base_Phys_DEF

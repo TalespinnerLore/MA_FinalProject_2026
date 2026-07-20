@@ -99,10 +99,10 @@ texture = ExtResource("11_h154a")
 
 [node name="WeaponTextureSlot" type="TextureRect" parent="gearInventoryBox"]
 layout_mode = 0
-offset_left = 72.0
-offset_top = 176.0
-offset_right = 104.0
-offset_bottom = 208.0
+offset_left = 88.0
+offset_top = 144.0
+offset_right = 120.0
+offset_bottom = 176.0
 texture = ExtResource("5_ksq6m")
 
 [node name="WeaponTexture" type="TextureRect" parent="gearInventoryBox/WeaponTextureSlot"]
@@ -113,10 +113,10 @@ texture = ExtResource("5_ksq6m")
 
 [node name="ArmourTextureSlot" type="TextureRect" parent="gearInventoryBox"]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 176.0
-offset_right = 72.0
-offset_bottom = 208.0
+offset_left = 24.0
+offset_top = 145.0
+offset_right = 56.0
+offset_bottom = 177.0
 texture = ExtResource("6_7q1lg")
 
 [node name="ArmourTexture" type="TextureRect" parent="gearInventoryBox/ArmourTextureSlot"]
@@ -138,6 +138,58 @@ layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
 texture = ExtResource("7_b4d8v")
+
+[node name="OptionsBox" type="NinePatchRect" parent="gearInventoryBox"]
+offset_left = 41.0
+offset_top = 184.0
+offset_right = 103.0
+offset_bottom = 232.0
+texture = ExtResource("3_41eq5")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="gearInventoryBox/OptionsBox"]
+layout_mode = 0
+offset_right = 63.0
+offset_bottom = 48.0
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="useButton" type="Button" parent="gearInventoryBox/OptionsBox/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 8
+text = "USE"
+flat = true
+
+[node name="giveButton" type="Button" parent="gearInventoryBox/OptionsBox/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 8
+text = "UNEQUIP"
+flat = true
+
+[node name="dropButton" type="Button" parent="gearInventoryBox/OptionsBox/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 8
+text = "DROP"
+flat = true
+
+[node name="throwButton" type="Button" parent="gearInventoryBox/OptionsBox/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_75ayx")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "THROW"
+flat = true
 
 [node name="StatAbilityBox" type="NinePatchRect" parent="."]
 layout_mode = 0
@@ -197,7 +249,7 @@ script = ExtResource("6_cblyr")
 [node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox"]
 layout_mode = 0
 offset_left = 16.0
-offset_right = 64.0
+offset_right = 72.0
 offset_bottom = 16.0
 theme = ExtResource("4_75ayx")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -207,7 +259,7 @@ vertical_alignment = 1
 
 [node name="Number" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox"]
 layout_mode = 0
-offset_left = 64.0
+offset_left = 72.0
 offset_right = 112.0
 offset_bottom = 16.0
 theme = ExtResource("4_75ayx")
@@ -246,7 +298,7 @@ stat = 1
 [node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox2"]
 layout_mode = 0
 offset_left = 16.0
-offset_right = 64.0
+offset_right = 72.0
 offset_bottom = 16.0
 theme = ExtResource("4_75ayx")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -256,7 +308,7 @@ vertical_alignment = 1
 
 [node name="Number" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox2"]
 layout_mode = 0
-offset_left = 64.0
+offset_left = 72.0
 offset_right = 112.0
 offset_bottom = 16.0
 theme = ExtResource("4_75ayx")
@@ -295,7 +347,7 @@ stat = 2
 [node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox3"]
 layout_mode = 0
 offset_left = 16.0
-offset_right = 64.0
+offset_right = 72.0
 offset_bottom = 16.0
 theme = ExtResource("4_75ayx")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -305,7 +357,7 @@ vertical_alignment = 1
 
 [node name="Number" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox3"]
 layout_mode = 0
-offset_left = 64.0
+offset_left = 72.0
 offset_right = 112.0
 offset_bottom = 16.0
 theme = ExtResource("4_75ayx")
@@ -344,7 +396,7 @@ stat = 3
 [node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox4"]
 layout_mode = 0
 offset_left = 16.0
-offset_right = 64.0
+offset_right = 72.0
 offset_bottom = 16.0
 theme = ExtResource("4_75ayx")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -354,7 +406,7 @@ vertical_alignment = 1
 
 [node name="Number" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox4"]
 layout_mode = 0
-offset_left = 64.0
+offset_left = 72.0
 offset_right = 112.0
 offset_bottom = 16.0
 theme = ExtResource("4_75ayx")
@@ -393,7 +445,7 @@ stat = 4
 [node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox5"]
 layout_mode = 0
 offset_left = 16.0
-offset_right = 64.0
+offset_right = 72.0
 offset_bottom = 16.0
 theme = ExtResource("4_75ayx")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -403,7 +455,7 @@ vertical_alignment = 1
 
 [node name="Number" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox5"]
 layout_mode = 0
-offset_left = 64.0
+offset_left = 72.0
 offset_right = 112.0
 offset_bottom = 16.0
 theme = ExtResource("4_75ayx")
@@ -431,6 +483,7 @@ stretch_mode = 3
 [node name="StatBox6" type="NinePatchRect" parent="StatAbilityBox/StatBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+mouse_filter = 1
 texture = ExtResource("9_wjtch")
 patch_margin_left = 5
 patch_margin_top = 5
@@ -442,7 +495,7 @@ stat = 5
 [node name="Label" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox6"]
 layout_mode = 0
 offset_left = 16.0
-offset_right = 64.0
+offset_right = 72.0
 offset_bottom = 16.0
 theme = ExtResource("4_75ayx")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -452,7 +505,7 @@ vertical_alignment = 1
 
 [node name="Number" type="Label" parent="StatAbilityBox/StatBoxContainer/StatBox6"]
 layout_mode = 0
-offset_left = 64.0
+offset_left = 72.0
 offset_right = 112.0
 offset_bottom = 16.0
 theme = ExtResource("4_75ayx")
@@ -473,6 +526,7 @@ layout_mode = 0
 offset_left = 112.0
 offset_right = 128.0
 offset_bottom = 16.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("8_7a4yo")
 texture_pressed = ExtResource("8_7a4yo")
 stretch_mode = 3
@@ -523,7 +577,6 @@ offset_left = 102.0
 offset_top = 1.0
 offset_right = 126.0
 offset_bottom = 17.0
-mouse_filter = 1
 theme = ExtResource("4_75ayx")
 theme_override_colors/font_color = Color(0.988235, 0.945098, 0.796078, 1)
 text = " USE"
@@ -956,6 +1009,16 @@ flat = true
 [connection signal="mouse_entered" from="gearInventoryBox/TrinketTextureSlot/TrinketTexture" to="." method="_on_trinket_texture_mouse_entered"]
 [connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox/minusButton" to="StatAbilityBox/StatBoxContainer/StatBox" method="_on_minus_button_pressed"]
 [connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox/plusButton" to="StatAbilityBox/StatBoxContainer/StatBox" method="_on_plus_button_pressed"]
+[connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox2/minusButton" to="StatAbilityBox/StatBoxContainer/StatBox2" method="_on_minus_button_pressed"]
+[connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox2/plusButton" to="StatAbilityBox/StatBoxContainer/StatBox2" method="_on_plus_button_pressed"]
+[connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox3/minusButton" to="StatAbilityBox/StatBoxContainer/StatBox3" method="_on_minus_button_pressed"]
+[connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox3/plusButton" to="StatAbilityBox/StatBoxContainer/StatBox3" method="_on_plus_button_pressed"]
+[connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox4/minusButton" to="StatAbilityBox/StatBoxContainer/StatBox4" method="_on_minus_button_pressed"]
+[connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox4/plusButton" to="StatAbilityBox/StatBoxContainer/StatBox4" method="_on_plus_button_pressed"]
+[connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox5/minusButton" to="StatAbilityBox/StatBoxContainer/StatBox5" method="_on_minus_button_pressed"]
+[connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox5/plusButton" to="StatAbilityBox/StatBoxContainer/StatBox5" method="_on_plus_button_pressed"]
+[connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox6/minusButton" to="StatAbilityBox/StatBoxContainer/StatBox6" method="_on_minus_button_pressed"]
+[connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox6/plusButton" to="StatAbilityBox/StatBoxContainer/StatBox6" method="_on_plus_button_pressed"]
 [connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox7/usepointsButton" to="StatAbilityBox/StatBoxContainer/StatBox7" method="_on_usepoints_button_pressed"]
 [connection signal="mouse_entered" from="StatAbilityBox/AbilityBoxContainer/AbilityBox" to="StatAbilityBox/AbilityBoxContainer/AbilityBox" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="StatAbilityBox/AbilityBoxContainer/AbilityBox2" to="StatAbilityBox/AbilityBoxContainer/AbilityBox2" method="_on_mouse_entered"]
