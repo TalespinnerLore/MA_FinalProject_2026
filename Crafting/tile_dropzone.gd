@@ -1,4 +1,5 @@
 extends Node2D
+class_name DropZone
 
 @onready var TILE_ID = 0
 enum RARITIES {BASIC,RARE,ELITE,UNIQUE}
@@ -28,13 +29,16 @@ func take_data(data:DUNGEON_CRAFTING_TILE_DATA,spritedata,data_Source):
 	get_parent().get_parent().change_data(CRAFTING_TILE_DATA,true)
 
 func remove_data():
-	get_parent().get_parent().change_data(CRAFTING_TILE_DATA,false)
+	var hold_DATA = CRAFTING_TILE_DATA
+	CRAFTING_TILE_DATA = null
+	get_parent().get_parent().change_data(hold_DATA,false)
 	slot_filled = false
 	data_sprite.texture = null
 	if is_instance_valid(data_source):
+		
 		data_source.drag_failed()
 	else:
-		tile_inv.TileID_NamedInventory[CRAFTING_TILE_DATA.TILE_ID][1] += 1
+		tile_inv.TileID_NamedInventory[hold_DATA.TILE_ID][1] += 1
 	#print(data_sprite.texture)
 
 

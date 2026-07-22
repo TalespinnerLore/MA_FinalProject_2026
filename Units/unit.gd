@@ -65,9 +65,9 @@ enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_R
 ####################################################
 #Experience
 @export_category('XP Stats')
-@export var UnitLevel:int = 0
+@export var UnitLevel:int = 1
 @export var XP:int = 0
-@export var XP_to_Level:int = 50
+@export var XP_to_Level:int = 10
 #var XP_to_Level_0to1 = 50
 
 @export var XP_Mult = 1.0
@@ -78,7 +78,13 @@ func Calc_XP_to_Level():
 	return(XP_to_Level*(1.0+(0.1*(UnitLevel-1))))
 
 func Calc_XP_to_Reward():
-	return (((BaseXP*(UnitLevel-1)/10) + BaseXP)*XP_Mult)
+	XP_to_Reward = int((BaseXP*(UnitLevel-1/10) + BaseXP)*XP_Mult)
+	return XP_to_Reward
+
+func give_XP(XP_togive):
+	print('getting xp now')
+	XP+=XP_togive
+	Attempt_LevelUp()
 
 func Attempt_LevelUp():
 	print("ATTEMPT LEVEL-UP!")
@@ -640,7 +646,7 @@ func _move(dir:Vector2):
 
 func _select_direction(dir:Vector2):
 	facing = Vector2i(dir)
-	$Sprite2D/pointer.look_at(self.global_position+(dir*Vector2(32,32)))
+	set_pointer_at_facing()
 	return facing
 
 func action_used():
@@ -702,6 +708,10 @@ func init(is_player_controlled):
 		else:
 			HP_Current = HP_Max
 			HP_Module.new_level_refresh(HP_Current,HP_Max)
+		XP = PlayerStats.p1_XP
+		UnitLevel = PlayerStats.p1_level
+		for i in UnitLevel:
+			Calc_XP_to_Level()
 	else: #FIX THIS LATER TO ACCOUNT FOR NPC AND ALLY UNITS
 		$Label.visible = false
 		Team = Teams.ENEMY
@@ -710,6 +720,7 @@ func init(is_player_controlled):
 		HP_Module.new_level_refresh(HP_Current,HP_Max)
 		$Abilities.init()
 		$Sprite2D.texture = UnitStats.Sprite
+		Calc_XP_to_Reward()
 	target_unit = get_tree().get_first_node_in_group("Player")
 	dialogue_manager_ref = get_tree().get_first_node_in_group("DIALOGUE_MANAGER")
 	
@@ -749,13 +760,14 @@ var goldscene = preload("res://Objects/Items/GroundItem.tscn")
 
 func _on_death():
 	#emit_signal("unit_defeated")
-	get_parent()._on_unit_defeated()
+	get_parent()._on_unit_defeated(XP_to_Reward)
 	if Team == Teams.ENEMY:
 		if UnitStats.UnitName != "MiniBoss":
 			var gold = goldscene.instantiate()
 			gold.global_position = self.global_position
 			$"../../../GroundItem_Manager".add_child(gold)
 			$"../../../GroundItem_Manager".get_child(-1)._init()
+			emit_signal("unit_defeated",XP_to_Reward)
 			queue_free()
 		else:
 			await get_tree().create_timer(2).timeout
@@ -852,13 +864,15 @@ func AI_turn_enemy():
 			else:
 				var new_dir = non_coll.pick_random()
 				facing = new_dir
-				$Sprite2D/pointer.look_at(self.global_position+(Vector2(facing)*Vector2(32,32)))
+				set_pointer_at_facing()
+						
+
 				print("enemAI; onscreen-",$VisibleOnScreenNotifier2D.is_on_screen()," moverate-",move_duration)
 				_move(facing)
 			action_used()
 			pass
 		else:
-			$Sprite2D/pointer.look_at(self.global_position+(Vector2(facing)*Vector2(32,32)))
+			set_pointer_at_facing()
 			#choose_ability() ##score abilities for viability, choose 1, use it.
 			#print("AI attacks")
 			connect_dialogue()
@@ -880,6 +894,25 @@ func AI_turn_enemy():
 		pass
 	pass
 
+func set_pointer_at_facing():
+	print("facing:",facing," length:",facing.length())
+	if facing.length() < 1.4:
+		$Sprite2D/pointer.visible = true
+		$Sprite2D/pointer_diag.visible = false
+		$Sprite2D/pointer.look_at(self.global_position+(Vector2(facing)*Vector2(32,32)))
+	else:
+		$Sprite2D/pointer.visible = false
+		$Sprite2D/pointer_diag.visible = true
+		match facing:
+			Vector2i(1,-1):
+				$Sprite2D/pointer_diag.set_rotation_degrees(0)
+			Vector2i(-1,1):
+				$Sprite2D/pointer_diag.set_rotation_degrees(180)
+			Vector2i(1,1):
+				$Sprite2D/pointer_diag.set_rotation_degrees(90)
+			Vector2i(-1,-1):
+				$Sprite2D/pointer_diag.set_rotation_degrees(270)
+
 func path_random_tile():
 	var rand_dir = Global.dir8
 	rand_dir.shuffle()
@@ -889,7 +922,7 @@ func path_random_tile():
 		if valid.has(target_tile):
 			facing = target_tile - Vector2i(self_coords)
 			break
-	$Sprite2D/pointer.look_at(self.global_position+(Vector2(facing)*Vector2(32,32)))
+	set_pointer_at_facing()
 	_move(facing)
 
 

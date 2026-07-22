@@ -443,17 +443,28 @@ func change_data(data:DUNGEON_CRAFTING_TILE_DATA,adding:bool):
 		
 	show_data()
 	if (preset_data == null or ! adding) and data != offset_values:
+		print("hit preset = null / not adding, and data != offset values check")
 		# forced recheck when adding a tile with not preset, when you might change
 		## that preset by removing a tile, but not when removing the visual offset
 		### data that happens when the data is forwarded to DungeonData.
 		var preset = get_parent().check_for_preset_recipes()
 		if ! preset == null:
-			preset_data = preset[-1]
+			var testtext = []
+			for q in preset:
+				testtext.append(q.TILE_ID)
+			print("hit preset recipe existing check - IDs:",testtext)
+			preset_data = preset[-1] #the preset data that actually is applied (1 tile)
 			preset.pop_back()
 			offset_values = DUNGEON_CRAFTING_TILE_DATA.new()
 			for tile in preset:
-				offset_values.combine_data(tile,true)
+				var is_last = false #these are the things we want visually cancelled out (9 tiles)
+				if tile == preset[-1]:
+					is_last = true #the last is the visual info added (1 tile)
+				offset_values.combine_data(tile,is_last)
+			#change_data(preset_data,true)
+			change_data(offset_values,true)
 		else:
+			print("hit the no precet existing check")
 			preset_data = null
 			offset_values = null
 	pass

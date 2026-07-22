@@ -1,0 +1,80 @@
+[gd_resource type="Resource" script_class="DCTData_Preset" load_steps=6 format=3 uid="uid://ygkbugjck1i1"]
+
+[ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="1_bufft"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_wmnpe"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/DCTData_Preset.gd" id="2_eud4p"]
+[ext_resource type="Resource" uid="uid://pmf5ls6spbfm" path="res://Resources/DungeonGen/UniqueRooms/Resources/MINI_BOSS.tres" id="2_h02fg"]
+[ext_resource type="Resource" uid="uid://v7oc1ln8lrh7" path="res://Resources/Units/Player/Stats_Healer.tres" id="4_1do15"]
+
+[resource]
+script = ExtResource("2_eud4p")
+Boss_Enemy = ExtResource("1_bufft")
+Mini_Bosses = Array[ExtResource("1_wmnpe")]([ExtResource("4_1do15")])
+Final_Floor = ExtResource("2_h02fg")
+TILE_ID = 0
+rarity = 3
+Affinity_Fire = 0
+Affinity_Water = 0
+Affinity_Earth = 0
+Affinity_Air = 0
+Affinity_Force = 100
+Affinity_Light = 10
+Affinity_Dark = 10
+Biome_Test = 0
+Biome_Volcano = 0
+Biome_Island = 0
+Biome_Mesa = 0
+Biome_Skyland = 0
+EnvFeature_River = 0
+EnvFeature_Lake = 0
+EnvFeature_Flooded = 0
+EnvFeature_Barren = 0
+Halls_DeadEnds = 0
+Rooms_Round = 0
+Rooms_DenseLayout = 0
+Rooms_SparceLayout = 0
+Rooms_AlternatingSize = 0
+Rooms_Small = 0
+Rooms_Large = 0
+ItemType_Gold = 0
+ItemType_Tiles = 0
+ItemType_Consumable = 25
+ItemType_Gear = 25
+ItemType_Lockboxes = 0
+ItemType_KeyItem = 0
+ItemMods_SpawnRate = 70
+GearType_Weapon = 25
+GearType_Armour = 25
+GearType_Trinket = 25
+Class_Vanguard = 0
+Class_Warrior = 0
+Class_Mage = 0
+Class_Rogue = 0
+Class_Healer = 0
+Class_Jester = 0
+MobType_Beast = 0
+MobType_Elemental = 0
+MobType_Undead = 0
+MobType_Construct = 125
+MobType_Mortal = 100
+MobType_Wildling = 0
+MobMods_SpawnRate = 25
+MobMods_Level = 0
+MobMods_EXP = 0
+MobMods_Gold = 20
+MobMods_Gear = 35
+UniqueRooms_TreasureVault = 0
+UniqueRooms_MonsterHouse = 0
+Boss_T0_Roaming = 0
+Boss_T0_Mini = 0
+Boss_T1_Generic = 0
+Boss_T1_Fire = 0
+Boss_T1_Water = 0
+Boss_T1_Earth = 0
+Boss_T1_Wind = 0
+Boss_T1_Force = 1
+Boss_T2_Generic = 0
+Boss_T2_QuadElement = 0
+Boss_T2_Force = 0
+extra_floors = 8
+has_boss = true

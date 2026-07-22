@@ -54,30 +54,76 @@ var zonerarities = [t0_cross_rarities,t1_grid3_rarities,t1_grid3_rarities_unique
 var preset_recipes = [t1_fireboss_recipe,t1_waterboss_recipe,t1_earthboss_recipe,t1_airboss_recipe,t1_forceboss_recipe]
 
 func check_for_preset_recipes():
+	#print(t1_forceboss_recipe)
+	#print("predef",preset_recipes[4])
+	preset_recipes = [t1_fireboss_recipe,t1_waterboss_recipe,t1_earthboss_recipe,t1_airboss_recipe,t1_forceboss_recipe]
+	#print("postdef",preset_recipes[4])
 	var valid_recipe = false
 	var zones = $DROPZONES.get_children()
-	var return_preset:DCTData_Preset
+	var return_preset
 	for recipe in preset_recipes:
+
+		var preset_list_tileID = [] #tile ids
+		var zonedata_list = []
+		var zone_tilelID = []
 		
-		#valid_recipe = true
-		var index = 0
-		var data:DUNGEON_CRAFTING_TILE_DATA #stored data in dropzones
-		for tile in recipe:
-			data = zones[index].CRAFTING_TILE_DATA
-			if index <= zones.get_size()-1:
-				if data != tile:
-					valid_recipe = false
+		for zone:DropZone in $DROPZONES.get_children():
+			zonedata_list.append(zone.CRAFTING_TILE_DATA)
+		if recipe == preset_recipes[-1]:
+			print("zonesdata:",zonedata_list,"\nrecipe:",recipe)
+			
+			for i in $DROPZONES.get_child_count():
+				if recipe[i] != null:
+					preset_list_tileID.append(recipe[i].TILE_ID)
+				else:
+					preset_list_tileID.append('<null>')
+				if $DROPZONES.get_child(i).CRAFTING_TILE_DATA != null:
+					zone_tilelID.append($DROPZONES.get_child(i).CRAFTING_TILE_DATA.TILE_ID)
+				else:
+					zone_tilelID.append('<null>')
+			print('z_tileID:',zone_tilelID,"\nr_tileID:",preset_list_tileID)
+			#print("zone tileID:",zone_list[i].CRAFTING_TILE_DATA.TILE_ID," recipe tileID:",recipe[i].TILE_ID)
+		
+		#unindent this latervvvvv
+			for j in recipe.size() - 2:
+				print(j)
+				if recipe[j] != null and recipe[j] != zonedata_list[j]:
+					print(zonedata_list[j]," != ",recipe[j],'\n',zone_tilelID[j]," != ",preset_list_tileID[j])
 					break
-			else:
-				return_preset = recipe#[-1] #the actual data we care about being returned.
-				valid_recipe = true
-		if valid_recipe:
-			print("this should be a valid recipe")
-			break
+				elif j == recipe.size() - 3:
+					valid_recipe = true
+					return_preset = recipe
+					print('is valid recipe')
+					break
+				else:
+					print('not end of recipe')
+			
 	if valid_recipe:
+		print('returning preset data now')
 		return return_preset
 	else:
 		return null
+#		var zone_index = 0
+
+		#var data:DUNGEON_CRAFTING_TILE_DATA #stored data in dropzones
+		#for tile_resource in recipe:
+		#	data = zones[zone_index].CRAFTING_TILE_DATA
+		#	preset_list.append(tile_resource.TILE_ID)
+		#	if zone_index <= zones.get_size()-1:
+		#		if data != tile_resource and data != null:
+		#			valid_recipe = false
+		#			break
+		#	else:
+		#		return_preset = recipe#[-1] #the actual data we care about being returned.
+		#		valid_recipe = true
+		#if valid_recipe:
+		#	print("this should be a valid recipe")
+		#	break
+		#print(preset_list)
+	#if valid_recipe:
+	#	return return_preset
+	#else:
+	#	return null
 
 var dropzone_scene = preload("res://Crafting/tile_dropzone.tscn")
 

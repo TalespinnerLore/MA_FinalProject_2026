@@ -144,6 +144,7 @@ func spawn_unit(group:Unit_Group):
 				
 			new_unit.position = Global.grid_to_pos(try)
 		new_unit.UnitLevel = DungeonData.AREA_LEVEL+DungeonData.UNIT_LEVEL_Boost
+		new_unit.XP_Mult = float(DungeonData.MobMods_EXP/100)+1.0
 		Active_Units.append(new_unit)
 		group.add_child(new_unit)
 		group.get_child(-1).init(group.is_player_controlled)
@@ -154,6 +155,7 @@ func spawn_specific_unit(group:Unit_Group,unitdata:StatComponent,tile:Vector2i):
 	new_unit.UnitStats = unitdata
 	new_unit.position = Global.grid_to_pos(tile)
 	new_unit.UnitLevel = DungeonData.AREA_LEVEL+DungeonData.UNIT_LEVEL_Boost
+	new_unit.XP_Mult = float(DungeonData.MobMods_EXP/100)+1.0
 	Active_Units.append(new_unit)
 	group.add_child(new_unit)
 	print("spawn spec unit; name:",unitdata.UnitName)

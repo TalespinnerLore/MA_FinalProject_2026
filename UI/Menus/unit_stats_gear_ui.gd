@@ -15,7 +15,7 @@ func load_data():
 			var classdata = PlayerStats.p1_class
 			unit = get_tree().get_first_node_in_group("Player")
 			unit.set_stats()
-			$gearInventoryBox/HPLabel.text = str('HP: ',unit.HP_Current,'/',unit.HP_Max+unit.HP_Max_boost)
+			$gearInventoryBox/HPLabel.text = str('XP: ',unit.XP,'/',unit.XP_to_Level,'\nHP: ',unit.HP_Current,'/',unit.HP_Max+unit.HP_Max_boost)
 			$gearInventoryBox/NameClassLabel.text = str('Test McTestface\n LVL ',unit.UnitLevel,' ',classdata.UnitName)
 			autostats = classdata.get_levelup_stats(unit.UnitLevel)
 			$gearInventoryBox/PortraitTextureRect.texture = classdata.Sprite

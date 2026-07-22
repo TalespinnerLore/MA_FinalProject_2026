@@ -116,9 +116,10 @@ func spawn_unique_room_chance(remaining:int,roomdata:UniqueRoomData):
 	return added
 
 func save_player_data():
-	PlayerStats.p1_ability_usesB1234WAT = get_tree().get_first_node_in_group("Player").Abilities.ability_usesB1234WAT
-	PlayerStats.p1_HP = get_tree().get_first_node_in_group("Player").HP_Current
-
+	var p1 = get_tree().get_first_node_in_group("Player")
+	PlayerStats.p1_ability_usesB1234WAT = p1.Abilities.ability_usesB1234WAT
+	PlayerStats.p1_HP = p1.HP_Current
+	PlayerStats.p1_XP = p1.XP
 
 
 ###vvvDEPRECIATEDvvv###

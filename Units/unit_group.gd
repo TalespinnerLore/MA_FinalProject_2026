@@ -147,13 +147,19 @@ func _on_unit_damaged() -> void:
 	#camerashake here
 	pass
 
-func _on_unit_defeated():
+func _on_unit_defeated(xp_awarded):
 	print("unit defeated triggering?")
 	if get_active_units().size() == 1 and is_player_controlled == true:
 		#defeated.emit(unit_defeated)
 		pass
-	print("active enems: ",get_active_units().size()," is player? ",is_player_controlled,\
-	" is final? ",DungeonData.current_floor >= DungeonData.max_floors)
+	#print("active enems: ",get_active_units().size()," is player? ",is_player_controlled,\
+	#" is final? ",DungeonData.current_floor >= DungeonData.max_floors)
+	
+	if is_player_controlled == false:
+		print("AWARDING XP TO PLAYER")
+		for player_unit:Unit_Instance in get_parent().all_groups[0].get_children():
+			print('playercheck - ',player_unit.UnitStats.UnitName)
+			player_unit.give_XP(xp_awarded)
 	#this goes off before the last unit is freed fom the queue, so 1 is correct.
 	if get_active_units().size() == 1 and is_player_controlled != true \
 	and DungeonData.current_floor >= DungeonData.max_floors:

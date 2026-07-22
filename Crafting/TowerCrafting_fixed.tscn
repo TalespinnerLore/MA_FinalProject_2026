@@ -1,16 +1,26 @@
-[gd_scene load_steps=9 format=4 uid="uid://bfynsxir5rxqw"]
+[gd_scene load_steps=18 format=4 uid="uid://bfynsxir5rxqw"]
 
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_hxmwj"]
 [ext_resource type="Script" path="res://Crafting/tower_crafting_fixed.gd" id="1_u4c53"]
 [ext_resource type="TileSet" uid="uid://ty37cym0krxg" path="res://Crafting/tower_crafting_ui.tres" id="2_1au4a"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/DungeonCraftingTileData.gd" id="2_fv2ap"]
+[ext_resource type="Resource" uid="uid://17804feuy204" path="res://Resources/Items/Tiles/DungeonGen/Items/TRINKET.tres" id="3_1moxw"]
 [ext_resource type="FontFile" uid="uid://bme72xoxft30d" path="res://Art/Tiny5-Regular.ttf" id="3_2s003"]
+[ext_resource type="Resource" uid="uid://sr4qktjx4o8r" path="res://Resources/Items/Tiles/DungeonGen/Items/CONSUMABLE.tres" id="4_dpa81"]
 [ext_resource type="PackedScene" uid="uid://b6dntdfdb23xd" path="res://Crafting/tile_dropzone.tscn" id="4_uf6kn"]
+[ext_resource type="Resource" uid="uid://dd8k3tis72r44" path="res://Resources/Items/Tiles/DungeonGen/Items/ARMOUR.tres" id="5_i8e2a"]
 [ext_resource type="Script" path="res://ui_towercrafting.gd" id="5_jd6lb"]
+[ext_resource type="Resource" uid="uid://xs0uyvl8xuco" path="res://Resources/Items/Tiles/DungeonGen/Items/WEAPON.tres" id="6_esmu1"]
 [ext_resource type="PackedScene" uid="uid://d1yshb420qmo7" path="res://Crafting/tile_object.tscn" id="6_lq04m"]
+[ext_resource type="Resource" uid="uid://b6xgevtxsyynm" path="res://Resources/Items/Tiles/DungeonGen/Elements/FORCE.tres" id="7_1m1sb"]
 [ext_resource type="PackedScene" uid="uid://bitvmnpjfrxby" path="res://Crafting/DungeonCraftingTile.tscn" id="7_jockm"]
+[ext_resource type="Resource" uid="uid://stb6ypti7q54" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_BOSS.tres" id="8_ywfu4"]
+[ext_resource type="Resource" uid="uid://ba1rjkyjexgx1" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_FORCEBOSS.tres" id="9_cvojt"]
+[ext_resource type="Resource" uid="uid://ygkbugjck1i1" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/FORCETOWER_T1.tres" id="10_i3nak"]
 
 [node name="TowerCrafting_FIXED" type="Node2D"]
 script = ExtResource("1_u4c53")
+t1_forceboss_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("5_i8e2a"), ExtResource("6_esmu1"), ExtResource("3_1moxw"), ExtResource("4_dpa81"), ExtResource("7_1m1sb"), ExtResource("7_1m1sb"), ExtResource("7_1m1sb"), ExtResource("7_1m1sb"), ExtResource("8_ywfu4"), ExtResource("9_cvojt"), ExtResource("10_i3nak")])
 grid_level = 2
 
 [node name="TileMapLayer_SideUI" type="TileMapLayer" parent="."]

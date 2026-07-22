@@ -70,8 +70,9 @@ func spawn_vfx():
 	var vfx = Ability_vfx.instantiate()
 	vfx.texture = StatusData.vfx
 	vfx.position = owning_unit.position
-	var vfx_container = get_tree().get_first_node_in_group("VFX_container") 
-	vfx_container.add_child(vfx)
+	if is_instance_valid(get_tree()):
+		var vfx_container = get_tree().get_first_node_in_group("VFX_container") 
+		vfx_container.add_child(vfx)
 
 func periodic_effect():
 	spawn_vfx()
