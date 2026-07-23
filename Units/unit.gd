@@ -67,7 +67,7 @@ enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_R
 @export_category('XP Stats')
 @export var UnitLevel:int = 1
 @export var XP:int = 0
-@export var XP_to_Level:int = 10
+@export var XP_to_Level:int = 30
 #var XP_to_Level_0to1 = 50
 
 @export var XP_Mult = 1.0
@@ -75,14 +75,16 @@ enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_R
 @export var BaseXP = 5
 
 func Calc_XP_to_Level():
-	return(XP_to_Level*(1.0+(0.1*(UnitLevel-1))))
+	XP_to_Level = 5*UnitLevel*((int(UnitLevel%5)+((5+int(UnitLevel/2.5)) * int(1+int(UnitLevel/5)+int(UnitLevel/10)))))
+	return 
 
 func Calc_XP_to_Reward():
-	XP_to_Reward = int((BaseXP*(UnitLevel-1/10) + BaseXP)*XP_Mult)
+	XP_to_Reward = int(BaseXP*UnitLevel*XP_Mult)
 	return XP_to_Reward
 
-func give_XP(XP_togive):
+func give_XP(XP_togive,enem_level):
 	print('getting xp now')
+	XP_togive = XP_togive * (1 + 0.3*clampi(enem_level-UnitLevel,-3,5))
 	XP+=XP_togive
 	Attempt_LevelUp()
 
@@ -710,8 +712,7 @@ func init(is_player_controlled):
 			HP_Module.new_level_refresh(HP_Current,HP_Max)
 		XP = PlayerStats.p1_XP
 		UnitLevel = PlayerStats.p1_level
-		for i in UnitLevel:
-			Calc_XP_to_Level()
+		Calc_XP_to_Level()
 	else: #FIX THIS LATER TO ACCOUNT FOR NPC AND ALLY UNITS
 		$Label.visible = false
 		Team = Teams.ENEMY
@@ -760,7 +761,7 @@ var goldscene = preload("res://Objects/Items/GroundItem.tscn")
 
 func _on_death():
 	#emit_signal("unit_defeated")
-	get_parent()._on_unit_defeated(XP_to_Reward)
+	get_parent()._on_unit_defeated(XP_to_Reward,UnitLevel)
 	if Team == Teams.ENEMY:
 		if UnitStats.UnitName != "MiniBoss":
 			var gold = goldscene.instantiate()
@@ -857,6 +858,7 @@ func AI_turn_enemy():
 				#print("non-coll: ",non_coll, " facing: ",facing)
 				#print("has facing")
 				print("enemAI; onscreen-",$VisibleOnScreenNotifier2D.is_on_screen()," moverate-",move_duration)
+				set_pointer_at_facing()
 				_move(facing)
 			elif non_coll.size() <= 0:
 				print("AI unit is surrounded, can't move")

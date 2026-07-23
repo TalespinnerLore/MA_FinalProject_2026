@@ -193,8 +193,18 @@ func spawn_item(tile:Vector2i,drop_pool:Array[ItemData]):
 	var data:ItemData = filtered_drops.pick_random()
 	
 	if data == null: #failsafe if flitering borks itself
+		#print('// data was null //', drop_pool, 'biomeID:',DungeonData.floor_biome.BiomeID)
 		data = drop_pool.pick_random()
-		print(data," // data was null // newdataname:",data.Itemname)
+		#if data is ItemData:
+		#	print('data is ItemData')
+		#else:
+		#	print('data NOT ItemData')
+		#for i in drop_pool:
+		#	print(i, i.ItemName)
+		#print('newitem:',data)
+		#print('itemname:',data.Itemname)
+		print(data," // data was null // newdataname:",data.ItemName)
+		
 	var new:GroundItem = item_scene.instantiate()
 	new.ITEM_DATA = data
 	if data.ItemName != 'Gold':

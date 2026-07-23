@@ -419,12 +419,12 @@ var vaults = UniqueRooms_TreasureVault
 @export var final_floor:FINAL_FLOOR = FINAL_FLOOR.N_A
 @export var PRESET_Recipie := false
 
-@export var crafting_tier:= 0
+@export var crafting_tier:= 1
 
 
 
 func open_level_new():
-	print("floor ",current_floor)
+	print("old floor ",current_floor)
 	current_floor += 1
 	if current_floor < 1:
 		current_floor = 1
@@ -451,15 +451,18 @@ func set_floor_data():
 			PlayerStats.fill_ability_usesB1234WAT(0,i)
 		if final_floor_layout == null:
 			final_floor_layout = load("res://Resources/DungeonGen/UniqueRooms/Resources/FINAL_FLOOR_Generic.tres")
+		if safe_room_floor_layout == null:
+			safe_room_floor_layout = load("res://Resources/DungeonGen/UniqueRooms/Resources/SAFE_FLOOR_Generic.tres")
 		#DETERMINE MAX FLOORS
 		var safe_floor_amount = 0
 		match crafting_tier:
 			0:
-				max_floors = 2 + extra_floors
+				max_floors = 4 + extra_floors
 				max_wandering_units = 4
 			1:
 				max_floors = 8 + extra_floors
 				max_wandering_units = 6
+				safe_floor_amount = 1
 			2:
 				max_floors = 16 + extra_floors
 				max_wandering_units = 8
@@ -470,7 +473,7 @@ func set_floor_data():
 				max_wandering_units = 10
 				safe_floor_amount = 1
 			4:
-				max_floors = 32 + extra_floors
+				max_floors = 36 + extra_floors
 				max_wandering_units = 12
 				
 				safe_floor_amount = 2
@@ -479,19 +482,16 @@ func set_floor_data():
 				max_wandering_units = 14
 				safe_floor_amount = randi_range(0,2)
 		
+		max_wandering_units = floori(max_wandering_units*(100+MobMods_SpawnRate)/100)
+		
 		var safe_floor_step = 0
 		if safe_floor_amount > 0:
-			safe_floor_step = roundi(max_floors-1 / safe_floor_amount+1)
+			print("crafttier:",crafting_tier, " max-1:",max_floors-1," sflrs+1:",safe_floor_amount+1," step:",roundi(float(max_floors-1) / float(safe_floor_amount+1)))
+			safe_floor_step = roundi(float(max_floors-1) / float(safe_floor_amount+1))
+			print("sflrs:",safe_floor_amount," step:",roundi(max_floors-1 / safe_floor_amount+1),"floored:",floori(max_floors-1 / safe_floor_amount+1))
 		#determine safe floors
 		#floor num for unique rooms, and other special features
-		for i in range(0,max_floors):
-			if safe_floor_amount > 0:
-				if i%safe_floor_step == 0:
-					safe_floors.append(i)
-			if i == max_floors - 2:
-				if Boss_T2_Generic > 0 or Boss_T2_QuadElement > 0 or Boss_T2_Force > 0:
-					safe_floors.append(i)
-			floors_special_features.append([])
+		
 		elites = Boss_T0_Roaming
 		minis = Boss_T0_Mini
 		houses = UniqueRooms_MonsterHouse
@@ -521,27 +521,60 @@ func set_floor_data():
 			if echance <= -1: #0.1: #-1 is becuase elites not properly implemented yet.
 				elites+=1
 			echance = randf()
-			
-		for floor_index in range(0,floors_special_features.size()):
-			if minis > 0 and safe_floors.has(floor_index+1):
-				floors_special_features[floor_index].append('MINI_BOSS')
-			var floor_count = floors_special_features.size()-floor_index-safe_floors.size()-1
+		
+		for i in range(1,max_floors):
+			if safe_floor_amount > 0:
+				if i%safe_floor_step == 0 and safe_floors.size() < safe_floor_amount:
+					safe_floors.append(i)
+			if i == max_floors - 2:
+				if Boss_T2_Generic > 0 or Boss_T2_QuadElement > 0 or Boss_T2_Force > 0:
+					safe_floors.append(i)
+			floors_special_features.append([])
+		
+		for i in range(floors_special_features.size(),0,-1): #minibosses prioritize being befroe safe floors
+			if safe_floors.has(i) and minis > 1:
+				floors_special_features[i-1].append('MINI_BOSS')
+				minis-=1
+		floors_special_features.insert(0,['FLOOR 0 / NULL FLOOR']) #adds an empty value as index==0, so I can get matching index and floornum
+		
+		print("specfeat floor poss:",floors_special_features.size()-1)
+		var floors_left = floors_special_features.size()
+		
+		for floor_index in range(1,floors_special_features.size()):
+			floors_special_features[floor_index].append(str('FLOOR ',floor_index))
+			var floor_count = max_floors-1-safe_floors.size()-(floor_index-1)
+			#max_floors - final floor - num safe floors - num floors distributed to already.
+			#print("floorindex:",floor_index)
+			#print("possible floors total to distribute on:",floor)
 			#the number of floors it's possible to stick a feature in remaining
-			if ! safe_floors.has(floor_index) and floor_index != (max_floors-1):
-				#print("chance",echance,"count",floor_count,"max",max_floors,"flrindex",floor_index,"safeflrs",safe_floors)
-				echance = elites/floor_count
+			if ! safe_floors.has(floor_index) and floor_index != (max_floors) and floor_count > 0:
+				print("echance",echance," count",floor_count," max",max_floors," flrindex",floor_index," safeflrs",safe_floors)
+				if minis > 0 and ! floors_special_features[floor_index].has('MINI_BOSS') and\
+				randf() <= float(minis/floor_count) :
+					floors_special_features[floor_index].append('MINI_BOSS')
+					minis-=1
+				
+				echance = float(elites/floor_count)
 				if elites > 0 and randf() <= echance:
 					floors_special_features[floor_index].append('ROAMING_ELITE')
-				hchance = houses/floor_count
+					elites-=1
+				hchance = float(houses/floor_count)
 				if houses > 0 and randf() <= hchance:
 					floors_special_features[floor_index].append('MONSTER_HOUSE')
-				vchance = vaults/floor_count
+					houses-=1
+				vchance = float(vaults/floor_count)
 				if vaults > 0 and randf() <= vchance:
 					#if floors_special_features[floor_index].has('MONSTER_HOUSE'):
 					#	pass#floors_special_features[floor_index-] FIX THIS
 						##spawn a shitload of extra loot in the monster house instaead.
 						##do this on timemap side.
 					floors_special_features[floor_index].append('TREASURE_VAULT')
+					vaults-=1
+				#floors_left -= 1
+			elif safe_floors.has(floor_index):
+				floors_special_features[floor_index].append('SAFE')
+		print('FLOOR FEATURES:',floors_special_features)
+		
 		gold_chance *= ItemType_Gold
 		tile_chance *= ItemType_Tiles
 		cons_chance *= ItemType_Consumable
@@ -652,6 +685,12 @@ func set_floor_data():
 				mini_bosses.pop_front()
 			FINAL_FLOOR.BOSS:
 				max_wandering_units = 1
+	elif safe_floors.has(current_floor):
+		Unique_Rooms.append(safe_room_floor_layout)
+		var check = safe_room_floor_layout.get_tiles()
+		var check2:TileMapLayer = load(check).instantiate()
+		level_size = check2.get_used_rect().size
+		check2.queue_free()
 	
 	pass
 

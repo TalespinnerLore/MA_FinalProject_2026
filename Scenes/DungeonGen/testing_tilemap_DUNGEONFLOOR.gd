@@ -1167,7 +1167,7 @@ func Connect_Doors_BRUTE(room_index):
 		print("ONLY 1 DOORWAY")
 	#print('brute connecting path:',connecting_path)
 	#for tile in connecting_path:
-	#	set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(16,10)) #TESTING OBVS PATH
+	#	set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(16,10)) #TESTING OBVFitemS PATH
 
 func connect_doorways():
 	for room in Rooms:
@@ -1298,7 +1298,7 @@ func init_tilemap():
 	else:
 		push_error('COULD NOT FIND navigation MANAGER')
 		
-	if is_instance_valid(item_manager_ref):
+	if is_instance_valid(item_manager_ref) and ! DungeonData.safe_floors.has(DungeonData.current_floor):
 		item_manager_ref.init_items()
 	
 	print("RIVERTILE:",DungeonData.river_tile," FLOODTILE:",DungeonData.flood_tile)

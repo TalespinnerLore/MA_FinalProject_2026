@@ -197,7 +197,8 @@ func _begin_turn() -> void:
 	
 	turn_counter += 1
 	#print("TURN COUNTER - ",turn_counter) #vvv triggers every 30 player turns/steps vvv
-	if turn_counter%60 == 0 and $Enemy_Group.get_child_count() < DungeonData.max_wandering_units:
+	if turn_counter%60 == 0 and $Enemy_Group.get_child_count() < DungeonData.max_wandering_units\
+	and ! DungeonData.safe_floors.has(DungeonData.current_floor):
 		spawn_unit(all_groups[1]) #enemy group
 		#print("Current enemies: ",$Enemy_Group.get_child_count(),", Max enemies: ",DungeonData.max_wandering_units)
 #	print("HITS MANAGER BEGIN TURN")

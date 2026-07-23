@@ -27,6 +27,7 @@ func init() -> void:
 		init_child(child)
 		UnitManager.Active_Units.append(child)
 	if is_player_controlled:
+		await get_tree().create_timer(0.5).timeout
 		temp_distribute()
 	
 	if get_children().size() < DungeonData.max_wandering_units and ! is_player_controlled:
@@ -147,7 +148,7 @@ func _on_unit_damaged() -> void:
 	#camerashake here
 	pass
 
-func _on_unit_defeated(xp_awarded):
+func _on_unit_defeated(xp_awarded,unitlevel):
 	print("unit defeated triggering?")
 	if get_active_units().size() == 1 and is_player_controlled == true:
 		#defeated.emit(unit_defeated)
@@ -159,15 +160,15 @@ func _on_unit_defeated(xp_awarded):
 		print("AWARDING XP TO PLAYER")
 		for player_unit:Unit_Instance in get_parent().all_groups[0].get_children():
 			print('playercheck - ',player_unit.UnitStats.UnitName)
-			player_unit.give_XP(xp_awarded)
+			player_unit.give_XP(xp_awarded,unitlevel)
 	#this goes off before the last unit is freed fom the queue, so 1 is correct.
 	if get_active_units().size() == 1 and is_player_controlled != true \
 	and DungeonData.current_floor >= DungeonData.max_floors:
 		print("killed boss mob")
 		emit_signal("dungeon_boss_defeated")
-	elif is_player_controlled != true:
-		print("unitgroup; defeated ",current_unit.UnitStats.UnitName)
-		pass
+	#elif is_player_controlled != true:
+		#print("unitgroup; defeated ",current_unit.UnitStats.UnitName)
+		#pass
 
 func get_active_units():
 	var active_units=[]#:Array[Unit_Instance] = []

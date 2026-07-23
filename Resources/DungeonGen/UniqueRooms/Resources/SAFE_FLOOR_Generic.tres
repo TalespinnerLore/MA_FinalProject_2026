@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UniqueRoomData" load_steps=4 format=3 uid="uid://hrr33ct56pgl"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="1_e6pr6"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="2_r54ht"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/UniqueRoomData.gd" id="3_7ut32"]
+
+[resource]
+script = ExtResource("3_7ut32")
+tilemap_name = 3
+mobs_to_spawn = Array[ExtResource("2_r54ht")]([])
+items_to_spawn = Array[ExtResource("1_e6pr6")]([])
+key_item_list = Array[ExtResource("1_e6pr6")]([])
+item_num = 0
+spawn_stairs_here = true
+spawn_extra_stairs = false
+randomly_placed = false
+top_left_corner_position = Vector2i(0, 0)
+has_preset_spawn = true
