@@ -4,7 +4,8 @@ extends Node
 var p1_class:StatComponent = load("res://Resources/Units/Player/Stats_Warrior.tres")
 var p1_weapon:ItemData_Gear
 var p1_armour:ItemData_Gear
-var p1_trinket:ItemData_Gear
+var p1_trinket:ItemData
+var p1_trinket_slot_stacksize:= 0
 var p1_equipped_abilities:Array[AbilityData] = [load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")]
 var p1_ability_usesB1234WAT:Array[int] = [999,0,0,0,0,0,0,0] #1234WAT
 var p1_HP:int
@@ -66,6 +67,7 @@ func Add_to_Player_Inv_stack(Item:ItemData,stack_size:int):
 	return [success,remaining_stack]
 
 func Remove_from_Player_Inv_stack(Item:ItemData,index:int):
+	print(player_inventory)
 	var success:=false
 	#var remaining_stack = stack_size
 	if player_inventory[index][0] == Item:
@@ -76,8 +78,9 @@ func Remove_from_Player_Inv_stack(Item:ItemData,index:int):
 	return success
 
 
-func EquipGear_Player(data:ItemData,playerindex:int): #VERIFY EQUIPABILITY IN UNIT
+func EquipGear_Player(data:ItemData,playerindex:int,stacksize:int): #VERIFY EQUIPABILITY IN UNIT
 	var helddata:ItemData							#THIS IS ONLY FOR PLAYER INVENTORY
+	var unequip_stack = 1
 	match playerindex:
 		0:
 			match data.GearType:
@@ -85,17 +88,22 @@ func EquipGear_Player(data:ItemData,playerindex:int): #VERIFY EQUIPABILITY IN UN
 					if p1_armour != null:
 						helddata = p1_armour
 					p1_armour = data
-					Add_to_Player_Inv_stack(helddata,1)
 				ItemData.GEAR_TYPE.WEAPON:
 					if p1_weapon != null:
 						helddata = p1_weapon
 					p1_weapon = data
-					Add_to_Player_Inv_stack(helddata,1)
-				ItemData.GEAR_TYPE.TRINKET or ItemData.GEAR_TYPE.N_A:
+				ItemData.GEAR_TYPE.TRINKET:
 					if p1_trinket != null:
 						helddata = p1_trinket
 					p1_trinket = data
-					Add_to_Player_Inv_stack(helddata,1)
+				ItemData.GEAR_TYPE.N_A:
+					if p1_trinket != null:
+						helddata = p1_trinket
+						unequip_stack = p1_trinket_slot_stacksize
+					p1_trinket = data
+					p1_trinket_slot_stacksize = stacksize
+			if helddata != null:
+				Add_to_Player_Inv_stack(helddata,unequip_stack)
 
 func fill_ability_usesB1234WAT(playerindex,moveindex):
 		match playerindex:

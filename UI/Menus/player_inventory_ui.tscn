@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=4 uid="uid://whnmxcba77ab"]
 
 [ext_resource type="Script" path="res://UI/Menus/player_inventory_ui.gd" id="1_8rh85"]
-[ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Other/Gold.tres" id="2_l24b1"]
+[ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Items/Other/Gold.tres" id="2_l24b1"]
 [ext_resource type="Texture2D" uid="uid://b3pex2aw1g2mg" path="res://Art/UI_Art/Frames/ui_bg_blueoutline.png" id="2_vjver"]
 [ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="3_o7siq"]
 [ext_resource type="Texture2D" uid="uid://bl85iqf1ey42v" path="res://Art/UI_Art/Frames/ui_bg_yellowdark.png" id="3_u546i"]

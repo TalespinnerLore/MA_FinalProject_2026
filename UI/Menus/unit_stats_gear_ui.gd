@@ -25,6 +25,11 @@ func load_data():
 				$gearInventoryBox/ArmourTextureSlot/ArmourTexture.texture = PlayerStats.p1_armour.icon
 			if PlayerStats.p1_trinket != null:
 				$gearInventoryBox/TrinketTextureSlot/TrinketTexture.texture = PlayerStats.p1_trinket.icon
+				if PlayerStats.p1_trinket.GearType == 0: #ie, its not gear
+					$gearInventoryBox/TrinketTextureSlot/Label.text = str(PlayerStats.p1_trinket_slot_stacksize)
+					$gearInventoryBox/TrinketTextureSlot/Label.visible = true
+				else:
+					$gearInventoryBox/TrinketTextureSlot/Label.visible = false
 			var index = 0
 			for box in $StatAbilityBox/AbilityBoxContainer.get_children():
 				box.data = PlayerStats.p1_equipped_abilities[index]

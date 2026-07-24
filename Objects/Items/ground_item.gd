@@ -104,7 +104,7 @@ func Add_to_Player_Inv():
 
 
 func Attempt_Equip_to_Unit(unit:Unit_Instance):
-	if unit.EQUIPMENT.Attempt_Equip_to_Unit(ITEM_DATA,0): #0 = GROUND in enum, 1 = INVENTORY
+	if unit.EQUIPMENT.Attempt_Equip_to_Unit(ITEM_DATA,0,stack_size): #0 = GROUND in enum, 1 = INVENTORY
 		stack_size -= 1 #^^^ RETURNS SUCCESS AS TRUE/FALSE
 		if stack_size < 1:
 			queue_free()

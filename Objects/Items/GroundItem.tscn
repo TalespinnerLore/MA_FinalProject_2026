@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://do7xtfbiq5htq" path="res://Art/2D_images/gold_stack_large.png" id="1_x68m1"]
 [ext_resource type="Script" path="res://Objects/Items/ground_item.gd" id="2_o0egd"]
 [ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="3_bcnga"]
-[ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Other/Gold.tres" id="3_opqph"]
+[ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Items/Other/Gold.tres" id="3_opqph"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsj26"]
 size = Vector2(8, 8)

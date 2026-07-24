@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://brn8pf5kf160g" path="res://Resources/Units/Enemy/Stats_EnemyRanged.tres" id="4_loclw"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="5_lgpex"]
 [ext_resource type="Resource" uid="uid://b1mex6jfj2b7r" path="res://Resources/Units/Enemy/Stats_RareEnemyTest.tres" id="5_qb8bu"]
-[ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Other/Gold.tres" id="6_1ruva"]
+[ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Items/Other/Gold.tres" id="6_1ruva"]
 [ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion.tres" id="7_ymmp5"]
 [ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="8_nysnv"]
 

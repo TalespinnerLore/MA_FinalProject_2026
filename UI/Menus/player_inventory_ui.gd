@@ -70,6 +70,9 @@ func load_item_inventory():
 	for i in range(0,4): #hides all pages
 		$InventoryBox.get_child(i).visible = false
 	inv_container.visible = true
+	inv_content = PlayerStats.player_inventory
+	print('invcontent:',inv_content)
+	
 	var index = 0
 	for item in inv_container.get_children():
 		if (inv_page*inv_page_max_items)+index > inv_content.size() - 1:
@@ -77,6 +80,7 @@ func load_item_inventory():
 		else:
 			item.visible = true
 			var data = inv_content[(inv_page*inv_page_max_items)+index][0] #ItemData
+			print('itemdata:',data)
 			var stack_count = inv_content[(inv_page*inv_page_max_items)+index][1] #stack_size
 			item.icon = get_item_icon(data)
 			item.text = data.ItemName
@@ -206,8 +210,26 @@ func _on_use_button_pressed() -> void:
 func _on_give_button_pressed() -> void:
 	if selected_item.ItemName != 'Gold':
 		print("attempt equip")
-		player.EQUIPMENT.Attempt_Equip_to_Unit(selected_item,player.EQUIPMENT.SOURCE.INVENTORY)
+		var equip_attemp_stack = PlayerStats.player_inventory[selected_inv_slot][1]
+		var does_equip = player.EQUIPMENT.Attempt_Equip_to_Unit(selected_item, \
+		player.EQUIPMENT.SOURCE.INVENTORY,equip_attemp_stack)
+		#[success(bool), unequipped item(ItemData), stack_size(only not 1 if it was not gear)]
+		print('sucess,item,stack; ',does_equip)
+		if does_equip[0] == true:
+			print('item DID equip; play inv:',PlayerStats.player_inventory)
+			PlayerStats.Remove_from_Player_Inv_stack(selected_item,selected_inv_slot)
+			if does_equip[1] != null:
+				PlayerStats.Add_to_Player_Inv_stack(does_equip[1],does_equip[2])
+			PlayerStats.EquipGear_Player(selected_item,0,equip_attemp_stack)
+			inv_content = PlayerStats.player_inventory
+		if inv_content.size() < 1:
+			selected_item = load("res://Resources/Items/Other/Gold.tres")
+			print(selected_item)
+			selected_inv_slot = 0
+			on_item_selected(selected_item)
 		load_item_inventory()
+		#if inv_content.size() = 0:
+		#	selected_item = 
 	#solve the issue of stcking consumables having the whole stack deleted later.
 	##make stack amount = ability uses for the comsumable on the UI or something
 	pass # Replace with function body.
@@ -233,21 +255,31 @@ func _on_button_mouse_entered() -> void:
 
 func _on_button_pressed() -> void:
 	on_item_selected(inv_content[10*inv_page + 0][0])
+	selected_inv_slot = 10*inv_page + 0
 func _on_button_2_pressed() -> void:
 	on_item_selected(inv_content[10*inv_page + 1][0])
+	selected_inv_slot = 10*inv_page + 1
 func _on_button_3_pressed() -> void:
 	on_item_selected(inv_content[10*inv_page + 2][0])
+	selected_inv_slot = 10*inv_page + 2
 func _on_button_4_pressed() -> void:
 	on_item_selected(inv_content[10*inv_page + 3][0])
+	selected_inv_slot = 10*inv_page + 3
 func _on_button_5_pressed() -> void:
 	on_item_selected(inv_content[10*inv_page + 4][0])
+	selected_inv_slot = 10*inv_page + 4
 func _on_button_6_pressed() -> void:
 	on_item_selected(inv_content[10*inv_page + 5][0])
+	selected_inv_slot = 10*inv_page + 5
 func _on_button_7_pressed() -> void:
 	on_item_selected(inv_content[10*inv_page + 6][0])
+	selected_inv_slot = 10*inv_page + 6
 func _on_button_8_pressed() -> void:
 	on_item_selected(inv_content[10*inv_page + 7][0])
+	selected_inv_slot = 10*inv_page + 7
 func _on_button_9_pressed() -> void:
 	on_item_selected(inv_content[10*inv_page + 8][0])
+	selected_inv_slot = 10*inv_page + 8
 func _on_button_10_pressed() -> void:
 	on_item_selected(inv_content[10*inv_page + 9][0])
+	selected_inv_slot = 10*inv_page + 9

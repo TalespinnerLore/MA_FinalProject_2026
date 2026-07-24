@@ -149,8 +149,9 @@ func RandomRooms(): #GENERATE RANDOM ROOMS ON THE GRID.
 						boss_spawn_loc = tile
 						print("boss spawn loc: ",tile)
 					
-			for i in range(key_item_placement.size()):
-				spawn_key_item(room_data.key_item_list[i],key_item_placement[i])
+			if key_item_placement.size() > 0:
+				for i in range(key_item_placement.size()):
+					spawn_key_item(room_data.key_item_list[i],key_item_placement[i])
 			for i in room_data.item_num:
 				var itemtile = floors.pick_random()
 				if i < room_data.items_to_spawn.size():
