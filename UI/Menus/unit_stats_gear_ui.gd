@@ -37,11 +37,23 @@ func load_data():
 				box.set_textures()
 				index+=1
 			$StatAbilityBox/StatBoxContainer/StatBox/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[0]+autostats[0])
+			if unit.STR_boost != 0:
+				$StatAbilityBox/StatBoxContainer/StatBox/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[0]+autostats[0],"(+",unit.STR_boost,")")
 			$StatAbilityBox/StatBoxContainer/StatBox2/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[1]+autostats[1])
+			if unit.DEX_boost != 0:
+				$StatAbilityBox/StatBoxContainer/StatBox2/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[1]+autostats[1],"(+",unit.DEX_boost,")")
 			$StatAbilityBox/StatBoxContainer/StatBox3/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[2]+autostats[2])
+			if unit.VIT_boost != 0:
+				$StatAbilityBox/StatBoxContainer/StatBox3/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[2]+autostats[2],"(+",unit.VIT_boost,")")
 			$StatAbilityBox/StatBoxContainer/StatBox4/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[3]+autostats[3])
+			if unit.MAG_boost != 0:
+				$StatAbilityBox/StatBoxContainer/StatBox4/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[3]+autostats[3],"(+",unit.MAG_boost,")")
 			$StatAbilityBox/StatBoxContainer/StatBox5/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[4]+autostats[4])
+			if unit.DEF_boost != 0:
+				$StatAbilityBox/StatBoxContainer/StatBox5/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[4]+autostats[4],"(+",unit.DEF_boost,")")
 			$StatAbilityBox/StatBoxContainer/StatBox6/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[5]+autostats[5])
+			if unit.LUK_boost != 0:
+				$StatAbilityBox/StatBoxContainer/StatBox6/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[5]+autostats[5],"(+",unit.LUK_boost,")")
 			$StatAbilityBox/StatBoxContainer/StatBox7/Label.text = str("Free Stats - ",PlayerStats.p1_free_stats)
 			
 	pass
@@ -104,12 +116,29 @@ func ability_description(data:AbilityData):
 			desc.text += (str(se.effect_name,' '))
 		desc.text += (str('.\n'))
 	desc.text += (str('Valid Targets: ',AbilityData.Validity.keys()[data.valid_target],'\n'))
+	desc.text += str('\nRequired Stats:\n',\
+					'STR: ',data.BaseStats_required[0],'   DEX: ',data.BaseStats_required[1],'\n',\
+					'VIT: ',data.BaseStats_required[2],'   MAG: ',data.BaseStats_required[3],'\n',\
+					'DEF: ',data.BaseStats_required[4],'   LUK: ',data.BaseStats_required[5],'\n')
 
 func item_description(data:ItemData):
 	var title = $DescriptionBox/NameOfThingLabel
 	var desc = $DescriptionBox/DescriptionLabel
 	title.text = str('-ITEM-\n',data.ItemName)
-	desc.text = data.DESCRIPTION
+	desc.text = str(data.DESCRIPTION,'\n')
+	
+	if data is ItemData_Gear:
+		desc.text += str('\nBonus Stats:\n',\
+					'STR: ',data.STR_boost,'   DEX: ',data.DEX_boost,'\n',\
+					'VIT: ',data.VIT_boost,'   MAG: ',data.MAG_boost,'\n',\
+					'DEF: ',data.DEF_boost,'   LUK: ',data.LUK_boost,'\n')
+	
+	if data.STR_NEEDED > 0 or data.DEX_NEEDED > 0 or data.VIT_NEEDED > 0\
+	or data.MAG_NEEDED > 0 or data.DEF_NEEDED > 0 or data.LUK_NEEDED > 0:
+		desc.text += str('\nRequired Stats:\n',\
+					'STR: ',data.STR_NEEDED,'   DEX: ',data.DEX_NEEDED,'\n',\
+					'VIT: ',data.VIT_NEEDED,'   MAG: ',data.MAG_NEEDED,'\n',\
+					'DEF: ',data.DEF_NEEDED,'   LUK: ',data.LUK_NEEDED,'\n')
 	pass
 
 func stat_description(statindex:int):

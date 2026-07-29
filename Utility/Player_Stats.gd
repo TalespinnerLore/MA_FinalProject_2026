@@ -103,7 +103,8 @@ func EquipGear_Player(data:ItemData,playerindex:int,stacksize:int): #VERIFY EQUI
 					p1_trinket = data
 					p1_trinket_slot_stacksize = stacksize
 			if helddata != null:
-				Add_to_Player_Inv_stack(helddata,unequip_stack)
+				#Add_to_Player_Inv_stack(helddata,unequip_stack)
+				pass
 
 func fill_ability_usesB1234WAT(playerindex,moveindex):
 		match playerindex:

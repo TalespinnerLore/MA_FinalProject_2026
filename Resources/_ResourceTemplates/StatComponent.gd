@@ -5,6 +5,7 @@ extends Resource
 @export var Sprite:Texture2D
 @export var BasicAttack:AbilityData
 @export var UnitName:String
+@export var is_large_unit := false
 enum TYPE{MORTAL,UNDEAD,ELEMENTAL,CONSTRUCT,BEAST,WILDLING}
 @export var CreatureType:TYPE
 enum ElementType {FIRE,WATER,EARTH,AIR,FORCE,LIGHT,DARK}

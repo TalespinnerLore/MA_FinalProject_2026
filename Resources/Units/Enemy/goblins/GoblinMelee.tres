@@ -1,0 +1,67 @@
+[gd_resource type="Resource" script_class="StatComponent" load_steps=12 format=3 uid="uid://ijbghilyc0ba"]
+
+[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_fl6xa"]
+[ext_resource type="Texture2D" uid="uid://bt7ms3n1itwfp" path="res://Art/UnitSprites/Spritesheets/enemytype_goblin_base.png" id="2_hi3nr"]
+[ext_resource type="Texture2D" uid="uid://b3jx36v2l2q00" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette0.png" id="3_w5ngf"]
+[ext_resource type="Texture2D" uid="uid://7e7ykwl42crn" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette1.png" id="4_kqtie"]
+[ext_resource type="Texture2D" uid="uid://dgr04lpqi1dqf" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette2.png" id="5_hnkj5"]
+[ext_resource type="Texture2D" uid="uid://bva1bsnylcu50" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette3.png" id="6_pwfp4"]
+[ext_resource type="Texture2D" uid="uid://bklggjlht3xqp" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette4.png" id="7_pk1bi"]
+[ext_resource type="Texture2D" uid="uid://dn53jd5gcnvpu" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette5.png" id="8_gv806"]
+[ext_resource type="Texture2D" uid="uid://ihjy78vrlo1f" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette6.png" id="9_htjtx"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="10_72rgn"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="11_pochj"]
+
+[resource]
+script = ExtResource("10_72rgn")
+Sprite = ExtResource("2_hi3nr")
+BasicAttack = ExtResource("1_fl6xa")
+UnitName = "Goblin Shanker"
+is_large_unit = false
+CreatureType = 5
+Element = 4
+unit_specific_drops = Array[ExtResource("11_pochj")]([])
+elem_palettes = Array[Texture2D]([ExtResource("3_w5ngf"), ExtResource("4_kqtie"), ExtResource("5_hnkj5"), ExtResource("6_pwfp4"), ExtResource("7_pk1bi"), ExtResource("8_gv806"), ExtResource("9_htjtx")])
+STR_up = 3
+DEX_up = 1
+VIT_up = 2
+MAG_up = 1
+DEF_up = 3
+LUK_up = 0
+Free_Stats = 0
+Base_HP = 12
+STR = 3
+DEX = 2
+VIT = 2
+MAG = 0
+DEF = 3
+LUK = 5
+HP_Max_withVIT = null
+Base_Phys_ATK = 5.0
+Base_Mag_ATK = 5.0
+Base_Phys_DEF = 5.0
+Base_Mag_DEF = 5.0
+Base_Evasion = 5.0
+Heal_Buff_Mult = 1.1
+Melee_Mult = 1.1
+Ranged_Mult = 1.1
+Def_Mult = 1.1
+Reroll_Chance = 0.05
+STR_boost = 0
+DEX_boost = 0
+VIT_boost = 0
+MAG_boost = 0
+DEF_boost = 0
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0

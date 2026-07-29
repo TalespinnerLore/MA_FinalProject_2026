@@ -36,6 +36,7 @@ var last_door:=Vector2i(-1,-1)
 @export var TeamStrategy:Strategy = Strategy.FOLLOW
 @export var self_coords = Vector2i(0,0)
 @export var ElementalAffinity:ElementType = 4
+@export var is_large_unit := false
 
 enum Teams {PLAYER,ENEMY,ALLY,NPC}
 enum Strategy {FOLLOW,AGGRESSIVE,}
@@ -75,7 +76,8 @@ enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_R
 @export var BaseXP = 5
 
 func Calc_XP_to_Level():
-	XP_to_Level = 5*UnitLevel*((int(UnitLevel%5)+((5+int(UnitLevel/2.5)) * int(1+int(UnitLevel/5)+int(UnitLevel/10)))))
+	XP_to_Level = 1*UnitLevel*((int(UnitLevel%5)+((5+int(UnitLevel/2.5)) * int(1+int(UnitLevel/5)+int(UnitLevel/10)))))
+	print('xp to level calc: ',XP_to_Level)
 	return 
 
 func Calc_XP_to_Reward():
@@ -84,23 +86,37 @@ func Calc_XP_to_Reward():
 
 func give_XP(XP_togive,enem_level):
 	print('getting xp now')
+	print('xp_togive = ',XP_togive,' * (1 + 0.3 *[enemlvl-unitlevel: ',enem_level,'-',UnitLevel,'])')
 	XP_togive = XP_togive * (1 + 0.3*clampi(enem_level-UnitLevel,-3,5))
 	XP+=XP_togive
+	print('xp_togive = ',XP_togive)
 	Attempt_LevelUp()
+
+const Ability_vfx = preload("res://Objects/AbilityVFX.tscn")
 
 func Attempt_LevelUp():
 	print("ATTEMPT LEVEL-UP!")
 	if XP >= XP_to_Level:
 		UnitLevel+=1
+		
+		var vfx = Ability_vfx.instantiate()
+		vfx.texture = load("res://Art/2D_images/lvl-up.png")
+		vfx.life_span = 0.75
+#		print(Ability.vfx.get_size())
+		vfx.position = Global.grid_to_pos(self_coords)
+		get_parent().get_parent().vfx_holder.add_child(vfx)
+		
+		print('level up to ',UnitLevel)
 		if Team == Teams.PLAYER:
 			match self.get_index():
 				0: #team leader/only player char for now
 					PlayerStats.p1_free_stats += UnitStats.Free_Stats
+					print('player free stats, +',UnitStats.Free_Stats)
 		set_stats()
 		HP_Current = HP_Max
 		#IncreaseStats(UnitStats.STR_up,UnitStats.DEX_up,UnitStats.VIT_up,UnitStats.MAG_up,UnitStats.DEF_up,UnitStats.LUK_up,UnitStats.Free_Stats)
 		XP-=XP_to_Level
-		XP_to_Level = Calc_XP_to_Level()
+		Calc_XP_to_Level() #XP_to_Level = 
 		if XP >= XP_to_Level:
 			Attempt_LevelUp()
 ###vvv DEPRECIATED vvv###
@@ -228,6 +244,7 @@ func calc_stats_with_GearAndBuff_boost():
 
 func apply_calc_stat_boosts():
 	HP_Max += HP_Max_boost
+	HP_Current = clampi(HP_Current,0,HP_Max)
 	Base_Phys_ATK += Phys_ATK_boost
 	Base_Mag_ATK += Mag_ATK_boost
 	Base_Phys_DEF += Phys_DEF_boost
@@ -676,10 +693,16 @@ func action_used():
 
 
 func init(is_player_controlled):
+	print(UnitStats.UnitName,UnitStats.elem_palettes)
+	var palettesize = UnitStats.elem_palettes[UnitStats.Element].get_width()
+	$Sprite2D.material.set_shader_parameter('colors_count',palettesize)
+	$Sprite2D.material.set_shader_parameter('initial_palette',UnitStats.elem_palettes[4])
+	$Sprite2D.material.set_shader_parameter('new_palette',UnitStats.elem_palettes[UnitStats.Element])
 	#print(self," INITIALIZED")
 	HP_Module = $Sprite2D/HP_module
 	#print("unit ", self.name, " INITIALIZED")
-	
+	if UnitStats.is_large_unit:
+		is_large_unit = true
 	if is_player_controlled:
 		Team = Teams.PLAYER
 		
@@ -697,6 +720,9 @@ func init(is_player_controlled):
 		set_stats()
 		#print("initial set stats on init; hp:",HP_Current," max:",HP_Max)
 		$Sprite2D.texture = UnitStats.Sprite
+		#print('unit hframes: ',UnitStats.Sprite.get_width()/32)
+		$Sprite2D.hframes = UnitStats.Sprite.get_width()/32
+		$Sprite2D.frame = 0
 		$Abilities.init()
 		print("floornum ", DungeonData.current_floor)
 		if DungeonData.current_floor > 1:
@@ -721,6 +747,9 @@ func init(is_player_controlled):
 		HP_Module.new_level_refresh(HP_Current,HP_Max)
 		$Abilities.init()
 		$Sprite2D.texture = UnitStats.Sprite
+		print('unit hframes: ',UnitStats.Sprite.get_width()/32)
+		$Sprite2D.hframes = UnitStats.Sprite.get_width()/32
+		$Sprite2D.frame = 0
 		Calc_XP_to_Reward()
 	target_unit = get_tree().get_first_node_in_group("Player")
 	dialogue_manager_ref = get_tree().get_first_node_in_group("DIALOGUE_MANAGER")
@@ -761,8 +790,12 @@ var goldscene = preload("res://Objects/Items/GroundItem.tscn")
 
 func _on_death():
 	#emit_signal("unit_defeated")
-	get_parent()._on_unit_defeated(XP_to_Reward,UnitLevel)
+	
 	if Team == Teams.ENEMY:
+		get_parent()._on_unit_defeated(XP_to_Reward,UnitLevel)
+		if EQUIPMENT.enemy_must_drop_list.size() > 0:
+			for item in EQUIPMENT.enemy_must_drop_list:
+				get_parent().get_parent().item_manager_ref.drop_item(self_coords,item[0],item[1])
 		if UnitStats.UnitName != "MiniBoss":
 			var gold = goldscene.instantiate()
 			gold.global_position = self.global_position
@@ -902,6 +935,16 @@ func set_pointer_at_facing():
 		$Sprite2D/pointer.visible = true
 		$Sprite2D/pointer_diag.visible = false
 		$Sprite2D/pointer.look_at(self.global_position+(Vector2(facing)*Vector2(32,32)))
+		if $Sprite2D.hframes > 1:
+			match facing:
+				Vector2i.DOWN:
+					$Sprite2D.frame = 0
+				Vector2i.LEFT:
+					$Sprite2D.frame = 1
+				Vector2i.RIGHT:
+					$Sprite2D.frame = 2
+				Vector2i.UP:
+					$Sprite2D.frame = 3
 	else:
 		$Sprite2D/pointer.visible = false
 		$Sprite2D/pointer_diag.visible = true
@@ -914,6 +957,16 @@ func set_pointer_at_facing():
 				$Sprite2D/pointer_diag.set_rotation_degrees(90)
 			Vector2i(-1,-1):
 				$Sprite2D/pointer_diag.set_rotation_degrees(270)
+		if $Sprite2D.hframes > 1:
+			match facing:
+				Vector2i.UP+Vector2i.LEFT:
+					$Sprite2D.frame = 1
+				Vector2i.DOWN+Vector2i.LEFT:
+					$Sprite2D.frame = 1
+				Vector2i.UP+Vector2i.RIGHT:
+					$Sprite2D.frame = 2
+				Vector2i.DOWN+Vector2i.RIGHT:
+					$Sprite2D.frame = 2
 
 func path_random_tile():
 	var rand_dir = Global.dir8

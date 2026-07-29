@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://6oi2jvuw6g2i"]
 
 [ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_tnsni"]
-[ext_resource type="Texture2D" uid="uid://cma54lo0lvcps" path="res://Art/UnitSprites/BasicCharacter_ranger.png" id="2_2eaww"]
+[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_sa1e1"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_xhakb"]
 
 [resource]
@@ -26,9 +26,10 @@ Def_Mult_boost = 0.0
 Reroll_Chance_boost = 0.0
 ItemName = "Threadbare Gloves"
 max_stack = 1
-icon = ExtResource("2_2eaww")
+icon = ExtResource("2_sa1e1")
 ITEM_ID = 14
 TILE_ID = -1
+shop_value = 1
 ItemAbility = ExtResource("1_tnsni")
 throw_range = 3
 DESCRIPTION = "Old fingerless gloves."
@@ -37,6 +38,8 @@ ItemType = 3
 GearType = 1
 ConsType = 0
 Class_Bias = 4
+min_area_level = 0
+max_area_level = 5
 Affinity_Fire = false
 Affinity_Water = false
 Affinity_Earth = false
@@ -45,7 +48,7 @@ Affinity_Force = false
 Affinity_Light = false
 Affinity_Dark = false
 STR_NEEDED = 5
-DEX_NEEDED = 5
+DEX_NEEDED = 10
 VIT_NEEDED = 0
 MAG_NEEDED = 0
 DEF_NEEDED = 0

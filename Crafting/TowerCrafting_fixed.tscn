@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bfynsxir5rxqw"]
+[gd_scene load_steps=21 format=4 uid="uid://bfynsxir5rxqw"]
 
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_hxmwj"]
 [ext_resource type="Script" path="res://Crafting/tower_crafting_fixed.gd" id="1_u4c53"]
@@ -17,11 +17,17 @@
 [ext_resource type="Resource" uid="uid://stb6ypti7q54" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_BOSS.tres" id="8_ywfu4"]
 [ext_resource type="Resource" uid="uid://ba1rjkyjexgx1" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_FORCEBOSS.tres" id="9_cvojt"]
 [ext_resource type="Resource" uid="uid://ygkbugjck1i1" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/FORCETOWER_T1.tres" id="10_i3nak"]
+[ext_resource type="Resource" uid="uid://dftxohwy60tkw" path="res://Resources/Items/Tiles/DungeonGen/Misq/INCREASED_GOLD.tres" id="11_c5xca"]
+[ext_resource type="Resource" uid="uid://c4s1uluohurar" path="res://Resources/Items/Tiles/DungeonGen/Unique Rooms/TREASURE_VAULT_RECIPE.tres" id="12_ddntj"]
+[ext_resource type="Resource" uid="uid://bp815opj4hc6b" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/T0_TreasureVault.tres" id="13_fju8x"]
 
 [node name="TowerCrafting_FIXED" type="Node2D"]
 script = ExtResource("1_u4c53")
 t1_forceboss_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("5_i8e2a"), ExtResource("6_esmu1"), ExtResource("3_1moxw"), ExtResource("4_dpa81"), ExtResource("7_1m1sb"), ExtResource("7_1m1sb"), ExtResource("7_1m1sb"), ExtResource("7_1m1sb"), ExtResource("8_ywfu4"), ExtResource("9_cvojt"), ExtResource("10_i3nak")])
-grid_level = 2
+t1_fireboss_recipe = Array[ExtResource("2_fv2ap")]([null, null, null, null, null, null, null, null, null, null, null])
+t1_waterboss_recipe = Array[ExtResource("2_fv2ap")]([null, null, null, null, null, null, null, null, null, null, null])
+t1_airboss_recipe = Array[ExtResource("2_fv2ap")]([null, null, null, null, null, null, null, null, null, null, null])
+treasure_vault_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("11_c5xca"), ExtResource("11_c5xca"), ExtResource("11_c5xca"), ExtResource("11_c5xca"), null, null, null, null, null, ExtResource("12_ddntj"), ExtResource("13_fju8x")])
 
 [node name="TileMapLayer_SideUI" type="TileMapLayer" parent="."]
 light_mask = 0
@@ -130,6 +136,38 @@ offset_bottom = 352.0
 theme_override_fonts/font = ExtResource("3_2s003")
 theme_override_font_sizes/font_size = 16
 text = "[START]"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 280.0
+offset_top = 327.0
+offset_right = 362.0
+offset_bottom = 357.0
+theme_override_constants/line_spacing = -6
+theme_override_fonts/font = ExtResource("3_2s003")
+theme_override_font_sizes/font_size = 16
+text = "CRAFTING
+TIER"
+horizontal_alignment = 1
+
+[node name="Button+" type="Button" parent="."]
+offset_left = 360.0
+offset_top = 328.0
+offset_right = 384.0
+offset_bottom = 354.0
+theme_override_fonts/font = ExtResource("3_2s003")
+theme_override_font_sizes/font_size = 16
+text = "+
+"
+
+[node name="Button-" type="Button" parent="."]
+offset_left = 256.0
+offset_top = 328.0
+offset_right = 280.0
+offset_bottom = 354.0
+theme_override_fonts/font = ExtResource("3_2s003")
+theme_override_font_sizes/font_size = 16
+text = "-
+"
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="."]
 offset_left = 520.0
@@ -246,3 +284,5 @@ position = Vector2(136, 304)
 [connection signal="pressed" from="Button<" to="TileInventory" method="_on_button_pressed_left"]
 [connection signal="pressed" from="Button>" to="TileInventory" method="_on_button_pressed_right"]
 [connection signal="pressed" from="ButtonSTART" to="TileInventory" method="_on_button_start_pressed"]
+[connection signal="pressed" from="Button+" to="." method="_on_button_pressedPLUS"]
+[connection signal="pressed" from="Button-" to="." method="_on_button_pressedMINUS"]

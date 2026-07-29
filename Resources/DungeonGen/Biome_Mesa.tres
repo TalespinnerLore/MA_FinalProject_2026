@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=11 format=3 uid="uid://b1u4kv5m3ccr2"]
+[gd_resource type="Resource" script_class="Biome" load_steps=19 format=3 uid="uid://b1u4kv5m3ccr2"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_hfycw"]
 [ext_resource type="Resource" uid="uid://dgm8dna5mwt7q" path="res://Resources/Units/Enemy/Stats_EnemyMagic.tres" id="2_dr3nc"]
@@ -10,6 +10,14 @@
 [ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Items/Other/Gold.tres" id="6_qbafv"]
 [ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion.tres" id="7_locgv"]
 [ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="8_jcoy8"]
+[ext_resource type="Resource" uid="uid://mk47vckyu5i0" path="res://Resources/Items/Gear/Armour/Apprentice_Robe.tres" id="8_urjin"]
+[ext_resource type="Resource" uid="uid://5wgv2bevaw0i" path="res://Resources/Items/Gear/Armour/Rusty_Bucket.tres" id="9_4get2"]
+[ext_resource type="Resource" uid="uid://lvwwmp4kmbg3" path="res://Resources/Items/Gear/Armour/Scrap_Buckler.tres" id="10_5ovnp"]
+[ext_resource type="Resource" uid="uid://f4gfxys3pmgd" path="res://Resources/Items/Gear/Weapons/Brass_Knuckles.tres" id="11_d5b8g"]
+[ext_resource type="Resource" uid="uid://dr3wqb6id5en4" path="res://Resources/Items/Gear/Weapons/Heavy_Stick.tres" id="12_rnhdi"]
+[ext_resource type="Resource" uid="uid://dxd4eme03waqt" path="res://Resources/Items/Gear/Weapons/Quartz_Wand.tres" id="13_dv282"]
+[ext_resource type="Resource" uid="uid://b8x3poja3xktt" path="res://Resources/Items/Gear/Trinkets/Amulet_of_Health.tres" id="16_iafc2"]
+[ext_resource type="Resource" uid="uid://dj017droxyvia" path="res://Resources/Items/Gear/Trinkets/Lucky_Rabbit_Foot.tres" id="17_l4lcp"]
 
 [resource]
 script = ExtResource("2_pt78k")
@@ -17,8 +25,8 @@ BiomeID = 3
 Unique_Rooms = Array[Resource]([])
 Common_Enemies = Array[ExtResource("1_hfycw")]([ExtResource("2_dr3nc"), ExtResource("3_wb55p"), ExtResource("4_p6308")])
 Rare_Enemies = Array[ExtResource("1_hfycw")]([ExtResource("5_m748s")])
-Common_Items = Array[ExtResource("5_vnkrj")]([ExtResource("6_qbafv"), ExtResource("7_locgv")])
-Rare_Items = Array[ExtResource("5_vnkrj")]([ExtResource("7_locgv")])
+Common_Items = Array[ExtResource("5_vnkrj")]([ExtResource("6_qbafv"), ExtResource("7_locgv"), ExtResource("8_urjin"), ExtResource("9_4get2"), ExtResource("10_5ovnp"), ExtResource("8_urjin"), ExtResource("11_d5b8g"), ExtResource("12_rnhdi"), ExtResource("13_dv282")])
+Rare_Items = Array[ExtResource("5_vnkrj")]([ExtResource("16_iafc2"), ExtResource("17_l4lcp")])
 Mini_Boss = ExtResource("8_jcoy8")
 Wandering_Boss = false
 Flooded = false

@@ -8,7 +8,7 @@ class_name Unit_Equipment_Inventory
 
 @onready var unit:Unit_Instance = get_parent()
 
-var enemy_must_drop_list:= [null,null,null]
+var enemy_must_drop_list:= []
 #var enemy_gold_drop_amount:int = 0 ##this just becomes trinket stacksize, doi.
 
 enum SOURCE{GROUND,INVENTORY}
@@ -54,6 +54,8 @@ func Attempt_Equip_to_Unit(Item:ItemData,ItemSource:SOURCE,Item_stacks:int):
 					if PlayerStats.player_inventory.size() < PlayerStats.inventory_size:
 						if equipped_item != null:
 							#PlayerStats.player_inventory.append([equipped_item,1])
+							if equipped_item != null:
+								apply_gear_statboosts(equipped_item,false)
 							add_to_equip_slot(Item)
 							success = true
 							if Item.GearType == Item.GEAR_TYPE.N_A:
@@ -69,7 +71,10 @@ func Attempt_Equip_to_Unit(Item:ItemData,ItemSource:SOURCE,Item_stacks:int):
 					#PlayerStats.PlayerStats.player_inventory.append([equipped_item,1])
 					print('is being equipped from inventory')
 					#PlayerStats.EquipGear_Player(Item,0)
+					if equipped_item != null:
+						apply_gear_statboosts(equipped_item,false)
 					add_to_equip_slot(Item)
+					
 					success = true
 					if Item.GearType == Item.GEAR_TYPE.N_A:
 						print('item is not gear')
@@ -81,8 +86,17 @@ func Attempt_Equip_to_Unit(Item:ItemData,ItemSource:SOURCE,Item_stacks:int):
 			print("is enemy unit") #enemies only pick items up if they have an empty slot for it
 			match ItemSource:		#and they never replace picked up items.
 				SOURCE.GROUND:
-					if equipped_item != null:
+					if equipped_item == null:
 						add_to_equip_slot(Item)
+						match Item.GearType:
+							Item.GEAR_TYPE.ARMOUR:
+								enemy_must_drop_list.append([Item,Item_stacks])
+							Item.GEAR_TYPE.WEAPON:
+								enemy_must_drop_list.append([Item,Item_stacks])
+							Item.GEAR_TYPE.TRINKET:
+								enemy_must_drop_list.append([Item,Item_stacks])
+							Item.GEAR_TYPE.N_A:
+								enemy_must_drop_list.append([Item,Item_stacks])
 						success = true
 					else:
 						success = false
@@ -99,18 +113,30 @@ func add_to_equip_slot(Item:ItemData):
 		Item.GEAR_TYPE.ARMOUR:
 			equipped_armour = Item
 			unit.ABILITIES.ArmourAbility = Item.ItemAbility
+			apply_gear_statboosts(Item,true)
 		Item.GEAR_TYPE.WEAPON:
 			equipped_weapon = Item
 			unit.ABILITIES.WeaponAbility = Item.ItemAbility
+			apply_gear_statboosts(Item,true)
 		Item.GEAR_TYPE.TRINKET:
 			equipped_trinket = Item
 			unit.ABILITIES.TrinketAbility = Item.ItemAbility
+			apply_gear_statboosts(Item,true)
 		Item.GEAR_TYPE.N_A:
 			equipped_trinket = Item
 			unit.ABILITIES.TrinketAbility = Item.ItemAbility
 
-
-
+func apply_gear_statboosts(data:ItemData_Gear, adding:bool):
+	var is_equipping = 1
+	if ! adding:
+		is_equipping = -1
+	unit.STR_boost += is_equipping*data.STR_boost
+	unit.DEX_boost += is_equipping*data.DEX_boost
+	unit.VIT_boost += is_equipping*data.VIT_boost
+	unit.MAG_boost += is_equipping*data.MAG_boost
+	unit.DEF_boost += is_equipping*data.DEF_boost
+	unit.LUK_boost += is_equipping*data.LUK_boost
+	print("boosted stats added!")
 
 func check_has_equip_stats(Item:ItemData):
 	if Item.STR_NEEDED <= (unit.STR+unit.STR_boost) \

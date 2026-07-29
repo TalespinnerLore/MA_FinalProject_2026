@@ -1,10 +1,16 @@
-[gd_resource type="Resource" script_class="EnemyList" load_steps=3 format=3 uid="uid://1l2h3cnxakt"]
+[gd_resource type="Resource" script_class="TypeList" load_steps=8 format=3 uid="uid://1l2h3cnxakt"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_wg6ee"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/EnemyTypeList.gd" id="2_6bgku"]
+[ext_resource type="Resource" uid="uid://dgm8dna5mwt7q" path="res://Resources/Units/Enemy/Stats_EnemyMagic.tres" id="2_fc6tr"]
+[ext_resource type="Resource" uid="uid://dunj0e8tqw7uv" path="res://Resources/Units/Enemy/Stats_EnemyMelee.tres" id="3_kgmv6"]
+[ext_resource type="Resource" uid="uid://brn8pf5kf160g" path="res://Resources/Units/Enemy/Stats_EnemyRanged.tres" id="4_8npr8"]
+[ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="5_kofmn"]
+[ext_resource type="Resource" uid="uid://b1mex6jfj2b7r" path="res://Resources/Units/Enemy/Stats_RareEnemyTest.tres" id="6_umxyy"]
 
 [resource]
 script = ExtResource("2_6bgku")
 CreatureType = 0
-is_rare = false
-Enemies = Array[ExtResource("1_wg6ee")]([])
+Common_Enemies = Array[ExtResource("1_wg6ee")]([ExtResource("2_fc6tr"), ExtResource("3_kgmv6"), ExtResource("4_8npr8")])
+Rare_Enemies = Array[ExtResource("1_wg6ee")]([ExtResource("6_umxyy")])
+MiniBoss_Enemies = Array[ExtResource("1_wg6ee")]([ExtResource("5_kofmn")])

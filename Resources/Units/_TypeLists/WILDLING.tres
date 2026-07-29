@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="TypeList" load_steps=3 format=3 uid="uid://lr4nbyhktqt5"]
+[gd_resource type="Resource" script_class="TypeList" load_steps=6 format=3 uid="uid://lr4nbyhktqt5"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_j00d2"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/EnemyTypeList.gd" id="2_3nfbk"]
+[ext_resource type="Resource" uid="uid://ijbghilyc0ba" path="res://Resources/Units/Enemy/goblins/GoblinMelee.tres" id="2_sw6b7"]
+[ext_resource type="Resource" uid="uid://d0etqlijo61fy" path="res://Resources/Units/Enemy/goblins/GoblinRanged.tres" id="3_qg4u7"]
+[ext_resource type="Resource" uid="uid://dce4pgoihwbme" path="res://Resources/Units/Enemy/goblins/GoblinMage.tres" id="4_o8g1l"]
 
 [resource]
 script = ExtResource("2_3nfbk")
 CreatureType = 5
-Common_Enemies = Array[ExtResource("1_j00d2")]([])
-Rare_Enemies = Array[ExtResource("1_j00d2")]([])
+Common_Enemies = Array[ExtResource("1_j00d2")]([ExtResource("2_sw6b7"), ExtResource("3_qg4u7")])
+Rare_Enemies = Array[ExtResource("1_j00d2")]([ExtResource("4_o8g1l")])
 MiniBoss_Enemies = Array[ExtResource("1_j00d2")]([])

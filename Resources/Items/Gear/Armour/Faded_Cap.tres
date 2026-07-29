@@ -1,17 +1,17 @@
-[gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://mk47vckyu5i0"]
+[gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://cw6rg0j6b0r4k"]
 
 [ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_sv3am"]
-[ext_resource type="Texture2D" uid="uid://bixa6lgv0t1kx" path="res://Art/UnitSprites/BasicCharacter_mage.png" id="2_phpcl"]
+[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_rky13"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_rnc4d"]
 
 [resource]
 script = ExtResource("3_rnc4d")
 STR_boost = -1
 DEX_boost = 0
-VIT_boost = 0
-MAG_boost = 1
+VIT_boost = -1
+MAG_boost = 0
 DEF_boost = 1
-LUK_boost = 0
+LUK_boost = 3
 HP_Max_boost = 0
 Phys_ATK_boost = 0
 Mag_ATK_boost = 0
@@ -24,19 +24,22 @@ Melee_Mult_boost = 0.0
 Ranged_Mult_boost = 0.0
 Def_Mult_boost = 0.0
 Reroll_Chance_boost = 0.0
-ItemName = "Apprentice Robe"
+ItemName = "Faded Cap"
 max_stack = 1
-icon = ExtResource("2_phpcl")
-ITEM_ID = 11
+icon = ExtResource("2_rky13")
+ITEM_ID = 13
 TILE_ID = 0
+shop_value = 1
 ItemAbility = ExtResource("1_sv3am")
 throw_range = 3
-DESCRIPTION = "A set of old mage apprentice robes."
+DESCRIPTION = "A cap, faded with age. The bells have been lost."
 rarity = 0
 ItemType = 3
 GearType = 1
 ConsType = 0
-Class_Bias = 3
+Class_Bias = 6
+min_area_level = 0
+max_area_level = 5
 Affinity_Fire = false
 Affinity_Water = false
 Affinity_Earth = false
@@ -45,8 +48,8 @@ Affinity_Force = false
 Affinity_Light = false
 Affinity_Dark = false
 STR_NEEDED = 0
-DEX_NEEDED = 5
+DEX_NEEDED = 0
 VIT_NEEDED = 0
-MAG_NEEDED = 5
+MAG_NEEDED = 0
 DEF_NEEDED = 0
-LUK_NEEDED = 0
+LUK_NEEDED = 8

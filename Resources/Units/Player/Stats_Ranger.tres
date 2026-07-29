@@ -1,19 +1,27 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=5 format=3 uid="uid://cww662eyo140s"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=12 format=3 uid="uid://cww662eyo140s"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_egh68"]
 [ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="1_y08ut"]
 [ext_resource type="Texture2D" uid="uid://cma54lo0lvcps" path="res://Art/UnitSprites/BasicCharacter_ranger.png" id="2_du2ht"]
+[ext_resource type="Texture2D" uid="uid://b8r01xxaa8xxs" path="res://Art/UnitSprites/Palettes/testspritepallette0.png" id="3_88lls"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="4_erxop"]
+[ext_resource type="Texture2D" uid="uid://b6hv8onls4dsr" path="res://Art/UnitSprites/Palettes/testspritepallette1.png" id="4_lc1pt"]
+[ext_resource type="Texture2D" uid="uid://flaexc2jrtx5" path="res://Art/UnitSprites/Palettes/testspritepallette2.png" id="5_d4dys"]
+[ext_resource type="Texture2D" uid="uid://dut6j2j3px423" path="res://Art/UnitSprites/Palettes/testspritepallette3.png" id="6_pgwmk"]
+[ext_resource type="Texture2D" uid="uid://bd8fiogco46kp" path="res://Art/UnitSprites/Palettes/testspritepallette4.png" id="7_3eaf4"]
+[ext_resource type="Texture2D" uid="uid://dmpsavoioy4md" path="res://Art/UnitSprites/Palettes/testspritepallette5.png" id="8_v8u6s"]
+[ext_resource type="Texture2D" uid="uid://dg8kt5fgnjh81" path="res://Art/UnitSprites/Palettes/testspritepallette6.png" id="9_mduwa"]
 
 [resource]
 script = ExtResource("1_egh68")
 Sprite = ExtResource("2_du2ht")
 BasicAttack = ExtResource("1_y08ut")
 UnitName = "Ranger"
+is_large_unit = false
 CreatureType = 0
 Element = 4
 unit_specific_drops = Array[ExtResource("4_erxop")]([])
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("3_88lls"), ExtResource("4_lc1pt"), ExtResource("5_d4dys"), ExtResource("6_pgwmk"), ExtResource("7_3eaf4"), ExtResource("8_v8u6s"), ExtResource("9_mduwa")])
 STR_up = 5
 DEX_up = 5
 VIT_up = 0

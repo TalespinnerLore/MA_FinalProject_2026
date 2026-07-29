@@ -50,13 +50,14 @@ var zonerarities = [t0_cross_rarities,t1_grid3_rarities,t1_grid3_rarities_unique
 @export var t1_waterboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
 @export var t1_earthboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
 @export var t1_airboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
+@export var treasure_vault_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
 
-var preset_recipes = [t1_fireboss_recipe,t1_waterboss_recipe,t1_earthboss_recipe,t1_airboss_recipe,t1_forceboss_recipe]
+var preset_recipes = [t1_fireboss_recipe,t1_waterboss_recipe,t1_earthboss_recipe,t1_airboss_recipe,t1_forceboss_recipe,treasure_vault_recipe]
 
 func check_for_preset_recipes():
 	#print(t1_forceboss_recipe)
 	#print("predef",preset_recipes[4])
-	preset_recipes = [t1_fireboss_recipe,t1_waterboss_recipe,t1_earthboss_recipe,t1_airboss_recipe,t1_forceboss_recipe]
+	preset_recipes = [t1_forceboss_recipe,treasure_vault_recipe] #t1_fireboss_recipe,t1_waterboss_recipe,t1_earthboss_recipe,t1_airboss_recipe,
 	#print("postdef",preset_recipes[4])
 	var valid_recipe = false
 	var zones = $DROPZONES.get_children()
@@ -69,34 +70,34 @@ func check_for_preset_recipes():
 		
 		for zone:DropZone in $DROPZONES.get_children():
 			zonedata_list.append(zone.CRAFTING_TILE_DATA)
-		if recipe == preset_recipes[-1]:
-			print("zonesdata:",zonedata_list,"\nrecipe:",recipe)
-			
-			for i in $DROPZONES.get_child_count():
-				if recipe[i] != null:
-					preset_list_tileID.append(recipe[i].TILE_ID)
-				else:
-					preset_list_tileID.append('<null>')
-				if $DROPZONES.get_child(i).CRAFTING_TILE_DATA != null:
-					zone_tilelID.append($DROPZONES.get_child(i).CRAFTING_TILE_DATA.TILE_ID)
-				else:
-					zone_tilelID.append('<null>')
-			print('z_tileID:',zone_tilelID,"\nr_tileID:",preset_list_tileID)
+		#if recipe == preset_recipes[-1]:
+		print("zonesdata:",zonedata_list,"\nrecipe:",recipe)
+		
+		for i in $DROPZONES.get_child_count():
+			if recipe[i] != null:
+				preset_list_tileID.append(recipe[i].TILE_ID)
+			else:
+				preset_list_tileID.append('<null>')
+			if $DROPZONES.get_child(i).CRAFTING_TILE_DATA != null:
+				zone_tilelID.append($DROPZONES.get_child(i).CRAFTING_TILE_DATA.TILE_ID)
+			else:
+				zone_tilelID.append('<null>')
+		print('z_tileID:',zone_tilelID,"\nrecipe_tileID:",preset_list_tileID)
 			#print("zone tileID:",zone_list[i].CRAFTING_TILE_DATA.TILE_ID," recipe tileID:",recipe[i].TILE_ID)
 		
 		#unindent this latervvvvv
-			for j in recipe.size() - 2:
-				print(j)
-				if recipe[j] != null and recipe[j] != zonedata_list[j]:
-					print(zonedata_list[j]," != ",recipe[j],'\n',zone_tilelID[j]," != ",preset_list_tileID[j])
-					break
-				elif j == recipe.size() - 3:
-					valid_recipe = true
-					return_preset = recipe
-					print('is valid recipe')
-					break
-				else:
-					print('not end of recipe')
+		for j in recipe.size() - 2:
+			print(j)
+			if recipe[j] != null and recipe[j] != zonedata_list[j]:
+				print(zonedata_list[j]," != ",recipe[j],'\n',zone_tilelID[j]," != ",preset_list_tileID[j])
+				break
+			elif j == recipe.size() - 3:
+				valid_recipe = true
+				return_preset = recipe.duplicate()
+				print('is valid recipe')
+				break
+			else:
+				print('not end of recipe')
 			
 	if valid_recipe:
 		print('returning preset data now')
@@ -128,7 +129,10 @@ func check_for_preset_recipes():
 var dropzone_scene = preload("res://Crafting/tile_dropzone.tscn")
 
 func set_dropzones(Tier:gridTier):
-	for n in $DROPZONES.get_children():
+	grid_level = Tier
+	for n:DropZone in $DROPZONES.get_children():
+		#n.remove_data()
+		#await get_tree().create_timer(0.1).timeout
 		n.queue_free()
 	var coords = []
 	var rarities = zonerarities[Tier]
@@ -166,3 +170,19 @@ func _ready() -> void:
 func change_data(data:DUNGEON_CRAFTING_TILE_DATA,adding:bool):
 	$TileInventory.change_data(data,adding)
 	pass
+
+
+func _on_button_pressedPLUS() -> void:
+	for n:DropZone in $DROPZONES.get_children():
+		if n.slot_filled:
+			n.remove_data()
+	set_dropzones(clampi(grid_level+1,0,5))
+	pass # Replace with function body.
+
+
+func _on_button_pressedMINUS() -> void:
+	for n:DropZone in $DROPZONES.get_children():
+		if n.slot_filled:
+			n.remove_data()
+	set_dropzones(clampi(grid_level-1,0,5))
+	pass # Replace with function body.

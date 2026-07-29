@@ -1212,6 +1212,8 @@ func connect_doorways():
 
 
 func what_is_this_tile(x,y):
+	x = clampi(x,0,Width_X-1)
+	y = clampi(y,0,Height_Y-1)
 	#print("X,Y: ",x,",",y)
 	if River_Tiles_list.has(Vector2i(x,y)):
 		#print("isriver")

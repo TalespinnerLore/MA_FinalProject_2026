@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Unit_Instance_NonCombat
 
 signal interact
 signal move_complete

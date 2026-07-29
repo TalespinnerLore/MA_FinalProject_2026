@@ -36,6 +36,8 @@ var monster_house = false
 @export var nav_manager_ref:NavigationManager
 @export var dialogue_manager_ref:DialogueManager
 @export var env_manager_ref:EnvironmentObjectManager
+@export var item_manager_ref:GroundItemManager
+@export var vfx_holder:Node
 
 var player_spawnpoint:Vector2i
 ##########################
@@ -48,6 +50,8 @@ func init() -> void:
 	nav_manager_ref = get_tree().get_first_node_in_group("NAVIGATION_MANAGER") 
 	dialogue_manager_ref = get_tree().get_first_node_in_group("DIALOGUE_MANAGER")
 	env_manager_ref = get_tree().get_first_node_in_group("ENVIRONMENT_OBJECT_MANAGER")
+	item_manager_ref = get_tree().get_first_node_in_group("ITEM_MANAGER")
+	vfx_holder = $"../VFX"
 	print("spawn tiles:",spawn_tiles)
 	get_room_spawn_tiles()
 	print("spawn tiles:",spawn_tiles)

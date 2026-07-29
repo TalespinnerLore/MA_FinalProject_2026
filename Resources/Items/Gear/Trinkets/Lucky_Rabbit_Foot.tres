@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://dj017droxyvia"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_g71nm"]
+[ext_resource type="Texture2D" uid="uid://yibjbh8uryjy" path="res://Art/ItemSprites/trinkets.png" id="2_fpwt0"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="2_tttia"]
+
+[resource]
+script = ExtResource("2_tttia")
+STR_boost = 0
+DEX_boost = 0
+VIT_boost = 0
+MAG_boost = 0
+DEF_boost = 0
+LUK_boost = 7
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.14
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.07
+ItemName = "Lucky Rabit's Foot"
+max_stack = 1
+icon = ExtResource("2_fpwt0")
+ITEM_ID = 0
+TILE_ID = 0
+shop_value = 1
+ItemAbility = ExtResource("1_g71nm")
+throw_range = 3
+DESCRIPTION = "Not so lucky for the rabbit, turns out. Slightly boosts crit rate and luck."
+rarity = 1
+ItemType = 3
+GearType = 3
+ConsType = 0
+Class_Bias = 0
+min_area_level = 0
+max_area_level = 20
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = false
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 10

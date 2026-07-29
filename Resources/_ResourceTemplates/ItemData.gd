@@ -26,7 +26,10 @@ enum CONS_TYPE {N_A,EDIBLE,THROWING,KEY,OTHER}
 @export var GearType:GEAR_TYPE
 @export var ConsType:CONS_TYPE
 @export var Class_Bias:CLASS
- 
+
+@export var min_area_level := 0
+@export var max_area_level := 999
+
 @export var Affinity_Fire := false
 @export var Affinity_Water := false
 @export var Affinity_Earth := false

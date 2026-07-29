@@ -80,15 +80,15 @@ var max_floors: = 5
 var current_floor: = 0
 var monster_house_count: = 1
 
-var AREA_LEVEL := 0
+var AREA_LEVEL := 1
 var UNIT_LEVEL_Boost := 0
 
 var floor_is_monsterhouse := false
 
 var item_mult = 1.0
-var gold_chance = 2.5
+var gold_chance = 2.0
 var tile_chance = 1.5
-var cons_chance = 1.5
+var cons_chance = 2.0
 var gear_chance = 1.0
 var lockbox_chance = 0.5
 
@@ -462,7 +462,7 @@ func set_floor_data():
 			1:
 				max_floors = 8 + extra_floors
 				max_wandering_units = 6
-				safe_floor_amount = 1
+				#safe_floor_amount = 1
 			2:
 				max_floors = 16 + extra_floors
 				max_wandering_units = 8
@@ -685,13 +685,14 @@ func set_floor_data():
 				mini_bosses.pop_front()
 			FINAL_FLOOR.BOSS:
 				max_wandering_units = 1
+	
 	elif safe_floors.has(current_floor):
 		Unique_Rooms.append(safe_room_floor_layout)
 		var check = safe_room_floor_layout.get_tiles()
 		var check2:TileMapLayer = load(check).instantiate()
 		level_size = check2.get_used_rect().size
 		check2.queue_free()
-	
+		print('safe floor tiles transferred')
 	pass
 
 func select_biome_index():

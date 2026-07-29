@@ -13,14 +13,14 @@ const basetile_fixed = preload("res://Crafting/DungeonCraftingTile.tscn")
 
 @export var TileID_NamedInventory = [["TEST",0],["FIRE",4],["WATER",4],["EARTH",4],["AIR",4],["FORCE",4],\
 ["VOLCANO",4],["ISLANDS",4],["MESA",4],["SKY_ISLANDS",4],\
-["RIVER",4],["LAKE",2],["ROUND_ROOMS",4],["DENSE_LAYOUT",2],["SPARSE_LAYOUT",2],["ALTERNATING_SIZE_ROOMS",0],["SMALL_ROOMS",2],["LARGE_ROOMS",2],\
+["RIVER",4],["LAKE",2],["ROUND_ROOMS",4],["DENSE_LAYOUT",2],["SPARSE_LAYOUT",2],["ALTERNATING_SIZE_ROOMS",2],["SMALL_ROOMS",2],["LARGE_ROOMS",2],\
 ["CONSUMABLES",2],["GEAR",2],["LOCKBOXES",2],["WEAPONS",2],["ARMOUR",2],["TRINKETS",2],\
 ["VANGUARD",1],["WARRIOR",1],["MAGE",1],["ROGUE",1],["HEALER",1],["JESTER",1],\
-["INCREASED_MOB_DENSITY",2],["INCREASED_GOLD",2],["INCREASED_XP",2],["DECREASED_MOB_DENSITY",2],["DECREASED_GOLD",2],["DECREASED_XP",2],\
-["BEASTS",2],["ELEMENTALS",2],["UNDEAD",2],["CONSTRUCTS",2],["MORTALS",2],["WILDLINGS",2],\
-["TREASURE_ROOM",2],["MINI_BOSS",4],["MONSTER_HOUSE",4],\
-["T1_BOSS",1],["T1_FIREBOSS",1],["T1_WATERBOSS",1],["T1_EARTHBOSS",1],["T1_AIRBOSS",1],["T1_FORCEBOSS",4],\
-["T2_BOSS",1],["T2_QUADBOSS",0],["T2_FORCEBOSS",0]]
+["INCREASED_MOB_DENSITY",2],["INCREASED_GOLD",4],["INCREASED_XP",2],["DECREASED_MOB_DENSITY",2],["DECREASED_GOLD",2],["DECREASED_XP",2],\
+["BEASTS",0],["ELEMENTALS",0],["UNDEAD",0],["CONSTRUCTS",0],["MORTALS",2],["WILDLINGS",2],\
+["TREASURE_ROOM",1],["MINI_BOSS",1],["MONSTER_HOUSE",1],\
+["T1_BOSS",1],["T1_FIREBOSS",0],["T1_WATERBOSS",0],["T1_EARTHBOSS",0],["T1_AIRBOSS",0],["T1_FORCEBOSS",0],\
+["T2_BOSS",0],["T2_QUADBOSS",0],["T2_FORCEBOSS",0]]
 
 var tile_paths = ["res://Resources/Items/Tiles/DungeonGen/Elements/TEST.tres","res://Resources/Items/Tiles/DungeonGen/Elements/FIRE.tres",\
 "res://Resources/Items/Tiles/DungeonGen/Elements/WATER.tres","res://Resources/Items/Tiles/DungeonGen/Elements/EARTH.tres",\
@@ -442,16 +442,19 @@ func change_data(data:DUNGEON_CRAFTING_TILE_DATA,adding:bool):
 			has_boss = false
 		
 	show_data()
-	if (preset_data == null or ! adding) and data != offset_values:
+	if (preset_data == null or ! adding) and data != offset_values and data != preset_data:
 		print("hit preset = null / not adding, and data != offset values check")
 		# forced recheck when adding a tile with not preset, when you might change
 		## that preset by removing a tile, but not when removing the visual offset
 		### data that happens when the data is forwarded to DungeonData.
 		var preset = get_parent().check_for_preset_recipes()
-		if ! preset == null:
+		if ! preset == null: #if preset is filled:
 			var testtext = []
 			for q in preset:
-				testtext.append(q.TILE_ID)
+				if q != null:
+					testtext.append(q.TILE_ID)
+				else:
+					testtext.append('<null>')
 			print("hit preset recipe existing check - IDs:",testtext)
 			preset_data = preset[-1] #the preset data that actually is applied (1 tile)
 			preset.pop_back()
@@ -460,11 +463,17 @@ func change_data(data:DUNGEON_CRAFTING_TILE_DATA,adding:bool):
 				var is_last = false #these are the things we want visually cancelled out (9 tiles)
 				if tile == preset[-1]:
 					is_last = true #the last is the visual info added (1 tile)
-				offset_values.combine_data(tile,is_last)
+				if tile != null:
+					offset_values.combine_data(tile,is_last)
 			#change_data(preset_data,true)
 			change_data(offset_values,true)
 		else:
 			print("hit the no precet existing check")
+			print(preset_data, offset_values)
+			if adding == false and preset_data != null:
+				print('change back offset')
+				change_data(offset_values,false)
+				
 			preset_data = null
 			offset_values = null
 	pass
@@ -649,6 +658,7 @@ func load_data_to_dungeon():
 		if preset_data.Mini_Bosses != null:
 			DungeonData.mini_bosses = preset_data.Mini_Bosses
 	#var dun_data = DUNGEON_CRAFTING_TILE_DATA.new()
+	DungeonData.crafting_tier = get_parent().grid_level
 	DungeonData.Affinity_Fire = Affinity_Fire
 	DungeonData.Affinity_Water = Affinity_Water
 	DungeonData.Affinity_Earth = Affinity_Earth

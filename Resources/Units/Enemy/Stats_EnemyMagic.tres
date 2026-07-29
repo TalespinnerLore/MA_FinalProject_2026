@@ -1,19 +1,27 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=5 format=3 uid="uid://dgm8dna5mwt7q"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=12 format=3 uid="uid://dgm8dna5mwt7q"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_1q2fq"]
 [ext_resource type="Resource" uid="uid://dygpdjty37286" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres" id="1_icnkg"]
 [ext_resource type="Texture2D" uid="uid://d16ekei1j7qu8" path="res://Art/UnitSprites/BasicCharacter_enemymage.png" id="2_00mq1"]
+[ext_resource type="Texture2D" uid="uid://b8r01xxaa8xxs" path="res://Art/UnitSprites/Palettes/testspritepallette0.png" id="3_gr42u"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="4_1xdsg"]
+[ext_resource type="Texture2D" uid="uid://b6hv8onls4dsr" path="res://Art/UnitSprites/Palettes/testspritepallette1.png" id="4_ci0dp"]
+[ext_resource type="Texture2D" uid="uid://flaexc2jrtx5" path="res://Art/UnitSprites/Palettes/testspritepallette2.png" id="5_d766r"]
+[ext_resource type="Texture2D" uid="uid://dut6j2j3px423" path="res://Art/UnitSprites/Palettes/testspritepallette3.png" id="6_yk5ik"]
+[ext_resource type="Texture2D" uid="uid://bd8fiogco46kp" path="res://Art/UnitSprites/Palettes/testspritepallette4.png" id="7_xojjw"]
+[ext_resource type="Texture2D" uid="uid://dmpsavoioy4md" path="res://Art/UnitSprites/Palettes/testspritepallette5.png" id="8_hwiq2"]
+[ext_resource type="Texture2D" uid="uid://dg8kt5fgnjh81" path="res://Art/UnitSprites/Palettes/testspritepallette6.png" id="9_2d00a"]
 
 [resource]
 script = ExtResource("1_1q2fq")
 Sprite = ExtResource("2_00mq1")
 BasicAttack = ExtResource("1_icnkg")
-UnitName = "MageEnemy"
+UnitName = "Bandit Mage"
+is_large_unit = false
 CreatureType = 0
 Element = 4
 unit_specific_drops = Array[ExtResource("4_1xdsg")]([])
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("3_gr42u"), ExtResource("4_ci0dp"), ExtResource("5_d766r"), ExtResource("6_yk5ik"), ExtResource("7_xojjw"), ExtResource("8_hwiq2"), ExtResource("9_2d00a")])
 STR_up = 1
 DEX_up = 3
 VIT_up = 2

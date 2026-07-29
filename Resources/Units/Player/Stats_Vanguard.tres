@@ -1,19 +1,27 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=5 format=3 uid="uid://crgv6vgn5oh3u"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=12 format=3 uid="uid://crgv6vgn5oh3u"]
 
 [ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_7a4j6"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_sag3s"]
 [ext_resource type="Texture2D" uid="uid://byt11lv3l0usu" path="res://Art/UnitSprites/BasicCharacter_vanguard.png" id="2_yhmo5"]
+[ext_resource type="Texture2D" uid="uid://b8r01xxaa8xxs" path="res://Art/UnitSprites/Palettes/testspritepallette0.png" id="3_eook7"]
+[ext_resource type="Texture2D" uid="uid://b6hv8onls4dsr" path="res://Art/UnitSprites/Palettes/testspritepallette1.png" id="4_i7ufj"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="4_pjmwo"]
+[ext_resource type="Texture2D" uid="uid://flaexc2jrtx5" path="res://Art/UnitSprites/Palettes/testspritepallette2.png" id="5_suiv1"]
+[ext_resource type="Texture2D" uid="uid://dut6j2j3px423" path="res://Art/UnitSprites/Palettes/testspritepallette3.png" id="6_p0wk6"]
+[ext_resource type="Texture2D" uid="uid://bd8fiogco46kp" path="res://Art/UnitSprites/Palettes/testspritepallette4.png" id="7_od1ib"]
+[ext_resource type="Texture2D" uid="uid://dmpsavoioy4md" path="res://Art/UnitSprites/Palettes/testspritepallette5.png" id="8_el2s2"]
+[ext_resource type="Texture2D" uid="uid://dg8kt5fgnjh81" path="res://Art/UnitSprites/Palettes/testspritepallette6.png" id="9_ffud0"]
 
 [resource]
 script = ExtResource("1_sag3s")
 Sprite = ExtResource("2_yhmo5")
 BasicAttack = ExtResource("1_7a4j6")
 UnitName = "Vanguard"
+is_large_unit = false
 CreatureType = 0
 Element = 4
 unit_specific_drops = Array[ExtResource("4_pjmwo")]([])
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("3_eook7"), ExtResource("4_i7ufj"), ExtResource("5_suiv1"), ExtResource("6_p0wk6"), ExtResource("7_od1ib"), ExtResource("8_el2s2"), ExtResource("9_ffud0")])
 STR_up = 0
 DEX_up = 5
 VIT_up = 0

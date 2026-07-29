@@ -1,19 +1,27 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=5 format=3 uid="uid://brn8pf5kf160g"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=12 format=3 uid="uid://brn8pf5kf160g"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_fgudt"]
 [ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="1_lg36o"]
 [ext_resource type="Texture2D" uid="uid://dk3bsrh054bs7" path="res://Art/UnitSprites/BasicCharacter_enemyranger.png" id="2_vvisp"]
+[ext_resource type="Texture2D" uid="uid://b8r01xxaa8xxs" path="res://Art/UnitSprites/Palettes/testspritepallette0.png" id="3_pxd30"]
+[ext_resource type="Texture2D" uid="uid://b6hv8onls4dsr" path="res://Art/UnitSprites/Palettes/testspritepallette1.png" id="4_nfdnd"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="4_om8wu"]
+[ext_resource type="Texture2D" uid="uid://flaexc2jrtx5" path="res://Art/UnitSprites/Palettes/testspritepallette2.png" id="5_cjs22"]
+[ext_resource type="Texture2D" uid="uid://dut6j2j3px423" path="res://Art/UnitSprites/Palettes/testspritepallette3.png" id="6_s00sd"]
+[ext_resource type="Texture2D" uid="uid://bd8fiogco46kp" path="res://Art/UnitSprites/Palettes/testspritepallette4.png" id="7_rxwel"]
+[ext_resource type="Texture2D" uid="uid://dmpsavoioy4md" path="res://Art/UnitSprites/Palettes/testspritepallette5.png" id="8_l1mau"]
+[ext_resource type="Texture2D" uid="uid://dg8kt5fgnjh81" path="res://Art/UnitSprites/Palettes/testspritepallette6.png" id="9_slykv"]
 
 [resource]
 script = ExtResource("1_fgudt")
 Sprite = ExtResource("2_vvisp")
 BasicAttack = ExtResource("1_lg36o")
-UnitName = "RangedEnemy"
+UnitName = "Bandit Archer"
+is_large_unit = false
 CreatureType = 0
 Element = 4
 unit_specific_drops = Array[ExtResource("4_om8wu")]([])
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("3_pxd30"), ExtResource("4_nfdnd"), ExtResource("5_cjs22"), ExtResource("6_s00sd"), ExtResource("7_rxwel"), ExtResource("8_l1mau"), ExtResource("9_slykv")])
 STR_up = 3
 DEX_up = 3
 VIT_up = 2
@@ -26,7 +34,7 @@ STR = 3
 DEX = 3
 VIT = 2
 MAG = 1
-DEF = 1
+DEF = 2
 LUK = 5
 HP_Max_withVIT = null
 Base_Phys_ATK = 5.0

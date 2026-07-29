@@ -1,19 +1,27 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=5 format=3 uid="uid://oygkar1j0gy3"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=12 format=3 uid="uid://oygkar1j0gy3"]
 
 [ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_b2avj"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="2_2gbsx"]
 [ext_resource type="Texture2D" uid="uid://b4x3wup30pxxh" path="res://Art/UnitSprites/BasicCharacter_warrior.png" id="2_531wi"]
+[ext_resource type="Texture2D" uid="uid://b8r01xxaa8xxs" path="res://Art/UnitSprites/Palettes/testspritepallette0.png" id="3_3b2hh"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="4_31f34"]
+[ext_resource type="Texture2D" uid="uid://b6hv8onls4dsr" path="res://Art/UnitSprites/Palettes/testspritepallette1.png" id="4_lqdpl"]
+[ext_resource type="Texture2D" uid="uid://flaexc2jrtx5" path="res://Art/UnitSprites/Palettes/testspritepallette2.png" id="5_o4k6y"]
+[ext_resource type="Texture2D" uid="uid://dut6j2j3px423" path="res://Art/UnitSprites/Palettes/testspritepallette3.png" id="6_boic2"]
+[ext_resource type="Texture2D" uid="uid://bd8fiogco46kp" path="res://Art/UnitSprites/Palettes/testspritepallette4.png" id="7_temb1"]
+[ext_resource type="Texture2D" uid="uid://dmpsavoioy4md" path="res://Art/UnitSprites/Palettes/testspritepallette5.png" id="8_mlwk4"]
+[ext_resource type="Texture2D" uid="uid://dg8kt5fgnjh81" path="res://Art/UnitSprites/Palettes/testspritepallette6.png" id="9_fx7wr"]
 
 [resource]
 script = ExtResource("2_2gbsx")
 Sprite = ExtResource("2_531wi")
 BasicAttack = ExtResource("1_b2avj")
 UnitName = "Warrior"
+is_large_unit = false
 CreatureType = 0
 Element = 4
 unit_specific_drops = Array[ExtResource("4_31f34")]([])
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("3_3b2hh"), ExtResource("4_lqdpl"), ExtResource("5_o4k6y"), ExtResource("6_boic2"), ExtResource("7_temb1"), ExtResource("8_mlwk4"), ExtResource("9_fx7wr")])
 STR_up = 5
 DEX_up = 0
 VIT_up = 0
