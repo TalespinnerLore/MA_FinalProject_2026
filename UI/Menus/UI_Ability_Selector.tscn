@@ -53,6 +53,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BackgroundTexture_9PR" type="NinePatchRect" parent="."]
+layout_mode = 0
 offset_left = 88.0
 offset_top = 64.0
 offset_right = 552.0
@@ -64,6 +65,7 @@ patch_margin_right = 6
 patch_margin_bottom = 6
 
 [node name="StatAbilityBox" type="NinePatchRect" parent="."]
+layout_mode = 0
 offset_left = 97.0
 offset_top = 72.0
 offset_right = 241.0
@@ -733,6 +735,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="AbilitySelectionBox" type="NinePatchRect" parent="."]
+layout_mode = 0
 offset_left = 249.0
 offset_top = 72.0
 offset_right = 393.0
@@ -759,6 +762,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LeftButton" type="TextureButton" parent="AbilitySelectionBox"]
+layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
 offset_right = 38.0
@@ -781,6 +785,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RightButton" type="TextureButton" parent="AbilitySelectionBox"]
+layout_mode = 0
 offset_left = 106.0
 offset_top = 6.0
 offset_right = 138.0
@@ -1327,6 +1332,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="equip" type="NinePatchRect" parent="AbilitySelectionBox"]
+layout_mode = 0
 offset_left = 7.0
 offset_top = 208.0
 offset_right = 69.0
@@ -1350,6 +1356,7 @@ text = "EQUIP
 flat = true
 
 [node name="enequip" type="NinePatchRect" parent="AbilitySelectionBox"]
+layout_mode = 0
 offset_left = 75.0
 offset_top = 208.0
 offset_right = 137.0
@@ -1372,6 +1379,7 @@ text = "UNEQUIP"
 flat = true
 
 [node name="DescriptionBox" type="NinePatchRect" parent="."]
+layout_mode = 0
 offset_left = 400.0
 offset_top = 72.0
 offset_right = 544.0

@@ -482,6 +482,7 @@ theme_override_constants/separation = 0
 alignment = 1
 
 [node name="useButton" type="Button" parent="OptionsBox/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("3_5otyh")
 theme_override_constants/outline_size = 4
@@ -490,6 +491,7 @@ text = "USE"
 flat = true
 
 [node name="giveButton" type="Button" parent="OptionsBox/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("3_5otyh")
 theme_override_constants/outline_size = 4
@@ -498,6 +500,7 @@ text = "GIVE"
 flat = true
 
 [node name="dropButton" type="Button" parent="OptionsBox/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("3_5otyh")
 theme_override_constants/outline_size = 4
@@ -514,21 +517,20 @@ theme_override_font_sizes/font_size = 16
 text = "THROW"
 flat = true
 
-[node name="sellButton" type="Button" parent="OptionsBox/VBoxContainer"]
-visible = false
+[node name="buyButton" type="Button" parent="OptionsBox/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_5otyh")
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 16
-text = "SELL
+text = "BUY
 "
 flat = true
 
 [node name="GoldCounter" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 504.0
+offset_left = 304.0
 offset_top = 80.0
-offset_right = 536.0
+offset_right = 336.0
 offset_bottom = 112.0
 texture = ExtResource("9_ljlvs")
 stretch_mode = 3
@@ -538,8 +540,34 @@ layout_mode = 0
 offset_right = 33.0
 offset_bottom = 28.0
 theme = ExtResource("3_5otyh")
+theme_override_constants/line_spacing = -1
 theme_override_constants/outline_size = 4
-text = "999999"
+text = "GOLD
+
+9999"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="GoldCounter2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 276.0
+offset_right = 208.0
+offset_bottom = 308.0
+texture = ExtResource("9_ljlvs")
+stretch_mode = 3
+
+[node name="GoldAmountLabel" type="Label" parent="GoldCounter2"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 33.0
+offset_bottom = 27.0
+theme = ExtResource("3_5otyh")
+theme_override_constants/line_spacing = -3
+theme_override_constants/outline_size = 4
+text = "COST
+
+000"
 horizontal_alignment = 1
 vertical_alignment = 2
 
