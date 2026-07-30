@@ -15,6 +15,7 @@ const seperator_label = preload("res://UI/Menus/UI Components/seperator_label.ts
 var basic_attack:AbilityData
 var selected_ability_slot:int = 0
 var selected_ability:AbilityData
+@export var selected_stat:STATS
 
 enum Pnum {P1,P2,P3,P4}
 @export var PlayerUnit:Pnum
@@ -22,7 +23,8 @@ var autostats
 
 func _ready() -> void:
 	load_player_data()
-	load_abilities(3)
+	await get_tree().create_timer(2).timeout
+	change_statpage(true)
 	#for ability:AbilityData in abilities:
 	#	print(ability.ability_name)
 
@@ -47,6 +49,19 @@ func load_player_data():
 	$StatAbilityBox/StatBoxContainer/StatBox5/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[4]+autostats[4])
 	$StatAbilityBox/StatBoxContainer/StatBox6/Number.text = str(PlayerStats.p1_investedStrDexVitMagDefLuk[5]+autostats[5])
 	$StatAbilityBox/StatBoxContainer/StatBox7/Label.text = str("Free Stats - ",PlayerStats.p1_free_stats)
+	load_abilities(selected_stat)
+	
+
+func change_statpage(forward:bool):
+	if forward:
+		selected_stat += 1
+	else:
+		selected_stat -= 1
+	if selected_stat < 0:
+		selected_stat = 5
+	elif selected_stat > 5:
+		selected_stat = 0
+	load_abilities(selected_stat)
 
 func show_hide_plusbtns(show:bool):
 	for i in 6:
@@ -57,30 +72,38 @@ func show_hide_minusbtn(show:bool,index:int):
 	var box:UIstatbox = get_child(index)
 	box.get_child(2).visible = show
 
-func show_player_stats(stats:Array[STATS]):
+func show_player_stats(stats:Array): #of ints
+	print('stats needed:',stats)
 	for box in $StatAbilityBox/StatBoxContainer.get_children():
 		box.visible = false
-	for stat in stats:
-		match stat:
-			0:
-				$StatAbilityBox/StatBoxContainer/StatBox.visible = true
-			1:
-				$StatAbilityBox/StatBoxContainer/StatBox2.visible = true
-			2:
-				$StatAbilityBox/StatBoxContainer/StatBox3.visible = true
-			3:
-				$StatAbilityBox/StatBoxContainer/StatBox4.visible = true
-			4:
-				$StatAbilityBox/StatBoxContainer/StatBox5.visible = true
-			5:
-				$StatAbilityBox/StatBoxContainer/StatBox6.visible = true
+	for index in stats.size():
+		if stats[index] > 0:
+			match index:
+				0:
+					$StatAbilityBox/StatBoxContainer/StatBox.visible = true
+				1:
+					$StatAbilityBox/StatBoxContainer/StatBox2.visible = true
+				2:
+					$StatAbilityBox/StatBoxContainer/StatBox3.visible = true
+				3:
+					$StatAbilityBox/StatBoxContainer/StatBox4.visible = true
+					#print('need mag')
+				4:
+					$StatAbilityBox/StatBoxContainer/StatBox5.visible = true
+				5:
+					$StatAbilityBox/StatBoxContainer/StatBox6.visible = true
 	if PlayerStats.p1_free_stats > 0:
 		$StatAbilityBox/StatBoxContainer/StatBox7.visible = true
 
-
-func load_abilities(stat_index:STATS):
+func clear_abilities():
 	for child in $AbilitySelectionBox/ScrollContainer/VBoxContainer.get_children():
 		child.queue_free()
+	abilities.clear()
+	return
+
+func load_abilities(stat_index:STATS):
+	clear_abilities()
+	#print('child count:',$AbilitySelectionBox/ScrollContainer/VBoxContainer.get_child_count(),$AbilitySelectionBox/ScrollContainer/VBoxContainer.get_children())
 	var seperator_label_text = ''
 	match stat_index:
 		0:
@@ -122,12 +145,17 @@ func load_abilities(stat_index:STATS):
 			$AbilitySelectionBox/ScrollContainer/VBoxContainer.add_child(newlabel)
 		var new_box = abilitybox.instantiate()
 		new_box.data = abilities[i]
+		print(new_box.data)
 		new_box.uses_remaining = abilities[i].max_uses
 		new_box.set_textures()
 		$AbilitySelectionBox/ScrollContainer/VBoxContainer.add_child(new_box)
 		pass
+	
+	show_usable_abilities()
 
 func sort_abilities(stat_index:STATS):
+	for box in $AbilitySelectionBox/ScrollContainer/VBoxContainer.get_children():
+		print(box,' ')
 	var main_statreq:Array[int] = []
 	for ability in abilities:
 		main_statreq.append(ability.BaseStats_required[stat_index])
@@ -142,7 +170,22 @@ func sort_abilities(stat_index:STATS):
 				break #should only break the innner loop
 	abilities = ordered_abilites
 
-
+func show_usable_abilities():
+	await get_tree().create_timer(0.1).timeout
+	for box in $AbilitySelectionBox/ScrollContainer/VBoxContainer.get_children():
+		if box is UI_abilitybox:
+			print(box.data)
+			for stat in 6:
+				print('stat:',stat,' req:',box.data.BaseStats_required[stat],' have:',PlayerStats.p1_investedStrDexVitMagDefLuk[stat]+autostats[stat])
+				if box.data.BaseStats_required[stat] > \
+				PlayerStats.p1_investedStrDexVitMagDefLuk[stat]+autostats[stat]:
+					print(box.data.BaseStats_required[stat],' > ',PlayerStats.p1_investedStrDexVitMagDefLuk[stat]+autostats[stat])
+					box.self_modulate = Color.DIM_GRAY
+					break
+				else:
+					
+					box.self_modulate = Color.WHITE
+			pass
 
 func ability_description(data:AbilityData):
 	var is_equipped = false
@@ -153,12 +196,14 @@ func ability_description(data:AbilityData):
 			break #checks if this is an equipped ability, and if not preps it to be slotted in.
 	if not is_equipped:
 		selected_ability = data
+	print(data.BaseStats_required)
+	show_player_stats(data.BaseStats_required)
 	
 	print("abilityname: ",data.ability_name)
 	var title = $DescriptionBox/NameOfThingLabel
 	var desc = $DescriptionBox/DescriptionLabel
 	#ENUM_NAME.keys()[enum_val]
-	title.text = str('-ABILITY-\n',data.ability_name)
+	title.text = str('- ABILITY -\n',data.ability_name)
 	desc.text = '' 
 	if data.damaging:
 		desc.text += (str('Damaging '))
@@ -243,3 +288,25 @@ var desc_luk = "Luck (LUK) provides a 1% chance to reroll negative outcomes or r
 Seriously, that's it. \n"
 
 var desc_free = "Freely applicable stat points that can be allocated as the player wishes. \n"
+
+
+func _on_equip_button_pressed() -> void:
+	PlayerStats.p1_equipped_abilities[selected_ability_slot] = selected_ability
+	load_player_data()
+	pass # Replace with function body.
+
+
+func _on_unequip_button_pressed() -> void:
+	PlayerStats.p1_equipped_abilities[selected_ability_slot] = basic_attack
+	load_player_data()
+	pass # Replace with function body.
+
+
+func _on_left_button_pressed() -> void:
+	change_statpage(false)
+	pass # Replace with function body.
+
+
+func _on_right_button_pressed() -> void:
+	change_statpage(true)
+	pass # Replace with function body.

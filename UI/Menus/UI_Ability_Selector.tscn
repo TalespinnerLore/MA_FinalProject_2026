@@ -60,6 +60,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bspq1")
+selected_stat = 1
 
 [node name="BackgroundTexture_9PR" type="NinePatchRect" parent="."]
 layout_mode = 0
@@ -1155,12 +1156,6 @@ autowrap_mode = 2
 [node name="AbilityBox" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer" instance=ExtResource("29_87voy")]
 layout_mode = 2
 
-[node name="statcount2" type="Label" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("3_yh5q2")
-text = " - 10 DEX -"
-horizontal_alignment = 1
-
 [node name="AbilityBox2" type="NinePatchRect" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
@@ -1285,6 +1280,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="statcount2" type="Label" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_yh5q2")
+text = " - 10 DEX -"
+horizontal_alignment = 1
+
 [node name="equip" type="NinePatchRect" parent="AbilitySelectionBox"]
 layout_mode = 0
 offset_left = 7.0
@@ -1405,6 +1406,8 @@ autowrap_mode = 2
 [connection signal="mouse_entered" from="StatAbilityBox/AbilityBoxContainer/AbilityBox2" to="StatAbilityBox/AbilityBoxContainer/AbilityBox2" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="StatAbilityBox/AbilityBoxContainer/AbilityBox3" to="StatAbilityBox/AbilityBoxContainer/AbilityBox3" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="StatAbilityBox/AbilityBoxContainer/AbilityBox4" to="StatAbilityBox/AbilityBoxContainer/AbilityBox4" method="_on_mouse_entered"]
+[connection signal="pressed" from="AbilitySelectionBox/LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="AbilitySelectionBox/RightButton" to="." method="_on_right_button_pressed"]
 [connection signal="scroll_ended" from="AbilitySelectionBox/ScrollContainer" to="AbilitySelectionBox/ScrollContainer" method="_on_scroll_ended"]
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox4" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox4" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox5" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox5" method="_on_mouse_entered"]
@@ -1413,3 +1416,6 @@ autowrap_mode = 2
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox15" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox15" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox2" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox2" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox3" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox3" method="_on_mouse_entered"]
+[connection signal="pressed" from="AbilitySelectionBox/equip/giveButton" to="." method="_on_equip_button_pressed"]
+[connection signal="pressed" from="AbilitySelectionBox/equip/giveButton" to="." method="_on_give_button_pressed"]
+[connection signal="pressed" from="AbilitySelectionBox/enequip/giveButton" to="." method="_on_unequip_button_pressed"]

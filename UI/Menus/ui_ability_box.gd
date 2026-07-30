@@ -47,3 +47,7 @@ func _on_mouse_entered() -> void:
 	#emit_signal("show_abilitydata",data)
 	print("showing ability desc")
 	get_tree().call_group("description", "ability_description",data)
+
+func kill_instance():
+	self.queue_free()
+	print('killing node')
