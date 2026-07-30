@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ResourceGroup" load_steps=2 format=3 uid="uid://dlqqxjumun7uc"]
+
+[ext_resource type="Script" path="res://addons/godot_resource_groups/resource_group.gd" id="1_ppsis"]
+
+[resource]
+script = ExtResource("1_ppsis")
+base_folder = "res://Resources/Abilities/DEF_base"
+includes = Array[String]([])
+excludes = Array[String]([])
+paths = Array[String](["res://Resources/Abilities/DEF_base/Healing_Bubble.tres", "res://Resources/Abilities/DEF_base/Pebble_Guard.tres"])

@@ -1,11 +1,13 @@
-[gd_scene load_steps=33 format=3 uid="uid://qs3fqojkph1u"]
+[gd_scene load_steps=41 format=3 uid="uid://qs3fqojkph1u"]
 
+[ext_resource type="Script" path="res://UI/Menus/ui_ability_selector.gd" id="1_bspq1"]
 [ext_resource type="Texture2D" uid="uid://b3pex2aw1g2mg" path="res://Art/UI_Art/Frames/ui_bg_blueoutline.png" id="1_ggu28"]
 [ext_resource type="Texture2D" uid="uid://bl85iqf1ey42v" path="res://Art/UI_Art/Frames/ui_bg_yellowdark.png" id="2_vbjgb"]
 [ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="3_yh5q2"]
 [ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="4_c2njx"]
 [ext_resource type="Texture2D" uid="uid://cu3lk0k4qo1aj" path="res://Art/UI_Art/Frames/ui_bg_thin.png" id="4_n3caj"]
 [ext_resource type="Script" path="res://UI/Menus/ui_ability_box.gd" id="5_j3bqn"]
+[ext_resource type="Script" path="res://UI/Menus/stat_box_container.gd" id="6_7finb"]
 [ext_resource type="Texture2D" uid="uid://d3xgf11emdh0b" path="res://Art/UI_Art/ui_elem_dark.png" id="6_o5ygl"]
 [ext_resource type="Texture2D" uid="uid://cmtdkudyucs5o" path="res://Art/UI_Art/AbilityType/ui_mag_generic.png" id="7_1pytd"]
 [ext_resource type="Texture2D" uid="uid://de1joagwyuvmh" path="res://Art/UI_Art/AoE/ui_aoe_front.png" id="8_tf8f3"]
@@ -13,19 +15,25 @@
 [ext_resource type="Texture2D" uid="uid://xbm0r636tkfl" path="res://Art/UI_Art/AbilityType/ui_other_buff-debuff.png" id="10_tf5wb"]
 [ext_resource type="Texture2D" uid="uid://co1plajimoqu6" path="res://Art/UI_Art/AoE/ui_aoe_circle.png" id="11_s0ap0"]
 [ext_resource type="Texture2D" uid="uid://dyujfophr4wij" path="res://Art/UI_Art/ui_elem_fire.png" id="12_pfgvr"]
+[ext_resource type="Resource" uid="uid://rfa1oc5gpu6h" path="res://Resources/Abilities/DEX_base/Venom_Strike.tres" id="13_nou42"]
 [ext_resource type="Texture2D" uid="uid://0g5i5s07mb2x" path="res://Art/UI_Art/AbilityType/ui_mag_ranged.png" id="13_wy21u"]
 [ext_resource type="Texture2D" uid="uid://bjb3o6mmrr0uu" path="res://Art/UI_Art/AoE/ui_aoe_cone.png" id="14_ft3k2"]
 [ext_resource type="Texture2D" uid="uid://bi8o4wvd5x7fd" path="res://Art/UI_Art/ui_elem_wind.png" id="15_s6u2p"]
 [ext_resource type="Texture2D" uid="uid://bndblypkjtmdm" path="res://Art/UI_Art/AbilityType/ui_phys_ranged.png" id="16_x2c2j"]
 [ext_resource type="Texture2D" uid="uid://0l35ou02nh7y" path="res://Art/UI_Art/AoE/ui_aoe_line.png" id="17_ncsk4"]
+[ext_resource type="Resource" uid="uid://cv14lef7fcshm" path="res://Resources/Abilities/DEX_base/Piercing_Shot.tres" id="17_pqvda"]
 [ext_resource type="Script" path="res://UI/Menus/ui_stat_box.gd" id="19_mmq70"]
 [ext_resource type="Texture2D" uid="uid://vtw0q5vupesy" path="res://Art/UI_Art/12x12minus.png" id="20_2rc57"]
 [ext_resource type="Texture2D" uid="uid://cdsr7x70gmwos" path="res://Art/UI_Art/12x12plus.png" id="21_20whk"]
+[ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/Cone_of_Embers.tres" id="21_nqk8x"]
 [ext_resource type="Texture2D" uid="uid://cwfi6r14nnakd" path="res://Art/UI_Art/Frames/ui_bg_thinblue_3.png" id="22_6lq11"]
 [ext_resource type="Texture2D" uid="uid://fmymcvcoc0ph" path="res://Art/UI_Art/ui_longbutton.png" id="23_lhq38"]
+[ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="25_bm6x8"]
 [ext_resource type="Texture2D" uid="uid://d26g6cgvhcqaf" path="res://Art/UI_Art/arrow_tile_left.png" id="25_g23g5"]
 [ext_resource type="Texture2D" uid="uid://b4i6a72h02ho" path="res://Art/UI_Art/arrow_tile_right.png" id="26_04na7"]
 [ext_resource type="Script" path="res://UI/Menus/reverse_scroll_container.gd" id="26_7was7"]
+[ext_resource type="PackedScene" uid="uid://ddd3rdl4ft71a" path="res://UI/Menus/UI Components/seperator_label.tscn" id="28_vtj0m"]
+[ext_resource type="PackedScene" uid="uid://blbllhtoc7nms" path="res://UI/Menus/UI Components/ability_box.tscn" id="29_87voy"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pv6eg"]
 
@@ -44,13 +52,14 @@ VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_qtvoi")
 VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_cxc2n")
 VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_o5wsa")
 
-[node name="UiAbilitySelector" type="Control"]
+[node name="UiAbilitySelector" type="Control" groups=["description"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_bspq1")
 
 [node name="BackgroundTexture_9PR" type="NinePatchRect" parent="."]
 layout_mode = 0
@@ -79,22 +88,24 @@ patch_margin_bottom = 6
 [node name="NameLabel" type="Label" parent="StatAbilityBox"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = -3.0
+offset_top = -1.0
 offset_right = 144.0
-offset_bottom = 36.0
+offset_bottom = 38.0
 theme = ExtResource("3_yh5q2")
+theme_override_constants/line_spacing = -5
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 16
-text = "Test McTestface"
+text = "Test McTestface
+lvl 99 Ranger"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="StatAbilityBox"]
 layout_mode = 0
 offset_left = 52.0
-offset_top = 27.0
+offset_top = 32.0
 offset_right = 84.0
-offset_bottom = 59.0
+offset_bottom = 64.0
 texture = ExtResource("4_c2njx")
 
 [node name="StatPageLabel" type="Label" parent="StatAbilityBox"]
@@ -117,6 +128,7 @@ offset_top = 81.0
 offset_right = 136.0
 offset_bottom = 148.0
 theme_override_constants/separation = 1
+script = ExtResource("6_7finb")
 
 [node name="StatBox" type="NinePatchRect" parent="StatAbilityBox/StatBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
@@ -498,6 +510,7 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 script = ExtResource("5_j3bqn")
+data = ExtResource("13_nou42")
 
 [node name="elemTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox"]
 layout_mode = 0
@@ -560,6 +573,7 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 script = ExtResource("5_j3bqn")
+data = ExtResource("17_pqvda")
 
 [node name="elemTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox2"]
 layout_mode = 0
@@ -622,6 +636,7 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 script = ExtResource("5_j3bqn")
+data = ExtResource("21_nqk8x")
 
 [node name="elemTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox3"]
 layout_mode = 0
@@ -684,6 +699,7 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 script = ExtResource("5_j3bqn")
+data = ExtResource("25_bm6x8")
 
 [node name="elemTexture" type="TextureRect" parent="StatAbilityBox/AbilityBoxContainer/AbilityBox4"]
 layout_mode = 0
@@ -953,11 +969,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="statcount" type="Label" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer"]
+[node name="seperator_label" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer" instance=ExtResource("28_vtj0m")]
 layout_mode = 2
-theme = ExtResource("3_yh5q2")
-text = " - 40 DEX -"
-horizontal_alignment = 1
 
 [node name="AbilityBox22" type="NinePatchRect" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
@@ -1139,67 +1152,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="AbilityBox" type="NinePatchRect" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(128, 16)
+[node name="AbilityBox" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer" instance=ExtResource("29_87voy")]
 layout_mode = 2
-mouse_filter = 1
-texture = ExtResource("4_n3caj")
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
-script = ExtResource("5_j3bqn")
-
-[node name="elemTexture" type="TextureRect" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox"]
-layout_mode = 0
-offset_left = 1.0
-offset_right = 15.0
-offset_bottom = 16.0
-texture = ExtResource("6_o5ygl")
-stretch_mode = 3
-
-[node name="abilityTexture" type="TextureRect" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox"]
-layout_mode = 0
-offset_left = 14.0
-offset_right = 28.0
-offset_bottom = 16.0
-texture = ExtResource("7_1pytd")
-stretch_mode = 3
-
-[node name="aoeTexture" type="TextureRect" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox"]
-layout_mode = 0
-offset_left = 27.0
-offset_right = 41.0
-offset_bottom = 16.0
-texture = ExtResource("8_tf8f3")
-stretch_mode = 3
-
-[node name="uselimitLabel" type="Label" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox"]
-layout_mode = 0
-offset_left = 100.0
-offset_top = 1.0
-offset_right = 125.0
-offset_bottom = 17.0
-mouse_filter = 1
-theme = ExtResource("3_yh5q2")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "[99/99]"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="abilitynameLabel" type="Label" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox"]
-layout_mode = 0
-offset_left = 42.0
-offset_right = 96.0
-offset_bottom = 18.0
-mouse_filter = 1
-theme = ExtResource("3_yh5q2")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = -3
-text = "Name of Ability Goes Here"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
 
 [node name="statcount2" type="Label" parent="AbilitySelectionBox/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -1411,7 +1365,7 @@ offset_bottom = 42.0
 theme = ExtResource("3_yh5q2")
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 16
-text = "-CATEGORY-
+text = "- ABILITY -
 Description"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1425,8 +1379,11 @@ offset_bottom = 224.0
 theme = ExtResource("3_yh5q2")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 8
-text = "Strength (STR) provides the base value for a unit's PHYSICAL damage equal to total points invested. \\n
-It also provides a 2% multiplier to MELEE damage per point invested. \\n
+text = "This tells you what the ability does.
+
+Stats and whatnot.
+
+huzzah.
 "
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -1454,6 +1411,5 @@ autowrap_mode = 2
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox22" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox22" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox23" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox23" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox15" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox15" method="_on_mouse_entered"]
-[connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox2" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox2" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox3" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox3" method="_on_mouse_entered"]

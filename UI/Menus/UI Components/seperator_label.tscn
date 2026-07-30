@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddd3rdl4ft71a"]
+
+[ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="1_l8pd0"]
+
+[node name="seperator_label" type="Label"]
+theme = ExtResource("1_l8pd0")
+text = " - 40 DEX -"
+horizontal_alignment = 1

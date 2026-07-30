@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://blbllhtoc7nms"]
+
+[ext_resource type="Texture2D" uid="uid://cu3lk0k4qo1aj" path="res://Art/UI_Art/Frames/ui_bg_thin.png" id="1_47hsm"]
+[ext_resource type="Script" path="res://UI/Menus/ui_ability_box.gd" id="2_1y2aw"]
+[ext_resource type="Texture2D" uid="uid://d3xgf11emdh0b" path="res://Art/UI_Art/ui_elem_dark.png" id="3_47vsg"]
+[ext_resource type="Texture2D" uid="uid://cmtdkudyucs5o" path="res://Art/UI_Art/AbilityType/ui_mag_generic.png" id="4_mq2a1"]
+[ext_resource type="Texture2D" uid="uid://de1joagwyuvmh" path="res://Art/UI_Art/AoE/ui_aoe_front.png" id="5_65tar"]
+[ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="6_65wna"]
+
+[node name="AbilityBox" type="NinePatchRect"]
+custom_minimum_size = Vector2(128, 16)
+mouse_filter = 1
+texture = ExtResource("1_47hsm")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("2_1y2aw")
+
+[node name="elemTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 15.0
+offset_bottom = 16.0
+texture = ExtResource("3_47vsg")
+stretch_mode = 3
+
+[node name="abilityTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_right = 28.0
+offset_bottom = 16.0
+texture = ExtResource("4_mq2a1")
+stretch_mode = 3
+
+[node name="aoeTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 27.0
+offset_right = 41.0
+offset_bottom = 16.0
+texture = ExtResource("5_65tar")
+stretch_mode = 3
+
+[node name="uselimitLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 1.0
+offset_right = 125.0
+offset_bottom = 17.0
+mouse_filter = 1
+theme = ExtResource("6_65wna")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[99/99]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="abilitynameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 42.0
+offset_right = 96.0
+offset_bottom = 18.0
+mouse_filter = 1
+theme = ExtResource("6_65wna")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
+text = "Name of Ability Goes Here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

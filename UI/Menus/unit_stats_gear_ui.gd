@@ -6,7 +6,7 @@ enum Pnum {P1,P2,P3,P4}
 @export var unit:Unit_Instance
 var autostats #= classdata.get_levelup_stats(unit.UnitLevel)
 
-func load_data():
+func load_player_data():
 	$StatAbilityBox/StatBoxContainer.show_hide_plusbtns(false)
 	for i in 6:
 		$StatAbilityBox/StatBoxContainer.show_hide_minusbtn(false,i)
@@ -69,7 +69,7 @@ func _process(delta: float) -> void:
 
 func open_close():
 	if not visible:
-		load_data()
+		load_player_data()
 	self.visible = ! self.visible
 	pause_level()
 

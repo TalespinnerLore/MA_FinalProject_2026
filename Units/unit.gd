@@ -695,6 +695,7 @@ func action_used():
 func init(is_player_controlled):
 	print(UnitStats.UnitName,UnitStats.elem_palettes)
 	var palettesize = UnitStats.elem_palettes[UnitStats.Element].get_width()
+	$Sprite2D.material = $Sprite2D.material.duplicate()
 	$Sprite2D.material.set_shader_parameter('colors_count',palettesize)
 	$Sprite2D.material.set_shader_parameter('initial_palette',UnitStats.elem_palettes[4])
 	$Sprite2D.material.set_shader_parameter('new_palette',UnitStats.elem_palettes[UnitStats.Element])

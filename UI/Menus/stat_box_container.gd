@@ -5,7 +5,7 @@ enum STAT{STR,DEX,VIT,MAG,DEF,LUK,FREE}
 
 @export var allocated_unsaved = [0,0,0,0,0,0]
 @export var total = 0
-@onready var top_charscreen_ui:UnitInventoryUI = get_parent().get_parent()
+@onready var top_charscreen_ui = get_parent().get_parent()
 @onready var free_stat_label = $StatBox7/Label
 #PlayerStats.p1_investedStrDexVitMagDefLuk[stat]
 
@@ -67,8 +67,9 @@ func save_allocated_points(is_true:bool):
 					numlabel.set("theme_override_colors/font_color",Color.BLACK)
 				PlayerStats.p1_free_stats -= total
 				#print("P1freestats:",PlayerStats.p1_free_stats)
-		top_charscreen_ui.unit.set_stats()
-		top_charscreen_ui.load_data()
+		if 'unit' in top_charscreen_ui:
+			top_charscreen_ui.unit.set_stats()
+		top_charscreen_ui.load_player_data()
 	else:
 		show_hide_plusbtns(true)
 		allocated_unsaved = [0,0,0,0,0,0]

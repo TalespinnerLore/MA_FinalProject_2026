@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ResourceGroup" load_steps=2 format=3 uid="uid://egh8pmkv5a03"]
+
+[ext_resource type="Script" path="res://addons/godot_resource_groups/resource_group.gd" id="1_es6hu"]
+
+[resource]
+script = ExtResource("1_es6hu")
+base_folder = "res://Resources/Abilities/DEX_base"
+includes = Array[String]([])
+excludes = Array[String]([])
+paths = Array[String](["res://Resources/Abilities/DEX_base/Piercing_Shot.tres", "res://Resources/Abilities/DEX_base/Venom_Strike.tres"])

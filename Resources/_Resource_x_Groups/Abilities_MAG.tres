@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ResourceGroup" load_steps=2 format=3 uid="uid://rbfvdt8385vp"]
+
+[ext_resource type="Script" path="res://addons/godot_resource_groups/resource_group.gd" id="1_60d8p"]
+
+[resource]
+script = ExtResource("1_60d8p")
+base_folder = "res://Resources/Abilities/MAG_base"
+includes = Array[String]([])
+excludes = Array[String]([])
+paths = Array[String](["res://Resources/Abilities/MAG_base/Cone_of_Embers.tres", "res://Resources/Abilities/MAG_base/EmberBurst.tres", "res://Resources/Abilities/MAG_base/EXPLOSION.tres", "res://Resources/Abilities/MAG_base/Incinerate.tres", "res://Resources/Abilities/MAG_base/Tiny_Smite.tres"])

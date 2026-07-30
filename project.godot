@@ -28,6 +28,10 @@ window/size/viewport_height=360
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_resource_groups/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
@@ -55,6 +59,10 @@ DIALOGUE_MANAGER=""
 Yes_No_UI=""
 VFX_container=""
 ITEM_MANAGER=""
+
+[godot_resource_groups]
+
+auto_rebuild=true
 
 [input]
 
