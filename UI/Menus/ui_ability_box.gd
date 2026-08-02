@@ -3,6 +3,9 @@ class_name UI_abilitybox
 
 signal show_abilitydata(data)
 
+const bg_standard = preload("res://Art/UI_Art/Frames/ui_bg_thin.png")
+const bg_selected = preload("res://Art/UI_Art/Frames/ui_bg_thinblue_2.png")
+
 @export var data:AbilityData
 @export var uses_remaining:int
 #enum ElementType {FIRE,WATER,EARTH,AIR,FORCE,LIGHT,DARK}
@@ -43,6 +46,12 @@ func set_textures():
 	pass
 
 
+func set_bg(is_being_selected:bool):
+	if is_being_selected:
+		$".".texture = bg_selected
+	else:
+		$".".texture = bg_standard
+
 func _on_mouse_entered() -> void:
 	#emit_signal("show_abilitydata",data)
 	print("showing ability desc")
@@ -51,3 +60,6 @@ func _on_mouse_entered() -> void:
 func kill_instance():
 	self.queue_free()
 	print('killing node')
+
+
+@export var equipable := true

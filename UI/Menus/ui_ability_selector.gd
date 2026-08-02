@@ -181,9 +181,10 @@ func show_usable_abilities():
 				PlayerStats.p1_investedStrDexVitMagDefLuk[stat]+autostats[stat]:
 					print(box.data.BaseStats_required[stat],' > ',PlayerStats.p1_investedStrDexVitMagDefLuk[stat]+autostats[stat])
 					box.self_modulate = Color.DIM_GRAY
+					box.equipable = false
 					break
 				else:
-					
+					box.equipable = true
 					box.self_modulate = Color.WHITE
 			pass
 
@@ -240,6 +241,7 @@ func ability_description(data:AbilityData):
 					'STR: ',data.BaseStats_required[0],'   DEX: ',data.BaseStats_required[1],'\n',\
 					'VIT: ',data.BaseStats_required[2],'   MAG: ',data.BaseStats_required[3],'\n',\
 					'DEF: ',data.BaseStats_required[4],'   LUK: ',data.BaseStats_required[5],'\n')
+	highlight_selected()
 
 
 func stat_description(statindex:int):
@@ -289,10 +291,29 @@ Seriously, that's it. \n"
 
 var desc_free = "Freely applicable stat points that can be allocated as the player wishes. \n"
 
+func highlight_selected():
+	for box:UI_abilitybox in $StatAbilityBox/AbilityBoxContainer.get_children():
+		if box.get_index() == selected_ability_slot:
+			box.set_bg(true)
+		else:
+			box.set_bg(false)
+	for box in $AbilitySelectionBox/ScrollContainer/VBoxContainer.get_children(): 
+		if box is UI_abilitybox:
+			if box.data == selected_ability:
+				box.set_bg(true)
+			else:
+				box.set_bg(false)
+
 
 func _on_equip_button_pressed() -> void:
-	PlayerStats.p1_equipped_abilities[selected_ability_slot] = selected_ability
-	load_player_data()
+	var works = true
+	for stat in 6:
+		if selected_ability.BaseStats_required[stat] > PlayerStats.p1_investedStrDexVitMagDefLuk[stat]+autostats[stat]:
+			works  = false
+			break
+	if works:
+		PlayerStats.p1_equipped_abilities[selected_ability_slot] = selected_ability
+		load_player_data()
 	pass # Replace with function body.
 
 

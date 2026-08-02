@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("1_3lemq")
-ability_name = "Intimidating_Shout"
+ability_name = "Intimidating Shout"
 vfx = ExtResource("4_rvrts")
 element = 6
 valid_target = 0
