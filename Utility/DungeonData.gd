@@ -458,7 +458,7 @@ func set_floor_data():
 		match crafting_tier:
 			0:
 				max_floors = 4 + extra_floors
-				max_wandering_units = 4
+				max_wandering_units = 2#4
 			1:
 				max_floors = 8 + extra_floors
 				max_wandering_units = 6

@@ -16,6 +16,7 @@
 script = ExtResource("1_fgudt")
 Sprite = ExtResource("2_vvisp")
 BasicAttack = ExtResource("1_lg36o")
+Attacks = Array[Object]([ExtResource("1_lg36o"), ExtResource("1_lg36o"), ExtResource("1_lg36o"), ExtResource("1_lg36o")])
 UnitName = "Bandit Archer"
 is_large_unit = false
 CreatureType = 0

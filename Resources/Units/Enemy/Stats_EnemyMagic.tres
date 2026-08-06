@@ -16,6 +16,7 @@
 script = ExtResource("1_1q2fq")
 Sprite = ExtResource("2_00mq1")
 BasicAttack = ExtResource("1_icnkg")
+Attacks = Array[Object]([ExtResource("1_icnkg"), ExtResource("1_icnkg"), ExtResource("1_icnkg"), ExtResource("1_icnkg")])
 UnitName = "Bandit Mage"
 is_large_unit = false
 CreatureType = 0

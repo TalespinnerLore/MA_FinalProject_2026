@@ -521,8 +521,15 @@ func _physics_process(delta: float) -> void:
 		#	
 
 func use_ability(index):
+	if Team == Teams.ENEMY:
+		print('usable attacks:')
+		print(ABILITIES.BasicAttack.ability_name)
+		print(ABILITIES.Slot_1.ability_name)
+		print(ABILITIES.Slot_2.ability_name)
+		print(ABILITIES.Slot_3.ability_name)
+		print(ABILITIES.Slot_4.ability_name)
 	if Abilities.ability_usesB1234WAT[index] > 0:
-		if Abilities.ability_usesB1234WAT[index] < 100:
+		if Abilities.ability_usesB1234WAT[index] < 100 and Team == Teams.PLAYER:
 			Abilities.ability_usesB1234WAT[index] -= 1
 		connect_dialogue()
 		match index:
@@ -643,6 +650,7 @@ func check_move_input():
 	pass
 
 func _move(dir:Vector2):
+	prev_path.append(self_coords)
 	$Sprite2D/pointer.look_at(self.global_position+(dir*Vector2(32,32)))
 	last_tile = self_coords
 	global_position += dir*tile_size
@@ -687,12 +695,15 @@ func action_used():
 	turn_actions_used+=1
 	if turn_actions_used>=max_turn_actions:	
 		end_turn()
+	elif Team == Teams.ENEMY:
+		AI_turn_enemy_new()
 #######################################
 #SPAWN CODE
 #######################################
 
 
 func init(is_player_controlled):
+	nav_manager_ref = get_tree().get_first_node_in_group("NAVIGATION_MANAGER")
 	print(UnitStats.UnitName,UnitStats.elem_palettes)
 	var palettesize = UnitStats.elem_palettes[UnitStats.Element].get_width()
 	$Sprite2D.material = $Sprite2D.material.duplicate()
@@ -754,6 +765,7 @@ func init(is_player_controlled):
 		Calc_XP_to_Reward()
 	target_unit = get_tree().get_first_node_in_group("Player")
 	dialogue_manager_ref = get_tree().get_first_node_in_group("DIALOGUE_MANAGER")
+	tilemap_ref = get_tree().get_first_node_in_group('TILEMAP')
 	
 
 	#position = position.snapped(Vector2.ONE * tile_size)
@@ -865,13 +877,14 @@ func _on_turn_start() -> void:
 			pass
 	else:
 		await get_tree().create_timer(0.05).timeout
-		AI_turn_enemy()
+		AI_turn_enemy_new()
 	
 
 var goal_tile:Vector2i
 var target_unit:Unit_Instance
 #@onready var pathfinding_manager:PathfindingManager = $"../../../PathfindingManager" #temp fix for now
 var path:Array[Vector2i] = []
+var prev_path:Array[Vector2i] = []
 
 func AI_turn_enemy():
 	#print("################# enemy AI turn start ####################")
@@ -926,8 +939,198 @@ func AI_turn_enemy():
 		#print("newtile: ",self_coords)
 		#path.pop_front()
 		path_random_tile()
-		action_used()
+		#action_used()
 		pass
+	pass
+
+func proceed_forwards():
+	var non_coll = check_relative_collision()
+	if non_coll.size() > 1 and non_coll.has(last_tile-self_coords):
+		non_coll.erase(last_tile-self_coords)
+	facing = non_coll.pick_random()
+	set_pointer_at_facing()
+	_move(facing)
+	pass
+
+var AI_aggression := 0
+
+func AI_turn_enemy_new():
+	########### WANDER STATE ############
+	#check if in room with player, or if player is in 3 tile range of this unit.
+	#if true:
+		#in_combat = true
+	#else:
+		#aggression = clampi(agression-1,0,3)
+	#if aggression  < 1:
+		#in_combat = false
+	if nav_manager_ref.check_unit_room_for_player(self):
+		in_combat = true
+		$isaggro.visible = true
+		AI_aggression = 3
+	#elif (abs(target_unit.self_coords.x) - abs(self_coords.x) <= 3 and abs(target_unit.self_coords.y) - abs(self_coords.y) == 0) or \
+	#(abs(target_unit.self_coords.y) - abs(self_coords.y) <= 3 and abs(target_unit.self_coords.x) - abs(self_coords.x) == 0):
+	#	in_combat = true
+	#	$isaggro.visible = true
+	#	AI_aggression = 3
+	elif AI_aggression > 0:
+		in_combat = true
+		$isaggro.visible = true
+		if (abs(target_unit.self_coords.x) - abs(self_coords.x) <= 3 and abs(target_unit.self_coords.y) - abs(self_coords.y) == 0) or \
+			(abs(target_unit.self_coords.y) - abs(self_coords.y) <= 3 and abs(target_unit.self_coords.x) - abs(self_coords.x) == 0):
+			AI_aggression = 3
+		else:
+			AI_aggression = clampi(AI_aggression-1,0,3)
+	
+	if AI_aggression < 1:
+		in_combat = false
+		$isaggro.visible = false
+	
+	if ! in_combat:
+		#proceed_forwards()
+		#return
+		
+		
+		###### NOT WORKING, ASTAR IS FUCKED AGAIN ###### <fixed it!>
+		if path.size() > 0:
+			if path[0] == self_coords:
+				path.pop_front()
+			facing = clamp(path[0]-self_coords,Vector2i(-1,-1),Vector2i(1,1))
+			var non_coll = check_relative_collision() #returns non-colliding DIRECTIONS
+			if non_coll.has(facing):
+				set_pointer_at_facing()
+				_move(facing)
+				#prev_path.insert(0,path[0])
+				path.pop_front()
+			else:
+				var pop_list = [] #this section pops directons that would move the enemy away from the player
+				if facing.x != 0: # from the list, to avoid ping-ponging between two tiles.
+					for dir in non_coll:
+						if dir.x == facing.x*-1:
+							pop_list.append(dir)
+				if facing.y != 0:
+					for dir in non_coll:
+						if dir.y == facing.y*-1:
+							pop_list.append(dir)
+				for dir in pop_list:
+					non_coll.erase(dir)
+				
+				if non_coll.size() <= 0:
+					
+					var temp_path_container = path
+					path = prev_path
+					prev_path = temp_path_container
+					facing = clamp(path[0]-self_coords,Vector2i(-1,-1),Vector2i(1,1))
+					non_coll = check_relative_collision() #returns non-colliding DIRECTIONS
+					if non_coll.has(facing):
+						set_pointer_at_facing()
+						_move(facing)
+						#prev_path.insert(0,path[0])
+						path.pop_front()
+					else:
+						action_used() 
+						#this should end the units turn if they are stuck between two units and cant move.
+				else:
+					print('AI HIT THE EMERGENCY PRICEDD FORWARDS')
+					proceed_forwards()
+			#follow_path()
+			pass
+		else: #should theorectically never hot this
+			path.clear()
+			#prev_path.clear()
+			path = nav_manager_ref.get_valid_path_tiles(self_coords,nav_manager_ref.ROOMS.pick_random().RoomCenter,0)
+			print("cleared path help =========================================")
+			#if in room:
+				#pathfinding_manager.get_path_to_new_room() #ignore closest door
+			#else:
+				#pathfinding_manager.get_valid_path_to_room(randi_range(0,roomnum-1)
+			#follow_path()
+		pass
+	########### COMBAT STATE ############
+	elif in_combat:
+		facing = Vector2i(clampi(self_coords.x - target_unit.self_coords.x,-1,1),clampi(self_coords.y - target_unit.self_coords.y,-1,1))
+		facing *= -1
+		goal_tile = target_unit.self_coords
+		var move_closer := false
+		var ab_num = randi_range(0,4)
+		var selected = ABILITIES.ability_data(ab_num)
+		print('selected attack:',selected.ability_name," ability range:",selected.range)
+		if self_coords.x == goal_tile.x or self_coords.y == goal_tile.y:
+			var wall_intheway = false
+			for i in range(1,selected.range+1):
+				var tile = self_coords+(i*facing)
+				if tilemap_ref.what_is_this_tile(tile.x,tile.y) != 'FLOOR':
+					print('wall in the way of ability, dont shoot')
+					wall_intheway = true
+					break
+				elif tile == target_unit.self_coords:
+					wall_intheway = false
+					print('no wall in the way, GETTIM')
+					break
+			if abs(self_coords.x-self_coords.y) <= selected.range and ! wall_intheway:
+				use_ability(ab_num)
+			else:
+				move_closer = true
+		else:
+			var wall_intheway = false
+			for i in range(1,selected.range+1):
+				var tile = self_coords+(i*facing)
+				if tilemap_ref.what_is_this_tile(tile.x,tile.y) != 'FLOOR':
+					print('wall in the way of ability, dont shoot')
+					wall_intheway = true
+					break
+				elif tile == target_unit.self_coords:
+					wall_intheway = false
+					print('no wall in the way, GETTIM')
+					break
+			var diff = abs(target_unit.self_coords) - abs(self_coords)
+			if diff.x == diff.y and diff.x <= selected.range and ! wall_intheway:
+				use_ability(ab_num)
+			else:
+				move_closer = true
+		if move_closer:
+			#if surrounded, end turn.
+			#check diagonals and horizontal except away from player, if blocked, pass turn.
+			#get path to enemy
+			#follow path
+			var non_coll = check_relative_collision() #returns non-colliding DIRECTIONS
+			if non_coll.has(facing):
+				set_pointer_at_facing()
+				_move(facing)
+			else:
+				var pop_list = [] #this section pops directons that would move the enemy away from the player
+				if facing.x != 0: # from the list, to avoid ping-ponging between two tiles.
+					for dir in non_coll:
+						if dir.x == facing.x*-1:
+							pop_list.append(dir)
+				if facing.y != 0:
+					for dir in non_coll:
+						if dir.y == facing.y*-1:
+							pop_list.append(dir)
+				for dir in pop_list:
+					non_coll.erase(dir)
+				
+				if non_coll.size() <= 0:
+					print("AI unit can;t advance toward player, does not move.")
+					action_used() #should end the turn, and if not, will repeat if higher action limit.
+					#this will also trigger if the unit is surrounded.
+					
+				else:
+					var new_dir = non_coll.pick_random()
+					facing = new_dir
+					set_pointer_at_facing()
+					_move(facing)
+		#if turn_actions_used < max_turn_actions:
+		#	action_used()
+			
+	pass
+
+func follow_path():
+	#look at next tile
+	#check collision
+	#if collidiing, try to path around diagonally.
+	##if diag blocked, try horizontally
+	###if all blocked, (can't pass other unit in corridior) swap previous path and current path
+	#move along path, add tile to prev_path, pop from path.
 	pass
 
 func set_pointer_at_facing():
@@ -970,7 +1173,7 @@ func set_pointer_at_facing():
 					$Sprite2D.frame = 2
 
 func path_random_tile():
-	var rand_dir = Global.dir8
+	var rand_dir = Global.dir8.duplicate()
 	rand_dir.shuffle()
 	var valid = $"../../../TileMapLayer".cells_Ground
 	for dir in rand_dir:
@@ -1006,7 +1209,9 @@ func end_turn():
 func cleartext():
 	$CombatText.text = ""
 
+@export var nav_manager_ref:NavigationManager
 @export var dialogue_manager_ref:DialogueManager
+@export var tilemap_ref:Dungeon_Floor
 var waiting_for_dialogue: = false
 signal waiting_on_dialogue
 

@@ -16,6 +16,7 @@
 script = ExtResource("10_72rgn")
 Sprite = ExtResource("2_hi3nr")
 BasicAttack = ExtResource("1_fl6xa")
+Attacks = Array[Object]([ExtResource("1_fl6xa"), ExtResource("1_fl6xa"), ExtResource("1_fl6xa"), ExtResource("1_fl6xa")])
 UnitName = "Goblin Shanker"
 is_large_unit = false
 CreatureType = 5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bge6c34betll2"]
+[gd_scene load_steps=19 format=3 uid="uid://bge6c34betll2"]
 
 [ext_resource type="Script" path="res://Units/unit.gd" id="1_g2b4t"]
 [ext_resource type="Resource" uid="uid://oygkar1j0gy3" path="res://Resources/Units/Player/Stats_Warrior.tres" id="2_d6r3d"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bd8fiogco46kp" path="res://Art/UnitSprites/Palettes/testspritepallette4.png" id="10_us2mj"]
 [ext_resource type="Texture2D" uid="uid://bovb7e3olespg" path="res://Art/UnitUI/pointer_straight.png" id="11_p7ssa"]
 [ext_resource type="Texture2D" uid="uid://crajfsvipaas4" path="res://Art/UnitUI/pointer_diagonal.png" id="12_bgx25"]
+[ext_resource type="Texture2D" uid="uid://dn51ssv6ypx8" path="res://Art/UnitUI/statuseffect_n_burned.png" id="16_v7wuf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gkagp"]
 shader = ExtResource("9_s467l")
@@ -164,6 +165,11 @@ wwwwwwwwwwwwwwwwwwwww"
 autowrap_mode = 3
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="isaggro" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+texture = ExtResource("16_v7wuf")
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -102,6 +102,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label4" type="Label" parent="CanvasLayer/GoldCounter"]
+visible = false
 layout_mode = 0
 offset_top = 301.0
 offset_right = 152.0
@@ -131,6 +132,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label5" type="Label" parent="CanvasLayer/GoldCounter"]
+visible = false
 layout_mode = 0
 offset_left = 488.0
 offset_top = 301.0

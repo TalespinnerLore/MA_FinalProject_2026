@@ -20,6 +20,28 @@ var water_paths = []
 var lava_paths = []
 var air_paths = []
 
+func new_path_on_enter(body:Unit_Instance):
+	ground_paths.shuffle()
+	for path in ground_paths:
+		if path[0] != body.last_door:
+			var pathtodoor = NavManager_ref.get_valid_path_tiles(body.last_door,path[0],0)
+			body.prev_path = body.path
+			body.path = pathtodoor
+			body.path.pop_back()
+			body.path.append_array(path)
+		if RoomDoors.size() < 2:
+			body.prev_path = body.path
+			body.path.clear()
+			body.path.insert(0,body.facing + body.self_coords)
+			body.path.append_array(NavManager_ref.get_valid_path_tiles(body.path[0],path[0],0))
+			body.path.append_array(path)
+			break
+
+func path_check_print():
+	var index = 0
+	for path in ground_paths:
+		index += 1
+		print('ground_path #',index, " ",path)
 
 func path_doorway_to_room(last_door:Vector2i,grid_index:int):
 	var dnum
@@ -53,7 +75,7 @@ func path_doorway_to_room(last_door:Vector2i,grid_index:int):
 func return_path_newdoor_newroom(door_coords,path_index):
 	var paths = [ground_paths,water_paths,lava_paths,air_paths]
 	if RoomDoors.size() > 1:
-		var choices = RoomDoors
+		var choices = RoomDoors.duplicate()
 		choices.erase(door_coords)
 		var newdoor = choices.pick_random()
 		var new_path = paths[path_index][RoomDoors.find(newdoor)]
@@ -85,7 +107,7 @@ func init() -> void:
 	self.scale = RoomSize
 	is_init = true
 	await get_tree().create_timer(3.0).timeout
-	print(ground_paths)
+	print('room init, ground paths:',ground_paths)
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -106,13 +128,14 @@ func _on_body_entered(body: Node2D) -> void:
 					body.in_combat = true
 					body.target_unit = unit
 					break
+			new_path_on_enter(body)
 	#elif body is Node2D:
 	#	ItemsInRoom.append(body)
 	pass # Replace with function body.
 
 var is_init = false
 func _ready() -> void:
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	#if ! is_init:
 	#	print("premove",position)
 	#	RoomOrigin = Vector2i(8,15)

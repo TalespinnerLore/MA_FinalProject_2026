@@ -16,6 +16,7 @@
 script = ExtResource("10_llmvl")
 Sprite = ExtResource("2_dojyh")
 BasicAttack = ExtResource("1_sl82f")
+Attacks = Array[Object]([ExtResource("1_sl82f"), ExtResource("1_sl82f"), ExtResource("1_sl82f"), ExtResource("1_sl82f")])
 UnitName = "Goblin Rogue"
 is_large_unit = false
 CreatureType = 5

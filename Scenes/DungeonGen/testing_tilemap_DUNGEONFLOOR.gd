@@ -1156,6 +1156,7 @@ func Connect_Doors_BRUTE(room_index):
 							set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(13,10))
 						'AIR':
 							set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(16,10))
+					TileGrid[tile.x][tile.y] = 'FLOOR'
 				#set_cell(Vector2i(tile.x,tile.y),0, Vector2i(0,2)) #THIS IS THE BRIDGE TILE
 		#print("walls: ",room[2])
 		#print("path: ",connecting_path)
