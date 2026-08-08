@@ -16,6 +16,7 @@
 script = ExtResource("1_wsuet")
 Sprite = ExtResource("2_5ewov")
 BasicAttack = ExtResource("1_jqqm3")
+Attacks = null
 UnitName = "Mini-Boss"
 is_large_unit = false
 CreatureType = 0

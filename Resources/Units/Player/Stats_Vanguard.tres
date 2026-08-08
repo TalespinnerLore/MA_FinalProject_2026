@@ -16,6 +16,7 @@
 script = ExtResource("1_sag3s")
 Sprite = ExtResource("2_yhmo5")
 BasicAttack = ExtResource("1_7a4j6")
+Attacks = null
 UnitName = "Vanguard"
 is_large_unit = false
 CreatureType = 0

@@ -16,6 +16,7 @@
 script = ExtResource("1_tsatv")
 Sprite = ExtResource("2_i68s1")
 BasicAttack = ExtResource("1_32wjw")
+Attacks = null
 UnitName = "Healer"
 is_large_unit = false
 CreatureType = 0
