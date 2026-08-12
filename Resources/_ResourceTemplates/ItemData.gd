@@ -34,7 +34,7 @@ enum CONS_TYPE {N_A,EDIBLE,THROWING,KEY,OTHER}
 @export var Affinity_Water := false
 @export var Affinity_Earth := false
 @export var Affinity_Air := false
-@export var Affinity_Force := false
+@export var Affinity_Force := true
 @export var Affinity_Light := false
 @export var Affinity_Dark := false
 

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://8koxvnv6cv2l"]
+
+[ext_resource type="Resource" uid="uid://cnb7e276ypcnu" path="res://Resources/Abilities/_ItemAbilities/Healing_Potion.tres" id="1_785ub"]
+[ext_resource type="Texture2D" uid="uid://yibjbh8uryjy" path="res://Art/ItemSprites/trinkets.png" id="2_rsben"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_y8aov"]
+
+[resource]
+script = ExtResource("3_y8aov")
+ItemName = "Cure-All"
+max_stack = 1
+icon = ExtResource("2_rsben")
+ITEM_ID = 1
+TILE_ID = -1
+shop_value = 999
+ItemAbility = ExtResource("1_785ub")
+throw_range = 3
+DESCRIPTION = "Removes all Status Effects, fully heals unit."
+rarity = 3
+ItemType = 2
+GearType = 0
+ConsType = 1
+Class_Bias = 0
+min_area_level = 20
+max_area_level = 999
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = true
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

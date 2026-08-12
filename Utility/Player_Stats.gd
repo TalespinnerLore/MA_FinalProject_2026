@@ -9,7 +9,7 @@ var p1_trinket_slot_stacksize:= 0
 var p1_equipped_abilities:Array[AbilityData] = [load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")]
 var p1_ability_usesB1234WAT:Array[int] = [999,0,0,0,0,0,0,0] #1234WAT
 var p1_HP:int
-var p1_level:=1
+var p1_level:=20
 var p1_XP:=0
 var p1_investedStrDexVitMagDefLuk:Array[int] = [0,0,0,0,0,0] 
 var p1_free_stats := 5
@@ -27,7 +27,7 @@ var p2_free_stats := 0
 
 var player_inventory = [] #[ITEM_ID,AMOUNT]
 var inventory_size = 10
-var player_gold = 0
+var player_gold = 999
 
 @export var TileID_NamedInventory = [["TEST",0],["FIRE",0],["WATER",0],["EARTH",0],["AIR",0],["FORCE",0],\
 ["VOLCANO",0],["ISLANDS",0],["MESA",0],["SKY_ISLANDS",0],\

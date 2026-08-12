@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=4 uid="uid://bk00h2s3eav8n"]
 
+[ext_resource type="Script" path="res://UI/Menus/shop_inventory_ui.gd" id="1_2yi8s"]
 [ext_resource type="Texture2D" uid="uid://b3pex2aw1g2mg" path="res://Art/UI_Art/Frames/ui_bg_blueoutline.png" id="1_23rp5"]
-[ext_resource type="Script" path="res://UI/Menus/player_inventory_ui.gd" id="1_ru06x"]
 [ext_resource type="Texture2D" uid="uid://bl85iqf1ey42v" path="res://Art/UI_Art/Frames/ui_bg_yellowdark.png" id="2_t415o"]
 [ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Items/Other/Gold.tres" id="2_xulgp"]
 [ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="3_5otyh"]
@@ -31,7 +31,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ru06x")
+script = ExtResource("1_2yi8s")
 selected_item = ExtResource("2_xulgp")
 
 [node name="BackgroundTexture_9PR" type="NinePatchRect" parent="."]
@@ -57,19 +57,6 @@ patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
-
-[node name="InventoryLabel" type="Label" parent="InventoryBox"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 4.0
-offset_right = 193.0
-offset_bottom = 27.0
-theme = ExtResource("3_5otyh")
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 16
-text = "CONSUMABLE SHOP Pg. 1"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="ItemContainer" type="VBoxContainer" parent="InventoryBox"]
 layout_mode = 0
@@ -306,6 +293,19 @@ visible = false
 position = Vector2(16, 0)
 tile_map_data = PackedByteArray("AAAAAAEAAgABAA4AAAACAAMAAgABABEAAAABAAQAAgABABAAAAADAAIAAgACAA8AAAADAAQAAgAAABAAAAABAAIAAgABAA8AAAAAAAUAAgAAABEAAAAEAAUAAgACABEAAAAEAAMAAgACABAAAAAAAAMAAgAAAA8AAAACAAEAAgAAAA4AAAAEAAEAAgACAA4AAAA=")
 tile_set = ExtResource("8_p3yvh")
+
+[node name="InventoryLabel" type="Label" parent="InventoryBox"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 193.0
+offset_bottom = 27.0
+theme = ExtResource("3_5otyh")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "CONSUMABLE SHOP Pg. 1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LeftButton" type="TextureButton" parent="InventoryBox"]
 layout_mode = 0
@@ -550,10 +550,10 @@ vertical_alignment = 2
 
 [node name="GoldCounter2" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 176.0
-offset_top = 276.0
-offset_right = 208.0
-offset_bottom = 308.0
+offset_left = 304.0
+offset_top = 143.0
+offset_right = 336.0
+offset_bottom = 175.0
 texture = ExtResource("9_ljlvs")
 stretch_mode = 3
 
@@ -586,3 +586,4 @@ vertical_alignment = 2
 [connection signal="pressed" from="OptionsBox/VBoxContainer/useButton" to="." method="_on_use_button_pressed"]
 [connection signal="pressed" from="OptionsBox/VBoxContainer/giveButton" to="." method="_on_give_button_pressed"]
 [connection signal="pressed" from="OptionsBox/VBoxContainer/dropButton" to="." method="_on_drop_button_pressed"]
+[connection signal="pressed" from="OptionsBox/VBoxContainer/buyButton" to="." method="_on_buy_button_pressed"]

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ResourceGroup" load_steps=2 format=3 uid="uid://dfvi3jp8l47hh"]
+
+[ext_resource type="Script" path="res://addons/godot_resource_groups/resource_group.gd" id="1_1gwx6"]
+
+[resource]
+script = ExtResource("1_1gwx6")
+base_folder = "res://Resources/Items/Consumables"
+includes = Array[String]([])
+excludes = Array[String]([])
+paths = Array[String](["res://Resources/Items/Consumables/CureAll.tres", "res://Resources/Items/Consumables/HealthElixer.tres", "res://Resources/Items/Consumables/HealthPotion_Large.tres", "res://Resources/Items/Consumables/HealthPotion_Medium.tres", "res://Resources/Items/Consumables/HealthPotion_Small.tres", "res://Resources/Items/Consumables/ManaPotion.tres"])

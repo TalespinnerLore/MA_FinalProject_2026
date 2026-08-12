@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bgb1c6unchqp1"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_86638"]
+[ext_resource type="Texture2D" uid="uid://bn1iumdmnp5m7" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile06.png" id="2_x5q4a"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_iatjc"]
+
+[resource]
+script = ExtResource("3_iatjc")
+ItemName = "Volcano Biome Tile"
+max_stack = 1
+icon = ExtResource("2_x5q4a")
+ITEM_ID = 2006
+TILE_ID = 6
+shop_value = 25
+ItemAbility = ExtResource("1_86638")
+throw_range = 3
+DESCRIPTION = "+25% Fire Affinity. -5% Water Affinity. +25% increased chance of Volcano Biome."
+rarity = 0
+ItemType = 1
+GearType = 0
+ConsType = 0
+Class_Bias = 0
+min_area_level = 0
+max_area_level = 999
+Affinity_Fire = true
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = false
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

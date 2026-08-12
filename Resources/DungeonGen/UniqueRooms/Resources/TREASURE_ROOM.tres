@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="1_uy23e"]
 [ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Items/Other/Gold.tres" id="2_aisla"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="2_apc34"]
-[ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion.tres" id="3_kil6e"]
+[ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion_Small.tres" id="3_kil6e"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/UniqueRoomData.gd" id="3_l4cf0"]
 
 [resource]

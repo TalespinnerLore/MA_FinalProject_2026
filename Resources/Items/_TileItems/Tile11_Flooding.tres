@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dn1q7uktd8bqm"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_4yph2"]
+[ext_resource type="Texture2D" uid="uid://cbvecdq7gt6fb" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile11.png" id="2_n41ga"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_b2gf0"]
+
+[resource]
+script = ExtResource("3_b2gf0")
+ItemName = "Flooding Tile"
+max_stack = 1
+icon = ExtResource("2_n41ga")
+ITEM_ID = 2011
+TILE_ID = 11
+shop_value = 25
+ItemAbility = ExtResource("1_4yph2")
+throw_range = 3
+DESCRIPTION = "+25% chance of Flooded state swapping from Biome default. +5% EXP gained."
+rarity = 0
+ItemType = 1
+GearType = 0
+ConsType = 0
+Class_Bias = 0
+min_area_level = 0
+max_area_level = 999
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = false
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

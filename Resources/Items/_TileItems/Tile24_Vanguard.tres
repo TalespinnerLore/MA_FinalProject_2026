@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bls8sgt8elg60"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_xbsdw"]
+[ext_resource type="Texture2D" uid="uid://dwj1tnb8mwqdx" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile24.png" id="2_2pbau"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_2surk"]
+
+[resource]
+script = ExtResource("3_2surk")
+ItemName = "Vanguard Gear Tile"
+max_stack = 1
+icon = ExtResource("2_2pbau")
+ITEM_ID = 2024
+TILE_ID = 24
+shop_value = 100
+ItemAbility = ExtResource("1_xbsdw")
+throw_range = 3
+DESCRIPTION = "+25% Vanguard item chance. +5% Gear item chance. +5% more items spawned."
+rarity = 1
+ItemType = 1
+GearType = 0
+ConsType = 0
+Class_Bias = 0
+min_area_level = 0
+max_area_level = 999
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = true
+Affinity_Light = false
+Affinity_Dark = true
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://brpl35grr5nua"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_fkn1h"]
+[ext_resource type="Texture2D" uid="uid://8sg443yjmb84" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile18.png" id="2_6dat5"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_au2pw"]
+
+[resource]
+script = ExtResource("3_au2pw")
+ItemName = "Consumables Tile"
+max_stack = 1
+icon = ExtResource("2_6dat5")
+ITEM_ID = 2018
+TILE_ID = 18
+shop_value = 100
+ItemAbility = ExtResource("1_fkn1h")
+throw_range = 3
+DESCRIPTION = "+25% Consumable item chance. +5% more items spawned."
+rarity = 1
+ItemType = 1
+GearType = 0
+ConsType = 0
+Class_Bias = 0
+min_area_level = 0
+max_area_level = 999
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = false
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

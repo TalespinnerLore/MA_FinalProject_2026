@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="StatusEffectData" load_steps=3 format=3 uid="uid://dt3uremtj3wxf"]
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=4 format=3 uid="uid://dt3uremtj3wxf"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_as1gj"]
+[ext_resource type="Texture2D" uid="uid://bo4n1m1smufwd" path="res://Art/UnitUI/statuseffect_p_haste.png" id="1_d8bo2"]
 [ext_resource type="Texture2D" uid="uid://cbr4mrsgqpdhc" path="res://Art/VFX Sprites/vfx_wind.png" id="2_f7p2c"]
 
 [resource]
 script = ExtResource("1_as1gj")
+icon = ExtResource("1_d8bo2")
 vfx = ExtResource("2_f7p2c")
 effect_name = "Haste"
 is_negative = false
-turn_duration = 3
+turn_duration = 2
 has_periodic_effect = false
 trigger_periodic_on_gain = false
 trigger_effect_on_timeout = false

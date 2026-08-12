@@ -189,9 +189,9 @@ func on_item_selected(data:ItemData):
 	'\nDEF - ',data.DEF_NEEDED,'\nLUK - ',data.LUK_NEEDED,)#'\n=====================')
 	$DescriptionBox/DescriptionLabel.text = str(data.DESCRIPTION,'\n',#'==================================\n',
 	'\n',
-	'Rarity Itemtype\n',
+	'Rarity:',data.rarity,' Itemtype: ',data.ItemType,'\n',
 	'\n',
-	'Gear/Consumable subtype\n',
+	#'Gear/Consumable subtype\n',
 	#5 I SHOULD HAVE MADE RESOURCE SUBTYPE FUUUUUUUCK
 	#6 \add affinity text here at some point
 	)

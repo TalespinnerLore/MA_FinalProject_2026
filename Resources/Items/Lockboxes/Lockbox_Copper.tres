@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://do5woyyyhg7ee"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_ryan6"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="2_d1ypq"]
+
+[resource]
+script = ExtResource("2_d1ypq")
+ItemName = "Copper Lockbox"
+max_stack = 1
+ITEM_ID = 401
+TILE_ID = 0
+shop_value = 50
+ItemAbility = ExtResource("1_ryan6")
+throw_range = 1
+DESCRIPTION = "A locked, copper-plated chest, with loot inside."
+rarity = 1
+ItemType = 4
+GearType = 0
+ConsType = 0
+Class_Bias = 0
+min_area_level = 10
+max_area_level = 20
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = false
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

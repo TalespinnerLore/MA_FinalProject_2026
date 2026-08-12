@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dmnato7v6qsib"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_gsl56"]
+[ext_resource type="Texture2D" uid="uid://bdkkho6pidbj8" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile50.png" id="2_tea7t"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_4r43k"]
+
+[resource]
+script = ExtResource("3_4r43k")
+ItemName = "Force Tower Keystone"
+max_stack = 1
+icon = ExtResource("2_tea7t")
+ITEM_ID = 2050
+TILE_ID = 50
+shop_value = 500
+ItemAbility = ExtResource("1_gsl56")
+throw_range = 3
+DESCRIPTION = "+1 Force Boss +100% Force Affinity. +10% Light Affinity.+10% Dark Affinity. +4 extra floors."
+rarity = 3
+ItemType = 1
+GearType = 0
+ConsType = 0
+Class_Bias = 0
+min_area_level = 10
+max_area_level = 999
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = true
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

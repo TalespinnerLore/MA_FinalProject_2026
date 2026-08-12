@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cnh868sngnbcy"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_yl8rb"]
+[ext_resource type="Texture2D" uid="uid://drbcofkoiujw2" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile48.png" id="2_n8jfr"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_lgfax"]
+
+[resource]
+script = ExtResource("3_lgfax")
+ItemName = "Earth Tower Keystone"
+max_stack = 1
+icon = ExtResource("2_n8jfr")
+ITEM_ID = 2048
+TILE_ID = 48
+shop_value = 100
+ItemAbility = ExtResource("1_yl8rb")
+throw_range = 3
+DESCRIPTION = "+1 Earth Boss +100% Earth Affinity. -50% Air Affinity +8 extra floors."
+rarity = 3
+ItemType = 1
+GearType = 0
+ConsType = 0
+Class_Bias = 0
+min_area_level = 15
+max_area_level = 999
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = true
+Affinity_Air = false
+Affinity_Force = false
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

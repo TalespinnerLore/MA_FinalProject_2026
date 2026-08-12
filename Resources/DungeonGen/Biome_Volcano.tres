@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://b1mex6jfj2b7r" path="res://Resources/Units/Enemy/Stats_RareEnemyTest.tres" id="5_v7wv7"]
 [ext_resource type="Resource" uid="uid://d0etqlijo61fy" path="res://Resources/Units/Enemy/goblins/GoblinRanged.tres" id="6_cl1ar"]
 [ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Items/Other/Gold.tres" id="6_garu2"]
-[ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion.tres" id="7_0wq84"]
+[ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion_Small.tres" id="7_0wq84"]
 [ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="8_cgfeq"]
 [ext_resource type="Resource" uid="uid://cw6rg0j6b0r4k" path="res://Resources/Items/Gear/Armour/Faded_Cap.tres" id="8_mpn0l"]
 [ext_resource type="Resource" uid="uid://mk47vckyu5i0" path="res://Resources/Items/Gear/Armour/Apprentice_Robe.tres" id="9_meqx2"]

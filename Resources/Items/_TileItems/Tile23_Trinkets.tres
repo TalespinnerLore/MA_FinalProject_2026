@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://def55la50joke"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_iycae"]
+[ext_resource type="Texture2D" uid="uid://bnfapfhkeqyda" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile23.png" id="2_rflpo"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_ca0mh"]
+
+[resource]
+script = ExtResource("3_ca0mh")
+ItemName = "Trinkets Gear Tile"
+max_stack = 1
+icon = ExtResource("2_rflpo")
+ITEM_ID = 2023
+TILE_ID = 23
+shop_value = 100
+ItemAbility = ExtResource("1_iycae")
+throw_range = 3
+DESCRIPTION = "+25% Trinket Gear chance. +5% Gear item chance.+5% enemies have Gear. +5% more items spawned."
+rarity = 1
+ItemType = 1
+GearType = 0
+ConsType = 0
+Class_Bias = 0
+min_area_level = 0
+max_area_level = 999
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = true
+Affinity_Light = true
+Affinity_Dark = true
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

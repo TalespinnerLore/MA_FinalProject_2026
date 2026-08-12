@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bltyj1wsytnoa"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_tsro5"]
+[ext_resource type="Texture2D" uid="uid://dc5b6tqlgwie7" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile42.png" id="2_d3ma0"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_w4t3d"]
+
+[resource]
+script = ExtResource("3_w4t3d")
+ItemName = "Treasure Vault Tile"
+max_stack = 1
+icon = ExtResource("2_d3ma0")
+ITEM_ID = 2042
+TILE_ID = 42
+shop_value = 100
+ItemAbility = ExtResource("1_tsro5")
+throw_range = 3
+DESCRIPTION = "+1 Treasure Room. +25% more items spawned. +100% Gold item chance. +5% Tiles item chance. +5% Consumables item chance. +5% Gear item chance. +5% Lockbox item chance."
+rarity = 2
+ItemType = 1
+GearType = 0
+ConsType = 0
+Class_Bias = 0
+min_area_level = 6
+max_area_level = 999
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = false
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

@@ -89,12 +89,12 @@ func periodic_effect():
 		'Regeneration':
 			apply_healing()
 		'Stunned': #50% chance / multiplier to skip a stunned unit's turn
-			if randf_range(0.0,1.0)/multiplier > 0.50:
+			if randf_range(0.0,1.0) > 0.50/multiplier:
 				owning_unit.skipping_turn = true
 				print(owning_unit," is stunned and can't do anything.")
 			else:
 				print(owning_unit," snaps out of their stunned state!")
-				queue_free()
+				on_timeout()
 
 func on_gain():
 	owning_unit.HP_Module.add_status_icon(StatusData)
@@ -122,10 +122,14 @@ func on_gain():
 				owning_unit.Range_Boost += affecting_value
 				spawn_vfx()
 			'Demoralized':
-				affecting_value = -5*multiplier
+				affecting_value = int(-5*multiplier)
 				owning_unit.Mag_ATK_boost += affecting_value
 				owning_unit.Phys_ATK_boost += affecting_value
 				owning_unit.apply_calc_stat_boosts()
+			'Haste':
+				affecting_value = roundi(turns_left*multiplier)
+				turns_left = affecting_value
+				owning_unit.max_turn_actions = 2
 	#######################################
 	if StatusData.trigger_periodic_on_gain:
 		periodic_effect()
@@ -155,6 +159,8 @@ func on_timeout():
 				owning_unit.Mag_ATK_boost -= affecting_value
 				owning_unit.Phys_ATK_boost -= affecting_value
 				owning_unit.apply_calc_stat_boosts()
+			'Haste':
+				owning_unit.max_turn_actions = 1
 	#############################################################
 	if StatusData.periodic_effect_trigger == trigger.EFFECT_LOST:
 		periodic_effect()

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b1g0gn0cnw66y"]
+
+[ext_resource type="Resource" uid="uid://cnb7e276ypcnu" path="res://Resources/Abilities/_ItemAbilities/Healing_Potion.tres" id="1_r1jtt"]
+[ext_resource type="Texture2D" uid="uid://bg6vju54amv13" path="res://Art/2D_images/temp_hp_pot.png" id="2_jdl2t"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_g5ceg"]
+
+[resource]
+script = ExtResource("3_g5ceg")
+ItemName = "Health Potion (Medium)"
+max_stack = 3
+icon = ExtResource("2_jdl2t")
+ITEM_ID = 1
+TILE_ID = -1
+shop_value = 100
+ItemAbility = ExtResource("1_r1jtt")
+throw_range = 3
+DESCRIPTION = "Heals an average portion of health."
+rarity = 0
+ItemType = 2
+GearType = 0
+ConsType = 1
+Class_Bias = 0
+min_area_level = 5
+max_area_level = 15
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = true
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

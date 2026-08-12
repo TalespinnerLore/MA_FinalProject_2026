@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://d0etqlijo61fy" path="res://Resources/Units/Enemy/goblins/GoblinRanged.tres" id="6_r06tj"]
 [ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Items/Other/Gold.tres" id="6_wfnpi"]
 [ext_resource type="Resource" uid="uid://6oi2jvuw6g2i" path="res://Resources/Items/Gear/Armour/Threadbare Gloves.tres" id="7_jcy4b"]
-[ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion.tres" id="7_ymmp5"]
+[ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion_Small.tres" id="7_ymmp5"]
 [ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="8_nysnv"]
 [ext_resource type="Resource" uid="uid://cpbnlkv0exvi1" path="res://Resources/Items/Gear/Armour/Old_Healer_Robe.tres" id="10_rlagb"]
 [ext_resource type="Resource" uid="uid://cnd50xxi1muwb" path="res://Resources/Items/Gear/Weapons/Crude_Bow.tres" id="11_7xoh4"]

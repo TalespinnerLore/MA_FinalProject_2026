@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="5_udpwt"]
 [ext_resource type="Resource" uid="uid://d0etqlijo61fy" path="res://Resources/Units/Enemy/goblins/GoblinRanged.tres" id="6_1i1qf"]
 [ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Items/Other/Gold.tres" id="6_m31s2"]
-[ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion.tres" id="7_m6hy6"]
+[ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion_Small.tres" id="7_m6hy6"]
 [ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="8_vs4oj"]
 [ext_resource type="Resource" uid="uid://cw6rg0j6b0r4k" path="res://Resources/Items/Gear/Armour/Faded_Cap.tres" id="8_yyisj"]
 [ext_resource type="Resource" uid="uid://6oi2jvuw6g2i" path="res://Resources/Items/Gear/Armour/Threadbare Gloves.tres" id="9_pg1c2"]

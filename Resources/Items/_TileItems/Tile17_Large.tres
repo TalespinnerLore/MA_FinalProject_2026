@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b1ddhqihbevx0"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_8cr8g"]
+[ext_resource type="Texture2D" uid="uid://tk7cn4dwdo2g" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile17.png" id="2_258rl"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_g3y1a"]
+
+[resource]
+script = ExtResource("3_g3y1a")
+ItemName = "Large Rooms Tile"
+max_stack = 1
+icon = ExtResource("2_258rl")
+ITEM_ID = 2017
+TILE_ID = 17
+shop_value = 25
+ItemAbility = ExtResource("1_8cr8g")
+throw_range = 3
+DESCRIPTION = "+25% chance for Large Rooms. +5% Rogue item chance. +5% Mage item chance. +5% Jester item chance."
+rarity = 0
+ItemType = 1
+GearType = 0
+ConsType = 0
+Class_Bias = 0
+min_area_level = 0
+max_area_level = 999
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = false
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

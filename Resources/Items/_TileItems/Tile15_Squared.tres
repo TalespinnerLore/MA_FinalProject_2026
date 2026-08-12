@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dy748ulfk780u"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_ix5q1"]
+[ext_resource type="Texture2D" uid="uid://c6yqrqhq5p31r" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile15.png" id="2_x7wuk"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_08s7h"]
+
+[resource]
+script = ExtResource("3_08s7h")
+ItemName = "Squared Rooms Tile"
+max_stack = 1
+icon = ExtResource("2_x7wuk")
+ITEM_ID = 2015
+TILE_ID = 15
+shop_value = 25
+ItemAbility = ExtResource("1_ix5q1")
+throw_range = 3
+DESCRIPTION = "+25% chance for Squared Rooms. +5% Fire Affinity. +5% Earth Affinity. +5% Light Affinity."
+rarity = 0
+ItemType = 1
+GearType = 0
+ConsType = 0
+Class_Bias = 0
+min_area_level = 0
+max_area_level = 999
+Affinity_Fire = true
+Affinity_Water = false
+Affinity_Earth = true
+Affinity_Air = false
+Affinity_Force = true
+Affinity_Light = true
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0
