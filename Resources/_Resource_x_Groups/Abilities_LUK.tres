@@ -6,5 +6,5 @@
 script = ExtResource("1_yyj1a")
 base_folder = "res://Resources/Abilities/LUK_base"
 includes = Array[String]([])
-excludes = Array[String]([])
-paths = Array[String](["res://Resources/Abilities/LUK_base/Enchant_Weapon_Gale.tres", "res://Resources/Abilities/LUK_base/Haste_Zone.tres", "res://Resources/Abilities/LUK_base/Increase_Precision.tres", "res://Resources/Abilities/LUK_base/WildWinds.tres"])
+excludes = Array[String](["Enchant_Weapon_Gale.tres"])
+paths = Array[String](["res://Resources/Abilities/LUK_base/Haste_Zone.tres", "res://Resources/Abilities/LUK_base/Increase_Precision.tres", "res://Resources/Abilities/LUK_base/WildWinds.tres"])

@@ -22,11 +22,27 @@ enum Pnum {P1,P2,P3,P4}
 var autostats 
 
 func _ready() -> void:
-	load_player_data()
-	await get_tree().create_timer(2).timeout
-	change_statpage(true)
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	#load_player_data()
+	#await get_tree().create_timer(2).timeout
+	#change_statpage(true)
 	#for ability:AbilityData in abilities:
 	#	print(ability.ability_name)
+	pass
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("AbilitySwap"):
+		open_close()
+
+func open_close():
+	load_player_data()
+	self.visible = ! self.visible
+	pause_level()
+
+func pause_level():
+	if is_instance_valid(get_tree()):
+		await get_tree().create_timer(0.1).timeout
+		get_tree().paused = ! get_tree().paused
 
 func load_player_data():
 	$StatAbilityBox/StatBoxContainer.show_hide_plusbtns(false)

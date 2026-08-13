@@ -22,20 +22,22 @@ var air_paths = []
 
 func new_path_on_enter(body:Unit_Instance):
 	ground_paths.shuffle()
+	print('ground paths:',ground_paths)
 	for path in ground_paths:
-		if path[0] != body.last_door:
-			var pathtodoor = NavManager_ref.get_valid_path_tiles(body.last_door,path[0],0)
-			body.prev_path = body.path
-			body.path = pathtodoor
-			body.path.pop_back()
-			body.path.append_array(path)
-		if RoomDoors.size() < 2:
-			body.prev_path = body.path
-			body.path.clear()
-			body.path.insert(0,body.facing + body.self_coords)
-			body.path.append_array(NavManager_ref.get_valid_path_tiles(body.path[0],path[0],0))
-			body.path.append_array(path)
-			break
+		if path.size() > 1:
+			if path[0] != body.last_door:
+				var pathtodoor = NavManager_ref.get_valid_path_tiles(body.last_door,path[0],0)
+				body.prev_path = body.path
+				body.path = pathtodoor
+				body.path.pop_back()
+				body.path.append_array(path)
+			if RoomDoors.size() < 2:
+				body.prev_path = body.path
+				body.path.clear()
+				body.path.insert(0,body.facing + body.self_coords)
+				body.path.append_array(NavManager_ref.get_valid_path_tiles(body.path[0],path[0],0))
+				body.path.append_array(path)
+				break
 
 func path_check_print():
 	var index = 0

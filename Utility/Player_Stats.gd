@@ -9,7 +9,7 @@ var p1_trinket_slot_stacksize:= 0
 var p1_equipped_abilities:Array[AbilityData] = [load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")]
 var p1_ability_usesB1234WAT:Array[int] = [999,0,0,0,0,0,0,0] #1234WAT
 var p1_HP:int
-var p1_level:=20
+var p1_level:=1
 var p1_XP:=0
 var p1_investedStrDexVitMagDefLuk:Array[int] = [0,0,0,0,0,0] 
 var p1_free_stats := 5
@@ -25,7 +25,7 @@ var p2_investedStrDexVitMagDefLuk:Array[int] = [0,0,0,0,0,0]
 var p2_free_stats := 0
 #var p2_statuseffects:Array
 
-var player_inventory = [] #[ITEM_ID,AMOUNT]
+var player_inventory = [[load("res://Resources/Items/Consumables/HealthPotion_Small.tres"),2]] #[ITEM_ID,AMOUNT]
 var inventory_size = 10
 var player_gold = 999
 

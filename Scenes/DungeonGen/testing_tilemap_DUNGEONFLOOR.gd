@@ -1305,6 +1305,9 @@ func init_tilemap():
 	if is_instance_valid(item_manager_ref) and ! DungeonData.safe_floors.has(DungeonData.current_floor):
 		item_manager_ref.init_items()
 	
+	$"../CanvasLayer/MUSIC".play_theme(DungeonData.floor_biome.BiomeID)
+	
+	
 	print("RIVERTILE:",DungeonData.river_tile," FLOODTILE:",DungeonData.flood_tile)
 	#pass
 	print('init tilemap; roomcount:',Rooms.size())

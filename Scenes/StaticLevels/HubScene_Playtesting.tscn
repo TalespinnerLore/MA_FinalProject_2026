@@ -18,7 +18,7 @@
 [ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/Cone_of_Embers.tres" id="14_85klr"]
 [ext_resource type="Resource" uid="uid://cqc4lv8ck3ypo" path="res://Resources/Abilities/MAG_base/EmberBurst.tres" id="15_j0kmv"]
 [ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="15_l8xr7"]
-[ext_resource type="Resource" uid="uid://cix2h68uqcx3c" path="res://Resources/Abilities/MAG_base/Tiny_Smite.tres" id="16_xfiqf"]
+[ext_resource type="Resource" uid="uid://cix2h68uqcx3c" path="res://Resources/Abilities/VIT_base/Tiny_Smite.tres" id="16_xfiqf"]
 [ext_resource type="Resource" uid="uid://dguinja0it7mu" path="res://Resources/Abilities/DEF_base/Healing_Bubble.tres" id="17_wxyj0"]
 [ext_resource type="Resource" uid="uid://d02ns3e6v636q" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres" id="18_68o0e"]
 [ext_resource type="Resource" uid="uid://bp0anynyd4ewq" path="res://Resources/Abilities/LUK_base/WildWinds.tres" id="18_d2ut8"]

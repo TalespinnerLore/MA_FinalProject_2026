@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bj1i2ct8r8gpt"]
+[gd_scene load_steps=30 format=4 uid="uid://bj1i2ct8r8gpt"]
 
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_7fd7v"]
 [ext_resource type="Script" path="res://Scenes/DungeonGen/testing_tilemap_DUNGEONFLOOR.gd" id="2_sai8a"]
@@ -19,12 +19,15 @@
 [ext_resource type="Texture2D" uid="uid://b3cg8kwm8w2ob" path="res://Art/2D_images/temp_loadscreen.png" id="15_yyivg"]
 [ext_resource type="PackedScene" uid="uid://s0jii18fk7d6" path="res://UI/Menus/unit_stats_gear_ui.tscn" id="16_ed1a7"]
 [ext_resource type="Script" path="res://Scenes/DungeonGen/loadscreen.gd" id="16_wlj7n"]
+[ext_resource type="PackedScene" uid="uid://qs3fqojkph1u" path="res://UI/Menus/UI_Ability_Selector.tscn" id="18_w3fuu"]
 [ext_resource type="Script" path="res://Scenes/DungeonGen/ability_ui.gd" id="19_gu8xj"]
 [ext_resource type="Texture2D" uid="uid://cu3lk0k4qo1aj" path="res://Art/UI_Art/Frames/ui_bg_thin.png" id="20_ka3vg"]
 [ext_resource type="Script" path="res://UI/Menus/ui_ability_box.gd" id="21_o7ocf"]
 [ext_resource type="Texture2D" uid="uid://d3xgf11emdh0b" path="res://Art/UI_Art/ui_elem_dark.png" id="22_7aike"]
 [ext_resource type="Texture2D" uid="uid://cmtdkudyucs5o" path="res://Art/UI_Art/AbilityType/ui_mag_generic.png" id="23_00hj8"]
 [ext_resource type="Texture2D" uid="uid://de1joagwyuvmh" path="res://Art/UI_Art/AoE/ui_aoe_front.png" id="24_n0k73"]
+[ext_resource type="Script" path="res://Scenes/DungeonGen/music.gd" id="26_r23u3"]
+[ext_resource type="AudioStream" uid="uid://dv4g2k3bm37yc" path="res://Sounds/islands.ogg" id="27_v4ogi"]
 
 [sub_resource type="Shortcut" id="Shortcut_bsp06"]
 events = [null]
@@ -152,6 +155,9 @@ horizontal_alignment = 1
 visible = false
 
 [node name="CharacterScreen_UI" parent="CanvasLayer" instance=ExtResource("16_ed1a7")]
+visible = false
+
+[node name="UiAbilitySelector" parent="CanvasLayer" instance=ExtResource("18_w3fuu")]
 visible = false
 
 [node name="AbilityUI" type="Control" parent="CanvasLayer"]
@@ -466,6 +472,18 @@ text = "BIOME NAME
 FLOOR #/#"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MUSIC" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("26_r23u3")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/MUSIC"]
+stream = ExtResource("27_v4ogi")
+volume_db = -10.0
+parameters/looping = true
 
 [connection signal="pressed" from="CanvasLayer/AbilityUI/Button" to="CanvasLayer/AbilityUI" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/AbilityUI/Button2" to="CanvasLayer/AbilityUI" method="_on_button_2_pressed"]

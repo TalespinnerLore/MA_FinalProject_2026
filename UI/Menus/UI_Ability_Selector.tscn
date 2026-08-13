@@ -1416,6 +1416,6 @@ autowrap_mode = 2
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox15" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox15" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox2" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox2" method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox3" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox3" method="_on_mouse_entered"]
-[connection signal="pressed" from="AbilitySelectionBox/equip/giveButton" to="." method="_on_give_button_pressed"]
 [connection signal="pressed" from="AbilitySelectionBox/equip/giveButton" to="." method="_on_equip_button_pressed"]
+[connection signal="pressed" from="AbilitySelectionBox/equip/giveButton" to="." method="_on_give_button_pressed"]
 [connection signal="pressed" from="AbilitySelectionBox/enequip/giveButton" to="." method="_on_unequip_button_pressed"]

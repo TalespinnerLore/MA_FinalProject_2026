@@ -21,7 +21,7 @@
 [ext_resource type="Resource" uid="uid://rfa1oc5gpu6h" path="res://Resources/Abilities/DEX_base/Venom_Strike.tres" id="15_5ldxw"]
 [ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/Cone_of_Embers.tres" id="16_bi1ew"]
 [ext_resource type="Resource" uid="uid://cqc4lv8ck3ypo" path="res://Resources/Abilities/MAG_base/EmberBurst.tres" id="17_y812q"]
-[ext_resource type="Resource" uid="uid://cix2h68uqcx3c" path="res://Resources/Abilities/MAG_base/Tiny_Smite.tres" id="18_3b2wq"]
+[ext_resource type="Resource" uid="uid://cix2h68uqcx3c" path="res://Resources/Abilities/VIT_base/Tiny_Smite.tres" id="18_3b2wq"]
 [ext_resource type="Resource" uid="uid://dguinja0it7mu" path="res://Resources/Abilities/DEF_base/Healing_Bubble.tres" id="19_imja6"]
 [ext_resource type="Resource" uid="uid://bp0anynyd4ewq" path="res://Resources/Abilities/LUK_base/WildWinds.tres" id="20_u6qll"]
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="22_p564o"]

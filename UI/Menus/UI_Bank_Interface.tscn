@@ -21,7 +21,7 @@ texture_margin_right = 3.0
 texture_margin_bottom = 1.0
 region_rect = Rect2(0, 0, 48, 24)
 
-[node name="Shop_UI" type="Control"]
+[node name="Bank_UI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,19 +53,6 @@ patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
-
-[node name="InventoryLabel" type="Label" parent="InventoryBox"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 4.0
-offset_right = 193.0
-offset_bottom = 27.0
-theme = ExtResource("5_k6t3a")
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 16
-text = "Inventory [99/99] Pg. 1"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="ItemContainer" type="VBoxContainer" parent="InventoryBox"]
 layout_mode = 0
@@ -303,6 +290,19 @@ position = Vector2(16, 0)
 tile_map_data = PackedByteArray("AAAAAAEAAgABAA4AAAACAAMAAgABABEAAAABAAQAAgABABAAAAADAAIAAgACAA8AAAADAAQAAgAAABAAAAABAAIAAgABAA8AAAAAAAUAAgAAABEAAAAEAAUAAgACABEAAAAEAAMAAgACABAAAAAAAAMAAgAAAA8AAAACAAEAAgAAAA4AAAAEAAEAAgACAA4AAAA=")
 tile_set = ExtResource("8_f5lnf")
 
+[node name="InventoryLabel" type="Label" parent="InventoryBox"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 193.0
+offset_bottom = 27.0
+theme = ExtResource("5_k6t3a")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "Inventory [99/99] Pg. 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="LeftButton" type="TextureButton" parent="InventoryBox"]
 layout_mode = 0
 offset_left = 8.0
@@ -360,19 +360,6 @@ patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="InventoryLabel" type="Label" parent="BankInventoryBox"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 4.0
-offset_right = 193.0
-offset_bottom = 27.0
-theme = ExtResource("5_k6t3a")
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 16
-text = "BANK [0/999]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="ItemContainer" type="VBoxContainer" parent="BankInventoryBox"]
 layout_mode = 0
 offset_left = 8.0
@@ -381,7 +368,7 @@ offset_right = 184.0
 offset_bottom = 200.0
 theme_override_constants/separation = 5
 
-[node name="Button" type="Button" parent="BankInventoryBox/ItemContainer"]
+[node name="Buttonbank" type="Button" parent="BankInventoryBox/ItemContainer"]
 material = SubResource("CanvasItemMaterial_h0eiw")
 layout_mode = 2
 theme = ExtResource("5_k6t3a")
@@ -391,7 +378,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
 text = "Health Potion"
 icon = ExtResource("7_oa136")
 
-[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button"]
+[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Buttonbank"]
 layout_mode = 0
 offset_left = 128.0
 offset_right = 168.0
@@ -402,7 +389,7 @@ text = "[5/5]"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Button2" type="Button" parent="BankInventoryBox/ItemContainer"]
+[node name="Button2bank" type="Button" parent="BankInventoryBox/ItemContainer"]
 material = SubResource("CanvasItemMaterial_h0eiw")
 layout_mode = 2
 theme = ExtResource("5_k6t3a")
@@ -412,7 +399,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
 text = "Health Potion"
 icon = ExtResource("7_oa136")
 
-[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button2"]
+[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button2bank"]
 layout_mode = 0
 offset_left = 128.0
 offset_right = 168.0
@@ -423,7 +410,7 @@ text = "[5/5]"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Button3" type="Button" parent="BankInventoryBox/ItemContainer"]
+[node name="Button3bank" type="Button" parent="BankInventoryBox/ItemContainer"]
 material = SubResource("CanvasItemMaterial_h0eiw")
 layout_mode = 2
 theme = ExtResource("5_k6t3a")
@@ -433,7 +420,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
 text = "Health Potion"
 icon = ExtResource("7_oa136")
 
-[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button3"]
+[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button3bank"]
 layout_mode = 0
 offset_left = 128.0
 offset_right = 168.0
@@ -444,7 +431,7 @@ text = "[5/5]"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Button4" type="Button" parent="BankInventoryBox/ItemContainer"]
+[node name="Button4bank" type="Button" parent="BankInventoryBox/ItemContainer"]
 material = SubResource("CanvasItemMaterial_h0eiw")
 layout_mode = 2
 theme = ExtResource("5_k6t3a")
@@ -454,7 +441,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
 text = "Health Potion"
 icon = ExtResource("7_oa136")
 
-[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button4"]
+[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button4bank"]
 layout_mode = 0
 offset_left = 128.0
 offset_right = 168.0
@@ -465,7 +452,7 @@ text = "[5/5]"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Button5" type="Button" parent="BankInventoryBox/ItemContainer"]
+[node name="Button5bank" type="Button" parent="BankInventoryBox/ItemContainer"]
 material = SubResource("CanvasItemMaterial_h0eiw")
 layout_mode = 2
 theme = ExtResource("5_k6t3a")
@@ -475,7 +462,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
 text = "Health Potion"
 icon = ExtResource("7_oa136")
 
-[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button5"]
+[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button5bank"]
 layout_mode = 0
 offset_left = 128.0
 offset_right = 168.0
@@ -486,7 +473,7 @@ text = "[5/5]"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Button6" type="Button" parent="BankInventoryBox/ItemContainer"]
+[node name="Button6bank" type="Button" parent="BankInventoryBox/ItemContainer"]
 material = SubResource("CanvasItemMaterial_h0eiw")
 layout_mode = 2
 theme = ExtResource("5_k6t3a")
@@ -496,7 +483,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
 text = "Health Potion"
 icon = ExtResource("7_oa136")
 
-[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button6"]
+[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button6bank"]
 layout_mode = 0
 offset_left = 128.0
 offset_right = 168.0
@@ -507,7 +494,7 @@ text = "[5/5]"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Button7" type="Button" parent="BankInventoryBox/ItemContainer"]
+[node name="Button7bank" type="Button" parent="BankInventoryBox/ItemContainer"]
 material = SubResource("CanvasItemMaterial_h0eiw")
 layout_mode = 2
 theme = ExtResource("5_k6t3a")
@@ -517,7 +504,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
 text = "Health Potion"
 icon = ExtResource("7_oa136")
 
-[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button7"]
+[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button7bank"]
 layout_mode = 0
 offset_left = 128.0
 offset_right = 168.0
@@ -528,7 +515,7 @@ text = "[5/5]"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Button8" type="Button" parent="BankInventoryBox/ItemContainer"]
+[node name="Button8bank" type="Button" parent="BankInventoryBox/ItemContainer"]
 material = SubResource("CanvasItemMaterial_h0eiw")
 layout_mode = 2
 theme = ExtResource("5_k6t3a")
@@ -538,7 +525,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
 text = "Health Potion"
 icon = ExtResource("7_oa136")
 
-[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button8"]
+[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button8bank"]
 layout_mode = 0
 offset_left = 128.0
 offset_right = 168.0
@@ -549,7 +536,7 @@ text = "[5/5]"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Button9" type="Button" parent="BankInventoryBox/ItemContainer"]
+[node name="Button9bank" type="Button" parent="BankInventoryBox/ItemContainer"]
 material = SubResource("CanvasItemMaterial_h0eiw")
 layout_mode = 2
 theme = ExtResource("5_k6t3a")
@@ -559,7 +546,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
 text = "Health Potion"
 icon = ExtResource("7_oa136")
 
-[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button9"]
+[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button9bank"]
 layout_mode = 0
 offset_left = 128.0
 offset_right = 168.0
@@ -570,7 +557,7 @@ text = "[5/5]"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Button10" type="Button" parent="BankInventoryBox/ItemContainer"]
+[node name="Button10bank" type="Button" parent="BankInventoryBox/ItemContainer"]
 material = SubResource("CanvasItemMaterial_h0eiw")
 layout_mode = 2
 theme = ExtResource("5_k6t3a")
@@ -580,7 +567,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_uat17")
 text = "Health Potion"
 icon = ExtResource("7_oa136")
 
-[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button10"]
+[node name="Label" type="Label" parent="BankInventoryBox/ItemContainer/Button10bank"]
 layout_mode = 0
 offset_left = 128.0
 offset_right = 168.0
@@ -608,6 +595,19 @@ visible = false
 position = Vector2(16, 0)
 tile_map_data = PackedByteArray("AAAAAAEAAgABAA4AAAACAAMAAgABABEAAAABAAQAAgABABAAAAADAAIAAgACAA8AAAADAAQAAgAAABAAAAABAAIAAgABAA8AAAAAAAUAAgAAABEAAAAEAAUAAgACABEAAAAEAAMAAgACABAAAAAAAAMAAgAAAA8AAAACAAEAAgAAAA4AAAAEAAEAAgACAA4AAAA=")
 tile_set = ExtResource("8_f5lnf")
+
+[node name="InventoryLabel" type="Label" parent="BankInventoryBox"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 193.0
+offset_bottom = 27.0
+theme = ExtResource("5_k6t3a")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "BANK [0/999]"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LeftButton" type="TextureButton" parent="BankInventoryBox"]
 layout_mode = 0
@@ -884,21 +884,28 @@ vertical_alignment = 2
 [connection signal="pressed" from="InventoryBox/ItemContainer/Button10" to="." method="_on_button_10_pressed"]
 [connection signal="pressed" from="InventoryBox/LeftButton" to="." method="_on_left_button_pressed"]
 [connection signal="pressed" from="InventoryBox/RightButton" to="." method="_on_right_button_pressed"]
-[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button3" to="." method="_on_button_3_pressed"]
-[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button4" to="." method="_on_button_4_pressed"]
-[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button5" to="." method="_on_button_5_pressed"]
-[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button6" to="." method="_on_button_6_pressed"]
-[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button7" to="." method="_on_button_7_pressed"]
-[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button8" to="." method="_on_button_8_pressed"]
-[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button9" to="." method="_on_button_9_pressed"]
-[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button10" to="." method="_on_button_10_pressed"]
+[connection signal="pressed" from="BankInventoryBox/ItemContainer/Buttonbank" to="." method="_on_buttonbank_pressed"]
+[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button2bank" to="." method="_on_button_2_bank_pressed"]
+[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button3bank" to="." method="_on_button_3_bank_pressed"]
+[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button4bank" to="." method="_on_button_4_bank_pressed"]
+[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button5bank" to="." method="_on_button_5_bank_pressed"]
+[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button6bank" to="." method="_on_button_6_bank_pressed"]
+[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button7bank" to="." method="_on_button_7_bank_pressed"]
+[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button8bank" to="." method="_on_button_8_bank_pressed"]
+[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button9bank" to="." method="_on_button_9_bank_pressed"]
+[connection signal="pressed" from="BankInventoryBox/ItemContainer/Button10bank" to="." method="_on_button_10_bank_pressed"]
 [connection signal="pressed" from="BankInventoryBox/LeftButton" to="." method="_on_left_button_pressed"]
 [connection signal="pressed" from="BankInventoryBox/RightButton" to="." method="_on_right_button_pressed"]
 [connection signal="pressed" from="OptionsBox/VBoxContainer/useButton" to="." method="_on_use_button_pressed"]
 [connection signal="pressed" from="OptionsBox/VBoxContainer/giveButton" to="." method="_on_give_button_pressed"]
 [connection signal="pressed" from="OptionsBox/VBoxContainer/dropButton" to="." method="_on_drop_button_pressed"]
+[connection signal="pressed" from="OptionsBox/VBoxContainer/takeButton" to="." method="_on_take_button_pressed"]
+[connection signal="pressed" from="OptionsBox/VBoxContainer/storeButton" to="." method="_on_store_button_pressed"]
+[connection signal="pressed" from="OptionsBox/VBoxContainer/trashButton" to="." method="_on_trash_button_pressed"]
 [connection signal="pressed" from="GoldOptionsBox/VBoxContainer/useButton" to="." method="_on_use_button_pressed"]
 [connection signal="pressed" from="GoldOptionsBox/VBoxContainer/giveButton" to="." method="_on_give_button_pressed"]
 [connection signal="pressed" from="GoldOptionsBox/VBoxContainer/dropButton" to="." method="_on_drop_button_pressed"]
+[connection signal="pressed" from="GoldOptionsBox/VBoxContainer/takeAllButton" to="." method="_on_take_all_button_pressed"]
+[connection signal="pressed" from="GoldOptionsBox/VBoxContainer/take10Button" to="." method="_on_take_10_button_pressed"]
+[connection signal="pressed" from="GoldOptionsBox/VBoxContainer/store10Button" to="." method="_on_store_10_button_pressed"]
+[connection signal="pressed" from="GoldOptionsBox/VBoxContainer/storeAllButton" to="." method="_on_store_all_button_pressed"]

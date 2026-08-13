@@ -76,7 +76,7 @@ enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_R
 @export var BaseXP = 5
 
 func Calc_XP_to_Level():
-	XP_to_Level = 1*UnitLevel*((int(UnitLevel%5)+((5+int(UnitLevel/2.5)) * int(1+int(UnitLevel/5)+int(UnitLevel/10)))))
+	XP_to_Level = 5*UnitLevel*((int(UnitLevel%5)+((5+int(UnitLevel/2.5)) * int(1+int(UnitLevel/5)+int(UnitLevel/10)))))
 	print('xp to level calc: ',XP_to_Level)
 	return 
 
@@ -87,7 +87,7 @@ func Calc_XP_to_Reward():
 func give_XP(XP_togive,enem_level):
 	print('getting xp now')
 	print('xp_togive = ',XP_togive,' * (1 + 0.3 *[enemlvl-unitlevel: ',enem_level,'-',UnitLevel,'])')
-	XP_togive = XP_togive * (1 + 0.3*clampi(enem_level-UnitLevel,-3,5))
+	XP_togive = int(XP_togive * (1 + 0.3*clampi(enem_level-UnitLevel,-3,5)))
 	XP+=XP_togive
 	print('xp_togive = ',XP_togive)
 	Attempt_LevelUp()

@@ -6,5 +6,5 @@
 script = ExtResource("1_60d8p")
 base_folder = "res://Resources/Abilities/MAG_base"
 includes = Array[String]([])
-excludes = Array[String]([])
-paths = Array[String](["res://Resources/Abilities/MAG_base/Cone_of_Embers.tres", "res://Resources/Abilities/MAG_base/EmberBurst.tres", "res://Resources/Abilities/MAG_base/EXPLOSION.tres", "res://Resources/Abilities/MAG_base/Incinerate.tres", "res://Resources/Abilities/MAG_base/Tiny_Smite.tres"])
+excludes = Array[String](["EXPLOSION.tres"])
+paths = Array[String](["res://Resources/Abilities/MAG_base/Cone_of_Embers.tres", "res://Resources/Abilities/MAG_base/EmberBurst.tres", "res://Resources/Abilities/MAG_base/Incinerate.tres"])
