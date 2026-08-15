@@ -16,6 +16,7 @@
 script = ExtResource("1_b5sfj")
 Sprite = ExtResource("2_xv6od")
 BasicAttack = ExtResource("1_n4n4l")
+Attacks = null
 UnitName = "Mage"
 is_large_unit = false
 CreatureType = 0
@@ -29,7 +30,7 @@ MAG_up = 5
 DEF_up = 0
 LUK_up = 0
 Free_Stats = 5
-Base_HP = 10
+Base_HP = 15
 STR = 5
 DEX = 5
 VIT = 5

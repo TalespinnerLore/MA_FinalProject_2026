@@ -1,0 +1,234 @@
+[gd_resource type="Resource" script_class="SaveDataResource" load_steps=5 format=3 uid="uid://brdnkt2uulofa"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_fhfyc"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="2_pset7"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/UniqueRoomData.gd" id="3_3j5k7"]
+[ext_resource type="Script" path="res://_SaveLoad/SaveData.gd" id="4_n6jek"]
+
+[resource]
+script = ExtResource("4_n6jek")
+p1_trinket_slot_stacksize = 0
+p1_equipped_abilities = null
+p1_ability_usesB1234WAT = Array[int]([999, 0, 0, 0, 0, 0, 0, 0])
+p1_HP = 0
+p1_level = 1
+p1_XP = 0
+p1_investedStrDexVitMagDefLuk = Array[int]([0, 0, 0, 0, 0, 0])
+p1_free_stats = 5
+player_inventory = null
+inventory_size = 10
+player_gold = 999
+is_in_dungeon = false
+Affinity_Fire = 0
+Affinity_Water = 0
+Affinity_Earth = 0
+Affinity_Air = 0
+Affinity_Force = 0
+Affinity_Light = 0
+Affinity_Dark = 0
+Biome_Test = 0
+Biome_Volcano = 0
+Biome_Island = 0
+Biome_Mesa = 0
+Biome_Skyland = 0
+EnvFeature_River = 0
+EnvFeature_Lake = 0
+EnvFeature_Flooded = 0
+EnvFeature_Barren = 0
+Halls_DeadEnds = 0
+Rooms_Round = 0
+Rooms_DenseLayout = 0
+Rooms_SparceLayout = 0
+Rooms_AlternatingSize = 0
+Rooms_Small = 0
+Rooms_Large = 0
+ItemType_Gold = 0
+ItemType_Tiles = 0
+ItemType_Consumable = 0
+ItemType_Gear = 0
+ItemType_Lockboxes = 0
+ItemType_KeyItem = 0
+ItemMods_SpawnRate = 0
+GearType_Weapon = 0
+GearType_Armour = 0
+GearType_Trinket = 0
+Class_Vanguard = 0
+Class_Warrior = 0
+Class_Mage = 0
+Class_Rogue = 0
+Class_Healer = 0
+Class_Jester = 0
+MobType_Beast = 0
+MobType_Elemental = 0
+MobType_Undead = 0
+MobType_Construct = 0
+MobType_Mortal = 0
+MobType_Wildling = 0
+MobMods_SpawnRate = 0
+MobMods_Level = 0
+MobMods_EXP = 0
+MobMods_Gold = 0
+MobMods_Gear = 0
+UniqueRooms_TreasureVault = 0
+UniqueRooms_MonsterHouse = 0
+Boss_T0_Roaming = 0
+Boss_T0_Mini = 0
+Boss_T1_Generic = 0
+Boss_T1_Fire = 0
+Boss_T1_Water = 0
+Boss_T1_Earth = 0
+Boss_T1_Wind = 0
+Boss_T1_Force = 0
+Boss_T2_Generic = 0
+Boss_T2_QuadElement = 0
+Boss_T2_Force = 0
+extra_floors = 0
+has_boss = false
+mini_bosses = Array[ExtResource("1_fhfyc")]([])
+elites = null
+minis = null
+houses = null
+vaults = null
+safe_floors = Array[int]([])
+floors_special_features = []
+final_floor = 0
+PRESET_Recipie = false
+crafting_tier = 0
+AREA_LEVEL = 1
+UNIT_LEVEL_Boost = 0
+max_wandering_units = 5
+max_floors = 5
+current_floor = 0
+room_attempts = 25
+interconnectivity = 4.0
+rounded = false
+spawn_river = false
+flooded = false
+river_tile = "WATER"
+flood_tile = "WATER"
+max_size = 15
+min_size = 5
+level_size = Vector2i(30, 30)
+Common_Enemies = Array[ExtResource("1_fhfyc")]([])
+Rare_Enemies = Array[ExtResource("1_fhfyc")]([])
+Common_Items = Array[ExtResource("2_pset7")]([])
+Rare_Items = Array[ExtResource("2_pset7")]([])
+Unique_Rooms = Array[ExtResource("3_3j5k7")]([])
+stored_character_data = {
+"Civilian": {
+"XP": 0,
+"armour": null,
+"equipped_abilities": [],
+"free_stats": 5,
+"investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
+"level": 1,
+"statComp": "res://Resources/Units/Player/Stats_Civilian.tres",
+"trinket": null,
+"trinket_slot_stacksize": 0,
+"weapon": null
+},
+"Healer": {
+"XP": 0,
+"armour": null,
+"equipped_abilities": [],
+"free_stats": 5,
+"investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
+"level": 1,
+"statComp": "res://Resources/Units/Player/Stats_Healer.tres",
+"trinket": null,
+"trinket_slot_stacksize": 0,
+"weapon": null
+},
+"Jester": {
+"XP": 0,
+"armour": null,
+"equipped_abilities": [],
+"free_stats": 8,
+"investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
+"level": 1,
+"statComp": "res://Resources/Units/Player/Stats_Jester.tres",
+"trinket": null,
+"trinket_slot_stacksize": 0,
+"weapon": null
+},
+"Mage": {
+"XP": 0,
+"armour": null,
+"equipped_abilities": [],
+"free_stats": 5,
+"investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
+"level": 1,
+"statComp": "res://Resources/Units/Player/Stats_Mage.tres",
+"trinket": null,
+"trinket_slot_stacksize": 0,
+"weapon": null
+},
+"Rogue": {
+"XP": 0,
+"armour": null,
+"equipped_abilities": [],
+"free_stats": 5,
+"investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
+"level": 1,
+"statComp": "res://Resources/Units/Player/Stats_Ranger.tres",
+"trinket": null,
+"trinket_slot_stacksize": 0,
+"weapon": null
+},
+"Vanguard": {
+"XP": 0,
+"armour": null,
+"equipped_abilities": [],
+"free_stats": 5,
+"investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
+"level": 1,
+"statComp": "res://Resources/Units/Player/Stats_Vanguard.tres",
+"trinket": null,
+"trinket_slot_stacksize": 0,
+"weapon": null
+},
+"Warrior": {
+"XP": 0,
+"armour": null,
+"equipped_abilities": [],
+"free_stats": 5,
+"investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
+"level": 1,
+"statComp": "res://Resources/Units/Player/Stats_Warrior.tres",
+"trinket": null,
+"trinket_slot_stacksize": 0,
+"weapon": null
+}
+}
+bank_gold_val = 0
+BankInventory_Resourcestack = null
+BankInventory_size = 999
+is_portal_open = false
+checkpoint_persistance_keys = {
+"1stdrop_minitile": false,
+"1stdrop_t1bosstile": false,
+"1stdrop_t2bosstile": false,
+"defeated_t0_miniboss": false,
+"defeated_t1_airboss": false,
+"defeated_t1_earthboss": false,
+"defeated_t1_fireboss": false,
+"defeated_t1_forceboss": false,
+"defeated_t1_waterboss": false,
+"defeated_t2_forceboss": false,
+"defeated_t2_quadboss": false,
+"reached_lvl_10": false,
+"reached_lvl_15": false,
+"reached_lvl_20": false,
+"reached_lvl_25": false,
+"reached_lvl_5": false,
+"unlocked_recipe_airboss": false,
+"unlocked_recipe_earthboss": false,
+"unlocked_recipe_fireboss": false,
+"unlocked_recipe_forceboss": false,
+"unlocked_recipe_forceboss2": false,
+"unlocked_recipe_miniboss": false,
+"unlocked_recipe_monsterhouse": false,
+"unlocked_recipe_quadboss": false,
+"unlocked_recipe_treasurevault": false,
+"unlocked_recipe_waterboss": false
+}

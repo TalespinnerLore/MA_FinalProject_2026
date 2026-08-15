@@ -44,6 +44,7 @@ func _ready() -> void:
 	bank_on_left_button_pressed()
 	load_item_inventory()
 	bank_load_item_inventory()
+	SaveLoad.change_class('Mage')
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Inventory"):

@@ -31,7 +31,7 @@ var biomes:Array[Biome] = [preload("res://Resources/DungeonGen/Biome_Test.tres")
 			preload("res://Resources/DungeonGen/Biome_Mesa.tres"),
 			preload("res://Resources/DungeonGen/Biome_SkyIsland.tres")]
 
-var floor_biome:Biome = biomes[3]
+
 
 ###vvvDEPRECIATEDvvv###
 func choose_biome():
@@ -54,8 +54,9 @@ func choose_biome():
 	if randint >= total_chance - Environments[0][1] and  Environments[0][1] != 0:
 		return 0 #TEST
 	return randi_range(1,4) #SELECT RANDOM BIOME
-	
 
+
+var floor_biome:Biome = biomes[3]
 @export var Common_Enemies:Array[StatComponent]
 @export var Rare_Enemies:Array[StatComponent]
 @export var Common_Items:Array[ItemData]
@@ -251,7 +252,7 @@ func reset_data():
 	item_mult = 1.0
 	gold_chance = 2.5
 	tile_chance = 1.5
-	cons_chance = 1.5
+	cons_chance = 2.0
 	gear_chance = 1.0
 	lockbox_chance = 0.5
 
