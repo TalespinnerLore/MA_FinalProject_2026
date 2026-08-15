@@ -212,5 +212,5 @@ func change_class(newClassName:String):
 	
 	SaveFileData.stored_character_data = class_data
 	#var abs:Array = class_data[classname]['equipped_abilities']
-	#print(abs.get_typed_builtin()) ###JUST REMOVED THE TYPEING OF THE ARRAYS TO FIX THIS
+	#print(abs.get_typed_builtin()) ###JUST REMOVED THE TYPEING OF9 THE ARRAYS TO FIX THIS
 	pass

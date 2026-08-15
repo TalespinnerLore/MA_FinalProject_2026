@@ -1054,6 +1054,12 @@ func AI_turn_enemy_new():
 		var ab_num = randi_range(0,4)
 		var selected = ABILITIES.ability_data(ab_num)
 		print('selected attack:',selected.ability_name," ability range:",selected.range)
+		
+		#var hit_tile_check = []
+		#for i in range(1,selected.range+1):
+		#	hit_tile_check.append(self_coords+(i*facing))
+		#if
+		
 		if self_coords.x == goal_tile.x or self_coords.y == goal_tile.y:
 			var wall_intheway = false
 			for i in range(1,selected.range+1):
@@ -1066,7 +1072,7 @@ func AI_turn_enemy_new():
 					wall_intheway = false
 					print('no wall in the way, GETTIM')
 					break
-			if abs(self_coords.x-self_coords.y) <= selected.range and ! wall_intheway:
+			if Vector2i(abs(self_coords)-abs(goal_tile)).length() <= selected.range and ! wall_intheway:
 				use_ability(ab_num)
 			else:
 				move_closer = true
