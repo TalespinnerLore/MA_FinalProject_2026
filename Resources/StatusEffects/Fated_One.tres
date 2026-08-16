@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=3 format=3 uid="uid://ctva444cpngq1"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_t0tn7"]
+[ext_resource type="Texture2D" uid="uid://m6sk7hjt5ypo" path="res://Art/VFX Sprites/vfx_light.png" id="2_6wnhp"]
+
+[resource]
+script = ExtResource("1_t0tn7")
+vfx = ExtResource("2_6wnhp")
+effect_name = "Fated One"
+is_negative = false
+turn_duration = 3
+has_periodic_effect = false
+trigger_periodic_on_gain = false
+trigger_effect_on_timeout = false
+periodic_effect_trigger = 5
+element = 5
+damage_type = 6
+base_damage = 0
+can_stack = false
+stat_multiplier = 5

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Units/abilities.gd" id="2_npetc"]
 [ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="3_iyyxl"]
 [ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/Cone_of_Embers.tres" id="4_qk8jk"]
-[ext_resource type="Resource" uid="uid://cv14lef7fcshm" path="res://Resources/Abilities/DEX_base/Piercing_Shot.tres" id="5_dxwwh"]
+[ext_resource type="Resource" uid="uid://cv14lef7fcshm" path="res://Resources/Abilities/DEX_base/10_Piercing_Shot.tres" id="5_dxwwh"]
 [ext_resource type="Script" path="res://Units/status_effects_manager.gd" id="6_k36fu"]
 [ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="7_ayqgv"]
 [ext_resource type="PackedScene" uid="uid://dp6qyj1ggegbu" path="res://Utility/Components/HP_module.tscn" id="8_82kg4"]

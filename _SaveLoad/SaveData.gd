@@ -22,6 +22,17 @@ class_name SaveDataResource
 
 @export var is_in_dungeon := false
 
+@export var TileID_NamedInventory = [["TEST",0],["FIRE",4],["WATER",4],["EARTH",4],["AIR",4],["FORCE",4],\
+["VOLCANO",4],["ISLANDS",4],["MESA",4],["SKY_ISLANDS",4],\
+["RIVER",4],["LAKE",2],["ROUND_ROOMS",4],["DENSE_LAYOUT",2],["SPARSE_LAYOUT",2],["ALTERNATING_SIZE_ROOMS",2],["SMALL_ROOMS",2],["LARGE_ROOMS",2],\
+["CONSUMABLES",2],["GEAR",2],["LOCKBOXES",2],["WEAPONS",2],["ARMOUR",2],["TRINKETS",2],\
+["VANGUARD",1],["WARRIOR",1],["MAGE",1],["ROGUE",1],["HEALER",1],["JESTER",1],\
+["INCREASED_MOB_DENSITY",2],["INCREASED_GOLD",4],["INCREASED_XP",2],["DECREASED_MOB_DENSITY",2],["DECREASED_GOLD",2],["DECREASED_XP",2],\
+["BEASTS",1],["ELEMENTALS",1],["UNDEAD",1],["CONSTRUCTS",1],["MORTALS",2],["WILDLINGS",2],\
+["TREASURE_ROOM",1],["MINI_BOSS",1],["MONSTER_HOUSE",1],\
+["T1_BOSS",1],["T1_FIREBOSS",0],["T1_WATERBOSS",1],["T1_EARTHBOSS",0],["T1_AIRBOSS",0],["T1_FORCEBOSS",1],\
+["T2_BOSS",0],["T2_QUADBOSS",0],["T2_FORCEBOSS",0]]
+
 @export_category('CURRENT DUNGEON DATA')
 @export var Affinity_Fire = 0
 @export var Affinity_Water = 0

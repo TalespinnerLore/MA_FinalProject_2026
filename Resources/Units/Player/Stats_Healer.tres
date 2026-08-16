@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=12 format=3 uid="uid://v7oc1ln8lrh7"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=13 format=3 uid="uid://v7oc1ln8lrh7"]
 
 [ext_resource type="Resource" uid="uid://dygpdjty37286" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres" id="1_32wjw"]
+[ext_resource type="Resource" uid="uid://b3vlgoi6d1u1t" path="res://Resources/Abilities/VIT_base/Healing_Touch.tres" id="1_qaavn"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_tsatv"]
 [ext_resource type="Texture2D" uid="uid://dscvo6hslhk00" path="res://Art/UnitSprites/BasicCharacter_healer.png" id="2_i68s1"]
 [ext_resource type="Texture2D" uid="uid://b8r01xxaa8xxs" path="res://Art/UnitSprites/Palettes/testspritepallette0.png" id="3_seqfd"]
@@ -16,7 +17,7 @@
 script = ExtResource("1_tsatv")
 Sprite = ExtResource("2_i68s1")
 BasicAttack = ExtResource("1_32wjw")
-Attacks = null
+Attacks = Array[Object]([ExtResource("1_qaavn"), null, null, null])
 UnitName = "Healer"
 is_large_unit = false
 CreatureType = 0

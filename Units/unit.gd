@@ -4,6 +4,7 @@ extends CharacterBody2D
 signal turn_start
 signal move_complete
 signal attack_start(AbilityData)#attack_start(ActionDef)
+signal sub_attack_start(AbilityData,Vector2i)
 #signal attack_end(ActionDef)
 signal unit_defeated
 signal hit_other_unit
@@ -47,6 +48,7 @@ enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_R
 
 @onready var ABILITIES:unit_equipped_abilities = $Abilities
 @onready var EQUIPMENT:Unit_Equipment_Inventory = $Equipment
+@onready var STATUS_EFECTS:StatusEffectManager = $StatusEffects
 
 @export var ARMOUR:ItemData
 @export var WEAPON:ItemData
@@ -308,6 +310,9 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 		print(amount-Ability.base_value, " + ",Ability.base_value," = ",amount)
 		
 		if Ability.damaging == true:
+			if STATUS_EFECTS.get_child_count() > 0:
+				for se:StatusEffectInstance in STATUS_EFECTS.get_children():
+					se.on_get_hit(Source) #shoulddo nothing if it not a unit hitting, or there's no children
 			target_unit.combattext(str("Before: ",HP_Current))
 			print("Before: ",HP_Current)
 			var calcs = calc_damage(Ability.damage_type,amount,hitcrit[1],Ability.element)
@@ -337,6 +342,8 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 					$StatusEffects.add_child(s_instance)
 				elif s_effect.can_stack:
 					$StatusEffects.add_stack(s_effect.effect_name)
+		if Ability.sub_ability != null:
+			Source.emit_signal("attack_start",Ability.sub_ability,Source)
 	else:
 		target_unit.combattext(str("MISS!"))
 		print("MISS!")
@@ -347,10 +354,10 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 func calc_evasion_and_crit(Accuracy,crit_boost:float): #runs on TARGETED UNIT
 	var Miss_Chance = 0.0
 	var Crit_Chance = 0.0 + crit_boost
-	if Base_Evasion > Accuracy:
+	if Base_Evasion+Evasion_boost > Accuracy:
 		Miss_Chance += ((Base_Evasion-Accuracy)*0.01)
 		Crit_Chance -= Miss_Chance
-	elif Accuracy > Base_Evasion:
+	elif Accuracy > Base_Evasion+Evasion_boost:
 		Crit_Chance += ((Accuracy-Base_Evasion)*0.01)
 	
 	var hit_roll = randf_range(0.0,1.0)

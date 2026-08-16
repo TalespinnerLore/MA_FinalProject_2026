@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=3 format=3 uid="uid://d1wcgr4p0oqyb"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_ibu5y"]
+[ext_resource type="Texture2D" uid="uid://jg5fc0geer0a" path="res://Art/VFX Sprites/vfx_dark.png" id="2_lqmll"]
+
+[resource]
+script = ExtResource("1_ibu5y")
+vfx = ExtResource("2_lqmll")
+effect_name = "Void Thorns"
+is_negative = false
+turn_duration = 5
+has_periodic_effect = true
+trigger_periodic_on_gain = false
+trigger_effect_on_timeout = false
+periodic_effect_trigger = 2
+element = 6
+damage_type = 6
+base_damage = 10
+can_stack = false
+stat_multiplier = 4

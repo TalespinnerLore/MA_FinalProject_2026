@@ -1,9 +1,11 @@
 extends Node
+class_name StatusEffectInstance
 @export var StatusData:StatusEffectData
 enum trigger{TURN_START,TURN_END,GETS_HIT,HITS_OTHER,EFFECT_LOST,EFFECT_GAINED}
 enum DamageType {Phys_Generic,Phys_Melee,Phys_Ranged,Mag_Generic,Mag_Melee,Mag_Ranged,Other}
 enum ElementType {FIRE,WATER,EARTH,AIR,FORCE,LIGHT,DARK}
 
+const StatusEffect_instance = preload("res://Utility/Components/StatusEffectInstance.tscn")
 const Ability_vfx = preload("res://Objects/AbilityVFX.tscn")
 @onready var owning_unit:Unit_Instance = self.get_parent().get_parent() #will be in status effect container node
 @export var source_unit:Unit_Instance
@@ -95,6 +97,20 @@ func periodic_effect():
 			else:
 				print(owning_unit," snaps out of their stunned state!")
 				on_timeout()
+		'Void Thorns': #when hit, inflict some damage and afflict the agressor with Poison and Feared
+			var inflict_these = [load("res://Resources/StatusEffects/Poisoned.tres"),load("res://Resources/StatusEffects/Demoralized.tres")]
+			for s_effect in inflict_these:
+				if ! hitting_unit.STATUS_EFECTS.has_stack(s_effect.effect_name):
+					var s_instance = StatusEffect_instance.instantiate()
+					s_instance.source_unit = owning_unit
+					s_instance.StatusData = s_effect
+					$StatusEffects.add_child(s_instance)
+				elif s_effect.can_stack:
+					$StatusEffects.add_stack(s_effect.effect_name)
+			apply_damage()
+		'Thorns':
+			apply_damage()
+		
 
 func on_gain():
 	owning_unit.HP_Module.add_status_icon(StatusData)
@@ -130,6 +146,9 @@ func on_gain():
 				affecting_value = roundi(turns_left*multiplier)
 				turns_left = affecting_value
 				owning_unit.max_turn_actions = 2
+			'Fated One':
+				owning_unit.Crit_Boost += 1.0
+				owning_unit.Evasion_boost += 999
 	#######################################
 	if StatusData.trigger_periodic_on_gain:
 		periodic_effect()
@@ -161,6 +180,9 @@ func on_timeout():
 				owning_unit.apply_calc_stat_boosts()
 			'Haste':
 				owning_unit.max_turn_actions = 1
+			'Fated One':
+				owning_unit.Crit_Boost -= 1.0
+				owning_unit.Evasion_boost -= 999
 	#############################################################
 	if StatusData.periodic_effect_trigger == trigger.EFFECT_LOST:
 		periodic_effect()
@@ -173,11 +195,13 @@ func on_timeout():
 	
 	manager.lose_effect_dialogue(StatusData)
 	
+var hitting_unit:Unit_Instance
 
-
-func on_get_hit():
-	if StatusData.has_periodic_effect and StatusData.periodic_effect_trigger == trigger.GETS_HIT:
-		periodic_effect()
+func on_get_hit(HittingUnit:Unit_Instance):
+	if is_instance_valid(HittingUnit):
+		hitting_unit = HittingUnit
+		if StatusData.has_periodic_effect and StatusData.periodic_effect_trigger == trigger.GETS_HIT:
+			periodic_effect()
 
 func on_hitting():
 	if StatusData.has_periodic_effect and StatusData.periodic_effect_trigger == trigger.HITS_OTHER:

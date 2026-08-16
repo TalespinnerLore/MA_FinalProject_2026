@@ -59,6 +59,7 @@ func init() -> void:
 		child.init()
 		all_groups.append(child)
 		child.AbilityUsed.connect(_process_ability)
+		child.SubAbilityUsed.connect(_process_sub_ability)
 		child.group_turn_completed.connect(_on_turn_complete)
 		#child.defeated.connect(_on_group_defeated)
 	if monster_house:
@@ -279,8 +280,59 @@ func _process_ability(Ability:AbilityData,Source):
 		dialogue_manager_ref.hit_nothing()
 	pass
 
-
-	
+func _process_sub_ability(Ability:AbilityData,Source,origin_tile:Vector2i):
+	print(Source.UnitStats.UnitName," uses ",Ability.ability_name,"!")
+	dialogue_manager_ref.show_unit_using_ability(Source.UnitStats.UnitName,Ability.ability_name)
+	var hit_tiles = calc_hit_tiles(Ability.targeting,Ability.range+Source.Range_Boost,Source.facing,origin_tile)
+	#print("HITTILES",hit_tiles)
+	var units_to_check:Array[Unit_Instance]
+	var does_pierce = false
+	var hits_nothing = true
+	if Ability.targeting != 0: #FRONT
+		does_pierce = true
+#	print("Hit Tiles: ",hit_tiles)
+	for tile in hit_tiles:
+		#print("Hit Tile: ",tile)
+		#if does_pierce:
+		var vfx = Ability_vfx.instantiate()
+		vfx.texture = Ability.vfx
+#		print(Ability.vfx.get_size())
+		vfx.position = Global.grid_to_pos(tile)
+		$"../VFX".add_child(vfx)
+		for group in all_groups:
+			#print("Group: ",group.name)
+			for child in group.get_children():
+				#print("Unit: ",child,", Coords: ",child.self_coords)
+				if Vector2i(child.self_coords) == Vector2i(tile): # vvv ENEMY, ALLY, ANY, SELF
+					if Source.Team == child.Team and Ability.valid_target != 0: 
+					#if same team and can hit ally, any or self, do hit.
+						child.ability_effect_calculations(Ability,Source)
+						hits_nothing = false
+						if ! does_pierce:
+							#print("not pierce swewsvsdivusiuvhsdivhs8dhv")
+							var new_vfx = Ability_vfx.instantiate()
+							new_vfx.position = Global.grid_to_pos(tile)
+							$"../VFX".add_child(new_vfx)
+							break
+						else:
+							pass
+							#print("IS pierce swewsvsdivusiuvhsdivhs8dhv")
+					elif Source.Team != child.Team and Ability.valid_target != 1 and Ability.valid_target != 3:
+					#if different team and can hit enemy or any, do hit.
+						child.ability_effect_calculations(Ability,Source)
+						hits_nothing = false
+						if ! does_pierce:
+								#print("not pierce swewsvsdivusiuvhsdivhs8dhv")
+								var neww_vfx = Ability_vfx.instantiate()
+								neww_vfx.global_position = Global.grid_to_pos(tile)
+								$"../VFX".add_child(neww_vfx)
+								break
+	if hits_nothing:
+		print("that hit nothing")
+	#	if 
+	#	await Source.waiting_on_dialogue
+		dialogue_manager_ref.hit_nothing()
+	pass
 
 
 @onready var tilegrid = $"../TileMapLayer"########GET REFERENCE TO GRID

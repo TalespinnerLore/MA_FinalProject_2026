@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=3 format=3 uid="uid://b44cku5j652w3"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_rbdns"]
+[ext_resource type="Texture2D" uid="uid://jg5fc0geer0a" path="res://Art/VFX Sprites/vfx_dark.png" id="2_cq8o8"]
+
+[resource]
+script = ExtResource("1_rbdns")
+vfx = ExtResource("2_cq8o8")
+effect_name = "Fragility"
+is_negative = true
+turn_duration = 3
+has_periodic_effect = false
+trigger_periodic_on_gain = true
+trigger_effect_on_timeout = false
+periodic_effect_trigger = 0
+element = 6
+damage_type = 6
+base_damage = 0
+can_stack = false
+stat_multiplier = 4

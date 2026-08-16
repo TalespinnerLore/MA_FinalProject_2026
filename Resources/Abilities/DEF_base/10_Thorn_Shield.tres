@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://y8gmthrmw3l1"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_kcyfj"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_5m361"]
+[ext_resource type="Resource" uid="uid://dpwnvovsa633d" path="res://Resources/StatusEffects/Thorns.tres" id="3_f077d"]
+[ext_resource type="Texture2D" uid="uid://dmgwhlft4rjab" path="res://Art/VFX Sprites/vfx_earth.png" id="4_j5mm8"]
+
+[resource]
+script = ExtResource("1_kcyfj")
+ability_name = "Thorn Shield"
+vfx = ExtResource("4_j5mm8")
+element = 2
+valid_target = 3
+targeting = 4
+range = 1
+base_value = 10
+max_uses = 15
+damage_type = 6
+damaging = false
+healing = false
+creates_shield = true
+inflict_status = Array[ExtResource("2_5m361")]([ExtResource("3_f077d")])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 0, 10, 0, 10, 0]
+Abilities_required = Array[ExtResource("1_kcyfj")]([])

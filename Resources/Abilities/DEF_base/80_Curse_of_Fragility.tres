@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://d1stjwu4tuogd"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_rdjim"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_y0hco"]
+[ext_resource type="Resource" uid="uid://b44cku5j652w3" path="res://Resources/StatusEffects/Fragility.tres" id="3_dddf2"]
+[ext_resource type="Texture2D" uid="uid://jg5fc0geer0a" path="res://Art/VFX Sprites/vfx_dark.png" id="4_vlxpj"]
+
+[resource]
+script = ExtResource("1_rdjim")
+ability_name = "Curse of Fragility"
+vfx = ExtResource("4_vlxpj")
+element = 6
+valid_target = 0
+targeting = 3
+range = 2
+base_value = 0
+max_uses = 15
+damage_type = 6
+damaging = false
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_y0hco")]([ExtResource("3_dddf2")])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 0, 50, 15, 80, 0]
+Abilities_required = Array[ExtResource("1_rdjim")]([])

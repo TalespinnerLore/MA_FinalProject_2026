@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=12 format=3 uid="uid://cww662eyo140s"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=13 format=3 uid="uid://cww662eyo140s"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_egh68"]
+[ext_resource type="Resource" uid="uid://cv14lef7fcshm" path="res://Resources/Abilities/DEX_base/10_Piercing_Shot.tres" id="1_hg1s1"]
 [ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="1_y08ut"]
 [ext_resource type="Texture2D" uid="uid://cma54lo0lvcps" path="res://Art/UnitSprites/BasicCharacter_ranger.png" id="2_du2ht"]
 [ext_resource type="Texture2D" uid="uid://b8r01xxaa8xxs" path="res://Art/UnitSprites/Palettes/testspritepallette0.png" id="3_88lls"]
@@ -16,7 +17,7 @@
 script = ExtResource("1_egh68")
 Sprite = ExtResource("2_du2ht")
 BasicAttack = ExtResource("1_y08ut")
-Attacks = null
+Attacks = Array[Object]([ExtResource("1_hg1s1"), null, null, null])
 UnitName = "Rogue"
 is_large_unit = false
 CreatureType = 0

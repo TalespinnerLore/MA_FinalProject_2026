@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://sl8x4w0qjq5m"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_ndqhx"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_eryb1"]
+[ext_resource type="Resource" uid="uid://dt1senpkdelhs" path="res://Resources/Abilities/DEX_base/SUB_Hurricane_Burst.tres" id="3_u31tt"]
+[ext_resource type="Texture2D" uid="uid://cbr4mrsgqpdhc" path="res://Art/VFX Sprites/vfx_wind.png" id="4_wjh8f"]
+
+[resource]
+script = ExtResource("1_ndqhx")
+ability_name = "Hurricane Arrow"
+vfx = ExtResource("4_wjh8f")
+element = 3
+valid_target = 0
+targeting = 0
+range = 20
+base_value = 25
+max_uses = 1
+damage_type = 2
+damaging = true
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_eryb1")]([])
+sub_ability = ExtResource("3_u31tt")
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 160, 0, 0, 0, 0]
+Abilities_required = Array[ExtResource("1_ndqhx")]([])

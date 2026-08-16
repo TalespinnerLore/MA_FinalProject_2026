@@ -2,6 +2,7 @@ class_name Unit_Group
 extends Node2D
 
 signal AbilityUsed(Ability:AbilityData,Source)
+signal SubAbilityUsed(Ability:AbilityData,Source,origin_tile)
 signal group_turn_completed
 signal unit_defeated
 signal on_turn_complete
@@ -189,6 +190,7 @@ func connect_current_unit_signals() -> void:
 	#current_unit.attack_complete.connect(_process_attack)
 	#print(current_unit)
 	current_unit.attack_start.connect(_process_ability)
+	current_unit.sub_attack_start.connect(_process_sub_ability)
 	current_unit.turn_complete.connect(_step_unit)
 	#print("connectted")
 	pass
@@ -207,6 +209,10 @@ func _process_attack(ActionDef): #DEPRECIATED
 func _process_ability(Ability:AbilityData,Source):#Ability,Source
 	#print("attack signal emitted ",Ability.ability_name,Source)
 	emit_signal("AbilityUsed",Ability,Source)
+
+func _process_sub_ability(Ability:AbilityData,Source,origin_tile:Vector2i):#Ability,Source
+	#print("attack signal emitted ",Ability.ability_name,Source)
+	emit_signal("SubAbilityUsed",Ability,Source,origin_tile)
 
 func _step_unit():
 	#print('STEPPING UNIT NOW')

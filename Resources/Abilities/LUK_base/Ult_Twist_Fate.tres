@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://la7qtwq33nh6"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_rptf8"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_yyk4f"]
+[ext_resource type="Resource" uid="uid://ctva444cpngq1" path="res://Resources/StatusEffects/Fated_One.tres" id="3_1mfng"]
+[ext_resource type="Texture2D" uid="uid://m6sk7hjt5ypo" path="res://Art/VFX Sprites/vfx_light.png" id="4_7qkxi"]
+
+[resource]
+script = ExtResource("1_rptf8")
+ability_name = "Twist Fate"
+vfx = ExtResource("4_7qkxi")
+element = 5
+valid_target = 3
+targeting = 4
+range = 1
+base_value = 0
+max_uses = 1
+damage_type = 6
+damaging = false
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_yyk4f")]([ExtResource("3_1mfng")])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 0, 0, 0, 0, 296]
+Abilities_required = Array[ExtResource("1_rptf8")]([])
