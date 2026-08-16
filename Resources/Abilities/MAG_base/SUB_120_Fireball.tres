@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://bwb7u180w3c8t"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_8o2ux"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_2w636"]
+[ext_resource type="Texture2D" uid="uid://dssgt1n5mnc5k" path="res://Art/VFX Sprites/vfx_fire.png" id="3_6bp33"]
+
+[resource]
+script = ExtResource("1_8o2ux")
+ability_name = "Fireball"
+vfx = ExtResource("3_6bp33")
+element = 0
+valid_target = 2
+targeting = 3
+range = 2
+base_value = 15
+max_uses = 999
+damage_type = 5
+damaging = true
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_2w636")]([])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 0, 0, 120, 0, 0]
+Abilities_required = Array[ExtResource("1_8o2ux")]([])

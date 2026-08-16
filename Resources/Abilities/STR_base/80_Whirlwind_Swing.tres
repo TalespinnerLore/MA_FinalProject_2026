@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://t0ggjrv48v1w"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_uvvol"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_kp7lb"]
+[ext_resource type="Resource" uid="uid://b4fce3e1vs38n" path="res://Resources/StatusEffects/Stunned.tres" id="3_u1c6k"]
+[ext_resource type="Texture2D" uid="uid://cbr4mrsgqpdhc" path="res://Art/VFX Sprites/vfx_wind.png" id="4_rujhr"]
+
+[resource]
+script = ExtResource("1_uvvol")
+ability_name = "Whirlwind Swing"
+vfx = ExtResource("4_rujhr")
+element = 3
+valid_target = 0
+targeting = 3
+range = 1
+base_value = 10
+max_uses = 15
+damage_type = 1
+damaging = true
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_kp7lb")]([ExtResource("3_u1c6k")])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [80, 0, 15, 0, 75, 0]
+Abilities_required = Array[ExtResource("1_uvvol")]([])

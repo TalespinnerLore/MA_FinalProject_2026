@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://d02ns3e6v636q" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres" id="1_1voga"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_nerkr"]
-[ext_resource type="Resource" uid="uid://djndl3e5gc6vi" path="res://Resources/Abilities/LUK_base/Increase_Precision.tres" id="1_yxgxl"]
+[ext_resource type="Resource" uid="uid://djndl3e5gc6vi" path="res://Resources/Abilities/LUK_base/10_Increase_Precision.tres" id="1_yxgxl"]
 [ext_resource type="Texture2D" uid="uid://ccysrrr4x4jfo" path="res://Art/UnitSprites/BasicCharacter_jester.png" id="2_ohgv2"]
 [ext_resource type="Texture2D" uid="uid://b8r01xxaa8xxs" path="res://Art/UnitSprites/Palettes/testspritepallette0.png" id="3_uk2a0"]
 [ext_resource type="Texture2D" uid="uid://b6hv8onls4dsr" path="res://Art/UnitSprites/Palettes/testspritepallette1.png" id="4_1iayg"]

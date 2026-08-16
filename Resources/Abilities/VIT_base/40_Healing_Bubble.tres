@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://dguinja0it7mu"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_kmtqh"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_xu1u3"]
+[ext_resource type="Resource" uid="uid://eivq82k3cb6i" path="res://Resources/StatusEffects/Regeneration.tres" id="3_irwrx"]
+[ext_resource type="Texture2D" uid="uid://jo8g6xyk6vmd" path="res://Art/VFX Sprites/vfx_water.png" id="4_wwlc5"]
+
+[resource]
+script = ExtResource("1_kmtqh")
+ability_name = "Healing Bubble"
+vfx = ExtResource("4_wwlc5")
+element = 1
+valid_target = 3
+targeting = 4
+range = 1
+base_value = 8
+max_uses = 10
+damage_type = 6
+damaging = false
+healing = false
+creates_shield = true
+inflict_status = Array[ExtResource("2_xu1u3")]([ExtResource("3_irwrx")])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [5, 0, 40, 30, 0, 0]
+Abilities_required = Array[ExtResource("1_kmtqh")]([])

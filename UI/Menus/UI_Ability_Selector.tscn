@@ -25,7 +25,7 @@
 [ext_resource type="Script" path="res://UI/Menus/ui_stat_box.gd" id="19_mmq70"]
 [ext_resource type="Texture2D" uid="uid://vtw0q5vupesy" path="res://Art/UI_Art/12x12minus.png" id="20_2rc57"]
 [ext_resource type="Texture2D" uid="uid://cdsr7x70gmwos" path="res://Art/UI_Art/12x12plus.png" id="21_20whk"]
-[ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/Cone_of_Embers.tres" id="21_nqk8x"]
+[ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/10_Cone_of_Embers.tres" id="21_nqk8x"]
 [ext_resource type="Texture2D" uid="uid://cwfi6r14nnakd" path="res://Art/UI_Art/Frames/ui_bg_thinblue_3.png" id="22_6lq11"]
 [ext_resource type="Texture2D" uid="uid://fmymcvcoc0ph" path="res://Art/UI_Art/ui_longbutton.png" id="23_lhq38"]
 [ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="25_bm6x8"]

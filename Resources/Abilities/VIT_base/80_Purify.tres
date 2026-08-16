@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://0if3g3khpnhi"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_0rxui"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_x5l12"]
+[ext_resource type="Resource" uid="uid://c1s0lqb64cpex" path="res://Resources/StatusEffects/Purification.tres" id="3_itvai"]
+[ext_resource type="Texture2D" uid="uid://m6sk7hjt5ypo" path="res://Art/VFX Sprites/vfx_light.png" id="4_6kx68"]
+
+[resource]
+script = ExtResource("1_0rxui")
+ability_name = "Purify"
+vfx = ExtResource("4_6kx68")
+element = 5
+valid_target = 1
+targeting = 3
+range = 1
+base_value = 2
+max_uses = 10
+damage_type = 6
+damaging = false
+healing = true
+creates_shield = false
+inflict_status = Array[ExtResource("2_x5l12")]([ExtResource("3_itvai")])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [15, 0, 80, 50, 0, 0]
+Abilities_required = Array[ExtResource("1_0rxui")]([])

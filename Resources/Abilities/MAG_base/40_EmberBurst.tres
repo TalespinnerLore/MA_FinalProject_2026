@@ -6,12 +6,12 @@
 
 [resource]
 script = ExtResource("1_pk5it")
-ability_name = "Ember Burst"
+ability_name = "Flame Burst"
 vfx = ExtResource("3_32sr3")
 element = 0
 valid_target = 0
 targeting = 3
-range = 1
+range = 2
 base_value = 5
 max_uses = 25
 damage_type = 5
@@ -20,5 +20,5 @@ healing = false
 creates_shield = false
 inflict_status = Array[ExtResource("2_bxsuf")]([])
 STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
-BaseStats_required = [0, 10, 0, 10, 0, 0]
+BaseStats_required = [0, 30, 0, 40, 5, 0]
 Abilities_required = Array[ExtResource("1_pk5it")]([])

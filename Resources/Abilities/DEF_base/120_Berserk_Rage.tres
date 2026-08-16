@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("1_28f6o")
-ability_name = "Curse of Fragility"
+ability_name = "Berserk Rage"
 vfx = ExtResource("5_bxf3j")
 element = 0
 valid_target = 3

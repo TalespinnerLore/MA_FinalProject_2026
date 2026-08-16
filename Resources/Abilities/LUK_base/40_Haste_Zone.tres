@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://cfggrniird0fd"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_2074b"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_pdo1j"]
+[ext_resource type="Resource" uid="uid://dt3uremtj3wxf" path="res://Resources/StatusEffects/Haste.tres" id="3_e303x"]
+[ext_resource type="Texture2D" uid="uid://cbr4mrsgqpdhc" path="res://Art/VFX Sprites/vfx_wind.png" id="4_ou5n1"]
+
+[resource]
+script = ExtResource("1_2074b")
+ability_name = "Haste Zone"
+vfx = ExtResource("4_ou5n1")
+element = 3
+valid_target = 2
+targeting = 3
+range = 2
+base_value = 0
+max_uses = 15
+damage_type = 6
+damaging = false
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_pdo1j")]([ExtResource("3_e303x")])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 15, 0, 15, 0, 40]
+Abilities_required = Array[ExtResource("1_2074b")]([])

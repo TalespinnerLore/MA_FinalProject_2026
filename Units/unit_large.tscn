@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Units/unit.gd" id="1_8j0v2"]
 [ext_resource type="Script" path="res://Units/abilities.gd" id="3_kntq5"]
 [ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="4_y4nrj"]
-[ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/Cone_of_Embers.tres" id="5_2a1ss"]
+[ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/10_Cone_of_Embers.tres" id="5_2a1ss"]
 [ext_resource type="Resource" uid="uid://cv14lef7fcshm" path="res://Resources/Abilities/DEX_base/10_Piercing_Shot.tres" id="6_hdayg"]
 [ext_resource type="Script" path="res://Units/equipment.gd" id="7_a71ak"]
 [ext_resource type="Script" path="res://Units/status_effects_manager.gd" id="8_qd0w3"]

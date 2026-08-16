@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="StatComponent" load_steps=13 format=3 uid="uid://dce4pgoihwbme"]
 
-[ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/Cone_of_Embers.tres" id="1_lfcl6"]
+[ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/10_Cone_of_Embers.tres" id="1_lfcl6"]
 [ext_resource type="Texture2D" uid="uid://bt7ms3n1itwfp" path="res://Art/UnitSprites/Spritesheets/enemytype_goblin_base.png" id="2_7ien3"]
 [ext_resource type="Resource" uid="uid://d02ns3e6v636q" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres" id="2_oxqng"]
 [ext_resource type="Texture2D" uid="uid://b3jx36v2l2q00" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette0.png" id="3_ngpqv"]
