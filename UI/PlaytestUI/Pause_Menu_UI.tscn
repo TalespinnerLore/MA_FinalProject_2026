@@ -1,0 +1,290 @@
+[gd_scene load_steps=9 format=4 uid="uid://5k4xgds11d8w"]
+
+[ext_resource type="Texture2D" uid="uid://c1klp2j8qpq82" path="res://Art/UI_Art/Frames/ui_bg_bluedark.png" id="1_8qhtr"]
+[ext_resource type="Script" path="res://UI/PlaytestUI/pause_menu_ui.gd" id="1_affb8"]
+[ext_resource type="Texture2D" uid="uid://b5if3arx05nce" path="res://Art/UI_Art/Frames/ui_bg_yellowoutline.png" id="2_sagjh"]
+[ext_resource type="Script" path="res://UI/PlaytestUI/bg_swap.gd" id="3_vipyn"]
+[ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="4_43c3s"]
+[ext_resource type="TileSet" uid="uid://ty37cym0krxg" path="res://Crafting/tower_crafting_ui.tres" id="6_16kep"]
+[ext_resource type="Texture2D" uid="uid://d26g6cgvhcqaf" path="res://Art/UI_Art/arrow_tile_left.png" id="7_n783u"]
+[ext_resource type="Texture2D" uid="uid://b4i6a72h02ho" path="res://Art/UI_Art/arrow_tile_right.png" id="8_vp8kr"]
+
+[node name="PauseMenuUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_affb8")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 249.0
+offset_top = 72.0
+offset_right = 393.0
+offset_bottom = 99.0
+theme = ExtResource("4_43c3s")
+theme_override_colors/font_color = Color(0.796078, 0.858824, 0.988235, 1)
+theme_override_colors/font_outline_color = Color(0.34902, 0.337255, 0.321569, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "PAUSE MENU"
+
+[node name="OptionsBox" type="NinePatchRect" parent="."]
+offset_left = 224.0
+offset_top = 104.0
+offset_right = 416.0
+offset_bottom = 288.0
+texture = ExtResource("1_8qhtr")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsBox"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 12.0
+offset_right = 168.0
+offset_bottom = 172.0
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="EXITtoMAIN" type="NinePatchRect" parent="OptionsBox/VBoxContainer"]
+custom_minimum_size = Vector2(20, 40)
+layout_mode = 2
+texture = ExtResource("2_sagjh")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+script = ExtResource("3_vipyn")
+
+[node name="EXILTButton" type="Button" parent="OptionsBox/VBoxContainer/EXITtoMAIN"]
+layout_mode = 2
+offset_top = 3.0
+offset_right = 144.0
+offset_bottom = 36.0
+theme = ExtResource("4_43c3s")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "MAIN MENU
+"
+flat = true
+
+[node name="RECIPES" type="NinePatchRect" parent="OptionsBox/VBoxContainer"]
+custom_minimum_size = Vector2(20, 40)
+layout_mode = 2
+texture = ExtResource("2_sagjh")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+script = ExtResource("3_vipyn")
+
+[node name="recipesButton" type="Button" parent="OptionsBox/VBoxContainer/RECIPES"]
+layout_mode = 2
+offset_top = 3.0
+offset_right = 144.0
+offset_bottom = 36.0
+theme = ExtResource("4_43c3s")
+theme_override_colors/font_color = Color(0.796078, 0.858824, 0.988235, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "RECIPES FOUND
+"
+flat = true
+
+[node name="CLOSE" type="NinePatchRect" parent="OptionsBox/VBoxContainer"]
+custom_minimum_size = Vector2(20, 40)
+layout_mode = 2
+texture = ExtResource("2_sagjh")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+script = ExtResource("3_vipyn")
+
+[node name="CLOSEButton" type="Button" parent="OptionsBox/VBoxContainer/CLOSE"]
+layout_mode = 2
+offset_top = 3.0
+offset_right = 144.0
+offset_bottom = 36.0
+theme = ExtResource("4_43c3s")
+theme_override_colors/font_color = Color(0.996078, 0.47451, 0.403922, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "CLOSE
+"
+flat = true
+
+[node name="Recipes" type="NinePatchRect" parent="."]
+offset_left = 128.0
+offset_right = 512.0
+offset_bottom = 360.0
+texture = ExtResource("1_8qhtr")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="TileMapLayer_Base" type="TileMapLayer" parent="Recipes"]
+light_mask = 0
+position = Vector2(16, 3)
+tile_map_data = PackedByteArray("AAABAAEAAAABAAUAAAABAAIAAAABAAYAAAABAAMAAAABAAYAAAABAAQAAAABAAYAAAABAAUAAAAHAAIAAAABAAYAAAABAAYAAAABAAcAAAABAAYAAAABAAgAAAABAAYAAAABAAkAAAABAAcAAAACAAEAAAACAAUAAAACAAIAAAACAAIAAAACAAMAAAAFAAEAAAACAAQAAAACAAIAAAACAAUAAAACAAIAAAACAAYAAAACAAIAAAACAAcAAAAFAAMAAAACAAgAAAACAAIAAAACAAkAAAACAAcAAAADAAEAAAACAAUAAAADAAIAAAAGAAAAAAADAAMAAAAGAAEAAAADAAQAAAACAAIAAAADAAUAAAAAAAIAAAADAAYAAAACAAIAAAADAAcAAAAGAAMAAAADAAgAAAAGAAQAAAADAAkAAAACAAcAAAAEAAEAAAACAAUAAAAEAAIAAAACAAIAAAAEAAMAAAACAAIAAAAEAAQAAAABAAEAAAAEAAUAAAABAAIAAAAEAAYAAAABAAMAAAAEAAcAAAACAAIAAAAEAAgAAAACAAIAAAAEAAkAAAACAAcAAAAFAAEAAAAHAAIAAAAFAAIAAAACAAIAAAAFAAMAAAACAAAAAAAFAAUAAAACAAIAAAAFAAYAAAACAAMAAAAFAAcAAAACAAQAAAAFAAgAAAACAAIAAAAFAAkAAAAHAAIAAAAGAAEAAAACAAUAAAAGAAIAAAACAAIAAAAGAAMAAAACAAIAAAAGAAQAAAADAAEAAAAGAAUAAAADAAIAAAAGAAYAAAADAAMAAAAGAAcAAAACAAIAAAAGAAgAAAACAAIAAAAGAAkAAAACAAcAAAAHAAEAAAACAAUAAAAHAAIAAAAIAAAAAAAHAAMAAAAIAAEAAAAHAAQAAAACAAIAAAAHAAUAAAAEAAIAAAAHAAYAAAACAAIAAAAHAAcAAAAIAAMAAAAHAAgAAAAIAAQAAAAHAAkAAAACAAcAAAAIAAEAAAACAAUAAAAIAAIAAAACAAIAAAAIAAMAAAAJAAEAAAAIAAQAAAACAAIAAAAIAAUAAAACAAIAAAAIAAYAAAACAAIAAAAIAAcAAAAJAAMAAAAIAAgAAAACAAIAAAAIAAkAAAACAAcAAAAJAAEAAAADAAUAAAAJAAIAAAADAAYAAAAJAAMAAAADAAYAAAAJAAQAAAADAAYAAAAJAAUAAAAHAAIAAAAJAAYAAAADAAYAAAAJAAcAAAADAAYAAAAJAAgAAAADAAYAAAAJAAkAAAADAAcAAAAFAAQAAAACAAEAAAA=")
+tile_set = ExtResource("6_16kep")
+
+[node name="LeftButton" type="TextureButton" parent="Recipes/TileMapLayer_Base"]
+offset_left = -5.0
+offset_top = 161.0
+offset_right = 27.0
+offset_bottom = 193.0
+texture_normal = ExtResource("7_n783u")
+texture_pressed = ExtResource("7_n783u")
+texture_hover = ExtResource("7_n783u")
+texture_disabled = ExtResource("7_n783u")
+texture_focused = ExtResource("7_n783u")
+
+[node name="BackLabel" type="Label" parent="Recipes/TileMapLayer_Base/LeftButton"]
+visible = false
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+theme = ExtResource("4_43c3s")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightButton" type="TextureButton" parent="Recipes/TileMapLayer_Base"]
+offset_left = 326.0
+offset_top = 161.0
+offset_right = 358.0
+offset_bottom = 193.0
+texture_normal = ExtResource("8_vp8kr")
+texture_pressed = ExtResource("8_vp8kr")
+texture_hover = ExtResource("8_vp8kr")
+texture_disabled = ExtResource("8_vp8kr")
+texture_focused = ExtResource("8_vp8kr")
+
+[node name="NextLabel" type="Label" parent="Recipes/TileMapLayer_Base/RightButton"]
+visible = false
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+theme = ExtResource("4_43c3s")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BACK" type="NinePatchRect" parent="Recipes/TileMapLayer_Base"]
+offset_left = 144.0
+offset_top = 320.0
+offset_right = 208.0
+offset_bottom = 352.0
+texture = ExtResource("2_sagjh")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("3_vipyn")
+
+[node name="BACKButton" type="Button" parent="Recipes/TileMapLayer_Base/BACK"]
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 65.0
+offset_bottom = 29.0
+theme = ExtResource("4_43c3s")
+theme_override_colors/font_color = Color(0.996078, 0.47451, 0.403922, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "BACK
+"
+flat = true
+
+[node name="TileMapLayer_MonHouse" type="TileMapLayer" parent="Recipes"]
+light_mask = 0
+position = Vector2(16, 3)
+tile_map_data = PackedByteArray("AAAFAAQAAgACAAUAAAAFAAYAAgACAAUAAAAEAAUAAgABAAQAAAAGAAUAAgABAAQAAAAFAAUAAgAAAAoAAAA=")
+tile_set = ExtResource("6_16kep")
+
+[node name="TileMapLayer_TreasureVault" type="TileMapLayer" parent="Recipes"]
+visible = false
+light_mask = 0
+position = Vector2(16, 3)
+tile_map_data = PackedByteArray("AAAEAAQAAgABAAoAAAAGAAQAAgABAAoAAAAEAAYAAgABAAoAAAAGAAYAAgABAAoAAAA=")
+tile_set = ExtResource("6_16kep")
+
+[node name="TileMapLayer_MiniBoss" type="TileMapLayer" parent="Recipes"]
+visible = false
+light_mask = 0
+position = Vector2(16, 3)
+tile_map_data = PackedByteArray("AAAFAAQAAgAAAAsAAAAEAAUAAgAAAAoAAAAFAAYAAgAAAAoAAAAGAAUAAgAAAAoAAAA=")
+tile_set = ExtResource("6_16kep")
+
+[node name="TileMapLayer_ForceBoss" type="TileMapLayer" parent="Recipes"]
+visible = false
+light_mask = 0
+position = Vector2(16, 3)
+tile_map_data = PackedByteArray("AAAFAAUAAgAAAA8AAAAEAAUAAgABAAcAAAAGAAUAAgAAAAcAAAAFAAQAAgACAAcAAAAFAAYAAgAAAAYAAAAEAAYAAgACAAEAAAAGAAYAAgACAAEAAAAGAAQAAgACAAEAAAAEAAQAAgACAAEAAAA=")
+tile_set = ExtResource("6_16kep")
+
+[node name="TileMapLayer_FireBoss" type="TileMapLayer" parent="Recipes"]
+visible = false
+light_mask = 0
+position = Vector2(16, 3)
+tile_map_data = PackedByteArray("AAAFAAUAAgAAAA8AAAAEAAQAAgABAAAAAAAGAAQAAgABAAAAAAAEAAYAAgAAAAIAAAAGAAYAAgAAAAIAAAAEAAUAAgACAAwAAAAGAAUAAgACAAwAAAAFAAQAAgABAAoAAAAFAAYAAgACAAMAAAA=")
+tile_set = ExtResource("6_16kep")
+
+[node name="TileMapLayer_WaterBoss" type="TileMapLayer" parent="Recipes"]
+visible = false
+light_mask = 0
+position = Vector2(16, 3)
+tile_map_data = PackedByteArray("AAAFAAUAAgAAAA8AAAAFAAQAAgABAAMAAAAEAAQAAgABAAIAAAAGAAQAAgABAAIAAAAEAAYAAgACAAAAAAAGAAYAAgACAAAAAAAFAAYAAgAAAAYAAAAEAAUAAgACAA0AAAAGAAUAAgABAAsAAAA=")
+tile_set = ExtResource("6_16kep")
+
+[node name="TileMapLayer_EarthBoss" type="TileMapLayer" parent="Recipes"]
+visible = false
+light_mask = 0
+position = Vector2(16, 3)
+tile_map_data = PackedByteArray("AAAFAAUAAgAAAA8AAAAEAAYAAgACAAIAAAAGAAYAAgACAAIAAAAEAAQAAgAAAAEAAAAGAAQAAgAAAAEAAAAFAAQAAgAAAAgAAAAGAAUAAgAAAAsAAAAEAAUAAgAAAAoAAAAFAAYAAgACAAYAAAA=")
+tile_set = ExtResource("6_16kep")
+
+[node name="TileMapLayer_AirBoss" type="TileMapLayer" parent="Recipes"]
+visible = false
+light_mask = 0
+position = Vector2(16, 3)
+tile_map_data = PackedByteArray("AAAFAAUAAgAAAA8AAAAEAAYAAgABAAEAAAAGAAYAAgABAAEAAAAEAAQAAgAAAAMAAAAGAAQAAgAAAAMAAAAFAAQAAgACAAoAAAAFAAYAAgACAAsAAAAGAAUAAgABAAkAAAAEAAUAAgACAAgAAAA=")
+tile_set = ExtResource("6_16kep")
+
+[node name="TileMapLayer_QuadBoss" type="TileMapLayer" parent="Recipes"]
+visible = false
+light_mask = 0
+position = Vector2(16, 3)
+tile_map_data = PackedByteArray("AAAFAAUAAgAAABEAAAADAAMAAgABAA8AAAAHAAMAAgACAA8AAAAHAAcAAgAAABAAAAADAAcAAgABABAAAAAGAAYAAgACAAIAAAAEAAQAAgAAAAIAAAAGAAQAAgABAAIAAAAEAAYAAgAAAAMAAAAHAAUAAgABAAYAAAADAAUAAgAAAAYAAAAFAAMAAgABAAoAAAAFAAcAAgACAAYAAAAEAAUAAgABAA4AAAAFAAQAAgABAA4AAAAGAAUAAgABAA4AAAAFAAYAAgABAA4AAAA=")
+tile_set = ExtResource("6_16kep")
+
+[node name="TileMapLayer_SecretBoss" type="TileMapLayer" parent="Recipes"]
+visible = false
+light_mask = 0
+position = Vector2(16, 3)
+tile_map_data = PackedByteArray("AAAFAAUAAgAAABEAAAAFAAYAAgAAAA4AAAAFAAQAAgAAAA4AAAAEAAUAAgACAA4AAAAGAAUAAgACAA4AAAAEAAQAAgACAAoAAAAGAAQAAgACAAoAAAAEAAYAAgABAAoAAAAGAAYAAgABAAoAAAADAAUAAgAAAAsAAAAHAAUAAgAAAAsAAAAFAAMAAgACAAsAAAAFAAcAAgABAAsAAAADAAMAAgACABAAAAAHAAMAAgACABAAAAAHAAcAAgACABAAAAADAAcAAgACABAAAAA=")
+tile_set = ExtResource("6_16kep")
+
+[connection signal="mouse_entered" from="OptionsBox/VBoxContainer/EXITtoMAIN/EXILTButton" to="OptionsBox/VBoxContainer/EXITtoMAIN" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="OptionsBox/VBoxContainer/EXITtoMAIN/EXILTButton" to="OptionsBox/VBoxContainer/EXITtoMAIN" method="_on_mouse_exited"]
+[connection signal="pressed" from="OptionsBox/VBoxContainer/EXITtoMAIN/EXILTButton" to="." method="_on_exilt_button_pressed"]
+[connection signal="mouse_entered" from="OptionsBox/VBoxContainer/RECIPES/recipesButton" to="OptionsBox/VBoxContainer/RECIPES" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="OptionsBox/VBoxContainer/RECIPES/recipesButton" to="OptionsBox/VBoxContainer/RECIPES" method="_on_mouse_exited"]
+[connection signal="pressed" from="OptionsBox/VBoxContainer/RECIPES/recipesButton" to="." method="_on_recipes_button_pressed"]
+[connection signal="mouse_entered" from="OptionsBox/VBoxContainer/CLOSE/CLOSEButton" to="OptionsBox/VBoxContainer/CLOSE" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="OptionsBox/VBoxContainer/CLOSE/CLOSEButton" to="OptionsBox/VBoxContainer/CLOSE" method="_on_mouse_exited"]
+[connection signal="pressed" from="OptionsBox/VBoxContainer/CLOSE/CLOSEButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="Recipes/TileMapLayer_Base/LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="Recipes/TileMapLayer_Base/RightButton" to="." method="_on_right_button_pressed"]
+[connection signal="mouse_entered" from="Recipes/TileMapLayer_Base/BACK/BACKButton" to="Recipes/TileMapLayer_Base/BACK" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Recipes/TileMapLayer_Base/BACK/BACKButton" to="Recipes/TileMapLayer_Base/BACK" method="_on_mouse_exited"]
+[connection signal="pressed" from="Recipes/TileMapLayer_Base/BACK/BACKButton" to="." method="_on_back_button_pressed"]

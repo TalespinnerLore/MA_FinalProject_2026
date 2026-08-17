@@ -122,6 +122,7 @@ func ability_description(data:AbilityData):
 					'DEF: ',data.BaseStats_required[4],'   LUK: ',data.BaseStats_required[5],'\n')
 
 func item_description(data:ItemData):
+	selected_item = data.duplicate()
 	var title = $DescriptionBox/NameOfThingLabel
 	var desc = $DescriptionBox/DescriptionLabel
 	title.text = str('-ITEM-\n',data.ItemName)
@@ -192,9 +193,35 @@ var desc_free = "Freely applicable stat points that can be allocated as the play
 func _on_weapon_texture_mouse_entered() -> void:
 	if PlayerStats.p1_weapon != null:
 		item_description(PlayerStats.p1_weapon)
+		selected_slot = 'w'
 func _on_armour_texture_mouse_entered() -> void:
 	if PlayerStats.p1_armour != null:
 		item_description(PlayerStats.p1_armour)
+		selected_slot = 'a'
 func _on_trinket_texture_mouse_entered() -> void:
 	if PlayerStats.p1_trinket != null:
 		item_description(PlayerStats.p1_trinket)
+		selected_slot = 't'
+
+var selected_item:ItemData = null
+var selected_slot = null
+
+func _on_unequip_button_pressed() -> void:
+	if PlayerStats.player_inventory.size() < PlayerStats.inventory_size and selected_item != null:
+		PlayerStats.Add_to_Player_Inv_stack(selected_item,1)
+		selected_item = null
+		match selected_slot:
+			'w':
+				PlayerStats.p1_weapon = null
+			'a':
+				PlayerStats.p1_armour = null
+			't':
+				PlayerStats.p1_trinket = null
+	pass # Replace with function body.
+
+
+func _on_drop_button_pressed() -> void:
+	if get_tree().get_first_node_in_group("ITEM_MANAGER") != null and selected_item != null:
+		var manager:GroundItemManager = get_tree().get_first_node_in_group("ITEM_MANAGER")
+		manager.drop_item(get_tree().get_first_node_in_group("Player").self_coords,selected_item,1)
+		pass

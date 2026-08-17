@@ -236,7 +236,7 @@ func _on_give_button_pressed() -> void:
 
 
 func _on_drop_button_pressed() -> void:
-	if selected_item.ItemName != 'Gold':
+	if selected_item.ItemName != 'Gold' and is_instance_valid(ItemManager):
 		var dropped = ItemManager.drop_item(player.self_coords+player.facing,selected_item,\
 		PlayerStats.player_inventory[selected_inv_slot][1])
 

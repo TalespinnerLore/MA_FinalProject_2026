@@ -262,7 +262,7 @@ class_name SaveDataResource
 	"1stdrop_t1bosstile":false,
 	"1stdrop_t2bosstile":false,
 	
-	"unlocked_recipe_monsterhouse":false,
+	"unlocked_recipe_monsterhouse":true,
 	"unlocked_recipe_treasurevault":false,
 	"unlocked_recipe_miniboss":false,
 	"unlocked_recipe_forceboss":false,

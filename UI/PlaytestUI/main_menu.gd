@@ -70,6 +70,8 @@ func _on_cont_button_pressed() -> void:
 	SaveLoad.load_player_data()
 	if SaveLoad.SaveFileData.is_in_dungeon:
 		SaveLoad.load_dungeon_data()
+		await get_tree().create_timer(0.2)
+		#print('DUNDATA FIRE',DungeonData.Affinity_Fire)
 		open_to_dungeon()
 	elif SaveLoad.SaveFileData.is_in_hub:
 		open_to_HUB()
@@ -83,10 +85,11 @@ func _on_dev_button_pressed() -> void:
 	SaveLoad._load_devfile()
 	SaveLoad.load_player_data()
 	#open_to_house()
-	SaveLoad.load_dungeon_data()
-	await get_tree().create_timer(0.2)
-	print('DUNDATA FIRE',DungeonData.Affinity_Fire)
-	open_to_dungeon()
+	#SaveLoad.load_dungeon_data()
+	#await get_tree().create_timer(0.2)
+	#print('DUNDATA FIRE',DungeonData.Affinity_Fire)
+	#open_to_dungeon()
+	open_to_house()
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()

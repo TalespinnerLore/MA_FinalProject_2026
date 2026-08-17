@@ -314,6 +314,27 @@ func _on_button_pressed_right() -> void:
 	change_page_fixed(true)
 
 func _on_button_start_pressed() -> void:
+	var savekeys = SaveLoad.SaveFileData.checkpoint_persistance_keys
+	if Boss_T0_Mini > 0:
+		savekeys['unlocked_recipe_miniboss'] = true
+	if UniqueRooms_TreasureVault > 0:
+		savekeys['unlocked_recipe_treasurevault'] = true
+	if UniqueRooms_MonsterHouse > 0:
+		savekeys['unlocked_recipe_monsterhouse'] = true
+	if Boss_T1_Force > 0:
+		savekeys['unlocked_recipe_forceboss'] = true
+	if Boss_T1_Fire > 0:
+		savekeys['unlocked_recipe_fireboss'] = true
+	if Boss_T1_Water > 0:
+		savekeys['unlocked_recipe_waterboss'] = true
+	if Boss_T1_Earth > 0:
+		savekeys['unlocked_recipe_earthboss'] = true
+	if Boss_T1_Wind > 0:
+		savekeys['unlocked_recipe_airboss'] = true
+	if Boss_T2_Force > 0:
+		savekeys['unlocked_recipe_forceboss2'] = true
+	if Boss_T2_QuadElement > 0:
+		savekeys['unlocked_recipe_quadboss'] = true
 	print("testing button")
 	#DungeonData.Affinity = Affinity
 	#DungeonData.Enemies = Enemies
