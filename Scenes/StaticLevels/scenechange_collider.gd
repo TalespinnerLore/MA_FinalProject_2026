@@ -2,6 +2,7 @@ extends Area2D
 class_name scenechange_collider
 
 @export var scene_to_open:String
+@export var player_location:Vector2
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Unit_Instance_NonCombat:

@@ -1,25 +1,30 @@
-[gd_resource type="Resource" script_class="SaveDataResource" load_steps=5 format=3 uid="uid://brdnkt2uulofa"]
+[gd_resource type="Resource" script_class="SaveDataResource" load_steps=6 format=3 uid="uid://brdnkt2uulofa"]
 
-[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_fhfyc"]
-[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="2_pset7"]
-[ext_resource type="Script" path="res://Resources/_ResourceTemplates/UniqueRoomData.gd" id="3_3j5k7"]
-[ext_resource type="Script" path="res://_SaveLoad/SaveData.gd" id="4_n6jek"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_ieqc1"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="2_0u54d"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/UniqueRoomData.gd" id="3_1ooho"]
+[ext_resource type="Resource" uid="uid://c78i1vl8chm0p" path="res://Resources/Units/Player/Stats_Civilian.tres" id="4_kscll"]
+[ext_resource type="Script" path="res://_SaveLoad/SaveData.gd" id="5_nleun"]
 
 [resource]
-script = ExtResource("4_n6jek")
+script = ExtResource("5_nleun")
+p1_class = ExtResource("4_kscll")
 p1_trinket_slot_stacksize = 0
 p1_equipped_abilities = null
 p1_ability_usesB1234WAT = Array[int]([999, 0, 0, 0, 0, 0, 0, 0])
-p1_HP = 0
-p1_level = 1
+p1_HP = 60
+p1_level = 25
 p1_XP = 0
 p1_investedStrDexVitMagDefLuk = Array[int]([0, 0, 0, 0, 0, 0])
-p1_free_stats = 5
+p1_free_stats = 125
 player_inventory = null
-inventory_size = 10
-player_gold = 999
-is_in_dungeon = false
-Affinity_Fire = 0
+inventory_size = 60
+player_gold = 99999
+is_in_dungeon = true
+is_in_hub = false
+is_in_craftingroom = false
+TileID_NamedInventory = [["TEST", 0], ["FIRE", 8], ["WATER", 8], ["EARTH", 8], ["AIR", 8], ["FORCE", 8], ["VOLCANO", 8], ["ISLANDS", 8], ["MESA", 8], ["SKY_ISLANDS", 8], ["RIVER", 8], ["LAKE", 8], ["ROUND_ROOMS", 8], ["DENSE_LAYOUT", 8], ["SPARSE_LAYOUT", 8], ["ALTERNATING_SIZE_ROOMS", 8], ["SMALL_ROOMS", 8], ["LARGE_ROOMS", 8], ["CONSUMABLES", 8], ["GEAR", 2], ["LOCKBOXES", 8], ["WEAPONS", 8], ["ARMOUR", 8], ["TRINKETS", 8], ["VANGUARD", 8], ["WARRIOR", 8], ["MAGE", 8], ["ROGUE", 8], ["HEALER", 8], ["JESTER", 8], ["INCREASED_MOB_DENSITY", 8], ["INCREASED_GOLD", 8], ["INCREASED_XP", 8], ["DECREASED_MOB_DENSITY", 8], ["DECREASED_GOLD", 8], ["DECREASED_XP", 8], ["BEASTS", 8], ["ELEMENTALS", 8], ["UNDEAD", 8], ["CONSTRUCTS", 8], ["MORTALS", 8], ["WILDLINGS", 8], ["TREASURE_ROOM", 4], ["MINI_BOSS", 4], ["MONSTER_HOUSE", 4], ["T1_BOSS", 4], ["T1_FIREBOSS", 2], ["T1_WATERBOSS", 2], ["T1_EARTHBOSS", 2], ["T1_AIRBOSS", 2], ["T1_FORCEBOSS", 5], ["T2_BOSS", 2], ["T2_QUADBOSS", 1], ["T2_FORCEBOSS", 1]]
+Affinity_Fire = 200
 Affinity_Water = 0
 Affinity_Earth = 0
 Affinity_Air = 0
@@ -84,7 +89,7 @@ Boss_T2_QuadElement = 0
 Boss_T2_Force = 0
 extra_floors = 0
 has_boss = false
-mini_bosses = Array[ExtResource("1_fhfyc")]([])
+mini_bosses = Array[ExtResource("1_ieqc1")]([])
 elites = null
 minis = null
 houses = null
@@ -98,7 +103,7 @@ AREA_LEVEL = 1
 UNIT_LEVEL_Boost = 0
 max_wandering_units = 5
 max_floors = 5
-current_floor = 0
+current_floor = 3
 room_attempts = 25
 interconnectivity = 4.0
 rounded = false
@@ -109,19 +114,19 @@ flood_tile = "WATER"
 max_size = 15
 min_size = 5
 level_size = Vector2i(30, 30)
-Common_Enemies = Array[ExtResource("1_fhfyc")]([])
-Rare_Enemies = Array[ExtResource("1_fhfyc")]([])
-Common_Items = Array[ExtResource("2_pset7")]([])
-Rare_Items = Array[ExtResource("2_pset7")]([])
-Unique_Rooms = Array[ExtResource("3_3j5k7")]([])
+Common_Enemies = Array[ExtResource("1_ieqc1")]([])
+Rare_Enemies = Array[ExtResource("1_ieqc1")]([])
+Common_Items = Array[ExtResource("2_0u54d")]([])
+Rare_Items = Array[ExtResource("2_0u54d")]([])
+Unique_Rooms = Array[ExtResource("3_1ooho")]([])
 stored_character_data = {
 "Civilian": {
 "XP": 0,
 "armour": null,
 "equipped_abilities": [],
-"free_stats": 5,
+"free_stats": 125,
 "investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
-"level": 1,
+"level": 25,
 "statComp": "res://Resources/Units/Player/Stats_Civilian.tres",
 "trinket": null,
 "trinket_slot_stacksize": 0,
@@ -131,9 +136,9 @@ stored_character_data = {
 "XP": 0,
 "armour": null,
 "equipped_abilities": [],
-"free_stats": 5,
+"free_stats": 125,
 "investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
-"level": 1,
+"level": 25,
 "statComp": "res://Resources/Units/Player/Stats_Healer.tres",
 "trinket": null,
 "trinket_slot_stacksize": 0,
@@ -143,9 +148,9 @@ stored_character_data = {
 "XP": 0,
 "armour": null,
 "equipped_abilities": [],
-"free_stats": 8,
+"free_stats": 200,
 "investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
-"level": 1,
+"level": 25,
 "statComp": "res://Resources/Units/Player/Stats_Jester.tres",
 "trinket": null,
 "trinket_slot_stacksize": 0,
@@ -155,9 +160,9 @@ stored_character_data = {
 "XP": 0,
 "armour": null,
 "equipped_abilities": [],
-"free_stats": 5,
+"free_stats": 125,
 "investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
-"level": 1,
+"level": 25,
 "statComp": "res://Resources/Units/Player/Stats_Mage.tres",
 "trinket": null,
 "trinket_slot_stacksize": 0,
@@ -167,9 +172,9 @@ stored_character_data = {
 "XP": 0,
 "armour": null,
 "equipped_abilities": [],
-"free_stats": 5,
+"free_stats": 125,
 "investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
-"level": 1,
+"level": 25,
 "statComp": "res://Resources/Units/Player/Stats_Ranger.tres",
 "trinket": null,
 "trinket_slot_stacksize": 0,
@@ -179,9 +184,9 @@ stored_character_data = {
 "XP": 0,
 "armour": null,
 "equipped_abilities": [],
-"free_stats": 5,
+"free_stats": 125,
 "investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
-"level": 1,
+"level": 25,
 "statComp": "res://Resources/Units/Player/Stats_Vanguard.tres",
 "trinket": null,
 "trinket_slot_stacksize": 0,
@@ -191,44 +196,44 @@ stored_character_data = {
 "XP": 0,
 "armour": null,
 "equipped_abilities": [],
-"free_stats": 5,
+"free_stats": 125,
 "investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
-"level": 1,
+"level": 25,
 "statComp": "res://Resources/Units/Player/Stats_Warrior.tres",
 "trinket": null,
 "trinket_slot_stacksize": 0,
 "weapon": null
 }
 }
-bank_gold_val = 0
+bank_gold_val = 999999
 BankInventory_Resourcestack = null
 BankInventory_size = 999
 is_portal_open = false
 checkpoint_persistance_keys = {
-"1stdrop_minitile": false,
-"1stdrop_t1bosstile": false,
-"1stdrop_t2bosstile": false,
-"defeated_t0_miniboss": false,
-"defeated_t1_airboss": false,
-"defeated_t1_earthboss": false,
-"defeated_t1_fireboss": false,
-"defeated_t1_forceboss": false,
-"defeated_t1_waterboss": false,
-"defeated_t2_forceboss": false,
-"defeated_t2_quadboss": false,
-"reached_lvl_10": false,
-"reached_lvl_15": false,
-"reached_lvl_20": false,
-"reached_lvl_25": false,
-"reached_lvl_5": false,
-"unlocked_recipe_airboss": false,
-"unlocked_recipe_earthboss": false,
-"unlocked_recipe_fireboss": false,
-"unlocked_recipe_forceboss": false,
-"unlocked_recipe_forceboss2": false,
-"unlocked_recipe_miniboss": false,
-"unlocked_recipe_monsterhouse": false,
-"unlocked_recipe_quadboss": false,
-"unlocked_recipe_treasurevault": false,
-"unlocked_recipe_waterboss": false
+"1stdrop_minitile": true,
+"1stdrop_t1bosstile": true,
+"1stdrop_t2bosstile": true,
+"defeated_t0_miniboss": true,
+"defeated_t1_airboss": true,
+"defeated_t1_earthboss": true,
+"defeated_t1_fireboss": true,
+"defeated_t1_forceboss": true,
+"defeated_t1_waterboss": true,
+"defeated_t2_forceboss": true,
+"defeated_t2_quadboss": true,
+"reached_lvl_10": true,
+"reached_lvl_15": true,
+"reached_lvl_20": true,
+"reached_lvl_25": true,
+"reached_lvl_5": true,
+"unlocked_recipe_airboss": true,
+"unlocked_recipe_earthboss": true,
+"unlocked_recipe_fireboss": true,
+"unlocked_recipe_forceboss": true,
+"unlocked_recipe_forceboss2": true,
+"unlocked_recipe_miniboss": true,
+"unlocked_recipe_monsterhouse": true,
+"unlocked_recipe_quadboss": true,
+"unlocked_recipe_treasurevault": true,
+"unlocked_recipe_waterboss": true
 }

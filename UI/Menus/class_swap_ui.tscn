@@ -1,0 +1,328 @@
+[gd_scene load_steps=12 format=3 uid="uid://dfisf8473baje"]
+
+[ext_resource type="Script" path="res://UI/Menus/class_swap_ui.gd" id="1_bqmlg"]
+[ext_resource type="FontFile" uid="uid://bme72xoxft30d" path="res://Art/Tiny5-Regular.ttf" id="1_ll1xs"]
+[ext_resource type="Texture2D" uid="uid://byt11lv3l0usu" path="res://Art/UnitSprites/BasicCharacter_vanguard.png" id="2_c333x"]
+[ext_resource type="Texture2D" uid="uid://iuxuthmy31rr" path="res://Art/UnitSprites/BasicCharacter_enemy.png" id="3_1ndtd"]
+[ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="4_kgk44"]
+[ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="5_tol7f"]
+[ext_resource type="Texture2D" uid="uid://b4x3wup30pxxh" path="res://Art/UnitSprites/BasicCharacter_warrior.png" id="6_47y0h"]
+[ext_resource type="Texture2D" uid="uid://cma54lo0lvcps" path="res://Art/UnitSprites/BasicCharacter_ranger.png" id="7_whrrm"]
+[ext_resource type="Texture2D" uid="uid://bixa6lgv0t1kx" path="res://Art/UnitSprites/BasicCharacter_mage.png" id="8_fnyo6"]
+[ext_resource type="Texture2D" uid="uid://dscvo6hslhk00" path="res://Art/UnitSprites/BasicCharacter_healer.png" id="9_b8hgt"]
+[ext_resource type="Texture2D" uid="uid://ccysrrr4x4jfo" path="res://Art/UnitSprites/BasicCharacter_jester.png" id="10_l3vdo"]
+
+[node name="Class_Swap_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_bqmlg")
+
+[node name="ClassButtons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="VBoxContainer0" type="VBoxContainer" parent="ClassButtons"]
+custom_minimum_size = Vector2(80, 75)
+layout_mode = 0
+offset_left = 279.0
+offset_top = 31.0
+offset_right = 364.0
+offset_bottom = 118.0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer0"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_ll1xs")
+theme_override_font_sizes/font_size = 16
+text = "CIVILIAN
+"
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="ClassButtons/VBoxContainer0"]
+custom_minimum_size = Vector2(85, 65)
+layout_mode = 2
+texture_normal = ExtResource("4_kgk44")
+texture_pressed = ExtResource("3_1ndtd")
+texture_hover = ExtResource("3_1ndtd")
+texture_disabled = ExtResource("4_kgk44")
+texture_focused = ExtResource("4_kgk44")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer0/Button"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 65.0
+theme = ExtResource("5_tol7f")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Main Stat : NONE
+
+Gains 1 in each stat on level-up. 
+ [CHALLENGE MODE]"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="ClassButtons"]
+custom_minimum_size = Vector2(80, 75)
+layout_mode = 0
+offset_left = 177.0
+offset_top = 233.0
+offset_right = 262.0
+offset_bottom = 320.0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer1"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_ll1xs")
+theme_override_font_sizes/font_size = 16
+text = "VANGUARD"
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="ClassButtons/VBoxContainer1"]
+custom_minimum_size = Vector2(85, 65)
+layout_mode = 2
+texture_normal = ExtResource("2_c333x")
+texture_pressed = ExtResource("3_1ndtd")
+texture_hover = ExtResource("3_1ndtd")
+texture_disabled = ExtResource("4_kgk44")
+texture_focused = ExtResource("4_kgk44")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer1/Button"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 65.0
+theme = ExtResource("5_tol7f")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Main Stats : DEF / VIT
+
+This class focuses on Debuffing enemies and creating Shields."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ClassButtons"]
+custom_minimum_size = Vector2(80, 75)
+layout_mode = 0
+offset_left = 177.0
+offset_top = 134.0
+offset_right = 262.0
+offset_bottom = 221.0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_ll1xs")
+theme_override_font_sizes/font_size = 16
+text = "WARRIOR"
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="ClassButtons/VBoxContainer2"]
+custom_minimum_size = Vector2(85, 65)
+layout_mode = 2
+texture_normal = ExtResource("6_47y0h")
+texture_pressed = ExtResource("3_1ndtd")
+texture_hover = ExtResource("3_1ndtd")
+texture_disabled = ExtResource("4_kgk44")
+texture_focused = ExtResource("4_kgk44")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer2/Button"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 65.0
+theme = ExtResource("5_tol7f")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Main Stats : STR / DEF
+
+This class focuses on Physical Melee attacks."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="ClassButtons"]
+custom_minimum_size = Vector2(80, 75)
+layout_mode = 0
+offset_left = 177.0
+offset_top = 37.0
+offset_right = 262.0
+offset_bottom = 124.0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer3"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_ll1xs")
+theme_override_font_sizes/font_size = 16
+text = "ROGUE"
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="ClassButtons/VBoxContainer3"]
+custom_minimum_size = Vector2(85, 65)
+layout_mode = 2
+texture_normal = ExtResource("7_whrrm")
+texture_pressed = ExtResource("3_1ndtd")
+texture_hover = ExtResource("3_1ndtd")
+texture_disabled = ExtResource("4_kgk44")
+texture_focused = ExtResource("4_kgk44")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer3/Button"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 65.0
+theme = ExtResource("5_tol7f")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Main Stats : DEX / STR 
+
+This class focuses on Physical Ranged attacks."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="ClassButtons"]
+custom_minimum_size = Vector2(80, 75)
+layout_mode = 0
+offset_left = 378.0
+offset_top = 37.0
+offset_right = 463.0
+offset_bottom = 124.0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer4"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_ll1xs")
+theme_override_font_sizes/font_size = 16
+text = "MAGE"
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="ClassButtons/VBoxContainer4"]
+custom_minimum_size = Vector2(85, 65)
+layout_mode = 2
+texture_normal = ExtResource("8_fnyo6")
+texture_pressed = ExtResource("3_1ndtd")
+texture_hover = ExtResource("3_1ndtd")
+texture_disabled = ExtResource("4_kgk44")
+texture_focused = ExtResource("4_kgk44")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer4/Button"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 65.0
+theme = ExtResource("5_tol7f")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Main Stats : MAG / DEX 
+
+This class focuses on Magical Ranged attacks."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="ClassButtons"]
+custom_minimum_size = Vector2(80, 75)
+layout_mode = 0
+offset_left = 378.0
+offset_top = 134.0
+offset_right = 463.0
+offset_bottom = 221.0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer5"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_ll1xs")
+theme_override_font_sizes/font_size = 16
+text = "HEALER"
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="ClassButtons/VBoxContainer5"]
+custom_minimum_size = Vector2(85, 65)
+layout_mode = 2
+texture_normal = ExtResource("9_b8hgt")
+texture_pressed = ExtResource("3_1ndtd")
+texture_hover = ExtResource("3_1ndtd")
+texture_disabled = ExtResource("4_kgk44")
+texture_focused = ExtResource("4_kgk44")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer5/Button"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 65.0
+theme = ExtResource("5_tol7f")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Main Stats : VIT / MAG 
+
+This class focuses on Healing and Buffing themself and allies."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="ClassButtons"]
+custom_minimum_size = Vector2(80, 75)
+layout_mode = 0
+offset_left = 378.0
+offset_top = 233.0
+offset_right = 463.0
+offset_bottom = 320.0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer6"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_ll1xs")
+theme_override_font_sizes/font_size = 16
+text = "JESTER"
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="ClassButtons/VBoxContainer6"]
+custom_minimum_size = Vector2(85, 65)
+layout_mode = 2
+texture_normal = ExtResource("10_l3vdo")
+texture_pressed = ExtResource("3_1ndtd")
+texture_hover = ExtResource("3_1ndtd")
+texture_disabled = ExtResource("4_kgk44")
+texture_focused = ExtResource("4_kgk44")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ClassButtons/VBoxContainer6/Button"]
+layout_mode = 0
+offset_right = 85.0
+offset_bottom = 65.0
+theme = ExtResource("5_tol7f")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Main Stat : LUK
+
+A jack of all trades, with Luck-Based buffs and attacks."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Label" type="Label" parent="ClassButtons"]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 2.0
+offset_right = 498.0
+offset_bottom = 59.0
+theme = ExtResource("5_tol7f")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "CHOOSE YOUR PATH"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="ClassButtons/VBoxContainer0/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ClassButtons/VBoxContainer1/Button" to="." method="_on_button_pressed1"]
+[connection signal="pressed" from="ClassButtons/VBoxContainer2/Button" to="." method="_on_button_pressed2"]
+[connection signal="pressed" from="ClassButtons/VBoxContainer3/Button" to="." method="_on_button_pressed3"]
+[connection signal="pressed" from="ClassButtons/VBoxContainer4/Button" to="." method="_on_button_pressed4"]
+[connection signal="pressed" from="ClassButtons/VBoxContainer5/Button" to="." method="_on_button_pressed5"]
+[connection signal="pressed" from="ClassButtons/VBoxContainer6/Button" to="." method="_on_button_pressed6"]

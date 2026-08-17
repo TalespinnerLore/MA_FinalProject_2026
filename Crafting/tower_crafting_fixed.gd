@@ -74,14 +74,15 @@ func check_for_preset_recipes():
 		print("zonesdata:",zonedata_list,"\nrecipe:",recipe)
 		
 		for i in $DROPZONES.get_child_count():
-			if recipe[i] != null:
-				preset_list_tileID.append(recipe[i].TILE_ID)
-			else:
-				preset_list_tileID.append('<null>')
-			if $DROPZONES.get_child(i).CRAFTING_TILE_DATA != null:
-				zone_tilelID.append($DROPZONES.get_child(i).CRAFTING_TILE_DATA.TILE_ID)
-			else:
-				zone_tilelID.append('<null>')
+			if i <= recipe.size()-2:
+				if recipe[i] != null:
+					preset_list_tileID.append(recipe[i].TILE_ID)
+				else:
+					preset_list_tileID.append('<null>')
+				if $DROPZONES.get_child(i).CRAFTING_TILE_DATA != null:
+					zone_tilelID.append($DROPZONES.get_child(i).CRAFTING_TILE_DATA.TILE_ID)
+				else:
+					zone_tilelID.append('<null>')
 		print('z_tileID:',zone_tilelID,"\nrecipe_tileID:",preset_list_tileID)
 			#print("zone tileID:",zone_list[i].CRAFTING_TILE_DATA.TILE_ID," recipe tileID:",recipe[i].TILE_ID)
 		
@@ -176,7 +177,13 @@ func _on_button_pressedPLUS() -> void:
 	for n:DropZone in $DROPZONES.get_children():
 		if n.slot_filled:
 			n.remove_data()
-	set_dropzones(clampi(grid_level+1,0,5))
+	if grid_level == 3:
+		if $TileInventory.TileID_NamedInventory[-3][1] > 0:
+			set_dropzones(clampi(grid_level+1,0,5))
+		else:
+			set_dropzones(clampi(grid_level+2,0,5))
+	else:
+		set_dropzones(clampi(grid_level+1,0,5))
 	pass # Replace with function body.
 
 
@@ -184,5 +191,11 @@ func _on_button_pressedMINUS() -> void:
 	for n:DropZone in $DROPZONES.get_children():
 		if n.slot_filled:
 			n.remove_data()
-	set_dropzones(clampi(grid_level-1,0,5))
+	if grid_level == 5:
+		if $TileInventory.TileID_NamedInventory[-3][1] > 0:
+			set_dropzones(clampi(grid_level-1,0,5))
+		else:
+			set_dropzones(clampi(grid_level-2,0,5))
+	else:
+		set_dropzones(clampi(grid_level-1,0,5))
 	pass # Replace with function body.

@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="StatusEffectData" load_steps=3 format=3 uid="uid://d7u28wdirfu7"]
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=4 format=3 uid="uid://d7u28wdirfu7"]
 
+[ext_resource type="Texture2D" uid="uid://dn51ssv6ypx8" path="res://Art/UnitUI/statuseffect_n_burned.png" id="1_771wn"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_yib7j"]
 [ext_resource type="Texture2D" uid="uid://dssgt1n5mnc5k" path="res://Art/VFX Sprites/vfx_fire.png" id="2_t6o8t"]
 
 [resource]
 script = ExtResource("1_yib7j")
+icon = ExtResource("1_771wn")
 vfx = ExtResource("2_t6o8t")
 effect_name = "Burned"
 is_negative = true

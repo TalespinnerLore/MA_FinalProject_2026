@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cep05hvgm525l"]
+[gd_scene load_steps=16 format=4 uid="uid://cep05hvgm525l"]
 
 [ext_resource type="PackedScene" uid="uid://dwp2nrxgr03wq" path="res://Resources/DungeonGen/UniqueRooms/Tilemaps/000_TREASURE_ROOM.tscn" id="1_udpkw"]
 [ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="2_v2gme"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://ckv2gch6v67lq" path="res://Art/UI_Art/ui_icon_key.png" id="11_icp08"]
 [ext_resource type="PackedScene" uid="uid://qw8hxdfy48pn" path="res://Units/unit_non_combat.tscn" id="12_hql5f"]
 [ext_resource type="PackedScene" uid="uid://cmrvbbtrkis6q" path="res://Scenes/StaticLevels/scenechange_collider.tscn" id="13_mvpm1"]
+[ext_resource type="PackedScene" uid="uid://bt0puajtrhukx" path="res://UI/Menus/UI_Bank_Interface.tscn" id="14_20kbi"]
+[ext_resource type="PackedScene" uid="uid://bk00h2s3eav8n" path="res://UI/Menus/UI_Shop_Interface.tscn" id="15_1hy16"]
 
 [node name="HubWorld" type="Node2D"]
 
@@ -73,3 +75,11 @@ position = Vector2(-400, 1624)
 [node name="scenechange_collider" parent="." instance=ExtResource("13_mvpm1")]
 position = Vector2(304, 272)
 scene_to_open = "res://Scenes/StaticLevels/HubScene_Playtesting.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Bank_UI" parent="CanvasLayer" instance=ExtResource("14_20kbi")]
+visible = false
+
+[node name="Shop_UI" parent="CanvasLayer" instance=ExtResource("15_1hy16")]
+visible = false

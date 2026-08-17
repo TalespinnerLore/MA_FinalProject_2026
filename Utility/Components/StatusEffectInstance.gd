@@ -141,7 +141,7 @@ func on_gain():
 				affecting_value = int(-5*multiplier)
 				owning_unit.Mag_ATK_boost += affecting_value
 				owning_unit.Phys_ATK_boost += affecting_value
-				owning_unit.apply_calc_stat_boosts()
+				#owning_unit.apply_calc_stat_boosts()
 			'Haste':
 				affecting_value = roundi(turns_left*multiplier)
 				turns_left = affecting_value
@@ -149,6 +149,19 @@ func on_gain():
 			'Fated One':
 				owning_unit.Crit_Boost += 1.0
 				owning_unit.Evasion_boost += 999
+			'Fragility':
+				affecting_value = int(-10*multiplier)
+				owning_unit.DEF_boost += affecting_value
+			'Great Strength':
+				affecting_value = int(10*multiplier)
+				owning_unit.STR_boost += affecting_value
+			'Purification':
+				var to_free = []
+				for se:StatusEffectInstance in manager.get_children():
+					if se.is_negative == true:
+						to_free.append(se)
+				for se in to_free:
+					queue_free()
 	#######################################
 	if StatusData.trigger_periodic_on_gain:
 		periodic_effect()
@@ -183,6 +196,10 @@ func on_timeout():
 			'Fated One':
 				owning_unit.Crit_Boost -= 1.0
 				owning_unit.Evasion_boost -= 999
+			'Fragility':
+				owning_unit.DEF_boost -= affecting_value
+			'Great Strength':
+				owning_unit.STR_boost -= affecting_value
 	#############################################################
 	if StatusData.periodic_effect_trigger == trigger.EFFECT_LOST:
 		periodic_effect()

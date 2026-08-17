@@ -35,7 +35,8 @@ var lockbox_icon = preload("res://Art/UI_Art/ui_icon_lockbox.png")
 var key_item_icon = preload("res://Art/UI_Art/ui_icon_keyitem.png")
 
 func _ready() -> void:
-	#self.visible = false
+	SaveLoad.load_bank_data(self)
+	self.visible = false
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	unit_manager_ref = get_tree().get_first_node_in_group("UNIT_MANAGER")
 	#player = unit_manager_ref.get_child(0).get_child(0)
@@ -46,8 +47,9 @@ func _ready() -> void:
 	bank_load_item_inventory()
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("Inventory"):
-		open_close()
+	#if Input.is_action_just_pressed("Inventory"):
+	#	open_close()
+	pass
 
 var gold_val := 0
 var bank_gold_val := 0

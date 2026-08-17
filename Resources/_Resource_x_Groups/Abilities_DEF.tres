@@ -7,4 +7,4 @@ script = ExtResource("1_ppsis")
 base_folder = "res://Resources/Abilities/DEF_base"
 includes = Array[String]([])
 excludes = Array[String]([])
-paths = Array[String](["res://Resources/Abilities/DEF_base/Healing_Bubble.tres", "res://Resources/Abilities/DEF_base/Pebble_Guard.tres"])
+paths = Array[String](["res://Resources/Abilities/DEF_base/10_Thorn_Shield.tres", "res://Resources/Abilities/DEF_base/40_Intimidating_Shout.tres", "res://Resources/Abilities/DEF_base/80_Curse_of_Fragility.tres", "res://Resources/Abilities/DEF_base/120_Berserk_Rage.tres", "res://Resources/Abilities/DEF_base/Ult_Eternal_Bastion.tres"])

@@ -20,7 +20,7 @@ const basetile_fixed = preload("res://Crafting/DungeonCraftingTile.tscn")
 ["BEASTS",1],["ELEMENTALS",1],["UNDEAD",1],["CONSTRUCTS",1],["MORTALS",2],["WILDLINGS",2],\
 ["TREASURE_ROOM",1],["MINI_BOSS",1],["MONSTER_HOUSE",1],\
 ["T1_BOSS",1],["T1_FIREBOSS",0],["T1_WATERBOSS",1],["T1_EARTHBOSS",0],["T1_AIRBOSS",0],["T1_FORCEBOSS",1],\
-["T2_BOSS",0],["T2_QUADBOSS",0],["T2_FORCEBOSS",0]]
+["T2_BOSS",1],["T2_QUADBOSS",0],["T2_FORCEBOSS",0]]
 
 var tile_paths = ["res://Resources/Items/Tiles/DungeonGen/Elements/TEST.tres","res://Resources/Items/Tiles/DungeonGen/Elements/FIRE.tres",\
 "res://Resources/Items/Tiles/DungeonGen/Elements/WATER.tres","res://Resources/Items/Tiles/DungeonGen/Elements/EARTH.tres",\
@@ -476,6 +476,36 @@ func change_data(data:DUNGEON_CRAFTING_TILE_DATA,adding:bool):
 				
 			preset_data = null
 			offset_values = null
+	if Boss_T1_Generic > 0:
+		if preset_data == null:
+			$"../ButtonSTART".set_disabled(true)
+			$"../ButtonSTART".text = 'INVALID'
+		elif offset_values != null:
+			if offset_values.Boss_T1_Generic != 1:
+				$"../ButtonSTART".set_disabled(true)
+				$"../ButtonSTART".text = 'INVALID'
+			#print('boss offsert',offset_values.Boss_T1_Generic)
+			else:
+				$"../ButtonSTART".set_disabled(false)
+				$"../ButtonSTART".text = 'START'
+	elif Boss_T2_Generic > 0:
+		if get_parent().grid_level == 4:
+			if preset_data == null:
+				$"../ButtonSTART".set_disabled(true)
+				$"../ButtonSTART".text = 'INVALID'
+			elif offset_values != null:
+				if offset_values.Boss_T2_Generic != 1:
+					$"../ButtonSTART".set_disabled(true)
+					$"../ButtonSTART".text = 'INVALID'
+				else:
+					$"../ButtonSTART".set_disabled(false)
+					$"../ButtonSTART".text = 'START'
+		else:
+			$"../ButtonSTART".set_disabled(true)
+			$"../ButtonSTART".text = 'INVALID'
+	else:
+		$"../ButtonSTART".set_disabled(false)
+		$"../ButtonSTART".text = 'START'
 	pass
 
 @export var Affinity_Fire = 0

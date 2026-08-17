@@ -7,4 +7,4 @@ script = ExtResource("1_eu2r1")
 base_folder = "res://Resources/Abilities/STR_base"
 includes = Array[String]([])
 excludes = Array[String]([])
-paths = Array[String](["res://Resources/Abilities/STR_base/Cleave.tres", "res://Resources/Abilities/STR_base/Stunning_Blow.tres"])
+paths = Array[String](["res://Resources/Abilities/STR_base/10_Heavy_Chop.tres", "res://Resources/Abilities/STR_base/40_Stunning_Blow.tres", "res://Resources/Abilities/STR_base/80_Whirlwind_Swing.tres", "res://Resources/Abilities/STR_base/120_Void_Cleave.tres", "res://Resources/Abilities/STR_base/Ult_Colossal_Impact.tres"])

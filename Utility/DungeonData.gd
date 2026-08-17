@@ -118,7 +118,7 @@ func spawn_unique_room_chance(remaining:int,roomdata:UniqueRoomData):
 
 func save_player_data():
 	var p1 = get_tree().get_first_node_in_group("Player")
-	PlayerStats.p1_ability_usesB1234WAT = p1.Abilities.ability_usesB1234WAT
+	PlayerStats.p1_ability_usesB1234WAT = p1.ABILITIES.ability_usesB1234WAT
 	PlayerStats.p1_HP = p1.HP_Current
 	PlayerStats.p1_XP = p1.XP
 
@@ -582,7 +582,7 @@ func set_floor_data():
 		gear_chance *= MobMods_Gear
 		lockbox_chance *= ItemType_Lockboxes
 	else:
-		save_player_data()
+		pass#save_player_data()
 	###CODE RUN FOR ALL FLOORS BELOW THIS LINE###
 	level_size = Vector2i(25,25) + (clampi(int(current_floor/4),0,10)*Vector2i(4,4))
 	

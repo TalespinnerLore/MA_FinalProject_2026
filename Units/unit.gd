@@ -1065,7 +1065,7 @@ func AI_turn_enemy_new():
 		#var hit_tile_check = []
 		#for i in range(1,selected.range+1):
 		#	hit_tile_check.append(self_coords+(i*facing))
-		#if
+		#ifF
 		
 		if self_coords.x == goal_tile.x or self_coords.y == goal_tile.y:
 			var wall_intheway = false
