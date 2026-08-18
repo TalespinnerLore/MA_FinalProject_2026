@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="StatComponent" load_steps=6 format=3 uid="uid://dcg64y3m8f1qg"]
+
+[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_5t18y"]
+[ext_resource type="Texture2D" uid="uid://baj6qmljqsgg2" path="res://Art/UnitSprites/Spritesheets/enemytype_beast_base.png" id="2_ae3fp"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_lpa76"]
+[ext_resource type="Resource" uid="uid://cmc0ywri5q38h" path="res://Resources/Items/_TileItems/Tile36_Beasts.tres" id="4_h8k72"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="5_iaxx5"]
+
+[resource]
+script = ExtResource("5_iaxx5")
+Sprite = ExtResource("2_ae3fp")
+BasicAttack = ExtResource("1_5t18y")
+Attacks = null
+UnitName = "Scaled Beast"
+is_large_unit = false
+is_rare_spawn = false
+is_miniboss = false
+is_boss = false
+is_t2_boss = false
+CreatureType = 4
+Element = 4
+unit_specific_drops = Array[ExtResource("3_lpa76")]([])
+elem_palettes = Array[Texture2D]([])
+must_drop_items = Array[ExtResource("3_lpa76")]([])
+chance_drop_items = Array[ExtResource("3_lpa76")]([ExtResource("4_h8k72")])
+STR_up = 2
+DEX_up = 0
+VIT_up = 5
+MAG_up = 0
+DEF_up = 5
+LUK_up = 0
+Free_Stats = 1
+Base_HP = 10
+STR = 5
+DEX = 5
+VIT = 5
+MAG = 5
+DEF = 0
+LUK = 5
+HP_Max_withVIT = null
+Base_Phys_ATK = 5.0
+Base_Mag_ATK = 5.0
+Base_Phys_DEF = 5.0
+Base_Mag_DEF = 5.0
+Base_Evasion = 5.0
+Heal_Buff_Mult = 1.1
+Melee_Mult = 1.1
+Ranged_Mult = 1.1
+Def_Mult = 1.1
+Reroll_Chance = 0.05
+STR_boost = 0
+DEX_boost = 0
+VIT_boost = 0
+MAG_boost = 0
+DEF_boost = 0
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0

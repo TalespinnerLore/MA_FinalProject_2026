@@ -873,6 +873,7 @@ func set_item_spawn_pool():
 	print(" pre clear; biome:",floor_biome.BiomeID," CI",floor_biome.Common_Items," RI",floor_biome.Rare_Items)
 	Common_Items.clear()
 	Rare_Items.clear()
+	var drops = floor_biome.get_drop_pools(AREA_LEVEL)
 	Common_Items = floor_biome.Common_Items.duplicate()
 	Rare_Items = floor_biome.Rare_Items.duplicate()
 	print("post clear; biome:",floor_biome.BiomeID," CI",floor_biome.Common_Items," RI",floor_biome.Rare_Items)

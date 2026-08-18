@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="StatComponent" load_steps=6 format=3 uid="uid://b5edr6jthu0nf"]
+
+[ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="1_hjf5c"]
+[ext_resource type="Texture2D" uid="uid://dk3bsrh054bs7" path="res://Art/UnitSprites/BasicCharacter_enemyranger.png" id="2_0xrgn"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_28ckj"]
+[ext_resource type="Resource" uid="uid://b5n6rd73w02h" path="res://Resources/Items/_TileItems/Tile40_Bandits.tres" id="4_3is5m"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="5_7y8gy"]
+
+[resource]
+script = ExtResource("5_7y8gy")
+Sprite = ExtResource("2_0xrgn")
+BasicAttack = ExtResource("1_hjf5c")
+Attacks = null
+UnitName = "Bandit Ranger"
+is_large_unit = false
+is_rare_spawn = false
+is_miniboss = false
+is_boss = false
+is_t2_boss = false
+CreatureType = 0
+Element = 4
+unit_specific_drops = Array[ExtResource("3_28ckj")]([])
+elem_palettes = Array[Texture2D]([])
+must_drop_items = Array[ExtResource("3_28ckj")]([])
+chance_drop_items = Array[ExtResource("3_28ckj")]([ExtResource("4_3is5m")])
+STR_up = 5
+DEX_up = 5
+VIT_up = 0
+MAG_up = 0
+DEF_up = 0
+LUK_up = 2
+Free_Stats = 1
+Base_HP = 10
+STR = 5
+DEX = 5
+VIT = 5
+MAG = 5
+DEF = 0
+LUK = 5
+HP_Max_withVIT = null
+Base_Phys_ATK = 5.0
+Base_Mag_ATK = 5.0
+Base_Phys_DEF = 5.0
+Base_Mag_DEF = 5.0
+Base_Evasion = 5.0
+Heal_Buff_Mult = 1.1
+Melee_Mult = 1.1
+Ranged_Mult = 1.1
+Def_Mult = 1.1
+Reroll_Chance = 0.05
+STR_boost = 0
+DEX_boost = 0
+VIT_boost = 0
+MAG_boost = 0
+DEF_boost = 0
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0

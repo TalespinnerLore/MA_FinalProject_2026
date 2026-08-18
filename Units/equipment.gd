@@ -151,3 +151,11 @@ func check_has_equip_stats(Item:ItemData):
 
 func drop_item_on_floor_NOTinUSE(Item:ItemData):
 	pass #unnneeded
+
+func on_spawn_apply_boosts():
+	if equipped_trinket is ItemData_Gear and equipped_trinket != null:
+		apply_gear_statboosts(equipped_trinket,true)
+	if equipped_armour != null:
+		apply_gear_statboosts(equipped_armour,true)
+	if equipped_weapon != null:
+		apply_gear_statboosts(equipped_weapon,true)

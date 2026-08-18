@@ -7,14 +7,21 @@ extends Resource
 @export var Attacks:Array[AbilityData] = [BasicAttack,BasicAttack,BasicAttack,BasicAttack]
 @export var UnitName:String
 @export var is_large_unit := false
+@export var is_rare_spawn := false
+@export var is_miniboss := false
+@export var is_boss := false
+@export var is_t2_boss := false
 enum TYPE{MORTAL,UNDEAD,ELEMENTAL,CONSTRUCT,BEAST,WILDLING}
 @export var CreatureType:TYPE
 enum ElementType {FIRE,WATER,EARTH,AIR,FORCE,LIGHT,DARK}
 @export var Element:ElementType = ElementType.FORCE
 #@export var drop_held_equipment := false
-@export var unit_specific_drops:Array[ItemData]
+#@export var unit_specific_drops:Array[ItemData]
 
 @export var elem_palettes:Array[Texture2D]
+
+@export var must_drop_items:Array[ItemData]
+@export var chance_drop_items:Array[ItemData]
 
 @export_category('Level-Up Stats')
 @export var STR_up:int = 0

@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="StatComponent" load_steps=7 format=3 uid="uid://dvdkx18faiesk"]
+
+[ext_resource type="Resource" uid="uid://d02ns3e6v636q" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres" id="1_uqfpf"]
+[ext_resource type="Texture2D" uid="uid://bnpa0fl0fa7aj" path="res://Art/UnitSprites/Spritesheets/enemytype_elemental_base.png" id="2_77a6i"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_5ihe2"]
+[ext_resource type="Resource" uid="uid://btew2ovgrtk4t" path="res://Resources/Items/_TileItems/Tile3_Earth.tres" id="4_f6vs3"]
+[ext_resource type="Resource" uid="uid://cpk1yof75jgxl" path="res://Resources/Items/_TileItems/Tile37_Elementals.tres" id="5_6yeof"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="6_ttb0v"]
+
+[resource]
+script = ExtResource("6_ttb0v")
+Sprite = ExtResource("2_77a6i")
+BasicAttack = ExtResource("1_uqfpf")
+Attacks = null
+UnitName = "Earth Caster"
+is_large_unit = false
+is_rare_spawn = false
+is_miniboss = false
+is_boss = false
+is_t2_boss = false
+CreatureType = 2
+Element = 2
+elem_palettes = Array[Texture2D]([])
+must_drop_items = Array[ExtResource("3_5ihe2")]([])
+chance_drop_items = Array[ExtResource("3_5ihe2")]([ExtResource("4_f6vs3"), ExtResource("5_6yeof")])
+STR_up = 5
+DEX_up = 0
+VIT_up = 0
+MAG_up = 2
+DEF_up = 5
+LUK_up = 0
+Free_Stats = 1
+Base_HP = 10
+STR = 5
+DEX = 5
+VIT = 5
+MAG = 5
+DEF = 5
+LUK = 0
+HP_Max_withVIT = null
+Base_Phys_ATK = 5.0
+Base_Mag_ATK = 5.0
+Base_Phys_DEF = 5.0
+Base_Mag_DEF = 5.0
+Base_Evasion = 5.0
+Heal_Buff_Mult = 1.1
+Melee_Mult = 1.1
+Ranged_Mult = 1.1
+Def_Mult = 1.1
+Reroll_Chance = 0.05
+STR_boost = 0
+DEX_boost = 0
+VIT_boost = 0
+MAG_boost = 0
+DEF_boost = 0
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0

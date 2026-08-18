@@ -310,6 +310,20 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 		print(amount-Ability.base_value, " + ",Ability.base_value," = ",amount)
 		
 		if Ability.damaging == true:
+			if Team == Teams.PLAYER: #players take less damage, makes things easier to scale.
+				if ! Source.UnitStats.is_t2_boss:
+					if ! Source.UnitStats.is_boss:
+						if ! Source.UnitStats.is_miniboss:
+							if ! Source.UnitStats.is_rare_spawn:
+								amount = roundi(amount*0.5)
+							else:
+								amount = roundi(amount*0.6)
+						else:
+							amount = roundi(amount*0.70)
+					else:
+						amount = roundi(amount*0.80)
+				else:
+					amount = roundi(amount*0.85)
 			if STATUS_EFECTS.get_child_count() > 0:
 				for se:StatusEffectInstance in STATUS_EFECTS.get_children():
 					se.on_get_hit(Source) #shoulddo nothing if it not a unit hitting, or there's no children
@@ -774,6 +788,7 @@ func init(is_player_controlled):
 	dialogue_manager_ref = get_tree().get_first_node_in_group("DIALOGUE_MANAGER")
 	tilemap_ref = get_tree().get_first_node_in_group('TILEMAP')
 	
+	EQUIPMENT.on_spawn_apply_boosts()
 
 	#position = position.snapped(Vector2.ONE * tile_size)
 	#position += Vector2.ONE * tile_size/2
@@ -813,31 +828,35 @@ func _on_death():
 	
 	if Team == Teams.ENEMY:
 		get_parent()._on_unit_defeated(XP_to_Reward,UnitLevel)
-		if EQUIPMENT.enemy_must_drop_list.size() > 0:
-			for item in EQUIPMENT.enemy_must_drop_list:
-				get_parent().get_parent().item_manager_ref.drop_item(self_coords,item[0],item[1])
-		if UnitStats.UnitName != "MiniBoss":
-			var gold = goldscene.instantiate()
-			gold.global_position = self.global_position
-			$"../../../GroundItem_Manager".add_child(gold)
-			$"../../../GroundItem_Manager".get_child(-1)._init()
-			emit_signal("unit_defeated",XP_to_Reward)
-			queue_free()
-		else:
-			await get_tree().create_timer(2).timeout
-			self.process_mode = Node.PROCESS_MODE_ALWAYS
-			var unit_manager_ref = get_tree().get_first_node_in_group("UNIT_MANAGER")
-			unit_manager_ref.player_dead = true
-			unit_manager_ref.get_child(1).player_dead = true
-			await $"../../../CanvasLayer/DialogueSystemBase".action_complete
-			get_tree().paused = true
-			get_tree().change_scene_to_file("res://Scenes/StaticLevels/HubScene_Playtesting.tscn")
+		enemy_drop_items()
+		queue_free()
+		#if UnitStats.UnitName != "MiniBoss":
+		#	var gold = goldscene.instantiate()
+		#	gold.global_position = self.global_position
+		#	$"../../../GroundItem_Manager".add_child(gold)
+		#	$"../../../GroundItem_Manager".get_child(-1)._init()
+		#	emit_signal("unit_defeated",XP_to_Reward)
+		#	queue_free()
+		#else:
+		#	await get_tree().create_timer(2).timeout
+		#	self.process_mode = Node.PROCESS_MODE_ALWAYS
+		#	var unit_manager_ref = get_tree().get_first_node_in_group("UNIT_MANAGER")
+		#	unit_manager_ref.player_dead = true
+		#	unit_manager_ref.get_child(1).player_dead = true
+		#	await $"../../../CanvasLayer/DialogueSystemBase".action_complete
+		#	get_tree().paused = true
+		#	get_tree().change_scene_to_file("res://Scenes/StaticLevels/HubScene_Playtesting.tscn")
 		#Award EXP
 		#Roll Dropchance --- random pool
 		#Roll Dropchance --- equipped gear
 		pass
 	else:
 		#emit_signal("player_died")
+		PlayerStats.player_gold /= randf_range(2,4)
+		var items_lost = int(PlayerStats.player_inventory.size() / 4)
+		for i in items_lost:
+			PlayerStats.player_inventory.erase(PlayerStats.player_inventory.pick_random())
+		#^^^ death penalty: half to 3/4 all held gold, quarter of inventory items.
 		self.process_mode = Node.PROCESS_MODE_ALWAYS
 		var unit_manager_ref = get_tree().get_first_node_in_group("UNIT_MANAGER")
 		unit_manager_ref.player_dead = true
@@ -851,6 +870,55 @@ func _on_death():
 	
 	#queue_free()
 
+func enemy_drop_items():
+	var item_manager:GroundItemManager = get_parent().get_parent().item_manager_ref
+	if EQUIPMENT.enemy_must_drop_list.size() > 0:
+		for item in EQUIPMENT.enemy_must_drop_list: #vvv self coords, itemdata, stacksize
+			item_manager.drop_item(self_coords,item[0],item[1])
+	for item in UnitStats.must_drop_items:
+		item_manager.drop_item(self_coords,item,1)
+	if UnitStats.chance_drop_items.size() > 0 and randf() > 0.75: #25% chance to unit-specific item
+		item_manager.drop_item(self_coords,UnitStats.chance_drop_items.pick_random(),1)
+	elif randf() > 0.9: #if no unit drop, 10% chance to get random area drop
+		item_manager.enemy_random_drop(self_coords)
+	var gold:GroundItem = goldscene.instantiate()
+	gold.global_position = self.global_position
+	gold.dropped = true
+	gold.stack_size = randi_range(1,10+DungeonData.AREA_LEVEL*2) + held_gold
+	$"../../../GroundItem_Manager".add_child(gold)
+	$"../../../GroundItem_Manager".get_child(-1)._init()
+	
+	if UnitStats.is_miniboss:
+		if SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t0_miniboss'] == false:
+			item_manager.drop_item(self_coords,load("res://Resources/Items/_TileItems/Tile45_BossKeystone.tres"),1)
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t0_miniboss'] = true
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['unlocked_recipe_miniboss'] = true
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['unlocked_recipe_treasurevault'] = true
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['unlocked_recipe_forceboss'] = true
+	if UnitStats.is_boss:
+		if DungeonData.Boss_T1_Force > 0:
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t1_forceboss'] = true
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['unlocked_recipe_waterboss'] = true
+		if DungeonData.Boss_T1_Water > 0:
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t1_waterboss'] = true
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['unlocked_recipe_fireboss'] = true
+		if DungeonData.Boss_T1_Fire > 0:
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t1_fireboss'] = true
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['unlocked_recipe_airboss'] = true
+		if DungeonData.Boss_T1_Wind > 0:
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t1_airboss'] = true
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['unlocked_recipe_earthboss'] = true
+		if DungeonData.Boss_T1_Earth > 0:
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t1_earthboss'] = true
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['unlocked_recipe_waterboss'] = true
+		#only unlock final boss recipe when all 4 elemental bosses are defeated.
+		if SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t1_waterboss'] == true\
+		and SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t1_fireboss'] == true\
+		and SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t1_airboss'] == true\
+		and SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t1_earthboss'] == true:
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['unlocked_recipe_quadboss'] = true
+			if SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t2_quadboss'] != true:
+				item_manager.drop_item(self_coords,load("res://Resources/Items/_TileItems/Tile51_T2BossKeystone.tres"),1)
 
 #######################################
 #ABILITIES CODE

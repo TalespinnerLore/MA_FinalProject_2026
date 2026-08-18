@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="StatComponent" load_steps=6 format=3 uid="uid://b2ok2rdp61pau"]
+
+[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_q6tdw"]
+[ext_resource type="Texture2D" uid="uid://dmotdf6wk4kgq" path="res://Art/UnitSprites/Spritesheets/enemytype_construct_base.png" id="1_y6c0f"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="2_qsbjr"]
+[ext_resource type="Resource" uid="uid://2wrn0j4w25sn" path="res://Resources/Items/_TileItems/Tile39_Constructs.tres" id="3_vnsau"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="4_d0je8"]
+
+[resource]
+script = ExtResource("4_d0je8")
+Sprite = ExtResource("1_y6c0f")
+BasicAttack = ExtResource("1_q6tdw")
+Attacks = null
+UnitName = "Construct Brawler"
+is_large_unit = false
+is_rare_spawn = false
+is_miniboss = false
+is_boss = false
+is_t2_boss = false
+CreatureType = 3
+Element = 4
+unit_specific_drops = Array[ExtResource("2_qsbjr")]([])
+elem_palettes = Array[Texture2D]([])
+must_drop_items = Array[ExtResource("2_qsbjr")]([])
+chance_drop_items = Array[ExtResource("2_qsbjr")]([ExtResource("3_vnsau")])
+STR_up = 5
+DEX_up = 0
+VIT_up = 0
+MAG_up = 0
+DEF_up = 7
+LUK_up = 0
+Free_Stats = 1
+Base_HP = 10
+STR = 5
+DEX = 5
+VIT = 5
+MAG = 5
+DEF = 0
+LUK = 5
+HP_Max_withVIT = null
+Base_Phys_ATK = 5.0
+Base_Mag_ATK = 5.0
+Base_Phys_DEF = 5.0
+Base_Mag_DEF = 5.0
+Base_Evasion = 5.0
+Heal_Buff_Mult = 1.1
+Melee_Mult = 1.1
+Ranged_Mult = 1.1
+Def_Mult = 1.1
+Reroll_Chance = 0.05
+STR_boost = 0
+DEX_boost = 0
+VIT_boost = 0
+MAG_boost = 0
+DEF_boost = 0
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0

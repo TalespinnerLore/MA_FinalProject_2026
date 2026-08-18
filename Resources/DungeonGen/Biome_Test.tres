@@ -1,24 +1,34 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=11 format=3 uid="uid://cvxeww234qyuw"]
+[gd_resource type="Resource" script_class="Biome" load_steps=21 format=3 uid="uid://cvxeww234qyuw"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_5vpkm"]
-[ext_resource type="Resource" uid="uid://dgm8dna5mwt7q" path="res://Resources/Units/Enemy/Stats_EnemyMagic.tres" id="2_owjx2"]
-[ext_resource type="Resource" uid="uid://dunj0e8tqw7uv" path="res://Resources/Units/Enemy/Stats_EnemyMelee.tres" id="3_xrpiv"]
-[ext_resource type="Resource" uid="uid://brn8pf5kf160g" path="res://Resources/Units/Enemy/Stats_EnemyRanged.tres" id="4_xnkws"]
-[ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion_Small.tres" id="5_0gl05"]
-[ext_resource type="Resource" uid="uid://b1mex6jfj2b7r" path="res://Resources/Units/Enemy/Stats_RareEnemyTest.tres" id="5_vf5or"]
+[ext_resource type="Resource" uid="uid://dgvmn8brwaykn" path="res://Resources/Units/Enemy/bandits/Bandit_Mage.tres" id="2_0mnhx"]
+[ext_resource type="Resource" uid="uid://b5edr6jthu0nf" path="res://Resources/Units/Enemy/bandits/Bandit_Ranger.tres" id="3_rdobr"]
+[ext_resource type="Resource" uid="uid://ctw25kl02og26" path="res://Resources/Units/Enemy/bandits/Bandit_Thug.tres" id="4_e07vy"]
+[ext_resource type="Resource" uid="uid://dcg64y3m8f1qg" path="res://Resources/Units/Enemy/beasts/Scaled_Beast.tres" id="5_im2py"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/Biome.gd" id="6_4e5jn"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="6_fsiy7"]
 [ext_resource type="Resource" uid="uid://i2ad4iyjg7e6" path="res://Resources/Items/Other/Gold.tres" id="6_ltjou"]
-[ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="7_tcqu0"]
+[ext_resource type="Resource" uid="uid://yfhbqfr5rcy3" path="res://Resources/Units/Enemy/beasts/Wild_Beast.tres" id="6_pov3s"]
+[ext_resource type="Resource" uid="uid://b2ok2rdp61pau" path="res://Resources/Units/Enemy/constructs/Construct_Brawler.tres" id="7_av8uo"]
+[ext_resource type="Resource" uid="uid://d3qdwges8twgc" path="res://Resources/Units/Enemy/constructs/Construct_Guard.tres" id="8_ievjk"]
+[ext_resource type="Resource" uid="uid://ijbghilyc0ba" path="res://Resources/Units/Enemy/goblins/GoblinMelee.tres" id="9_1dv1b"]
+[ext_resource type="Resource" uid="uid://d0etqlijo61fy" path="res://Resources/Units/Enemy/goblins/GoblinRanged.tres" id="10_lnkrf"]
+[ext_resource type="Resource" uid="uid://3scj3nao7qvl" path="res://Resources/Units/Enemy/undead/Skeleton_Archer.tres" id="11_821be"]
+[ext_resource type="Resource" uid="uid://cnwl8iryesy2b" path="res://Resources/Units/Enemy/undead/Skeleton_Warrior.tres" id="12_8v2i7"]
+[ext_resource type="Resource" uid="uid://slx3kwfuaamv" path="res://Resources/Units/Enemy/bandits/Lawless_Fool.tres" id="15_3yexk"]
+[ext_resource type="Resource" uid="uid://drtxp1ey3lxnc" path="res://Resources/Units/Enemy/beasts/Venomous_Chimera.tres" id="16_blu0r"]
+[ext_resource type="Resource" uid="uid://deqsyjy15jegy" path="res://Resources/Units/Enemy/constructs/Construct_Technician.tres" id="17_fjkuc"]
+[ext_resource type="Resource" uid="uid://dce4pgoihwbme" path="res://Resources/Units/Enemy/goblins/GoblinMage.tres" id="18_agi4d"]
+[ext_resource type="Resource" uid="uid://c15nthotve75s" path="res://Resources/Units/Enemy/undead/Death_Knight.tres" id="19_df4my"]
 
 [resource]
 script = ExtResource("6_4e5jn")
 BiomeID = 0
 Unique_Rooms = Array[Resource]([])
-Common_Enemies = Array[ExtResource("1_5vpkm")]([ExtResource("2_owjx2"), ExtResource("3_xrpiv"), ExtResource("4_xnkws")])
-Rare_Enemies = Array[ExtResource("1_5vpkm")]([ExtResource("5_vf5or"), ExtResource("7_tcqu0")])
-Common_Items = Array[ExtResource("6_fsiy7")]([ExtResource("6_ltjou"), ExtResource("5_0gl05")])
-Rare_Items = Array[ExtResource("6_fsiy7")]([ExtResource("5_0gl05")])
+Common_Enemies = Array[ExtResource("1_5vpkm")]([ExtResource("2_0mnhx"), ExtResource("3_rdobr"), ExtResource("4_e07vy"), ExtResource("5_im2py"), ExtResource("6_pov3s"), ExtResource("7_av8uo"), ExtResource("8_ievjk"), ExtResource("9_1dv1b"), ExtResource("10_lnkrf"), ExtResource("11_821be"), ExtResource("12_8v2i7")])
+Rare_Enemies = Array[ExtResource("1_5vpkm")]([ExtResource("15_3yexk"), ExtResource("16_blu0r"), ExtResource("17_fjkuc"), ExtResource("18_agi4d"), ExtResource("19_df4my")])
+Common_Items = Array[ExtResource("6_fsiy7")]([ExtResource("6_ltjou")])
+Rare_Items = Array[ExtResource("6_fsiy7")]([ExtResource("6_ltjou")])
 Wandering_Boss = true
 Flooded = true
 FloodTile = 1

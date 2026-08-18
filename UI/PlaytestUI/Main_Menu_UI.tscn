@@ -363,6 +363,7 @@ text = "MA GAMES FINAL PROJECT - Johannes Kuhn
 horizontal_alignment = 1
 
 [node name="OptionsBox" type="NinePatchRect" parent="."]
+layout_mode = 0
 offset_left = 224.0
 offset_top = 104.0
 offset_right = 416.0

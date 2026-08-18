@@ -27,6 +27,65 @@ enum ROOM_DENSITY{AVERAGE_LAYOUT,DENSE_LAYOUT,SPARSE_LAYOUT}
 #enum GEAR_TYPE{WEAPON,ARMOUR,TRINKET}
 #enum CLASS{VANGUARD,WARRIOR,MAGE,ROGUE,HEALER,JESTER}
 
+
+func get_drop_pools(AreaLevel:int):
+	Common_Items.clear()
+	Rare_Items.clear()
+	Common_Items.append(load("res://Resources/Items/Other/Gold.tres"))
+	Rare_Items.append(load("res://Resources/Items/Other/Gold.tres"))
+	var all_items = []
+	var Items_Consumable:ResourceGroup = load("res://Resources/_Resource_x_Groups/Items_Consumables.tres")
+	var Items_Gear:ResourceGroup = load("res://Resources/_Resource_x_Groups/Items_Gear.tres")
+	var Items_Tiles:ResourceGroup = load("res://Resources/_Resource_x_Groups/Items_Tiles.tres")
+	var Items_Lockboxes:ResourceGroup = load("res://Resources/_Resource_x_Groups/Items_Lockboxes.tres")
+	Items_Consumable.load_all_into(all_items)
+	Items_Gear.load_all_into(all_items)
+	Items_Tiles.load_all_into(all_items)
+	Items_Lockboxes.load_all_into(all_items)
+	var filtered_items = []
+	for item:ItemData in all_items:
+		if not (item.min_area_level > AreaLevel or item.max_area_level < AreaLevel):
+			filtered_items.append(item)
+	all_items = filtered_items
+	match BiomeID:
+		0:
+			for item:ItemData in all_items:
+				if item.Affinity_Light or item.Affinity_Dark or item.Affinity_Force:
+					if item.rarity < 2:
+						Common_Items.append(item)
+					else:
+						Rare_Items.append(item)
+		1:
+			for item:ItemData in all_items:
+				if item.Affinity_Fire or item.Affinity_Force:
+					if item.rarity < 2:
+						Common_Items.append(item)
+					else:
+						Rare_Items.append(item)
+		2:
+			for item:ItemData in all_items:
+				if item.Affinity_Water or item.Affinity_Force:
+					if item.rarity < 2:
+						Common_Items.append(item)
+					else:
+						Rare_Items.append(item)
+		3:
+			for item:ItemData in all_items:
+				if item.Affinity_Earth or item.Affinity_Force:
+					if item.rarity < 2:
+						Common_Items.append(item)
+					else:
+						Rare_Items.append(item)
+		4:
+			for item:ItemData in all_items:
+				if item.Affinity_Air or item.Affinity_Force:
+					if item.rarity < 2:
+						Common_Items.append(item)
+					else:
+						Rare_Items.append(item)
+	return [Common_Items,Rare_Items]
+
+
 var mods = []
 
 func get_DG_Mods():

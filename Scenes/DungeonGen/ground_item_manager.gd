@@ -47,6 +47,34 @@ func init_items():
 		
 		spawn_item(random_tile,loot_pool)
 
+func enemy_random_drop(enem_tile):
+	var rareitem_chance = 0.025
+	var loot_pool:Array[ItemData]
+	if rareitem_chance >= randf_range(0,1):
+		loot_pool = DungeonData.Rare_Items
+		print("randspawn lootpool - rare")
+	else:
+		loot_pool = DungeonData.Common_Items
+		print("randspawn lootpool - common")
+	
+	unplaceable.clear()
+	for i in unit_manager_ref.Active_Units:
+		if is_instance_valid(i):
+			unplaceable.append(i.self_coords)
+	#for i in envobj_manager_ref.unpassable_tiles:
+	
+	var spawn_tile:Vector2i
+	var success := false
+	var new:GroundItem = item_scene.instantiate()
+	if ! item_tile_list.has(enem_tile) and ! unplaceable.has(enem_tile):
+		print("nothing to block, expected:",enem_tile,"real:",Global.grid_to_pos(enem_tile))
+		spawn_item(enem_tile,loot_pool)
+	else:
+		for dir in Global.dir8:
+			if ! item_tile_list.has(Vector2i(enem_tile+dir)) and ! unplaceable.has(Vector2i(enem_tile+dir)):
+				spawn_item(spawn_tile,loot_pool)
+				break
+	
 
 func _ready() -> void:
 	#unit_manager_ref =  get_tree().get_first_node_in_group("UNIT_MANAGER")
