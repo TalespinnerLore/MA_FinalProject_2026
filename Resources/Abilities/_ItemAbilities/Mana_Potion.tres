@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://dgrqwowdsgpcj"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_2g2w6"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_4ugxo"]
+
+[resource]
+script = ExtResource("1_2g2w6")
+ability_name = "Default Attack"
+element = 4
+valid_target = 0
+targeting = 0
+range = 1
+base_value = 0
+max_uses = 999
+damage_type = 0
+damaging = true
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_4ugxo")]([])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 0, 0, 0, 0, 0]
+Abilities_required = Array[ExtResource("1_2g2w6")]([])

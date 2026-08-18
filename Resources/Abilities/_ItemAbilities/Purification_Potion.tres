@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://7j43okgcfmgv"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_edpiy"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_liihf"]
+[ext_resource type="Resource" uid="uid://c1s0lqb64cpex" path="res://Resources/StatusEffects/Purification.tres" id="3_ydmej"]
+
+[resource]
+script = ExtResource("1_edpiy")
+ability_name = "Purification Potion"
+element = 5
+valid_target = 3
+targeting = 4
+range = 1
+base_value = 0
+max_uses = 1
+damage_type = 6
+damaging = false
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_liihf")]([ExtResource("3_ydmej")])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 0, 0, 0, 0, 0]
+Abilities_required = Array[ExtResource("1_edpiy")]([])

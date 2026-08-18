@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b4pjcdt4l6gxh"]
 
-[ext_resource type="Resource" uid="uid://cnb7e276ypcnu" path="res://Resources/Abilities/_ItemAbilities/Healing_Potion.tres" id="1_laun2"]
+[ext_resource type="Resource" uid="uid://cnb7e276ypcnu" path="res://Resources/Abilities/_ItemAbilities/Healing_Potion_small.tres" id="1_laun2"]
 [ext_resource type="Texture2D" uid="uid://bg6vju54amv13" path="res://Art/2D_images/temp_hp_pot.png" id="2_f6amk"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_2r1t8"]
 

@@ -53,36 +53,56 @@ func get_drop_pools(AreaLevel:int):
 				if item.Affinity_Light or item.Affinity_Dark or item.Affinity_Force:
 					if item.rarity < 2:
 						Common_Items.append(item)
+						if item.rarity < 1:
+							Common_Items.append(item)
 					else:
 						Rare_Items.append(item)
+						if item.rarity < 3: #adds Elite items to the pool twice,
+							Rare_Items.append(item) #making less rare than uniques.
 		1:
 			for item:ItemData in all_items:
 				if item.Affinity_Fire or item.Affinity_Force:
 					if item.rarity < 2:
 						Common_Items.append(item)
+						if item.rarity < 1:
+							Common_Items.append(item)
 					else:
 						Rare_Items.append(item)
+						if item.rarity < 3:
+							Rare_Items.append(item)
 		2:
 			for item:ItemData in all_items:
 				if item.Affinity_Water or item.Affinity_Force:
 					if item.rarity < 2:
 						Common_Items.append(item)
+						if item.rarity < 1:
+							Common_Items.append(item)
 					else:
 						Rare_Items.append(item)
+						if item.rarity < 3:
+							Rare_Items.append(item)
 		3:
 			for item:ItemData in all_items:
 				if item.Affinity_Earth or item.Affinity_Force:
 					if item.rarity < 2:
 						Common_Items.append(item)
+						if item.rarity < 1:
+							Common_Items.append(item)
 					else:
 						Rare_Items.append(item)
+						if item.rarity < 3:
+							Rare_Items.append(item)
 		4:
 			for item:ItemData in all_items:
 				if item.Affinity_Air or item.Affinity_Force:
 					if item.rarity < 2:
 						Common_Items.append(item)
+						if item.rarity < 1:
+							Common_Items.append(item)
 					else:
 						Rare_Items.append(item)
+						if item.rarity < 3:
+							Rare_Items.append(item)
 	return [Common_Items,Rare_Items]
 
 

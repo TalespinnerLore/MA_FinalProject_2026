@@ -876,6 +876,88 @@ func set_item_spawn_pool():
 	var drops = floor_biome.get_drop_pools(AREA_LEVEL)
 	Common_Items = floor_biome.Common_Items.duplicate()
 	Rare_Items = floor_biome.Rare_Items.duplicate()
+	
+	var all_items = []
+	var Items_Consumable:ResourceGroup = load("res://Resources/_Resource_x_Groups/Items_Consumables.tres")
+	var Items_Gear:ResourceGroup = load("res://Resources/_Resource_x_Groups/Items_Gear.tres")
+	var Items_Tiles:ResourceGroup = load("res://Resources/_Resource_x_Groups/Items_Tiles.tres")
+	var Items_Lockboxes:ResourceGroup = load("res://Resources/_Resource_x_Groups/Items_Lockboxes.tres")
+	Items_Consumable.load_all_into(all_items)
+	Items_Gear.load_all_into(all_items)
+	Items_Tiles.load_all_into(all_items)
+	Items_Lockboxes.load_all_into(all_items)
+	var filtered_items = []
+	for item:ItemData in all_items:
+		if not (item.min_area_level > AREA_LEVEL or item.max_area_level < AREA_LEVEL):
+			filtered_items.append(item)
+	all_items = filtered_items
+	
+	for item:ItemData in all_items:
+		if not item.Affinity_Force:
+			if item.Affinity_Dark and Affinity_Dark/100 >= randf():
+				if item.rarity < 2:
+					Common_Items.append(item)
+					if item.rarity < 1:
+						Common_Items.append(item)
+				else:
+					Rare_Items.append(item)
+					if item.rarity < 3: #adds Elite items to the pool twice,
+						Rare_Items.append(item) #making less rare than uniques.
+			elif item.Affinity_Light and Affinity_Light/100 >= randf():
+				if item.rarity < 2:
+					Common_Items.append(item)
+					if item.rarity < 1:
+						Common_Items.append(item)
+				else:
+					Rare_Items.append(item)
+					if item.rarity < 3: #adds Elite items to the pool twice,
+						Rare_Items.append(item) #making less rare than uniques.
+			elif floor_biome.BiomeID != 1 and item.Affinity_Fire and Affinity_Fire/200 >= randf():
+				if item.rarity < 2:
+					Common_Items.append(item)
+					if item.rarity < 1:
+						Common_Items.append(item)
+				else:
+					Rare_Items.append(item)
+					if item.rarity < 3: #adds Elite items to the pool twice,
+						Rare_Items.append(item) #making less rare than uniques.
+			elif floor_biome.BiomeID != 2 and item.Affinity_Water and Affinity_Water/200 >= randf():
+				if item.rarity < 2:
+					Common_Items.append(item)
+					if item.rarity < 1:
+						Common_Items.append(item)
+				else:
+					Rare_Items.append(item)
+					if item.rarity < 3: #adds Elite items to the pool twice,
+						Rare_Items.append(item) #making less rare than uniques.
+			elif floor_biome.BiomeID != 3 and item.Affinity_Earth and Affinity_Earth/200 >= randf():
+				if item.rarity < 2:
+					Common_Items.append(item)
+					if item.rarity < 1:
+						Common_Items.append(item)
+				else:
+					Rare_Items.append(item)
+					if item.rarity < 3: #adds Elite items to the pool twice,
+						Rare_Items.append(item) #making less rare than uniques.
+			elif floor_biome.BiomeID != 4 and item.Affinity_Air and Affinity_Air/200 >= randf():
+				if item.rarity < 2:
+					Common_Items.append(item)
+					if item.rarity < 1:
+						Common_Items.append(item)
+				else:
+					Rare_Items.append(item)
+					if item.rarity < 3: #adds Elite items to the pool twice,
+						Rare_Items.append(item) #making less rare than uniques.
+			
+	for item:ItemData in all_items:
+		if item.Affinity_Light or item.Affinity_Dark or item.Affinity_Force:
+			if item.rarity < 2:
+				Common_Items.append(item)
+			else:
+				Rare_Items.append(item)
+				if item.rarity < 3: #adds Elite items to the pool twice,
+					Rare_Items.append(item) #making less rare than uniques.
+
 	print("post clear; biome:",floor_biome.BiomeID," CI",floor_biome.Common_Items," RI",floor_biome.Rare_Items)
 
 

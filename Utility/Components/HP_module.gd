@@ -59,8 +59,6 @@ func _take_damage(damage):
 		hp-=damage
 		var barscale = clampf(hp/maxhp,0,1)
 		hp_bar.size.x = clampf(barscale*max_bar_size, 0, max_bar_size)
-
-
 	#var fixedscale = round(barscale*max_bar_size)/max_bar_size.0
 	#print("BARSCALE: ",barscale)
 	#$HP_Label.text = (str(hp)+"/"+str(maxhp))
@@ -71,6 +69,12 @@ func _take_damage(damage):
 		hp_bar.visible = false
 		if parent.has_method("_on_death"):
 			parent._on_death()
+	return hp
+
+func _heal_damage(healing:int):
+	hp = clampi(hp+healing,0,maxhp)
+	var barscale = clampf(hp/maxhp,0,1)
+	hp_bar.size.x = clampf(barscale*max_bar_size, 0, max_bar_size)
 	return hp
 
 func new_level_refresh(current_hp,max_hp) -> void:

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3 uid="uid://diiq3kt1fbvx1"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_nxewp"]
+
+[resource]
+script = ExtResource("1_nxewp")
+effect_name = "Restore Mana"
+is_negative = false
+turn_duration = 1
+has_periodic_effect = false
+trigger_periodic_on_gain = false
+trigger_effect_on_timeout = false
+periodic_effect_trigger = 0
+element = 4
+damage_type = 6
+base_damage = 0
+can_stack = false
+stat_multiplier = 3

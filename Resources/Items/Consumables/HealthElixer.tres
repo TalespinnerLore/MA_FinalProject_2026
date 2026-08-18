@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cj3no0ov5xw5p"]
 
-[ext_resource type="Resource" uid="uid://cnb7e276ypcnu" path="res://Resources/Abilities/_ItemAbilities/Healing_Potion.tres" id="1_l7vx5"]
+[ext_resource type="Resource" uid="uid://c6vmo4qn064pq" path="res://Resources/Abilities/_ItemAbilities/Healing_Potion_ALL.tres" id="1_nd7nx"]
 [ext_resource type="Texture2D" uid="uid://bg6vju54amv13" path="res://Art/2D_images/temp_hp_pot.png" id="2_6cjar"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_yssj3"]
 
@@ -12,7 +12,7 @@ icon = ExtResource("2_6cjar")
 ITEM_ID = 1
 TILE_ID = -1
 shop_value = 500
-ItemAbility = ExtResource("1_l7vx5")
+ItemAbility = ExtResource("1_nd7nx")
 throw_range = 3
 DESCRIPTION = "Heals  ALL health."
 rarity = 2

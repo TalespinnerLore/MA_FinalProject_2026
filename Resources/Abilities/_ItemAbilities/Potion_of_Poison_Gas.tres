@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://dshbiucdwu1ah"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_2voog"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_7551e"]
+[ext_resource type="Resource" uid="uid://v7gy1dfehh8o" path="res://Resources/StatusEffects/Poisoned.tres" id="3_vnopn"]
+[ext_resource type="Texture2D" uid="uid://jg5fc0geer0a" path="res://Art/VFX Sprites/vfx_dark.png" id="4_ny00s"]
+
+[resource]
+script = ExtResource("1_2voog")
+ability_name = "Potion of Poison Gas"
+vfx = ExtResource("4_ny00s")
+element = 6
+valid_target = 2
+targeting = 3
+range = 3
+base_value = 0
+max_uses = 1
+damage_type = 6
+damaging = false
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_7551e")]([ExtResource("3_vnopn")])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 0, 0, 0, 0, 0]
+Abilities_required = Array[ExtResource("1_2voog")]([])

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://qhf1gjbt6cbc"]
+
+[ext_resource type="Resource" uid="uid://kx6vppll76b1" path="res://Resources/Abilities/_ItemAbilities/Potion_of_Anger.tres" id="1_3bmd6"]
+[ext_resource type="Texture2D" uid="uid://bg6vju54amv13" path="res://Art/2D_images/temp_hp_pot.png" id="2_akpdf"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_22lkv"]
+
+[resource]
+script = ExtResource("3_22lkv")
+ItemName = "Potion of Anger"
+max_stack = 1
+icon = ExtResource("2_akpdf")
+ITEM_ID = 0
+TILE_ID = 0
+shop_value = 200
+ItemAbility = ExtResource("1_3bmd6")
+throw_range = 3
+DESCRIPTION = "Increases a unit's damage temporarily."
+rarity = 1
+ItemType = 2
+GearType = 0
+ConsType = 1
+Class_Bias = 0
+min_area_level = 10
+max_area_level = 999
+Affinity_Fire = true
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = false
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

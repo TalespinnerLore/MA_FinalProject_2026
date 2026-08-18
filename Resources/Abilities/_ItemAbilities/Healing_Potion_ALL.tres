@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://c6vmo4qn064pq"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_3ke3m"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_be7bo"]
+[ext_resource type="Texture2D" uid="uid://bg6vju54amv13" path="res://Art/2D_images/temp_hp_pot.png" id="3_gpprq"]
+
+[resource]
+script = ExtResource("1_3ke3m")
+ability_name = "Elixer of Health"
+vfx = ExtResource("3_gpprq")
+element = 1
+valid_target = 3
+targeting = 4
+range = 1
+base_value = 999
+max_uses = 1
+damage_type = 6
+damaging = false
+healing = true
+creates_shield = false
+inflict_status = Array[ExtResource("2_be7bo")]([])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 0, 0, 0, 0, 0]
+Abilities_required = Array[ExtResource("1_3ke3m")]([])

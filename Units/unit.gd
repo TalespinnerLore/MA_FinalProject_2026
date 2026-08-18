@@ -338,10 +338,11 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 			print("After: ",HP_Current)
 			in_combat = true
 		if Ability.healing:
+			amount*=(Source.Heal_Buff_Mult+Source.Heal_Buff_Mult_boost)
 			var calcs = calc_healing(amount,hitcrit[1],Ability.element)
-			amount = -1*calcs[0]
+			amount = calcs[0]
 			amount_negated = calcs[1]
-			HP_Module._take_damage(amount)
+			HP_Module._heal_damage(amount)
 		
 		if Ability.creates_shield: # and ! has_shield ##Shields overwrite other shields, probably plays better
 			HP_Module.gain_shield(Ability,Source)

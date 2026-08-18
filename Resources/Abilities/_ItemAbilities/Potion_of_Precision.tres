@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://mdxrcxmbor3y"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_i1qul"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_yrbot"]
+[ext_resource type="Resource" uid="uid://dfyjqhb4ntdnc" path="res://Resources/StatusEffects/Anger.tres" id="3_vidf2"]
+
+[resource]
+script = ExtResource("1_i1qul")
+ability_name = "Potion of Anger"
+element = 0
+valid_target = 3
+targeting = 4
+range = 1
+base_value = 0
+max_uses = 1
+damage_type = 6
+damaging = false
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_yrbot")]([ExtResource("3_vidf2")])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 0, 0, 0, 0, 0]
+Abilities_required = Array[ExtResource("1_i1qul")]([])

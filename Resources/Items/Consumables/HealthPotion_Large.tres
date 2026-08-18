@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://duinbwp4bqybn"]
 
-[ext_resource type="Resource" uid="uid://cnb7e276ypcnu" path="res://Resources/Abilities/_ItemAbilities/Healing_Potion.tres" id="1_4kf11"]
+[ext_resource type="Resource" uid="uid://rqtdewvm0ood" path="res://Resources/Abilities/_ItemAbilities/Healing_Potion_large.tres" id="1_es6ev"]
 [ext_resource type="Texture2D" uid="uid://bg6vju54amv13" path="res://Art/2D_images/temp_hp_pot.png" id="2_74jgv"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_uhxq1"]
 
@@ -12,7 +12,7 @@ icon = ExtResource("2_74jgv")
 ITEM_ID = 1
 TILE_ID = -1
 shop_value = 300
-ItemAbility = ExtResource("1_4kf11")
+ItemAbility = ExtResource("1_es6ev")
 throw_range = 3
 DESCRIPTION = "Heals a large portion of health."
 rarity = 0
