@@ -30,8 +30,6 @@ script = ExtResource("2_4clwx")
 [node name="UnitNonCombat" parent="NonCombatPlayerUnits" instance=ExtResource("3_5fc7e")]
 y_sort_enabled = true
 position = Vector2(320, 180)
-is_team_leader = true
-is_active_unit = true
 UnitStats = ExtResource("4_gwii0")
 
 [node name="TowerCraftingTile" parent="." instance=ExtResource("23_5l5lq")]

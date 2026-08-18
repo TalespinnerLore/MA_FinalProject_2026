@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://dr3wqb6id5en4"]
+[gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://5wgv2bevaw0i"]
 
-[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_5jj3x"]
-[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="2_7cu16"]
-[ext_resource type="Texture2D" uid="uid://bs2xknvf71vcu" path="res://Art/ItemSprites/sword.png" id="2_putdn"]
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_hu1o7"]
+[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_6tolm"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_0alel"]
 
 [resource]
-script = ExtResource("2_7cu16")
-STR_boost = 3
-DEX_boost = -1
+script = ExtResource("3_0alel")
+STR_boost = 0
+DEX_boost = 0
 VIT_boost = 0
 MAG_boost = -1
 DEF_boost = 2
@@ -24,18 +24,18 @@ Melee_Mult_boost = 0.0
 Ranged_Mult_boost = 0.0
 Def_Mult_boost = 0.0
 Reroll_Chance_boost = 0.0
-ItemName = "Heavy Stick"
+ItemName = "Rusty Bucket"
 max_stack = 1
-icon = ExtResource("2_putdn")
-ITEM_ID = 0
-TILE_ID = 0
+icon = ExtResource("2_6tolm")
+ITEM_ID = 10
+TILE_ID = -1
 shop_value = 1
-ItemAbility = ExtResource("1_5jj3x")
+ItemAbility = ExtResource("1_hu1o7")
 throw_range = 3
-DESCRIPTION = "The oldest weapon."
+DESCRIPTION = "Technically armour."
 rarity = 0
 ItemType = 3
-GearType = 2
+GearType = 1
 ConsType = 0
 Class_Bias = 2
 min_area_level = 0
@@ -51,5 +51,5 @@ STR_NEEDED = 10
 DEX_NEEDED = 0
 VIT_NEEDED = 0
 MAG_NEEDED = 0
-DEF_NEEDED = 10
+DEF_NEEDED = 5
 LUK_NEEDED = 0

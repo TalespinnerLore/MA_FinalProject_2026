@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://gy643k5rlbff"]
 
-[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_55olu"]
-[ext_resource type="Texture2D" uid="uid://b3u740hfd6idh" path="res://Art/ItemSprites/jester.png" id="2_16m47"]
-[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="2_a7f57"]
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_kkavu"]
+[ext_resource type="Texture2D" uid="uid://b3u740hfd6idh" path="res://Art/ItemSprites/jester.png" id="2_s4hk2"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_uxa3b"]
 
 [resource]
-script = ExtResource("2_a7f57")
-STR_boost = -1
-DEX_boost = -1
+script = ExtResource("3_uxa3b")
+STR_boost = 0
+DEX_boost = 0
 VIT_boost = -1
-MAG_boost = -1
+MAG_boost = 0
 DEF_boost = -1
 LUK_boost = 10
 HP_Max_boost = 0
@@ -26,30 +26,30 @@ Def_Mult_boost = 0.0
 Reroll_Chance_boost = 0.0
 ItemName = "Jingle Stick"
 max_stack = 1
-icon = ExtResource("2_16m47")
+icon = ExtResource("2_s4hk2")
 ITEM_ID = 0
 TILE_ID = 0
 shop_value = 1
-ItemAbility = ExtResource("1_55olu")
+ItemAbility = ExtResource("1_kkavu")
 throw_range = 3
 DESCRIPTION = "Some idiot tied bells to a stick."
-rarity = 0
+rarity = 1
 ItemType = 3
 GearType = 2
 ConsType = 0
 Class_Bias = 6
 min_area_level = 0
-max_area_level = 5
+max_area_level = 10
 Affinity_Fire = false
 Affinity_Water = false
 Affinity_Earth = false
 Affinity_Air = false
-Affinity_Force = false
-Affinity_Light = false
+Affinity_Force = true
+Affinity_Light = true
 Affinity_Dark = false
 STR_NEEDED = 0
 DEX_NEEDED = 0
 VIT_NEEDED = 0
 MAG_NEEDED = 0
 DEF_NEEDED = 0
-LUK_NEEDED = 0
+LUK_NEEDED = 15

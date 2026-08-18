@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://6oi2jvuw6g2i"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_5i380"]
+[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_e24qo"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_2qkks"]
+
+[resource]
+script = ExtResource("3_2qkks")
+STR_boost = 0
+DEX_boost = 1
+VIT_boost = 0
+MAG_boost = -1
+DEF_boost = 1
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0
+ItemName = "Threadbare Gloves"
+max_stack = 1
+icon = ExtResource("2_e24qo")
+ITEM_ID = 14
+TILE_ID = -1
+shop_value = 1
+ItemAbility = ExtResource("1_5i380")
+throw_range = 3
+DESCRIPTION = "Old fingerless gloves."
+rarity = 0
+ItemType = 3
+GearType = 1
+ConsType = 0
+Class_Bias = 4
+min_area_level = 0
+max_area_level = 5
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = false
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 5
+DEX_NEEDED = 10
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 0

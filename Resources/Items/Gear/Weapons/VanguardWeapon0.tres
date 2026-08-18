@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://f4gfxys3pmgd"]
 
-[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_0wrlw"]
-[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_85go2"]
-[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="2_88jw1"]
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_6xswm"]
+[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_2bbw6"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_8ucyu"]
 
 [resource]
-script = ExtResource("2_88jw1")
-STR_boost = 1
+script = ExtResource("3_8ucyu")
+STR_boost = 2
 DEX_boost = -1
-VIT_boost = 1
-MAG_boost = -1
+VIT_boost = 0
+MAG_boost = 0
 DEF_boost = 3
 LUK_boost = 0
 HP_Max_boost = 0
@@ -24,29 +24,29 @@ Melee_Mult_boost = 0.0
 Ranged_Mult_boost = 0.0
 Def_Mult_boost = 0.0
 Reroll_Chance_boost = 0.0
-ItemName = "Brass Knuckles"
+ItemName = "Spiked Gauntlets"
 max_stack = 1
-icon = ExtResource("2_85go2")
+icon = ExtResource("2_2bbw6")
 ITEM_ID = 0
 TILE_ID = 0
 shop_value = 1
-ItemAbility = ExtResource("1_0wrlw")
+ItemAbility = ExtResource("1_6xswm")
 throw_range = 3
 DESCRIPTION = "Knuckle defence is the best offence."
-rarity = 0
+rarity = 1
 ItemType = 3
 GearType = 2
 ConsType = 0
 Class_Bias = 1
 min_area_level = 0
-max_area_level = 5
+max_area_level = 10
 Affinity_Fire = false
 Affinity_Water = false
-Affinity_Earth = false
+Affinity_Earth = true
 Affinity_Air = false
 Affinity_Force = true
 Affinity_Light = false
-Affinity_Dark = false
+Affinity_Dark = true
 STR_NEEDED = 0
 DEX_NEEDED = 0
 VIT_NEEDED = 10

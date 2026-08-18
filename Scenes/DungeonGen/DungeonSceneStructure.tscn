@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://bj1i2ct8r8gpt"]
+[gd_scene load_steps=31 format=4 uid="uid://bj1i2ct8r8gpt"]
 
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_7fd7v"]
 [ext_resource type="Script" path="res://Scenes/DungeonGen/testing_tilemap_DUNGEONFLOOR.gd" id="2_sai8a"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://de1joagwyuvmh" path="res://Art/UI_Art/AoE/ui_aoe_front.png" id="24_n0k73"]
 [ext_resource type="Script" path="res://Scenes/DungeonGen/music.gd" id="26_r23u3"]
 [ext_resource type="AudioStream" uid="uid://dv4g2k3bm37yc" path="res://Sounds/islands.ogg" id="27_v4ogi"]
+[ext_resource type="AudioStream" uid="uid://bp161xni6qcnv" path="res://Sounds/stage clear.ogg" id="29_j08kg"]
 
 [sub_resource type="Shortcut" id="Shortcut_bsp06"]
 events = [null]
@@ -481,9 +482,22 @@ offset_bottom = 40.0
 script = ExtResource("26_r23u3")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/MUSIC"]
+process_mode = 3
 stream = ExtResource("27_v4ogi")
 volume_db = -10.0
 parameters/looping = true
+
+[node name="SFX" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("26_r23u3")
+
+[node name="SFX_Player" type="AudioStreamPlayer" parent="CanvasLayer/SFX" groups=["SFX_PLAYER"]]
+process_mode = 3
+stream = ExtResource("29_j08kg")
+volume_db = -10.0
 
 [connection signal="pressed" from="CanvasLayer/AbilityUI/Button" to="CanvasLayer/AbilityUI" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/AbilityUI/Button2" to="CanvasLayer/AbilityUI" method="_on_button_2_pressed"]

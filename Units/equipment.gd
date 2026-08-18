@@ -6,7 +6,7 @@ class_name Unit_Equipment_Inventory
 @export var equipped_trinket:ItemData
 @export var trinket_slot_stacksize:= 0
 
-@onready var unit:Unit_Instance = get_parent()
+@onready var unit = get_parent() #Unit_Instance was typed, this made things easier.
 
 var enemy_must_drop_list:= []
 #var enemy_gold_drop_amount:int = 0 ##this just becomes trinket stacksize, doi.

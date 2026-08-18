@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var finalised := false
+
 enum gridTier {T0,T1,T2,T2_5,T3}
 enum R {BASIC,RARE,ELITE,UNIQUE}
 
@@ -199,3 +201,8 @@ func _on_button_pressedMINUS() -> void:
 	else:
 		set_dropzones(clampi(grid_level-1,0,5))
 	pass # Replace with function body.
+
+
+func _on_texture_button_pressed() -> void:
+	self.visible = false
+	self.position = Vector2(-672,-388)

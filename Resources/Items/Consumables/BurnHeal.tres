@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cmlbyhitry1ve"]
 
-[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_6ldrc"]
+[ext_resource type="Resource" uid="uid://ewplp7rlvf3" path="res://Resources/Abilities/_ItemAbilities/BurnHeal.tres" id="1_52v58"]
 [ext_resource type="Texture2D" uid="uid://bg6vju54amv13" path="res://Art/2D_images/temp_hp_pot.png" id="2_u5ose"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_bh7vl"]
 
@@ -12,7 +12,7 @@ icon = ExtResource("2_u5ose")
 ITEM_ID = 1
 TILE_ID = -1
 shop_value = 150
-ItemAbility = ExtResource("1_6ldrc")
+ItemAbility = ExtResource("1_52v58")
 throw_range = 3
 DESCRIPTION = "Removes the Burning status effect."
 rarity = 0

@@ -1,17 +1,17 @@
-[gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://6oi2jvuw6g2i"]
+[gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://clfq564jyurid"]
 
-[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_tnsni"]
-[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_sa1e1"]
-[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_xhakb"]
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_26dq4"]
+[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_e0mwv"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_x8plw"]
 
 [resource]
-script = ExtResource("3_xhakb")
+script = ExtResource("3_x8plw")
 STR_boost = 0
-DEX_boost = 2
+DEX_boost = 5
 VIT_boost = 0
 MAG_boost = -1
-DEF_boost = 0
-LUK_boost = 0
+DEF_boost = 5
+LUK_boost = -1
 HP_Max_boost = 0
 Phys_ATK_boost = 0
 Mag_ATK_boost = 0
@@ -24,13 +24,13 @@ Melee_Mult_boost = 0.0
 Ranged_Mult_boost = 0.0
 Def_Mult_boost = 0.0
 Reroll_Chance_boost = 0.0
-ItemName = "Threadbare Gloves"
+ItemName = "Leather Chestplate"
 max_stack = 1
-icon = ExtResource("2_sa1e1")
+icon = ExtResource("2_e0mwv")
 ITEM_ID = 14
 TILE_ID = -1
 shop_value = 1
-ItemAbility = ExtResource("1_tnsni")
+ItemAbility = ExtResource("1_26dq4")
 throw_range = 3
 DESCRIPTION = "Old fingerless gloves."
 rarity = 0

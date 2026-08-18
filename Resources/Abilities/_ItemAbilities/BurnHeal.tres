@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://ewplp7rlvf3"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_srolh"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_hjeyr"]
+[ext_resource type="Resource" uid="uid://c3711d2btgqt6" path="res://Resources/StatusEffects/BurnHeal.tres" id="3_4krgt"]
+[ext_resource type="Texture2D" uid="uid://dssgt1n5mnc5k" path="res://Art/VFX Sprites/vfx_fire.png" id="4_jhpp1"]
+
+[resource]
+script = ExtResource("1_srolh")
+ability_name = "Burn Heal"
+vfx = ExtResource("4_jhpp1")
+element = 0
+valid_target = 3
+targeting = 4
+range = 1
+base_value = 0
+max_uses = 1
+damage_type = 6
+damaging = false
+healing = false
+creates_shield = false
+inflict_status = Array[ExtResource("2_hjeyr")]([ExtResource("3_4krgt")])
+STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
+BaseStats_required = [0, 0, 0, 0, 0, 0]
+Abilities_required = Array[ExtResource("1_srolh")]([])

@@ -100,7 +100,7 @@ func Attempt_LevelUp():
 	print("ATTEMPT LEVEL-UP!")
 	if XP >= XP_to_Level:
 		UnitLevel+=1
-		
+		PlayerStats.p1_level = UnitLevel
 		var vfx = Ability_vfx.instantiate()
 		vfx.texture = load("res://Art/2D_images/lvl-up.png")
 		vfx.life_span = 0.75
@@ -190,12 +190,13 @@ func set_stats():
 	print("0; hp:",HP_Current," max:",HP_Max)
 	var investedstats = [0,0,0,0,0,0]
 	if Team == Teams.PLAYER:
-		match self.get_index():
-			0: #team leader/only player char for now
-				investedstats = PlayerStats.p1_investedStrDexVitMagDefLuk
-				print("p1 base str: ",UnitStats.STR)
-				print("P1 invested stats: ",investedstats)
-				print("P1 LVL-UP stats: ",UnitStats.get_levelup_stats(UnitLevel))
+		#match self.get_index():
+		#	0: #team leader/only player char for now
+		UnitLevel = PlayerStats.p1_level
+		investedstats = PlayerStats.p1_investedStrDexVitMagDefLuk
+				#print("p1 base str: ",UnitStats.STR)
+				#print("P1 invested stats: ",investedstats)
+				#print("P1 LVL-UP stats: ",UnitStats.get_levelup_stats(UnitLevel))
 	else:
 		for i in UnitStats.Free_Stats*UnitLevel:
 			investedstats[randi_range(0,5)] += 1
@@ -241,22 +242,9 @@ func calc_stats_with_GearAndBuff_boost():
 	Base_Mag_DEF = (Base_Mag_ATK*0.75) + (Base_Phys_DEF*0.25)
 	Def_Mult = 1.0 + 0.02*(DEF+DEF_boost)
 	Reroll_Chance = 0.01*(LUK+LUK_boost)
-	apply_calc_stat_boosts()
+	EQUIPMENT.on_spawn_apply_boosts()
 	pass
 
-func apply_calc_stat_boosts():
-	HP_Max += HP_Max_boost
-	HP_Current = clampi(HP_Current,0,HP_Max)
-	Base_Phys_ATK += Phys_ATK_boost
-	Base_Mag_ATK += Mag_ATK_boost
-	Base_Phys_DEF += Phys_DEF_boost
-	Base_Mag_DEF += Mag_DEF_boost 
-	Base_Evasion += Evasion_boost 
-	Heal_Buff_Mult += Heal_Buff_Mult_boost 
-	Melee_Mult += Melee_Mult_boost
-	Ranged_Mult += Ranged_Mult_boost
-	Def_Mult += Def_Mult_boost
-	Reroll_Chance += Reroll_Chance_boost
 
 ####################################################
 #LUCK CODE
@@ -289,21 +277,21 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 	if hitcrit[0] == true:
 		match Ability.damage_type:
 			0:
-				amount = Source.Base_Phys_ATK
+				amount = (Source.Base_Phys_ATK + Source.Phys_ATK_boost)
 			1:
-				amount = Source.Base_Phys_ATK * Source.Melee_Mult
+				amount = (Source.Base_Phys_ATK + Source.Phys_ATK_boost) * (Source.Melee_Mult+Source.Melee_Mult_boost)
 				#print(Source.Base_Phys_ATK, " * ",Source.Melee_Mult," = ",amount)
 			2:
-				amount = Source.Base_Phys_ATK * Source.Ranged_Mult
+				amount = (Source.Base_Phys_ATK + Source.Phys_ATK_boost) * (Source.Ranged_Mult+Source.Ranged_Mult_boost)
 				print(" base phys ",Source.Base_Phys_ATK," str ",Source.STR," str_b ",Source.STR_boost)
 				print(" base phys ",Source.Ranged_Mult," str ",Source.DEX," str_b ",Source.DEX_boost)
 				print(Source.Base_Phys_ATK, " * ",Source.Ranged_Mult," = ",amount)
 			3:
-				amount = Source.Base_Mag_ATK
+				amount = Source.Base_Mag_ATK + Source.Mag_ATK_boost
 			4:
-				amount = Source.Base_Mag_ATK * Source.Melee_Mult
+				amount = (Source.Base_Mag_ATK + Source.Mag_ATK_boost) * (Source.Melee_Mult+Source.Melee_Mult_boost)
 			5:
-				amount = Source.Base_Mag_ATK * Source.Ranged_Mult
+				amount = (Source.Base_Mag_ATK+ Source.Mag_ATK_boost) * (Source.Ranged_Mult+Source.Ranged_Mult_boost)
 			6:
 				amount = 1
 		amount+=Ability.base_value
@@ -397,14 +385,14 @@ func calc_damage(Damage_Type:int,amount:int,crit:bool,AttackingElement:int): #ru
 		
 	if Damage_Type == 0 or Damage_Type == 1 or Damage_Type == 2: 
 		#Phys Generic      #Phys Melee         #Phys Ranged
-		damage_taken = amount-(Base_Phys_DEF*Def_Mult)
-		damage_negated = roundi(Base_Phys_DEF*Def_Mult)
-		print("Damage negated by defense: ",roundi(Base_Phys_DEF*Def_Mult))
+		damage_taken = amount-((Base_Phys_DEF+Phys_DEF_boost)*Def_Mult)
+		damage_negated = roundi((Base_Phys_DEF+Phys_DEF_boost)*Def_Mult)
+		print("Damage negated by defense: ",roundi((Base_Phys_DEF+Phys_DEF_boost)*Def_Mult))
 	elif Damage_Type == 3 or Damage_Type == 4 or Damage_Type == 5:
 		#Magic Generic      #Magic Melee         #Magic Ranged
-		damage_taken = amount-(Base_Mag_DEF*Def_Mult)
-		damage_negated = roundi(Base_Mag_DEF*Def_Mult)
-		print("Damage negated by defense: ",roundi(Base_Mag_DEF*Def_Mult))
+		damage_taken = amount-((Base_Mag_DEF+Mag_DEF_boost)*Def_Mult)
+		damage_negated = roundi((Base_Mag_DEF+Mag_DEF_boost)*Def_Mult)
+		print("Damage negated by defense: ",roundi((Base_Mag_DEF+Mag_DEF_boost)*Def_Mult))
 	else:
 		damage_taken = amount/Def_Mult
 		damage_negated = roundi(amount - amount/Def_Mult)
@@ -483,7 +471,7 @@ func AttackTiles(CoordList:Array, Damage_Type:int, AttackingElement:ElementType,
 		or (tilegrid.has_unit(tile) == true and Friendly_Fire == true): #IF there's a unit, calc damage unless it's friendly and friendly_fire is on.
 			var unit = tilegrid.get_unit_data(tile) #[REFERENCE, NAME, TEAM]
 			if Damaging == true:
-				var hit_crit = unit[0].calc_evasion_and_crit(Base_Evasion) #[HIT, CRIT]
+				var hit_crit = unit[0].calc_evasion_and_crit(Base_Evasion+Evasion_boost) #[HIT, CRIT]
 				if hit_crit[0] == true:
 					unit.calc_damage(Damage_Type, Base_Damage, hit_crit[1],AttackingElement)
 	pass
@@ -789,7 +777,7 @@ func init(is_player_controlled):
 	dialogue_manager_ref = get_tree().get_first_node_in_group("DIALOGUE_MANAGER")
 	tilemap_ref = get_tree().get_first_node_in_group('TILEMAP')
 	
-	EQUIPMENT.on_spawn_apply_boosts()
+	
 
 	#position = position.snapped(Vector2.ONE * tile_size)
 	#position += Vector2.ONE * tile_size/2
@@ -859,6 +847,9 @@ func _on_death():
 			PlayerStats.player_inventory.erase(PlayerStats.player_inventory.pick_random())
 		#^^^ death penalty: half to 3/4 all held gold, quarter of inventory items.
 		self.process_mode = Node.PROCESS_MODE_ALWAYS
+		sfx_player.stream = load("res://Sounds/game over.ogg")
+		sfx_player.play()
+		await sfx_player.finished
 		var unit_manager_ref = get_tree().get_first_node_in_group("UNIT_MANAGER")
 		unit_manager_ref.player_dead = true
 		unit_manager_ref.get_child(1).player_dead = true
@@ -870,6 +861,8 @@ func _on_death():
 	#Play Death ANIMATION
 	
 	#queue_free()
+
+@onready var sfx_player:AudioStreamPlayer = get_tree().get_first_node_in_group("SFX_PLAYER")
 
 func enemy_drop_items():
 	var item_manager:GroundItemManager = get_parent().get_parent().item_manager_ref

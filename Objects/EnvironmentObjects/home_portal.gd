@@ -12,12 +12,16 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Unit_Instance:
 		if body.Team == body.Teams.PLAYER:
 			emit_signal("player_found_portal")
+			sfx_player.stream = load("res://Sounds/stage clear.ogg")
+			sfx_player.play()
 
 			pass #SHOW DO YOU WANT TO GO TO THE NEXT FLOOR POPUP
 	pass # Replace with function body.
 
 @onready var env_object_manager_ref:EnvironmentObjectManager = get_tree().get_first_node_in_group("ENVIRONMENT_OBJECT_MANAGER")
 @onready var yn_UI:yes_no_UI = get_tree().get_first_node_in_group("Yes_No_UI")
+@onready var sfx_player:AudioStreamPlayer = get_tree().get_first_node_in_group("SFX_PLAYER")
+
 
 func init() -> void:
 	yn_UI = get_tree().get_first_node_in_group("Yes_No_UI")
@@ -32,10 +36,10 @@ func init() -> void:
 
 
 
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	return #why does this function exist?
-	if body is Unit_Instance:
-		if body.Team == body.Teams.PLAYER:
-			emit_signal("player_found_portal")
+#func _on_area_2d_body_exited(body: Node2D) -> void:
+#	return #why does this function exist?
+#	if body is Unit_Instance:
+#		if body.Team == body.Teams.PLAYER:
+#			emit_signal("player_found_portal")
 
 	pass # Replace with function body.

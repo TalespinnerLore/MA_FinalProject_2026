@@ -313,7 +313,12 @@ func _on_button_pressed_right() -> void:
 	#change_page(true)
 	change_page_fixed(true)
 
+@export var finalised := false
+
 func _on_button_start_pressed() -> void:
+	finalised = true
+	get_parent().finalised = true
+	get_tree().get_first_node_in_group("TOWER_PORTAL").open_door()
 	var savekeys = SaveLoad.SaveFileData.checkpoint_persistance_keys
 	if Boss_T0_Mini > 0:
 		savekeys['unlocked_recipe_miniboss'] = true
@@ -343,7 +348,9 @@ func _on_button_start_pressed() -> void:
 	#DungeonData.Special_Features = Special_Features
 	load_data_to_dungeon()
 	#DungeonData.choose_biome()
-	DungeonData.open_level_new()
+	get_parent().visible = false
+	get_parent().position = Vector2(-672,-388)
+	#DungeonData.open_level_new() #MOVING TO PORTAL HITBOX
 	
 	pass# Replace with function body.
 

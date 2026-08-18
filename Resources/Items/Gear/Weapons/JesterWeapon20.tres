@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://ch8cvwtvcyfpb"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_l4bvh"]
+[ext_resource type="Texture2D" uid="uid://b3u740hfd6idh" path="res://Art/ItemSprites/jester.png" id="2_xyhxu"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_bg5wc"]
+
+[resource]
+script = ExtResource("3_bg5wc")
+STR_boost = 3
+DEX_boost = 3
+VIT_boost = -3
+MAG_boost = 3
+DEF_boost = -3
+LUK_boost = 20
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0
+ItemName = "Clamourous Staff"
+max_stack = 1
+icon = ExtResource("2_xyhxu")
+ITEM_ID = 0
+TILE_ID = 0
+shop_value = 1
+ItemAbility = ExtResource("1_l4bvh")
+throw_range = 3
+DESCRIPTION = "Some idiot tied bells to a long stick."
+rarity = 1
+ItemType = 3
+GearType = 2
+ConsType = 0
+Class_Bias = 6
+min_area_level = 10
+max_area_level = 999
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = true
+Affinity_Light = true
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 0
+LUK_NEEDED = 100

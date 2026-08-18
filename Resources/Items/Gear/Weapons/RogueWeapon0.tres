@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://cnd50xxi1muwb"]
 
-[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_71sgu"]
-[ext_resource type="Texture2D" uid="uid://cdyjl3v58xrp0" path="res://Art/ItemSprites/bow.png" id="2_hu5ns"]
-[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="2_mimtq"]
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_jdul3"]
+[ext_resource type="Texture2D" uid="uid://cdyjl3v58xrp0" path="res://Art/ItemSprites/bow.png" id="2_7it8o"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_q2uwk"]
 
 [resource]
-script = ExtResource("2_mimtq")
+script = ExtResource("3_q2uwk")
 STR_boost = 2
 DEX_boost = 3
 VIT_boost = 0
 MAG_boost = -1
-DEF_boost = -1
+DEF_boost = 0
 LUK_boost = 0
 HP_Max_boost = 0
 Phys_ATK_boost = 0
@@ -26,24 +26,24 @@ Def_Mult_boost = 0.0
 Reroll_Chance_boost = 0.0
 ItemName = "Crude Bow"
 max_stack = 1
-icon = ExtResource("2_hu5ns")
+icon = ExtResource("2_7it8o")
 ITEM_ID = 0
 TILE_ID = 0
 shop_value = 1
-ItemAbility = ExtResource("1_71sgu")
+ItemAbility = ExtResource("1_jdul3")
 throw_range = 3
 DESCRIPTION = "Made with a branch and some twine."
-rarity = 0
+rarity = 1
 ItemType = 3
 GearType = 2
 ConsType = 0
 Class_Bias = 4
 min_area_level = 0
-max_area_level = 5
+max_area_level = 10
 Affinity_Fire = false
 Affinity_Water = false
 Affinity_Earth = false
-Affinity_Air = false
+Affinity_Air = true
 Affinity_Force = true
 Affinity_Light = false
 Affinity_Dark = false

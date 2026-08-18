@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b5vfps5hpstph"]
 
-[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_v3s4g"]
+[ext_resource type="Resource" uid="uid://dqqac621xhawg" path="res://Resources/Abilities/_ItemAbilities/PoisonHeal.tres" id="1_ceyvs"]
 [ext_resource type="Texture2D" uid="uid://bg6vju54amv13" path="res://Art/2D_images/temp_hp_pot.png" id="2_xf14r"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_raee5"]
 
@@ -12,7 +12,7 @@ icon = ExtResource("2_xf14r")
 ITEM_ID = 1
 TILE_ID = -1
 shop_value = 150
-ItemAbility = ExtResource("1_v3s4g")
+ItemAbility = ExtResource("1_ceyvs")
 throw_range = 3
 DESCRIPTION = "Removes the Poison status effect."
 rarity = 0

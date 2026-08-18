@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://c33cx8yurpu36"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_p1j31"]
+[ext_resource type="Texture2D" uid="uid://bs2xknvf71vcu" path="res://Art/ItemSprites/sword.png" id="2_aieai"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_w523d"]
+
+[resource]
+script = ExtResource("3_w523d")
+STR_boost = 6
+DEX_boost = 4
+VIT_boost = 0
+MAG_boost = -2
+DEF_boost = 0
+LUK_boost = 2
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0
+ItemName = "Dull Longsword"
+max_stack = 1
+icon = ExtResource("2_aieai")
+ITEM_ID = 0
+TILE_ID = 0
+shop_value = 1
+ItemAbility = ExtResource("1_p1j31")
+throw_range = 3
+DESCRIPTION = "It's better than a stick."
+rarity = 1
+ItemType = 3
+GearType = 2
+ConsType = 0
+Class_Bias = 2
+min_area_level = 5
+max_area_level = 15
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = true
+Affinity_Air = false
+Affinity_Force = true
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 35
+DEX_NEEDED = 0
+VIT_NEEDED = 0
+MAG_NEEDED = 0
+DEF_NEEDED = 20
+LUK_NEEDED = 0

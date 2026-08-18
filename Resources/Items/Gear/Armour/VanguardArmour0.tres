@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://lvwwmp4kmbg3"]
 
-[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_o1oi4"]
-[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_n1bmw"]
-[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_us5c6"]
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_is3u2"]
+[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_5rfdo"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_a2iqs"]
 
 [resource]
-script = ExtResource("3_us5c6")
+script = ExtResource("3_a2iqs")
 STR_boost = 0
 DEX_boost = -1
-VIT_boost = 1
+VIT_boost = 0
 MAG_boost = 0
-DEF_boost = 1
+DEF_boost = 2
 LUK_boost = 0
 HP_Max_boost = 0
 Phys_ATK_boost = 0
@@ -26,11 +26,11 @@ Def_Mult_boost = 0.0
 Reroll_Chance_boost = 0.0
 ItemName = "Scrap Buckler"
 max_stack = 1
-icon = ExtResource("2_n1bmw")
+icon = ExtResource("2_5rfdo")
 ITEM_ID = 12
 TILE_ID = -1
 shop_value = 1
-ItemAbility = ExtResource("1_o1oi4")
+ItemAbility = ExtResource("1_is3u2")
 throw_range = 3
 DESCRIPTION = "A pot lid with scrap iron welded to it."
 rarity = 0

@@ -1,11 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://qw8hxdfy48pn"]
+[gd_scene load_steps=6 format=3 uid="uid://qw8hxdfy48pn"]
 
 [ext_resource type="Script" path="res://Units/unit_non_combat.gd" id="1_lna23"]
-[ext_resource type="Script" path="res://Units/abilities.gd" id="2_npetc"]
-[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="3_iyyxl"]
-[ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/10_Cone_of_Embers.tres" id="4_qk8jk"]
-[ext_resource type="Resource" uid="uid://cv14lef7fcshm" path="res://Resources/Abilities/DEX_base/10_Piercing_Shot.tres" id="5_dxwwh"]
-[ext_resource type="Script" path="res://Units/status_effects_manager.gd" id="6_k36fu"]
+[ext_resource type="Script" path="res://Units/equipment.gd" id="2_6lvts"]
 [ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="7_ayqgv"]
 [ext_resource type="PackedScene" uid="uid://dp6qyj1ggegbu" path="res://Utility/Components/HP_module.tscn" id="8_82kg4"]
 
@@ -17,16 +13,8 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_lna23")
 
-[node name="Abilities" type="Node" parent="."]
-script = ExtResource("2_npetc")
-BasicAttack = ExtResource("3_iyyxl")
-Slot_1 = ExtResource("4_qk8jk")
-Slot_2 = ExtResource("5_dxwwh")
-Slot_3 = ExtResource("4_qk8jk")
-Slot_4 = ExtResource("4_qk8jk")
-
-[node name="StatusEffects" type="Node" parent="."]
-script = ExtResource("6_k36fu")
+[node name="Equipment" type="Node" parent="."]
+script = ExtResource("2_6lvts")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("7_ayqgv")

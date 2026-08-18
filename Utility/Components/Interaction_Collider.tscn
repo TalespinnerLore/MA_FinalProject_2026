@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwxiwr65crd8e"]
+
+[ext_resource type="Script" path="res://Utility/Components/interaction_collider.gd" id="1_230tx"]
+[ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="2_7qomp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3tqfj"]
+
+[node name="InteractionCollider" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_230tx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3tqfj")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -15.0
+offset_top = -71.0
+offset_right = 17.0
+offset_bottom = -48.0
+theme = ExtResource("2_7qomp")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 8
+text = "Press 'E'"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

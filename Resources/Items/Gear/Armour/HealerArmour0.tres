@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://cpbnlkv0exvi1"]
+
+[ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_igjhx"]
+[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_lox42"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_mex7u"]
+
+[resource]
+script = ExtResource("3_mex7u")
+STR_boost = 0
+DEX_boost = -1
+VIT_boost = 1
+MAG_boost = 0
+DEF_boost = 1
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0
+ItemName = "Old Healer Robe"
+max_stack = 1
+icon = ExtResource("2_lox42")
+ITEM_ID = 0
+TILE_ID = 0
+shop_value = 1
+ItemAbility = ExtResource("1_igjhx")
+throw_range = 3
+DESCRIPTION = "Clearly a hand-me-down."
+rarity = 0
+ItemType = 3
+GearType = 1
+ConsType = 0
+Class_Bias = 5
+min_area_level = 0
+max_area_level = 5
+Affinity_Fire = false
+Affinity_Water = false
+Affinity_Earth = false
+Affinity_Air = false
+Affinity_Force = false
+Affinity_Light = false
+Affinity_Dark = false
+STR_NEEDED = 0
+DEX_NEEDED = 0
+VIT_NEEDED = 10
+MAG_NEEDED = 5
+DEF_NEEDED = 0
+LUK_NEEDED = 0
