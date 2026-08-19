@@ -38,6 +38,7 @@ func _reset_save_file(savefile:int):
 	_save(savefile)
 
 func save_current_playerdata():
+	SaveFileData.player_hub_location = PlayerStats.player_hub_location
 	SaveFileData.p1_class = PlayerStats.p1_class
 	SaveFileData.p1_weapon = PlayerStats.p1_weapon
 	SaveFileData.p1_armour = PlayerStats.p1_armour
@@ -193,7 +194,9 @@ func change_class(newClassName:String):
 	class_data[classname]['armour'] = PlayerStats.p1_armour
 	class_data[classname]['trinket'] = PlayerStats.p1_trinket
 	class_data[classname]['trinket_slot_stacksize'] = PlayerStats.p1_trinket_slot_stacksize
-	class_data[classname]['equipped_abilities'] = PlayerStats.p1_equipped_abilities
+	for i in 4:
+		class_data[classname]['equipped_abilities'][i] = String(PlayerStats.p1_equipped_abilities[i].get_path())
+	#class_data[classname]['equipped_abilities'] = PlayerStats.p1_equipped_abilities
 	class_data[classname]['level'] = PlayerStats.p1_level
 	class_data[classname]['XP'] = PlayerStats.p1_XP
 	class_data[classname]['investedStrDexVitMagDefLuk'] = PlayerStats.p1_investedStrDexVitMagDefLuk
@@ -205,8 +208,12 @@ func change_class(newClassName:String):
 	PlayerStats.p1_armour = class_data[classname]['armour']
 	PlayerStats.p1_trinket = class_data[classname]['trinket']
 	PlayerStats.p1_trinket_slot_stacksize = class_data[classname]['trinket_slot_stacksize']
-
-	PlayerStats.p1_equipped_abilities = class_data[classname]['equipped_abilities']
+	
+	print('p abilities:',PlayerStats.p1_equipped_abilities,' swapped in:',class_data[classname]['equipped_abilities'])
+	for i in 4:
+		PlayerStats.p1_equipped_abilities[i] = load(class_data[classname]['equipped_abilities'][i])
+	#PlayerStats.p1_equipped_abilities = class_data[classname]['equipped_abilities']
+	print('p abilities:',PlayerStats.p1_equipped_abilities,' swapped in:',class_data[classname]['equipped_abilities'])
 	PlayerStats.p1_level = class_data[classname]['level']
 	PlayerStats.p1_XP = class_data[classname]['XP']
 	PlayerStats.p1_investedStrDexVitMagDefLuk = class_data[classname]['investedStrDexVitMagDefLuk']

@@ -23,6 +23,7 @@ class_name SaveDataResource
 @export var is_in_dungeon := false
 @export var is_in_hub := false
 @export var is_in_craftingroom := false
+@export var player_hub_location = 0
 
 @export var TileID_NamedInventory = [["TEST",0],["FIRE",4],["WATER",4],["EARTH",4],["AIR",4],["FORCE",4],\
 ["VOLCANO",0],["ISLANDS",0],["MESA",0],["SKY_ISLANDS",0],\
@@ -162,7 +163,7 @@ class_name SaveDataResource
 		'armour':null,
 		'trinket':null,
 		'trinket_slot_stacksize': 0,
-		'equipped_abilities':[load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")],
+		'equipped_abilities':["res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres"],
 		'level':1,
 		'XP':0,
 		'investedStrDexVitMagDefLuk':[0,0,0,0,0,0] ,
@@ -174,7 +175,7 @@ class_name SaveDataResource
 		'armour':null,
 		'trinket':null,
 		'trinket_slot_stacksize': 0,
-		'equipped_abilities':[load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")],
+		'equipped_abilities':["res://Resources/Abilities/DEF_base/10_Thorn_Shield.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres"],
 		'level':1,
 		'XP':0,
 		'investedStrDexVitMagDefLuk':[0,0,0,0,0,0] ,
@@ -186,7 +187,7 @@ class_name SaveDataResource
 		'armour':null,
 		'trinket':null,
 		'trinket_slot_stacksize': 0,
-		'equipped_abilities':[load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")],
+		'equipped_abilities':["res://Resources/Abilities/STR_base/10_Heavy_Chop.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres"],
 		'level':1,
 		'XP':0,
 		'investedStrDexVitMagDefLuk':[0,0,0,0,0,0] ,
@@ -198,7 +199,7 @@ class_name SaveDataResource
 		'armour':null,
 		'trinket':null,
 		'trinket_slot_stacksize': 0,
-		'equipped_abilities':[load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")],
+		'equipped_abilities':["res://Resources/Abilities/MAG_base/10_Cone_of_Embers.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres"],
 		'level':1,
 		'XP':0,
 		'investedStrDexVitMagDefLuk':[0,0,0,0,0,0] ,
@@ -210,7 +211,7 @@ class_name SaveDataResource
 		'armour':null,
 		'trinket':null,
 		'trinket_slot_stacksize': 0,
-		'equipped_abilities':[load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")],
+		'equipped_abilities':["res://Resources/Abilities/DEX_base/10_Piercing_Shot.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres"],
 		'level':1,
 		'XP':0,
 		'investedStrDexVitMagDefLuk':[0,0,0,0,0,0] ,
@@ -222,7 +223,7 @@ class_name SaveDataResource
 		'armour':null,
 		'trinket':null,
 		'trinket_slot_stacksize': 0,
-		'equipped_abilities':[load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")],
+		'equipped_abilities':["res://Resources/Abilities/VIT_base/10_Healing_Touch.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres"],
 		'level':1,
 		'XP':0,
 		'investedStrDexVitMagDefLuk':[0,0,0,0,0,0] ,
@@ -234,7 +235,7 @@ class_name SaveDataResource
 		'armour':null,
 		'trinket':null,
 		'trinket_slot_stacksize': 0,
-		'equipped_abilities':[load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")],
+		'equipped_abilities':["res://Resources/Abilities/LUK_base/10_Increase_Precision.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres","res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres"],
 		'level':1,
 		'XP':0,
 		'investedStrDexVitMagDefLuk':[0,0,0,0,0,0] ,

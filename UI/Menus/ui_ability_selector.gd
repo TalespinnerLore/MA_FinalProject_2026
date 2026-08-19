@@ -27,7 +27,7 @@ var autostats
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	_player_interaction()
+	#_player_interaction()
 	#load_player_data()
 	#await get_tree().create_timer(2).timeout
 	#change_statpage(true)
@@ -40,6 +40,7 @@ func _process(delta: float) -> void:
 		open_close()
 
 func open_close():
+	$StatAbilityBox/TextureRect.texture = PlayerStats.p1_class.Sprite
 	load_player_data()
 	self.visible = ! self.visible
 	pause_level()
@@ -58,6 +59,14 @@ func load_player_data():
 	basic_attack = classdata.BasicAttack
 	$StatAbilityBox/NameLabel.text = str('Test McTestface\n LVL ',PlayerStats.p1_level,' ',classdata.UnitName)
 	autostats = classdata.get_levelup_stats(PlayerStats.p1_level)
+	autostats[0]+=PlayerStats.p1_class.STR
+	autostats[1]+=PlayerStats.p1_class.DEX
+	autostats[2]+=PlayerStats.p1_class.VIT
+	autostats[3]+=PlayerStats.p1_class.MAG
+	autostats[4]+=PlayerStats.p1_class.DEF
+	autostats[5]+=PlayerStats.p1_class.LUK
+	
+	print('autostats:',autostats,' level:',PlayerStats.p1_level)
 	for box in $StatAbilityBox/AbilityBoxContainer.get_children():
 		box.data = PlayerStats.p1_equipped_abilities[index]
 		box.uses_remaining = PlayerStats.p1_ability_usesB1234WAT[index+1]
@@ -176,7 +185,7 @@ func load_abilities(stat_index:STATS):
 
 func sort_abilities(stat_index:STATS):
 	for box in $AbilitySelectionBox/ScrollContainer/VBoxContainer.get_children():
-		print(box,' ')
+		print(box,' box')
 	var main_statreq:Array[int] = []
 	for ability in abilities:
 		main_statreq.append(ability.BaseStats_required[stat_index])
@@ -192,10 +201,11 @@ func sort_abilities(stat_index:STATS):
 	abilities = ordered_abilites
 
 func show_usable_abilities():
+	print('show usable ability start')
 	await get_tree().create_timer(0.1).timeout
 	for box in $AbilitySelectionBox/ScrollContainer/VBoxContainer.get_children():
 		if box is UI_abilitybox:
-			print(box.data)
+			print(box.get_index(),'',box.data)
 			for stat in 6:
 				print('stat:',stat,' req:',box.data.BaseStats_required[stat],' have:',PlayerStats.p1_investedStrDexVitMagDefLuk[stat]+autostats[stat])
 				if box.data.BaseStats_required[stat] > \

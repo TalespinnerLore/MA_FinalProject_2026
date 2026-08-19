@@ -1,28 +1,30 @@
-[gd_resource type="Resource" script_class="SaveDataResource" load_steps=6 format=3 uid="uid://brdnkt2uulofa"]
+[gd_resource type="Resource" script_class="SaveDataResource" load_steps=7 format=3 uid="uid://brdnkt2uulofa"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_ieqc1"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="2_0u54d"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/UniqueRoomData.gd" id="3_1ooho"]
 [ext_resource type="Resource" uid="uid://c78i1vl8chm0p" path="res://Resources/Units/Player/Stats_Civilian.tres" id="4_kscll"]
 [ext_resource type="Script" path="res://_SaveLoad/SaveData.gd" id="5_nleun"]
+[ext_resource type="Resource" uid="uid://dygpdjty37286" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres" id="5_ppkpe"]
 
 [resource]
 script = ExtResource("5_nleun")
 p1_class = ExtResource("4_kscll")
 p1_trinket_slot_stacksize = 0
-p1_equipped_abilities = null
+p1_equipped_abilities = Array[Object]([ExtResource("5_ppkpe"), ExtResource("5_ppkpe"), ExtResource("5_ppkpe"), ExtResource("5_ppkpe")])
 p1_ability_usesB1234WAT = Array[int]([999, 0, 0, 0, 0, 0, 0, 0])
-p1_HP = 60
+p1_HP = 50
 p1_level = 25
 p1_XP = 0
 p1_investedStrDexVitMagDefLuk = Array[int]([0, 0, 0, 0, 0, 0])
 p1_free_stats = 125
-player_inventory = null
+player_inventory = []
 inventory_size = 60
-player_gold = 99999
-is_in_dungeon = true
+player_gold = 999999
+is_in_dungeon = false
 is_in_hub = false
 is_in_craftingroom = false
+player_hub_location = 0
 TileID_NamedInventory = [["TEST", 0], ["FIRE", 8], ["WATER", 8], ["EARTH", 8], ["AIR", 8], ["FORCE", 8], ["VOLCANO", 8], ["ISLANDS", 8], ["MESA", 8], ["SKY_ISLANDS", 8], ["RIVER", 8], ["LAKE", 8], ["ROUND_ROOMS", 8], ["DENSE_LAYOUT", 8], ["SPARSE_LAYOUT", 8], ["ALTERNATING_SIZE_ROOMS", 8], ["SMALL_ROOMS", 8], ["LARGE_ROOMS", 8], ["CONSUMABLES", 8], ["GEAR", 2], ["LOCKBOXES", 8], ["WEAPONS", 8], ["ARMOUR", 8], ["TRINKETS", 8], ["VANGUARD", 8], ["WARRIOR", 8], ["MAGE", 8], ["ROGUE", 8], ["HEALER", 8], ["JESTER", 8], ["INCREASED_MOB_DENSITY", 8], ["INCREASED_GOLD", 8], ["INCREASED_XP", 8], ["DECREASED_MOB_DENSITY", 8], ["DECREASED_GOLD", 8], ["DECREASED_XP", 8], ["BEASTS", 8], ["ELEMENTALS", 8], ["UNDEAD", 8], ["CONSTRUCTS", 8], ["MORTALS", 8], ["WILDLINGS", 8], ["TREASURE_ROOM", 4], ["MINI_BOSS", 4], ["MONSTER_HOUSE", 4], ["T1_BOSS", 4], ["T1_FIREBOSS", 2], ["T1_WATERBOSS", 2], ["T1_EARTHBOSS", 2], ["T1_AIRBOSS", 2], ["T1_FORCEBOSS", 5], ["T2_BOSS", 2], ["T2_QUADBOSS", 1], ["T2_FORCEBOSS", 1]]
 Affinity_Fire = 0
 Affinity_Water = 0
@@ -123,7 +125,7 @@ stored_character_data = {
 "Civilian": {
 "XP": 0,
 "armour": null,
-"equipped_abilities": [],
+"equipped_abilities": ["res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres"],
 "free_stats": 125,
 "investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
 "level": 25,
@@ -135,7 +137,7 @@ stored_character_data = {
 "Healer": {
 "XP": 0,
 "armour": null,
-"equipped_abilities": [],
+"equipped_abilities": ["res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres"],
 "free_stats": 125,
 "investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
 "level": 25,
@@ -147,7 +149,7 @@ stored_character_data = {
 "Jester": {
 "XP": 0,
 "armour": null,
-"equipped_abilities": [],
+"equipped_abilities": ["res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres"],
 "free_stats": 200,
 "investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
 "level": 25,
@@ -159,7 +161,7 @@ stored_character_data = {
 "Mage": {
 "XP": 0,
 "armour": null,
-"equipped_abilities": [],
+"equipped_abilities": ["res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres"],
 "free_stats": 125,
 "investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
 "level": 25,
@@ -183,7 +185,7 @@ stored_character_data = {
 "Vanguard": {
 "XP": 0,
 "armour": null,
-"equipped_abilities": [],
+"equipped_abilities": ["res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres"],
 "free_stats": 125,
 "investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
 "level": 25,
@@ -195,7 +197,7 @@ stored_character_data = {
 "Warrior": {
 "XP": 0,
 "armour": null,
-"equipped_abilities": [],
+"equipped_abilities": ["res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres", "res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres"],
 "free_stats": 125,
 "investedStrDexVitMagDefLuk": [0, 0, 0, 0, 0, 0],
 "level": 25,
@@ -206,7 +208,7 @@ stored_character_data = {
 }
 }
 bank_gold_val = 999999
-BankInventory_Resourcestack = null
+BankInventory_Resourcestack = []
 BankInventory_size = 999
 is_portal_open = false
 checkpoint_persistance_keys = {

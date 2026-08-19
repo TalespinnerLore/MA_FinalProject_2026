@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ddrvqfukxkpfr"]
 
-[ext_resource type="Script" path="res://Objects/EnvironmentObjects/classswap_point.gd" id="1_8tf02"]
-[ext_resource type="Texture2D" uid="uid://dmknubd008yeb" path="res://Art/UI_Art/EnvironmentSprites/SwapPoint.png" id="2_jbd1h"]
+[ext_resource type="Script" path="res://Objects/EnvironmentObjects/abilityswap_point.gd" id="1_kag7p"]
+[ext_resource type="Texture2D" uid="uid://ci1h8ss2sujb0" path="res://Art/UI_Art/EnvironmentSprites/SwapAbilityPoint.png" id="2_wy184"]
 [ext_resource type="PackedScene" uid="uid://bwxiwr65crd8e" path="res://Utility/Components/Interaction_Collider.tscn" id="3_c62yj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sspb6"]
@@ -9,11 +9,11 @@ size = Vector2(32, 32)
 
 [node name="AbilitySwapPoint" type="StaticBody2D"]
 collision_mask = 3
-script = ExtResource("1_8tf02")
+script = ExtResource("1_kag7p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 8)
-texture = ExtResource("2_jbd1h")
+texture = ExtResource("2_wy184")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true

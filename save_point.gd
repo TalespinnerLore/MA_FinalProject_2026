@@ -1,5 +1,8 @@
 extends StaticBody2D
 
+enum HUB_LOC{SWAP_DOOR,SAVEPOINT_SWAP,TOWERDOOR,SAVEPOINT_MIDDLE}
+@export var new_player_location:HUB_LOC
+
 func interaction():
 	SaveLoad.save_current_playerdata()
 	var hub_ref = get_tree().get_first_node_in_group('HUB_WORLD') 

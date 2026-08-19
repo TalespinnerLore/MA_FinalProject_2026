@@ -349,6 +349,7 @@ func _ready():
 			#is_team_leader = true
 			#print(PlayerStats.p1_class.resource_name)
 		init(true)
+	#print(PlayerStats.p1_equipped_abilities[0].get_path())
 
 
 func init(is_player_controlled):

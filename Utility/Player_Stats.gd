@@ -2,17 +2,17 @@ extends Node
 
 enum HUB_LOC{SWAP_DOOR,SAVEPOINT_SWAP,TOWERDOOR,SAVEPOINT_MIDDLE}
 
-@export var player_hub_location:HUB_LOC = 1
+@export var player_hub_location = 0
 
 var p1_class:StatComponent = load("res://Resources/Units/Player/Stats_Civilian.tres")
 var p1_weapon:ItemData_Gear
 var p1_armour:ItemData_Gear
 var p1_trinket:ItemData
 var p1_trinket_slot_stacksize:= 0
-var p1_equipped_abilities:Array = [load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres"),load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")]
+var p1_equipped_abilities:Array = [load("res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres"),load("res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres"),load("res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres"),load("res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres")]
 var p1_ability_usesB1234WAT:Array[int] = [999,0,0,0,0,0,0,0] #1234WAT
 var p1_HP:int
-var p1_level:=6
+var p1_level:=1
 var p1_XP:=0
 var p1_investedStrDexVitMagDefLuk:Array = [0,0,0,0,0,0] 
 var p1_free_stats := 5

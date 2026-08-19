@@ -54,7 +54,6 @@ VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_cxc2n")
 VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_o5wsa")
 
 [node name="UiAbilitySelector" type="Control" groups=["ABILITY_SELECTOR_UI", "description"]]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="TowerOfTrials_Test"
-run/main_scene="res://Scenes/StaticLevels/HubScene_Playtesting.tscn"
+config/name="TowerOfTrials_prototype1_5"
+run/main_scene="res://UI/PlaytestUI/Main_Menu_UI.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
