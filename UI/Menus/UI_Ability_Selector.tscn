@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://qs3fqojkph1u"]
+[gd_scene load_steps=42 format=3 uid="uid://qs3fqojkph1u"]
 
 [ext_resource type="Script" path="res://UI/Menus/ui_ability_selector.gd" id="1_bspq1"]
 [ext_resource type="Texture2D" uid="uid://b3pex2aw1g2mg" path="res://Art/UI_Art/Frames/ui_bg_blueoutline.png" id="1_ggu28"]
@@ -34,6 +34,7 @@
 [ext_resource type="Script" path="res://UI/Menus/reverse_scroll_container.gd" id="26_7was7"]
 [ext_resource type="PackedScene" uid="uid://ddd3rdl4ft71a" path="res://UI/Menus/UI Components/seperator_label.tscn" id="28_vtj0m"]
 [ext_resource type="PackedScene" uid="uid://blbllhtoc7nms" path="res://UI/Menus/UI Components/ability_box.tscn" id="29_87voy"]
+[ext_resource type="Texture2D" uid="uid://cxattyo56h3cr" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile54.png" id="35_50p6v"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pv6eg"]
 
@@ -53,6 +54,7 @@ VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_cxc2n")
 VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_o5wsa")
 
 [node name="UiAbilitySelector" type="Control" groups=["ABILITY_SELECTOR_UI", "description"]]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1389,6 +1391,17 @@ huzzah.
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 531.0
+offset_top = 69.0
+offset_right = 563.0
+offset_bottom = 101.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("35_50p6v")
+texture_pressed = ExtResource("35_50p6v")
+texture_hover = ExtResource("35_50p6v")
+stretch_mode = 0
+
 [connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox/minusButton" to="StatAbilityBox/StatBoxContainer/StatBox" method="_on_minus_button_pressed"]
 [connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox/plusButton" to="StatAbilityBox/StatBoxContainer/StatBox" method="_on_plus_button_pressed"]
 [connection signal="pressed" from="StatAbilityBox/StatBoxContainer/StatBox2/minusButton" to="StatAbilityBox/StatBoxContainer/StatBox2" method="_on_minus_button_pressed"]
@@ -1418,3 +1431,4 @@ autowrap_mode = 2
 [connection signal="mouse_entered" from="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox3" to="AbilitySelectionBox/ScrollContainer/VBoxContainer/AbilityBox3" method="_on_mouse_entered"]
 [connection signal="pressed" from="AbilitySelectionBox/equip/giveButton" to="." method="_on_equip_button_pressed"]
 [connection signal="pressed" from="AbilitySelectionBox/enequip/giveButton" to="." method="_on_unequip_button_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

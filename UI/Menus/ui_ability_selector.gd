@@ -3,7 +3,7 @@ class_name UI_AbilitySelector
 
 func _player_interaction():
 	pause_level()
-	self.visible = true
+	open_close()
 
 @onready var Abilities_STR:ResourceGroup = load("res://Resources/_Resource_x_Groups/Abilities_STR.tres")
 @onready var Abilities_DEX:ResourceGroup = load("res://Resources/_Resource_x_Groups/Abilities_DEX.tres")
@@ -27,6 +27,7 @@ var autostats
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	_player_interaction()
 	#load_player_data()
 	#await get_tree().create_timer(2).timeout
 	#change_statpage(true)
@@ -351,3 +352,8 @@ func _on_left_button_pressed() -> void:
 func _on_right_button_pressed() -> void:
 	change_statpage(true)
 	pass # Replace with function body.
+
+
+func _on_texture_button_pressed() -> void:
+	pause_level()
+	open_close()
