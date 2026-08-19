@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=7 format=3 uid="uid://c4qtt0t87mst0"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=14 format=3 uid="uid://c4qtt0t87mst0"]
 
 [ext_resource type="Resource" uid="uid://dygpdjty37286" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres" id="1_fj1yk"]
 [ext_resource type="Texture2D" uid="uid://bnpa0fl0fa7aj" path="res://Art/UnitSprites/Spritesheets/enemytype_elemental_base.png" id="2_3venl"]
@@ -6,6 +6,13 @@
 [ext_resource type="Resource" uid="uid://r5jqgja7wkb3" path="res://Resources/Items/_TileItems/Tile2_Water.tres" id="4_v8mqg"]
 [ext_resource type="Resource" uid="uid://cpk1yof75jgxl" path="res://Resources/Items/_TileItems/Tile37_Elementals.tres" id="5_08pml"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="6_l2vw1"]
+[ext_resource type="Texture2D" uid="uid://dybq578t1ohh4" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette0.png" id="6_yee13"]
+[ext_resource type="Texture2D" uid="uid://bytkpu6eh3mja" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette1.png" id="7_v1qvr"]
+[ext_resource type="Texture2D" uid="uid://cdvrukl1aqv1y" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette2.png" id="8_y3wj4"]
+[ext_resource type="Texture2D" uid="uid://bobdn0b18ccct" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette3.png" id="9_vdbav"]
+[ext_resource type="Texture2D" uid="uid://bek26ylbkxen4" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette4.png" id="10_8n0sm"]
+[ext_resource type="Texture2D" uid="uid://b7rqbnlla460c" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette5.png" id="11_asf21"]
+[ext_resource type="Texture2D" uid="uid://dgy7hq8xrmqnx" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette6.png" id="12_1am86"]
 
 [resource]
 script = ExtResource("6_l2vw1")
@@ -20,7 +27,7 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 2
 Element = 1
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("6_yee13"), ExtResource("7_v1qvr"), ExtResource("8_y3wj4"), ExtResource("9_vdbav"), ExtResource("10_8n0sm"), ExtResource("11_asf21"), ExtResource("12_1am86")])
 must_drop_items = Array[ExtResource("3_3f0yk")]([])
 chance_drop_items = Array[ExtResource("3_3f0yk")]([ExtResource("4_v8mqg"), ExtResource("5_08pml")])
 STR_up = 5

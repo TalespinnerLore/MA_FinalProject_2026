@@ -34,6 +34,10 @@ var other_icon = preload("res://Art/UI_Art/ui_icon_other.png")
 var lockbox_icon = preload("res://Art/UI_Art/ui_icon_lockbox.png")
 var key_item_icon = preload("res://Art/UI_Art/ui_icon_keyitem.png")
 
+func _player_interaction():
+	pause_level()
+	open_close()
+
 func _ready() -> void:
 	SaveLoad.load_bank_data(self)
 	self.visible = false
@@ -58,10 +62,13 @@ func open_close():
 	load_item_inventory()
 	if inv_content.size() > 0:
 		selected_item = inv_content[0][0]
+		print(selected_item)
 		selected_inv_slot = 0
 	else:
 		selected_item = load("res://Resources/Items/Other/Gold.tres")
 		selected_inv_slot = 0
+	if visible:
+		SaveLoad.save_hub_data(self)
 	self.visible = ! self.visible
 	pause_level()
 
@@ -441,3 +448,8 @@ func _on_store_all_button_pressed() -> void:
 	load_values()
 	bank_load_values()
 	pass # Replace with function body.
+
+
+func _on_texture_button_pressed() -> void:
+	pause_level()
+	open_close()

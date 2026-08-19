@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bk00h2s3eav8n"]
+[gd_scene load_steps=17 format=4 uid="uid://bk00h2s3eav8n"]
 
 [ext_resource type="Script" path="res://UI/Menus/shop_inventory_ui.gd" id="1_2yi8s"]
 [ext_resource type="Texture2D" uid="uid://b3pex2aw1g2mg" path="res://Art/UI_Art/Frames/ui_bg_blueoutline.png" id="1_23rp5"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bb6idmlcfgdjg" path="res://Art/UnitUI/statuseffect_p_regen.png" id="7_f2ao1"]
 [ext_resource type="TileSet" uid="uid://ty37cym0krxg" path="res://Crafting/tower_crafting_ui.tres" id="8_p3yvh"]
 [ext_resource type="Texture2D" uid="uid://c7f2l6gudwhlw" path="res://Art/2D_images/gold_counter.png" id="9_ljlvs"]
+[ext_resource type="Texture2D" uid="uid://cxattyo56h3cr" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile54.png" id="14_cvmqp"]
 [ext_resource type="Texture2D" uid="uid://d26g6cgvhcqaf" path="res://Art/UI_Art/arrow_tile_left.png" id="24_afpik"]
 [ext_resource type="Texture2D" uid="uid://b4i6a72h02ho" path="res://Art/UI_Art/arrow_tile_right.png" id="25_8hu8o"]
 
@@ -571,6 +572,17 @@ text = "COST
 horizontal_alignment = 1
 vertical_alignment = 2
 
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 531.0
+offset_top = 69.0
+offset_right = 563.0
+offset_bottom = 101.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("14_cvmqp")
+texture_pressed = ExtResource("14_cvmqp")
+texture_hover = ExtResource("14_cvmqp")
+stretch_mode = 0
+
 [connection signal="pressed" from="InventoryBox/ItemContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="InventoryBox/ItemContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="InventoryBox/ItemContainer/Button3" to="." method="_on_button_3_pressed"]
@@ -587,3 +599,4 @@ vertical_alignment = 2
 [connection signal="pressed" from="OptionsBox/VBoxContainer/giveButton" to="." method="_on_give_button_pressed"]
 [connection signal="pressed" from="OptionsBox/VBoxContainer/dropButton" to="." method="_on_drop_button_pressed"]
 [connection signal="pressed" from="OptionsBox/VBoxContainer/buyButton" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

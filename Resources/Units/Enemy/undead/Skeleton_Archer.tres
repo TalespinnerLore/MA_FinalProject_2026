@@ -1,16 +1,22 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=6 format=3 uid="uid://3scj3nao7qvl"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=12 format=3 uid="uid://3scj3nao7qvl"]
 
-[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_rvq7h"]
+[ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="1_skt5d"]
 [ext_resource type="Texture2D" uid="uid://c1ossj8gcg1ig" path="res://Art/UnitSprites/Spritesheets/enemytype_undead_base.png" id="2_rj2i7"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_n1fmr"]
+[ext_resource type="Texture2D" uid="uid://cw07hmvjramch" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette0.png" id="4_01icw"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="4_vncpn"]
-[ext_resource type="Resource" uid="uid://d3v1ahrrtkdkr" path="res://Resources/Items/_TileItems/Tile38_Undead.tres" id="5_3f51u"]
+[ext_resource type="Texture2D" uid="uid://clfevdleeveab" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette1.png" id="5_clyop"]
+[ext_resource type="Texture2D" uid="uid://btn5d2kk2b135" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette2.png" id="6_5l75o"]
+[ext_resource type="Texture2D" uid="uid://wx4sxhuks2ld" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette3.png" id="7_8em86"]
+[ext_resource type="Texture2D" uid="uid://dxd3owd0gfgya" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette4.png" id="8_b1mi0"]
+[ext_resource type="Texture2D" uid="uid://c135kdbvw4ehj" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette5.png" id="9_6bw6o"]
+[ext_resource type="Texture2D" uid="uid://ccf1xplejg0n2" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette6.png" id="10_uxxma"]
 
 [resource]
 script = ExtResource("4_vncpn")
 Sprite = ExtResource("2_rj2i7")
-BasicAttack = ExtResource("1_rvq7h")
-Attacks = null
+BasicAttack = ExtResource("1_skt5d")
+Attacks = Array[Object]([ExtResource("1_skt5d"), ExtResource("1_skt5d"), ExtResource("1_skt5d"), ExtResource("1_skt5d")])
 UnitName = "Skeleton Archer"
 is_large_unit = false
 is_rare_spawn = false
@@ -19,8 +25,7 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 1
 Element = 4
-unit_specific_drops = Array[ExtResource("3_n1fmr")]([ExtResource("5_3f51u")])
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("4_01icw"), ExtResource("5_clyop"), ExtResource("6_5l75o"), ExtResource("7_8em86"), ExtResource("8_b1mi0"), ExtResource("9_6bw6o"), ExtResource("10_uxxma")])
 must_drop_items = Array[ExtResource("3_n1fmr")]([])
 chance_drop_items = Array[ExtResource("3_n1fmr")]([])
 STR_up = 5

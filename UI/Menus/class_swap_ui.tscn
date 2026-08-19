@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dscvo6hslhk00" path="res://Art/UnitSprites/BasicCharacter_healer.png" id="9_b8hgt"]
 [ext_resource type="Texture2D" uid="uid://ccysrrr4x4jfo" path="res://Art/UnitSprites/BasicCharacter_jester.png" id="10_l3vdo"]
 
-[node name="Class_Swap_UI" type="Control"]
+[node name="Class_Swap_UI" type="Control" groups=["CLASS_SWAP"]]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

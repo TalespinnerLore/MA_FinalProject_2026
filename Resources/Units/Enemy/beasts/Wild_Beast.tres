@@ -1,16 +1,23 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=6 format=3 uid="uid://yfhbqfr5rcy3"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=13 format=3 uid="uid://yfhbqfr5rcy3"]
 
-[ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="1_q5raq"]
+[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_brfls"]
 [ext_resource type="Texture2D" uid="uid://baj6qmljqsgg2" path="res://Art/UnitSprites/Spritesheets/enemytype_beast_base.png" id="2_2i3nf"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_hykrq"]
 [ext_resource type="Resource" uid="uid://cmc0ywri5q38h" path="res://Resources/Items/_TileItems/Tile36_Beasts.tres" id="4_j0jgd"]
+[ext_resource type="Texture2D" uid="uid://dhrl0i2rgiq3p" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette0.png" id="5_bncc8"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="5_vxr3p"]
+[ext_resource type="Texture2D" uid="uid://bce0kg37pbsq2" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette1.png" id="6_uxx1u"]
+[ext_resource type="Texture2D" uid="uid://b4gh36awxcwlb" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette2.png" id="7_4lxcu"]
+[ext_resource type="Texture2D" uid="uid://df1wbojt3vbf7" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette3.png" id="8_hwhe4"]
+[ext_resource type="Texture2D" uid="uid://ej2etyj4u2v6" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette4.png" id="9_rycm1"]
+[ext_resource type="Texture2D" uid="uid://cofo7o2ts6jvr" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette5.png" id="10_xdxvf"]
+[ext_resource type="Texture2D" uid="uid://btf8fokfi07s1" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette6.png" id="11_dwa0f"]
 
 [resource]
 script = ExtResource("5_vxr3p")
 Sprite = ExtResource("2_2i3nf")
-BasicAttack = ExtResource("1_q5raq")
-Attacks = null
+BasicAttack = ExtResource("1_brfls")
+Attacks = Array[Object]([ExtResource("1_brfls"), ExtResource("1_brfls"), ExtResource("1_brfls"), ExtResource("1_brfls")])
 UnitName = "Wild Beast"
 is_large_unit = false
 is_rare_spawn = false
@@ -19,8 +26,7 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 4
 Element = 4
-unit_specific_drops = Array[ExtResource("3_hykrq")]([])
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("5_bncc8"), ExtResource("6_uxx1u"), ExtResource("7_4lxcu"), ExtResource("8_hwhe4"), ExtResource("9_rycm1"), ExtResource("10_xdxvf"), ExtResource("11_dwa0f")])
 must_drop_items = Array[ExtResource("3_hykrq")]([])
 chance_drop_items = Array[ExtResource("3_hykrq")]([ExtResource("4_j0jgd")])
 STR_up = 7

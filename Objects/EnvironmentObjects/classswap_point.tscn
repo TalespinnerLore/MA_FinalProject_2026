@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgf44y4ubuugp"]
+
+[ext_resource type="Script" path="res://Objects/EnvironmentObjects/classswap_point.gd" id="1_8hndq"]
+[ext_resource type="Texture2D" uid="uid://dmknubd008yeb" path="res://Art/UI_Art/EnvironmentSprites/SwapPoint.png" id="2_x4haa"]
+[ext_resource type="PackedScene" uid="uid://bwxiwr65crd8e" path="res://Utility/Components/Interaction_Collider.tscn" id="3_11w7g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sspb6"]
+size = Vector2(32, 32)
+
+[node name="ClassSwapPoint" type="StaticBody2D"]
+collision_mask = 3
+script = ExtResource("1_8hndq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 8)
+texture = ExtResource("2_x4haa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 17)
+shape = SubResource("RectangleShape2D_sspb6")
+debug_color = Color(0.918288, 6.87307e-05, 0.702664, 0.42)
+
+[node name="InteractionCollider" parent="." instance=ExtResource("3_11w7g")]
+position = Vector2(0, 38)

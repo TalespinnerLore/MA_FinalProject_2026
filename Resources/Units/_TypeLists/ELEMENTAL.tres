@@ -1,11 +1,23 @@
-[gd_resource type="Resource" script_class="TypeList" load_steps=3 format=3 uid="uid://b0y04jc7aw64g"]
+[gd_resource type="Resource" script_class="TypeList" load_steps=15 format=3 uid="uid://b0y04jc7aw64g"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_5xm8l"]
+[ext_resource type="Resource" uid="uid://c365vhp4wk3nw" path="res://Resources/Units/Enemy/elementals/Air_Elemental_Caster.tres" id="2_cgjn4"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/EnemyTypeList.gd" id="2_xajjq"]
+[ext_resource type="Resource" uid="uid://dvqdyjsq5beow" path="res://Resources/Units/Enemy/elementals/Air_Elemental_Skirmisher.tres" id="3_xs84c"]
+[ext_resource type="Resource" uid="uid://dvdkx18faiesk" path="res://Resources/Units/Enemy/elementals/Earth_Elemental_Caster.tres" id="4_wgcgj"]
+[ext_resource type="Resource" uid="uid://ccovelma48nao" path="res://Resources/Units/Enemy/elementals/Earth_Elemental_Skirmisher.tres" id="5_7a50b"]
+[ext_resource type="Resource" uid="uid://duuskevrvri7h" path="res://Resources/Units/Enemy/elementals/Fire_Elemental_Caster.tres" id="6_hhgda"]
+[ext_resource type="Resource" uid="uid://drtslea82tjva" path="res://Resources/Units/Enemy/elementals/Fire_Elemental_Skirmisher.tres" id="7_t0saa"]
+[ext_resource type="Resource" uid="uid://dltwnrj7t4hv1" path="res://Resources/Units/Enemy/elementals/Water_Elemental_Caster.tres" id="8_uy8we"]
+[ext_resource type="Resource" uid="uid://c4qtt0t87mst0" path="res://Resources/Units/Enemy/elementals/Water_Elemental_Skirmisher.tres" id="9_vhian"]
+[ext_resource type="Resource" uid="uid://cd6y5xet27t0f" path="res://Resources/Units/Enemy/elementals/Guardian_of_Air.tres" id="10_o6edd"]
+[ext_resource type="Resource" uid="uid://dfbgr20y4l2nq" path="res://Resources/Units/Enemy/elementals/Guardian_of_Earth.tres" id="11_d8clc"]
+[ext_resource type="Resource" uid="uid://b2x15h8bkbyov" path="res://Resources/Units/Enemy/elementals/Guardian_of_Fire.tres" id="12_2xjm1"]
+[ext_resource type="Resource" uid="uid://rsc2ps6lj752" path="res://Resources/Units/Enemy/elementals/Guardian_of_Water.tres" id="13_isyi6"]
 
 [resource]
 script = ExtResource("2_xajjq")
 CreatureType = 2
-Common_Enemies = Array[ExtResource("1_5xm8l")]([])
-Rare_Enemies = Array[ExtResource("1_5xm8l")]([])
+Common_Enemies = Array[ExtResource("1_5xm8l")]([ExtResource("2_cgjn4"), ExtResource("3_xs84c"), ExtResource("4_wgcgj"), ExtResource("5_7a50b"), ExtResource("6_hhgda"), ExtResource("7_t0saa"), ExtResource("8_uy8we"), ExtResource("9_vhian")])
+Rare_Enemies = Array[ExtResource("1_5xm8l")]([ExtResource("10_o6edd"), ExtResource("11_d8clc"), ExtResource("12_2xjm1"), ExtResource("13_isyi6")])
 MiniBoss_Enemies = Array[ExtResource("1_5xm8l")]([])

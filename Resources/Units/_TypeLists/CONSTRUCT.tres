@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="TypeList" load_steps=3 format=3 uid="uid://sngsk0jvraho"]
+[gd_resource type="Resource" script_class="TypeList" load_steps=6 format=3 uid="uid://sngsk0jvraho"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_dwue5"]
+[ext_resource type="Resource" uid="uid://b2ok2rdp61pau" path="res://Resources/Units/Enemy/constructs/Construct_Brawler.tres" id="2_g15cf"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/EnemyTypeList.gd" id="2_r1lff"]
+[ext_resource type="Resource" uid="uid://d3qdwges8twgc" path="res://Resources/Units/Enemy/constructs/Construct_Guard.tres" id="3_h70ne"]
+[ext_resource type="Resource" uid="uid://deqsyjy15jegy" path="res://Resources/Units/Enemy/constructs/Construct_Technician.tres" id="4_u03ol"]
 
 [resource]
 script = ExtResource("2_r1lff")
 CreatureType = 3
-Common_Enemies = Array[ExtResource("1_dwue5")]([])
-Rare_Enemies = Array[ExtResource("1_dwue5")]([])
+Common_Enemies = Array[ExtResource("1_dwue5")]([ExtResource("2_g15cf"), ExtResource("3_h70ne")])
+Rare_Enemies = Array[ExtResource("1_dwue5")]([ExtResource("4_u03ol")])
 MiniBoss_Enemies = Array[ExtResource("1_dwue5")]([])

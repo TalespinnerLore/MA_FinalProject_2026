@@ -63,6 +63,16 @@ ITEM_MANAGER=""
 SFX_PLAYER=""
 crafting=""
 TOWER_PORTAL=""
+tower_area=""
+classswap_area=""
+CLASS_SWAP=""
+HUB_WORLD=""
+BANK_UI=""
+STRONGBOXSHOP_UI=""
+ABILITY_SELECTOR_UI=""
+SHOP_UI_POTION=""
+SHOP_UI_GEAR=""
+SHOP_UI_TILES=""
 
 [godot_resource_groups]
 

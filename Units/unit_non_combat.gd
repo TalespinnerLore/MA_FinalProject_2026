@@ -364,5 +364,8 @@ func init(is_player_controlled):
 		$Sprite2D.texture = UnitStats.Sprite
 	get_self_coords()
 
+func load_class_texture():
+	$Sprite2D.texture = PlayerStats.p1_class.Sprite
+
 func set_spawn(spawnpoint):
 	position = grid_to_pos(spawnpoint,Vector2(0,0))[1] #the [1] gtes just the grid position

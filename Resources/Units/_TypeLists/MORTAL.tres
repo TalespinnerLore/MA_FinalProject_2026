@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_wg6ee"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/EnemyTypeList.gd" id="2_6bgku"]
-[ext_resource type="Resource" uid="uid://dgm8dna5mwt7q" path="res://Resources/Units/Enemy/Stats_EnemyMagic.tres" id="2_fc6tr"]
-[ext_resource type="Resource" uid="uid://dunj0e8tqw7uv" path="res://Resources/Units/Enemy/Stats_EnemyMelee.tres" id="3_kgmv6"]
-[ext_resource type="Resource" uid="uid://brn8pf5kf160g" path="res://Resources/Units/Enemy/Stats_EnemyRanged.tres" id="4_8npr8"]
+[ext_resource type="Resource" uid="uid://dgvmn8brwaykn" path="res://Resources/Units/Enemy/bandits/Bandit_Mage.tres" id="2_nhh50"]
+[ext_resource type="Resource" uid="uid://b5edr6jthu0nf" path="res://Resources/Units/Enemy/bandits/Bandit_Ranger.tres" id="3_5t683"]
+[ext_resource type="Resource" uid="uid://ctw25kl02og26" path="res://Resources/Units/Enemy/bandits/Bandit_Thug.tres" id="4_6jtjw"]
 [ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="5_kofmn"]
-[ext_resource type="Resource" uid="uid://b1mex6jfj2b7r" path="res://Resources/Units/Enemy/Stats_RareEnemyTest.tres" id="6_umxyy"]
+[ext_resource type="Resource" uid="uid://slx3kwfuaamv" path="res://Resources/Units/Enemy/bandits/Lawless_Fool.tres" id="6_1xsxd"]
 
 [resource]
 script = ExtResource("2_6bgku")
 CreatureType = 0
-Common_Enemies = Array[ExtResource("1_wg6ee")]([ExtResource("2_fc6tr"), ExtResource("3_kgmv6"), ExtResource("4_8npr8")])
-Rare_Enemies = Array[ExtResource("1_wg6ee")]([ExtResource("6_umxyy")])
+Common_Enemies = Array[ExtResource("1_wg6ee")]([ExtResource("2_nhh50"), ExtResource("3_5t683"), ExtResource("4_6jtjw")])
+Rare_Enemies = Array[ExtResource("1_wg6ee")]([ExtResource("6_1xsxd")])
 MiniBoss_Enemies = Array[ExtResource("1_wg6ee")]([ExtResource("5_kofmn")])

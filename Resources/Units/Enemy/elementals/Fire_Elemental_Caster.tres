@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=7 format=3 uid="uid://duuskevrvri7h"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=14 format=3 uid="uid://duuskevrvri7h"]
 
 [ext_resource type="Resource" uid="uid://d02ns3e6v636q" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres" id="1_1db87"]
 [ext_resource type="Texture2D" uid="uid://bnpa0fl0fa7aj" path="res://Art/UnitSprites/Spritesheets/enemytype_elemental_base.png" id="1_spmu1"]
@@ -6,12 +6,19 @@
 [ext_resource type="Resource" uid="uid://rm0ey0stwas" path="res://Resources/Items/_TileItems/Tile1_Fire.tres" id="3_l8bps"]
 [ext_resource type="Resource" uid="uid://cpk1yof75jgxl" path="res://Resources/Items/_TileItems/Tile37_Elementals.tres" id="4_ywy4o"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="5_jwctn"]
+[ext_resource type="Texture2D" uid="uid://dybq578t1ohh4" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette0.png" id="6_e0iek"]
+[ext_resource type="Texture2D" uid="uid://bytkpu6eh3mja" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette1.png" id="7_n3i2m"]
+[ext_resource type="Texture2D" uid="uid://cdvrukl1aqv1y" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette2.png" id="8_8svsh"]
+[ext_resource type="Texture2D" uid="uid://bobdn0b18ccct" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette3.png" id="9_yr0wi"]
+[ext_resource type="Texture2D" uid="uid://bek26ylbkxen4" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette4.png" id="10_m5e6i"]
+[ext_resource type="Texture2D" uid="uid://b7rqbnlla460c" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette5.png" id="11_s4ihi"]
+[ext_resource type="Texture2D" uid="uid://dgy7hq8xrmqnx" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette6.png" id="12_7m32t"]
 
 [resource]
 script = ExtResource("5_jwctn")
 Sprite = ExtResource("1_spmu1")
 BasicAttack = ExtResource("1_1db87")
-Attacks = null
+Attacks = Array[Object]([ExtResource("1_1db87"), ExtResource("1_1db87"), ExtResource("1_1db87"), ExtResource("1_1db87")])
 UnitName = "Fire Caster"
 is_large_unit = false
 is_rare_spawn = false
@@ -20,8 +27,7 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 2
 Element = 0
-unit_specific_drops = Array[ExtResource("2_a4h60")]([])
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("6_e0iek"), ExtResource("7_n3i2m"), ExtResource("8_8svsh"), ExtResource("9_yr0wi"), ExtResource("10_m5e6i"), ExtResource("11_s4ihi"), ExtResource("12_7m32t")])
 must_drop_items = Array[ExtResource("2_a4h60")]([])
 chance_drop_items = Array[ExtResource("2_a4h60")]([ExtResource("3_l8bps"), ExtResource("4_ywy4o")])
 STR_up = 5

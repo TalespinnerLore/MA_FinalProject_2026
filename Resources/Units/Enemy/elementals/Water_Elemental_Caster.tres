@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=7 format=3 uid="uid://dltwnrj7t4hv1"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=14 format=3 uid="uid://dltwnrj7t4hv1"]
 
 [ext_resource type="Resource" uid="uid://d02ns3e6v636q" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres" id="1_fvp5n"]
 [ext_resource type="Texture2D" uid="uid://bnpa0fl0fa7aj" path="res://Art/UnitSprites/Spritesheets/enemytype_elemental_base.png" id="2_x0s45"]
@@ -6,12 +6,19 @@
 [ext_resource type="Resource" uid="uid://r5jqgja7wkb3" path="res://Resources/Items/_TileItems/Tile2_Water.tres" id="4_p1wsq"]
 [ext_resource type="Resource" uid="uid://cpk1yof75jgxl" path="res://Resources/Items/_TileItems/Tile37_Elementals.tres" id="5_0ughv"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="6_228sl"]
+[ext_resource type="Texture2D" uid="uid://dybq578t1ohh4" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette0.png" id="6_y6csq"]
+[ext_resource type="Texture2D" uid="uid://bytkpu6eh3mja" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette1.png" id="7_fe3eo"]
+[ext_resource type="Texture2D" uid="uid://cdvrukl1aqv1y" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette2.png" id="8_q5tsg"]
+[ext_resource type="Texture2D" uid="uid://bobdn0b18ccct" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette3.png" id="9_qdfqo"]
+[ext_resource type="Texture2D" uid="uid://bek26ylbkxen4" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette4.png" id="10_4ra1x"]
+[ext_resource type="Texture2D" uid="uid://b7rqbnlla460c" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette5.png" id="11_rqm2h"]
+[ext_resource type="Texture2D" uid="uid://dgy7hq8xrmqnx" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette6.png" id="12_0hju7"]
 
 [resource]
 script = ExtResource("6_228sl")
 Sprite = ExtResource("2_x0s45")
 BasicAttack = ExtResource("1_fvp5n")
-Attacks = null
+Attacks = Array[Object]([ExtResource("1_fvp5n"), ExtResource("1_fvp5n"), ExtResource("1_fvp5n"), ExtResource("1_fvp5n")])
 UnitName = "Water Caster"
 is_large_unit = false
 is_rare_spawn = false
@@ -20,7 +27,7 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 2
 Element = 1
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("6_y6csq"), ExtResource("7_fe3eo"), ExtResource("8_q5tsg"), ExtResource("9_qdfqo"), ExtResource("10_4ra1x"), ExtResource("11_rqm2h"), ExtResource("12_0hju7")])
 must_drop_items = Array[ExtResource("3_aoers")]([])
 chance_drop_items = Array[ExtResource("3_aoers")]([ExtResource("4_p1wsq"), ExtResource("5_0ughv")])
 STR_up = 5

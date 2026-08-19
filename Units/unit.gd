@@ -13,6 +13,8 @@ signal turn_complete
 
 const StatusEffect_instance = preload("res://Utility/Components/StatusEffectInstance.tscn")
 
+@export var boss_used_ultimate := false
+
 ####################################################
 #CURRENT UNIT STATUS
 ####################################################
@@ -727,7 +729,7 @@ func init(is_player_controlled):
 		is_large_unit = true
 	if is_player_controlled:
 		Team = Teams.PLAYER
-		
+		print('sees player abilities')
 		UnitStats = PlayerStats.p1_class
 		$Abilities.Slot_1 = PlayerStats.p1_equipped_abilities[0]
 		$Abilities.Slot_2 = PlayerStats.p1_equipped_abilities[1]
@@ -762,11 +764,17 @@ func init(is_player_controlled):
 		UnitLevel = PlayerStats.p1_level
 		Calc_XP_to_Level()
 	else: #FIX THIS LATER TO ACCOUNT FOR NPC AND ALLY UNITS
+		print('print unitstats name',UnitStats.UnitName)
 		$Label.visible = false
 		Team = Teams.ENEMY
 		set_stats()
 		HP_Current = HP_Max
 		HP_Module.new_level_refresh(HP_Current,HP_Max)
+		ABILITIES.BasicAttack = UnitStats.BasicAttack
+		ABILITIES.Slot_1 = UnitStats.Attacks[0]
+		ABILITIES.Slot_2 = UnitStats.Attacks[1]
+		ABILITIES.Slot_3 = UnitStats.Attacks[2]
+		ABILITIES.Slot_4 = UnitStats.Attacks[3]
 		$Abilities.init()
 		$Sprite2D.texture = UnitStats.Sprite
 		print('unit hframes: ',UnitStats.Sprite.get_width()/32)
@@ -1121,6 +1129,13 @@ func AI_turn_enemy_new():
 		goal_tile = target_unit.self_coords
 		var move_closer := false
 		var ab_num = randi_range(0,4)
+		#vvv for t2 boss ult attack vvv#
+		if UnitStats.is_t2_boss and ab_num == 0:
+			if boss_used_ultimate:
+				ab_num = randi_range(1,4)
+			else:
+				boss_used_ultimate = true
+				
 		var selected = ABILITIES.ability_data(ab_num)
 		print('selected attack:',selected.ability_name," ability range:",selected.range)
 		

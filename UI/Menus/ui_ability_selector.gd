@@ -1,6 +1,10 @@
 extends Control
 class_name UI_AbilitySelector
 
+func _player_interaction():
+	pause_level()
+	self.visible = true
+
 @onready var Abilities_STR:ResourceGroup = load("res://Resources/_Resource_x_Groups/Abilities_STR.tres")
 @onready var Abilities_DEX:ResourceGroup = load("res://Resources/_Resource_x_Groups/Abilities_DEX.tres")
 @onready var Abilities_VIT:ResourceGroup = load("res://Resources/_Resource_x_Groups/Abilities_VIT.tres")

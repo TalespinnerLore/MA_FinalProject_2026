@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bt0puajtrhukx"]
+[gd_scene load_steps=14 format=4 uid="uid://bt0puajtrhukx"]
 
 [ext_resource type="Script" path="res://UI/Menus/bank_inventory_ui.gd" id="1_7s6rq"]
 [ext_resource type="Texture2D" uid="uid://b3pex2aw1g2mg" path="res://Art/UI_Art/Frames/ui_bg_blueoutline.png" id="3_h20k4"]
@@ -9,6 +9,7 @@
 [ext_resource type="TileSet" uid="uid://ty37cym0krxg" path="res://Crafting/tower_crafting_ui.tres" id="8_f5lnf"]
 [ext_resource type="Texture2D" uid="uid://d26g6cgvhcqaf" path="res://Art/UI_Art/arrow_tile_left.png" id="9_bb6a7"]
 [ext_resource type="Texture2D" uid="uid://b4i6a72h02ho" path="res://Art/UI_Art/arrow_tile_right.png" id="10_jn3tc"]
+[ext_resource type="Texture2D" uid="uid://cxattyo56h3cr" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile54.png" id="11_wtlgd"]
 [ext_resource type="Texture2D" uid="uid://c7f2l6gudwhlw" path="res://Art/2D_images/gold_counter.png" id="13_7wlfp"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h0eiw"]
@@ -21,7 +22,7 @@ texture_margin_right = 3.0
 texture_margin_bottom = 1.0
 region_rect = Rect2(0, 0, 48, 24)
 
-[node name="Bank_UI" type="Control"]
+[node name="Bank_UI" type="Control" groups=["BANK_UI"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -872,6 +873,17 @@ text = "GOLD
 horizontal_alignment = 1
 vertical_alignment = 2
 
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 531.0
+offset_top = 69.0
+offset_right = 563.0
+offset_bottom = 101.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("11_wtlgd")
+texture_pressed = ExtResource("11_wtlgd")
+texture_hover = ExtResource("11_wtlgd")
+stretch_mode = 0
+
 [connection signal="pressed" from="InventoryBox/ItemContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="InventoryBox/ItemContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="InventoryBox/ItemContainer/Button3" to="." method="_on_button_3_pressed"]
@@ -909,3 +921,4 @@ vertical_alignment = 2
 [connection signal="pressed" from="GoldOptionsBox/VBoxContainer/take10Button" to="." method="_on_take_10_button_pressed"]
 [connection signal="pressed" from="GoldOptionsBox/VBoxContainer/store10Button" to="." method="_on_store_10_button_pressed"]
 [connection signal="pressed" from="GoldOptionsBox/VBoxContainer/storeAllButton" to="." method="_on_store_all_button_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

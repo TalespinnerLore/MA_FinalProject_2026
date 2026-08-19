@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://mgd3pw0f7l2m"]
+
+[ext_resource type="Script" path="res://Objects/EnvironmentObjects/hub_shop.gd" id="1_s682c"]
+[ext_resource type="Texture2D" uid="uid://cafyj6tnngxgq" path="res://Art/UI_Art/ui_icon_edible.png" id="2_a4h7l"]
+[ext_resource type="PackedScene" uid="uid://bwxiwr65crd8e" path="res://Utility/Components/Interaction_Collider.tscn" id="3_yuvpw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utk0y"]
+size = Vector2(32, 32)
+
+[node name="HubShop" type="StaticBody2D"]
+script = ExtResource("1_s682c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+texture = ExtResource("2_a4h7l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_utk0y")
+debug_color = Color(0.918288, 6.87307e-05, 0.702664, 0.42)
+
+[node name="InteractionCollider" parent="." instance=ExtResource("3_yuvpw")]
+position = Vector2(0, 6)

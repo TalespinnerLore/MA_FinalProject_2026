@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://tile_map_layer.gd" id="2_4clwx"]
 [ext_resource type="PackedScene" uid="uid://qw8hxdfy48pn" path="res://Units/unit_non_combat.tscn" id="3_5fc7e"]
 [ext_resource type="Resource" uid="uid://oygkar1j0gy3" path="res://Resources/Units/Player/Stats_Warrior.tres" id="4_gwii0"]
+[ext_resource type="PackedScene" uid="uid://cgf44y4ubuugp" path="res://Objects/EnvironmentObjects/classswap_point.tscn" id="7_f4v0j"]
 [ext_resource type="PackedScene" uid="uid://dfisf8473baje" path="res://UI/Menus/class_swap_ui.tscn" id="7_w0vxf"]
-[ext_resource type="PackedScene" uid="uid://cfwhb7u03fvhb" path="res://Objects/EnvironmentObjects/tower_crafting_tile.tscn" id="23_5l5lq"]
 [ext_resource type="PackedScene" uid="uid://cmrvbbtrkis6q" path="res://Scenes/StaticLevels/scenechange_collider.tscn" id="24_wiml1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcx8d"]
@@ -17,7 +17,7 @@ size = Vector2(122, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n8nk2"]
 size = Vector2(156.5, 20)
 
-[node name="HubScenePlaytesting" type="Node2D"]
+[node name="ClassSwapArea" type="Node2D" groups=["ClassSwap"]]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(16, 0)
@@ -29,12 +29,8 @@ script = ExtResource("2_4clwx")
 
 [node name="UnitNonCombat" parent="NonCombatPlayerUnits" instance=ExtResource("3_5fc7e")]
 y_sort_enabled = true
-position = Vector2(320, 180)
+position = Vector2(320, 304)
 UnitStats = ExtResource("4_gwii0")
-
-[node name="TowerCraftingTile" parent="." instance=ExtResource("23_5l5lq")]
-z_as_relative = false
-position = Vector2(320, 149)
 
 [node name="walls" type="Area2D" parent="."]
 position = Vector2(47, 32)
@@ -71,5 +67,10 @@ scene_to_open = "res://Scenes/StaticLevels/HubWorld.tscn"
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Class_Swap_UI" parent="CanvasLayer" instance=ExtResource("7_w0vxf")]
+visible = false
 offset_right = 640.0
 offset_bottom = 360.0
+
+[node name="SavePoint" parent="." instance=ExtResource("7_f4v0j")]
+z_index = 10
+position = Vector2(320, 128)

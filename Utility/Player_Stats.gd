@@ -1,5 +1,8 @@
 extends Node
 
+enum HUB_LOC{SWAP_DOOR,SAVEPOINT_SWAP,TOWERDOOR,SAVEPOINT_MIDDLE}
+
+@export var player_hub_location:HUB_LOC = 1
 
 var p1_class:StatComponent = load("res://Resources/Units/Player/Stats_Civilian.tres")
 var p1_weapon:ItemData_Gear

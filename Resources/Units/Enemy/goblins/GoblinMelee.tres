@@ -25,7 +25,6 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 5
 Element = 4
-unit_specific_drops = Array[ExtResource("11_pochj")]([])
 elem_palettes = Array[Texture2D]([ExtResource("3_w5ngf"), ExtResource("4_kqtie"), ExtResource("5_hnkj5"), ExtResource("6_pwfp4"), ExtResource("7_pk1bi"), ExtResource("8_gv806"), ExtResource("9_htjtx")])
 must_drop_items = Array[ExtResource("11_pochj")]([])
 chance_drop_items = Array[ExtResource("11_pochj")]([])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://bfynsxir5rxqw"]
+[gd_scene load_steps=27 format=4 uid="uid://bfynsxir5rxqw"]
 
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_hxmwj"]
 [ext_resource type="Script" path="res://Crafting/tower_crafting_fixed.gd" id="1_u4c53"]
@@ -20,6 +20,11 @@
 [ext_resource type="Resource" uid="uid://dftxohwy60tkw" path="res://Resources/Items/Tiles/DungeonGen/Misq/INCREASED_GOLD.tres" id="11_c5xca"]
 [ext_resource type="Resource" uid="uid://c4s1uluohurar" path="res://Resources/Items/Tiles/DungeonGen/Unique Rooms/TREASURE_VAULT_RECIPE.tres" id="12_ddntj"]
 [ext_resource type="Resource" uid="uid://bp815opj4hc6b" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/T0_TreasureVault.tres" id="13_fju8x"]
+[ext_resource type="Resource" uid="uid://b8w42kvnc7c44" path="res://Resources/Items/Tiles/DungeonGen/Rooms/DENSE_LAYOUT.tres" id="14_8k1dh"]
+[ext_resource type="Resource" uid="uid://ck43pd0evuatv" path="res://Resources/Items/Tiles/DungeonGen/Rooms/LARGE_ROOMS.tres" id="15_6blm7"]
+[ext_resource type="Resource" uid="uid://bvj2gavwqhh1a" path="res://Resources/Items/Tiles/DungeonGen/Misq/INCREASED_MOB_DENSITY.tres" id="16_010fx"]
+[ext_resource type="Resource" uid="uid://caef5r7a07b8s" path="res://Resources/Items/Tiles/DungeonGen/Unique Rooms/MONSTER_HOUSE_recipe.tres" id="17_sbjbf"]
+[ext_resource type="Resource" uid="uid://ceob6v0nkjrhq" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/T0_MonsterHouse.tres" id="18_emybg"]
 [ext_resource type="Texture2D" uid="uid://cxattyo56h3cr" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile54.png" id="21_37v8o"]
 
 [node name="TowerCrafting_FIXED" type="Node2D"]
@@ -28,7 +33,8 @@ t1_forceboss_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("5_i8e2a"), Ext
 t1_fireboss_recipe = Array[ExtResource("2_fv2ap")]([null, null, null, null, null, null, null, null, null, null, null])
 t1_waterboss_recipe = Array[ExtResource("2_fv2ap")]([null, null, null, null, null, null, null, null, null, null, null])
 t1_airboss_recipe = Array[ExtResource("2_fv2ap")]([null, null, null, null, null, null, null, null, null, null, null])
-treasure_vault_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("11_c5xca"), ExtResource("11_c5xca"), ExtResource("11_c5xca"), ExtResource("11_c5xca"), null, null, null, null, null, ExtResource("12_ddntj"), ExtResource("13_fju8x")])
+treasure_vault_recipe = Array[ExtResource("2_fv2ap")]([null, ExtResource("11_c5xca"), ExtResource("11_c5xca"), ExtResource("11_c5xca"), ExtResource("11_c5xca"), ExtResource("12_ddntj"), ExtResource("13_fju8x")])
+monster_house_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("16_010fx"), ExtResource("14_8k1dh"), ExtResource("14_8k1dh"), ExtResource("15_6blm7"), ExtResource("15_6blm7"), ExtResource("17_sbjbf"), ExtResource("18_emybg")])
 
 [node name="TileMapLayer_SideUI" type="TileMapLayer" parent="."]
 light_mask = 0

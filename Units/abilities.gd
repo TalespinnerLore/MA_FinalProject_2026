@@ -1,7 +1,7 @@
 extends Node
 class_name unit_equipped_abilities
 
-@export var BasicAttack:AbilityData= load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")
+@export var BasicAttack:AbilityData = load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")
 
 @export var Slot_1:AbilityData = load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")
 @export var Slot_2:AbilityData = load("res://Resources/Abilities/_basic_attacks/_DefaultBasicAttack.tres")
@@ -33,12 +33,14 @@ func init():
 	
 	var parent:Unit_Instance = get_parent()
 	BasicAttack = get_parent().UnitStats.BasicAttack
+	print(BasicAttack)
 	if parent.Team == parent.Teams.PLAYER:
 		print("abilities; is player unit")
 		if parent.is_team_leader:
 			ability_usesB1234WAT = PlayerStats.p1_ability_usesB1234WAT
 	else:
 		print("abilities; is enemy unit")
+		#BasicAttack = parent.UnitStats.BasicAttack
 		Slot_1 = parent.UnitStats.Attacks[0]
 		Slot_2 = parent.UnitStats.Attacks[1]
 		Slot_3 = parent.UnitStats.Attacks[2]

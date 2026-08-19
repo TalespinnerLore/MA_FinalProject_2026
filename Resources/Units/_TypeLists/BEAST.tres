@@ -1,16 +1,15 @@
-[gd_resource type="Resource" script_class="TypeList" load_steps=8 format=3 uid="uid://b8xfx8n16r000"]
+[gd_resource type="Resource" script_class="TypeList" load_steps=7 format=3 uid="uid://b8xfx8n16r000"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_1hams"]
-[ext_resource type="Resource" uid="uid://dgm8dna5mwt7q" path="res://Resources/Units/Enemy/Stats_EnemyMagic.tres" id="2_mtybf"]
-[ext_resource type="Resource" uid="uid://dunj0e8tqw7uv" path="res://Resources/Units/Enemy/Stats_EnemyMelee.tres" id="3_s1cwy"]
-[ext_resource type="Resource" uid="uid://brn8pf5kf160g" path="res://Resources/Units/Enemy/Stats_EnemyRanged.tres" id="4_5mb5s"]
+[ext_resource type="Resource" uid="uid://dcg64y3m8f1qg" path="res://Resources/Units/Enemy/beasts/Scaled_Beast.tres" id="2_gwkxe"]
+[ext_resource type="Resource" uid="uid://yfhbqfr5rcy3" path="res://Resources/Units/Enemy/beasts/Wild_Beast.tres" id="3_8ju2f"]
 [ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="5_srn2g"]
-[ext_resource type="Resource" uid="uid://b1mex6jfj2b7r" path="res://Resources/Units/Enemy/Stats_RareEnemyTest.tres" id="6_cy05r"]
+[ext_resource type="Resource" uid="uid://drtxp1ey3lxnc" path="res://Resources/Units/Enemy/beasts/Venomous_Chimera.tres" id="5_wgnve"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/EnemyTypeList.gd" id="7_vrt1v"]
 
 [resource]
 script = ExtResource("7_vrt1v")
 CreatureType = 4
-Common_Enemies = Array[ExtResource("1_1hams")]([ExtResource("2_mtybf"), ExtResource("3_s1cwy"), ExtResource("4_5mb5s"), ExtResource("3_s1cwy")])
-Rare_Enemies = Array[ExtResource("1_1hams")]([ExtResource("6_cy05r")])
+Common_Enemies = Array[ExtResource("1_1hams")]([ExtResource("2_gwkxe"), ExtResource("3_8ju2f")])
+Rare_Enemies = Array[ExtResource("1_1hams")]([ExtResource("5_wgnve")])
 MiniBoss_Enemies = Array[ExtResource("1_1hams")]([ExtResource("5_srn2g")])

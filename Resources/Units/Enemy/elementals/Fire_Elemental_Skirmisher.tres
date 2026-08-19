@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=7 format=3 uid="uid://drtslea82tjva"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=14 format=3 uid="uid://drtslea82tjva"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="1_g2hrq"]
 [ext_resource type="Resource" uid="uid://dygpdjty37286" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres" id="1_s756u"]
@@ -6,12 +6,19 @@
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="2_lpjam"]
 [ext_resource type="Resource" uid="uid://rm0ey0stwas" path="res://Resources/Items/_TileItems/Tile1_Fire.tres" id="4_twmbn"]
 [ext_resource type="Resource" uid="uid://cpk1yof75jgxl" path="res://Resources/Items/_TileItems/Tile37_Elementals.tres" id="5_oo5j5"]
+[ext_resource type="Texture2D" uid="uid://dybq578t1ohh4" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette0.png" id="6_3ir0s"]
+[ext_resource type="Texture2D" uid="uid://bytkpu6eh3mja" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette1.png" id="7_qt8xf"]
+[ext_resource type="Texture2D" uid="uid://cdvrukl1aqv1y" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette2.png" id="8_3yi5l"]
+[ext_resource type="Texture2D" uid="uid://bobdn0b18ccct" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette3.png" id="9_d6uio"]
+[ext_resource type="Texture2D" uid="uid://bek26ylbkxen4" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette4.png" id="10_3fx8x"]
+[ext_resource type="Texture2D" uid="uid://b7rqbnlla460c" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette5.png" id="11_4cuoh"]
+[ext_resource type="Texture2D" uid="uid://dgy7hq8xrmqnx" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette6.png" id="12_hoyqs"]
 
 [resource]
 script = ExtResource("2_lpjam")
 Sprite = ExtResource("2_kq6fk")
 BasicAttack = ExtResource("1_s756u")
-Attacks = null
+Attacks = Array[Object]([ExtResource("1_s756u"), ExtResource("1_s756u"), ExtResource("1_s756u"), ExtResource("1_s756u")])
 UnitName = "Fire Skirmisher"
 is_large_unit = false
 is_rare_spawn = false
@@ -20,8 +27,7 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 2
 Element = 0
-unit_specific_drops = Array[ExtResource("1_g2hrq")]([])
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("6_3ir0s"), ExtResource("7_qt8xf"), ExtResource("8_3yi5l"), ExtResource("9_d6uio"), ExtResource("10_3fx8x"), ExtResource("11_4cuoh"), ExtResource("12_hoyqs")])
 must_drop_items = Array[ExtResource("1_g2hrq")]([])
 chance_drop_items = Array[ExtResource("1_g2hrq")]([ExtResource("4_twmbn"), ExtResource("5_oo5j5")])
 STR_up = 5

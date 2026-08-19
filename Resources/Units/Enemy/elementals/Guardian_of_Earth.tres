@@ -1,17 +1,25 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=7 format=3 uid="uid://dfbgr20y4l2nq"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=15 format=3 uid="uid://dfbgr20y4l2nq"]
 
 [ext_resource type="Resource" uid="uid://dygpdjty37286" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres" id="1_bhbgc"]
+[ext_resource type="Resource" uid="uid://y8gmthrmw3l1" path="res://Resources/Abilities/DEF_base/10_Thorn_Shield.tres" id="2_6rflq"]
 [ext_resource type="Texture2D" uid="uid://bnpa0fl0fa7aj" path="res://Art/UnitSprites/Spritesheets/enemytype_elemental_base.png" id="2_7jubi"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_4sv1w"]
 [ext_resource type="Resource" uid="uid://btew2ovgrtk4t" path="res://Resources/Items/_TileItems/Tile3_Earth.tres" id="4_i3r8j"]
 [ext_resource type="Resource" uid="uid://cpk1yof75jgxl" path="res://Resources/Items/_TileItems/Tile37_Elementals.tres" id="5_e0bwx"]
+[ext_resource type="Texture2D" uid="uid://dybq578t1ohh4" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette0.png" id="5_nx3k4"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="6_h4ua6"]
+[ext_resource type="Texture2D" uid="uid://bytkpu6eh3mja" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette1.png" id="6_r0w1h"]
+[ext_resource type="Texture2D" uid="uid://cdvrukl1aqv1y" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette2.png" id="7_po2xy"]
+[ext_resource type="Texture2D" uid="uid://bobdn0b18ccct" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette3.png" id="8_obqpv"]
+[ext_resource type="Texture2D" uid="uid://bek26ylbkxen4" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette4.png" id="9_4n4fn"]
+[ext_resource type="Texture2D" uid="uid://b7rqbnlla460c" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette5.png" id="10_2yqse"]
+[ext_resource type="Texture2D" uid="uid://dgy7hq8xrmqnx" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette6.png" id="11_2x8w1"]
 
 [resource]
 script = ExtResource("6_h4ua6")
 Sprite = ExtResource("2_7jubi")
 BasicAttack = ExtResource("1_bhbgc")
-Attacks = null
+Attacks = Array[Object]([ExtResource("1_bhbgc"), ExtResource("1_bhbgc"), ExtResource("2_6rflq"), ExtResource("2_6rflq")])
 UnitName = "Guardian of Earth"
 is_large_unit = false
 is_rare_spawn = true
@@ -20,7 +28,7 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 2
 Element = 2
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("5_nx3k4"), ExtResource("6_r0w1h"), ExtResource("7_po2xy"), ExtResource("8_obqpv"), ExtResource("9_4n4fn"), ExtResource("10_2yqse"), ExtResource("11_2x8w1")])
 must_drop_items = Array[ExtResource("3_4sv1w")]([ExtResource("5_e0bwx")])
 chance_drop_items = Array[ExtResource("3_4sv1w")]([ExtResource("4_i3r8j")])
 STR_up = 2

@@ -1,11 +1,21 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=3 format=3 uid="uid://cnwl8iryesy2b"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=12 format=3 uid="uid://cnwl8iryesy2b"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="1_inhcg"]
+[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_k7phs"]
+[ext_resource type="Texture2D" uid="uid://c1ossj8gcg1ig" path="res://Art/UnitSprites/Spritesheets/enemytype_undead_base.png" id="2_1vx3j"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="2_bhgx1"]
+[ext_resource type="Texture2D" uid="uid://cw07hmvjramch" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette0.png" id="2_ik84m"]
+[ext_resource type="Texture2D" uid="uid://clfevdleeveab" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette1.png" id="3_1cdoe"]
+[ext_resource type="Texture2D" uid="uid://btn5d2kk2b135" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette2.png" id="4_8642s"]
+[ext_resource type="Texture2D" uid="uid://wx4sxhuks2ld" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette3.png" id="5_yamkt"]
+[ext_resource type="Texture2D" uid="uid://dxd3owd0gfgya" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette4.png" id="6_dv64d"]
+[ext_resource type="Texture2D" uid="uid://c135kdbvw4ehj" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette5.png" id="7_1kx83"]
+[ext_resource type="Texture2D" uid="uid://ccf1xplejg0n2" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette6.png" id="8_ew1t2"]
 
 [resource]
 script = ExtResource("2_bhgx1")
-Attacks = null
+Sprite = ExtResource("2_1vx3j")
+Attacks = Array[Object]([ExtResource("1_k7phs"), ExtResource("1_k7phs"), ExtResource("1_k7phs"), ExtResource("1_k7phs")])
 UnitName = ""
 is_large_unit = false
 is_rare_spawn = false
@@ -14,8 +24,7 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 0
 Element = 4
-unit_specific_drops = Array[ExtResource("1_inhcg")]([])
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("2_ik84m"), ExtResource("3_1cdoe"), ExtResource("4_8642s"), ExtResource("5_yamkt"), ExtResource("6_dv64d"), ExtResource("7_1kx83"), ExtResource("8_ew1t2")])
 must_drop_items = Array[ExtResource("1_inhcg")]([])
 chance_drop_items = Array[ExtResource("1_inhcg")]([])
 STR_up = 0

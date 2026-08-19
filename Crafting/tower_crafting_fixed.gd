@@ -38,14 +38,49 @@ var t3_expansion_rarities = [R.RARE,R.RARE,R.RARE,R.RARE,R.BASIC,R.BASIC,R.BASIC
 						R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,R.RARE,\
 						R.UNIQUE]
 
+######## neatened up these since it was making recipes difficult otherwise #####
+
+var t0_cross = [Vector2(0,0),Vector2(-1,0),Vector2(1,0),Vector2(0,-1),Vector2(0,1)]
+var t0_rarities = [R.RARE,R.BASIC,R.BASIC,R.BASIC,R.BASIC]
+var t1_square = [Vector2(-1,-1),Vector2(1,1),Vector2(1,-1),Vector2(-1,1)]
+var t1_rarities = [R.ELITE,R.RARE,R.RARE,R.RARE,R.RARE,\
+						R.BASIC,R.BASIC,R.BASIC,R.BASIC]
+var t2_unique = []
+var t2_rarities = [R.UNIQUE,R.RARE,R.RARE,R.RARE,R.RARE,\
+						R.BASIC,R.BASIC,R.BASIC,R.BASIC]
+var t3_star = [Vector2(-2,0),Vector2(2,0),Vector2(0,-2),Vector2(0,2),\
+				Vector2(-2,-2),Vector2(2,2),Vector2(2,-2),Vector2(-2,2)]
+var t3_rarities = [R.UNIQUE,R.RARE,R.RARE,R.RARE,R.RARE,\
+						R.BASIC,R.BASIC,R.BASIC,R.BASIC,\
+						R.BASIC,R.BASIC,R.BASIC,R.BASIC,\
+						R.ELITE,R.ELITE,R.ELITE,R.ELITE]
+var t3_5_T2s = []
+var t3_5_rarities = [R.UNIQUE,R.ELITE,R.ELITE,R.ELITE,R.ELITE,\
+						R.RARE,R.RARE,R.RARE,R.RARE,\
+						R.RARE,R.RARE,R.RARE,R.RARE,\
+						R.UNIQUE,R.UNIQUE,R.UNIQUE,R.UNIQUE]
+var t4_fullgrid = [Vector2(-4,0),Vector2(4,0),Vector2(0,-4),Vector2(0,4),\
+					Vector2(-3,-2),Vector2(3,2),Vector2(-2,-3),Vector2(2,3),
+					Vector2(3,-2),Vector2(-3,2),Vector2(2,-3),Vector2(-2,3)]
+var t4_rarities = [R.UNIQUE,R.RARE,R.RARE,R.RARE,R.RARE,\
+						R.BASIC,R.BASIC,R.BASIC,R.BASIC,\
+						R.BASIC,R.BASIC,R.BASIC,R.BASIC,\
+						R.ELITE,R.ELITE,R.ELITE,R.ELITE,\
+						R.RARE,R.RARE,R.RARE,R.RARE,\
+						R.RARE,R.RARE,R.RARE,R.RARE,\
+						R.RARE,R.RARE,R.RARE,R.RARE]
+
 @onready var bg_0 = $TileMapLayer_Base/TileMapLayer_Slots0
 @onready var bg_1 = $TileMapLayer_Base/TileMapLayer_Slots1
 @onready var bg_2 = $TileMapLayer_Base/TileMapLayer_Slots2
 @onready var bg_3 = $TileMapLayer_Base/TileMapLayer_Slots3
 
 var zone_bgs = [bg_0,bg_1,bg_1,bg_2,bg_2,bg_3]
-var zonelists = [t0_cross_tileoffset,t1_grid3_tileoffset,t1_grid3_tileoffset,t2_edge8_tileoffset,t2_edge8_tileoffset,t3_expansion_tileoffset]
-var zonerarities = [t0_cross_rarities,t1_grid3_rarities,t1_grid3_rarities_unique,t2_edge8_rarities,t2_5_rarities,t3_expansion_rarities]
+var zonelists_old = [t0_cross_tileoffset,t1_grid3_tileoffset,t1_grid3_tileoffset,t2_edge8_tileoffset,t2_edge8_tileoffset,t3_expansion_tileoffset]
+var zonerarities_old = [t0_cross_rarities,t1_grid3_rarities,t1_grid3_rarities_unique,t2_edge8_rarities,t2_5_rarities,t3_expansion_rarities]
+
+var zonelists = [t0_cross,t1_square,t2_unique,t3_star,t3_5_T2s,t4_fullgrid]
+var zonerarities = [t0_rarities,t1_rarities,t2_rarities,t3_rarities,t3_5_rarities,t4_rarities]
 
 @export var t1_forceboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
 @export var t1_fireboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
@@ -53,19 +88,67 @@ var zonerarities = [t0_cross_rarities,t1_grid3_rarities,t1_grid3_rarities_unique
 @export var t1_earthboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
 @export var t1_airboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
 @export var treasure_vault_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
+@export var monster_house_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
 
 var preset_recipes = [t1_fireboss_recipe,t1_waterboss_recipe,t1_earthboss_recipe,t1_airboss_recipe,t1_forceboss_recipe,treasure_vault_recipe]
+
+func check_preset_recipes_FIXED():
+	preset_recipes = [t1_forceboss_recipe,treasure_vault_recipe,monster_house_recipe]
+	var valid_recipe = false
+	var zones = $DROPZONES.get_children()
+	var return_preset
+	for recipe in preset_recipes:
+		if valid_recipe:
+			break
+		var preset_list_tileID = [] #tile ids
+		var zonedata_list = []
+		var zone_tilelID = []
+		
+		for zone:DropZone in $DROPZONES.get_children():
+			zonedata_list.append(zone.CRAFTING_TILE_DATA)
+		print("zonesdata:",zonedata_list,"\nrecipe:",recipe)
+		
+		for i in $DROPZONES.get_child_count():
+			if i <= recipe.size()-2:
+				if recipe[i] != null: #get list of recipe values for these slots.
+					preset_list_tileID.append(recipe[i].TILE_ID)
+				else:
+					preset_list_tileID.append('<null>')
+				#get list of slotted tile values for these slots.
+				if $DROPZONES.get_child(i).CRAFTING_TILE_DATA != null:
+					zone_tilelID.append($DROPZONES.get_child(i).CRAFTING_TILE_DATA.TILE_ID)
+				else:
+					zone_tilelID.append('<null>')
+		#now check those values against one another to see if its valid.
+		for j in recipe.size() - 2:
+			print(j)
+			if recipe[j] != null and recipe[j] != zonedata_list[j]:
+				print(zonedata_list[j]," != ",recipe[j],'\n',zone_tilelID[j]," != ",preset_list_tileID[j])
+				break
+			elif j == recipe.size() - 3:
+				valid_recipe = true
+				return_preset = recipe.duplicate()
+				print('is valid recipe')
+				break
+			else:
+				print('not end of recipe')
+	if valid_recipe:
+		print('returning preset data now')
+		return return_preset
+	else:
+		return null
 
 func check_for_preset_recipes():
 	#print(t1_forceboss_recipe)
 	#print("predef",preset_recipes[4])
-	preset_recipes = [t1_forceboss_recipe,treasure_vault_recipe] #t1_fireboss_recipe,t1_waterboss_recipe,t1_earthboss_recipe,t1_airboss_recipe,
+	preset_recipes = [t1_forceboss_recipe,treasure_vault_recipe,monster_house_recipe] #t1_fireboss_recipe,t1_waterboss_recipe,t1_earthboss_recipe,t1_airboss_recipe,
 	#print("postdef",preset_recipes[4])
 	var valid_recipe = false
 	var zones = $DROPZONES.get_children()
 	var return_preset
 	for recipe in preset_recipes:
-
+		if valid_recipe:
+			break
 		var preset_list_tileID = [] #tile ids
 		var zonedata_list = []
 		var zone_tilelID = []
@@ -88,7 +171,7 @@ func check_for_preset_recipes():
 		print('z_tileID:',zone_tilelID,"\nrecipe_tileID:",preset_list_tileID)
 			#print("zone tileID:",zone_list[i].CRAFTING_TILE_DATA.TILE_ID," recipe tileID:",recipe[i].TILE_ID)
 		
-		#unindent this latervvvvv
+		####unindent this latervvvvv #did it
 		for j in recipe.size() - 2:
 			print(j)
 			if recipe[j] != null and recipe[j] != zonedata_list[j]:
@@ -101,7 +184,8 @@ func check_for_preset_recipes():
 				break
 			else:
 				print('not end of recipe')
-			
+		if recipe == t1_forceboss_recipe:
+			print('boss recipe:\n     z_tileID:',zone_tilelID,"\nrecipe_tileID:",preset_list_tileID)
 	if valid_recipe:
 		print('returning preset data now')
 		return return_preset
@@ -139,9 +223,13 @@ func set_dropzones(Tier:gridTier):
 		n.queue_free()
 	var coords = []
 	var rarities = zonerarities[Tier]
-	for tile in zonelists[Tier]:
+	var list_of_zones = []
+	for i in range(0,Tier+1): #if 0, should just hit 0
+		if zonelists[i].size() > 0:
+			list_of_zones.append_array(zonelists[i])
+	for tile in list_of_zones:
 		coords.append(middle_coord+(tile*Vector2(32,32)))
-	coords.append(middle_coord)
+	#coords.append(middle_coord)
 	var i = -1
 	for pos in coords:
 		i+=1
@@ -205,4 +293,4 @@ func _on_button_pressedMINUS() -> void:
 
 func _on_texture_button_pressed() -> void:
 	self.visible = false
-	self.position = Vector2(-672,-388)
+	self.position = Vector2(-1000,-1000)

@@ -178,11 +178,11 @@ func save_dungeon_data():
 	SaveFileData.Unique_Rooms = DungeonData.Unique_Rooms
 
 
-func save_hub_data(BankUI:BankInventoryUI,is_portal_open:bool):
+func save_hub_data(BankUI:BankInventoryUI):#is_portal_open:bool
 	SaveFileData.bank_gold_val = BankUI.bank_gold_val
 	SaveFileData.BankInventory_Resourcestack = BankUI.BankInventory_Resourcestack
 	SaveFileData.BankInventory_size = BankUI.BankInventory_size
-	SaveFileData.is_portal_open = is_portal_open
+	#SaveFileData.is_portal_open = is_portal_open
 
 
 

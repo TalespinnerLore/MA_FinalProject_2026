@@ -1,16 +1,25 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=6 format=3 uid="uid://slx3kwfuaamv"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=15 format=3 uid="uid://slx3kwfuaamv"]
 
 [ext_resource type="Resource" uid="uid://d02ns3e6v636q" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres" id="1_5hol6"]
-[ext_resource type="Texture2D" uid="uid://beagb6x40mqqy" path="res://Art/UnitSprites/BasicCharacter_enemywarrior.png" id="2_jyqhg"]
+[ext_resource type="Resource" uid="uid://dygpdjty37286" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres" id="1_k4h2q"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_ece0o"]
+[ext_resource type="Resource" uid="uid://djndl3e5gc6vi" path="res://Resources/Abilities/LUK_base/10_Increase_Precision.tres" id="3_wle7j"]
 [ext_resource type="Resource" uid="uid://b5n6rd73w02h" path="res://Resources/Items/_TileItems/Tile40_Bandits.tres" id="4_b23ym"]
+[ext_resource type="Texture2D" uid="uid://b8r01xxaa8xxs" path="res://Art/UnitSprites/Palettes/testspritepallette0.png" id="4_nh3yh"]
+[ext_resource type="Texture2D" uid="uid://iuxuthmy31rr" path="res://Art/UnitSprites/BasicCharacter_enemy.png" id="4_w4yku"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="5_texu5"]
+[ext_resource type="Texture2D" uid="uid://b6hv8onls4dsr" path="res://Art/UnitSprites/Palettes/testspritepallette1.png" id="5_tujg1"]
+[ext_resource type="Texture2D" uid="uid://flaexc2jrtx5" path="res://Art/UnitSprites/Palettes/testspritepallette2.png" id="6_jqrbh"]
+[ext_resource type="Texture2D" uid="uid://dut6j2j3px423" path="res://Art/UnitSprites/Palettes/testspritepallette3.png" id="7_osjb7"]
+[ext_resource type="Texture2D" uid="uid://bd8fiogco46kp" path="res://Art/UnitSprites/Palettes/testspritepallette4.png" id="8_h7fys"]
+[ext_resource type="Texture2D" uid="uid://dmpsavoioy4md" path="res://Art/UnitSprites/Palettes/testspritepallette5.png" id="9_ryjoo"]
+[ext_resource type="Texture2D" uid="uid://dg8kt5fgnjh81" path="res://Art/UnitSprites/Palettes/testspritepallette6.png" id="10_fsrf1"]
 
 [resource]
 script = ExtResource("5_texu5")
-Sprite = ExtResource("2_jyqhg")
-BasicAttack = ExtResource("1_5hol6")
-Attacks = null
+Sprite = ExtResource("4_w4yku")
+BasicAttack = ExtResource("1_k4h2q")
+Attacks = Array[Object]([ExtResource("1_k4h2q"), ExtResource("1_5hol6"), ExtResource("3_wle7j"), ExtResource("3_wle7j")])
 UnitName = "Lawless Fool"
 is_large_unit = false
 is_rare_spawn = true
@@ -19,7 +28,7 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 0
 Element = 4
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("4_nh3yh"), ExtResource("5_tujg1"), ExtResource("6_jqrbh"), ExtResource("7_osjb7"), ExtResource("8_h7fys"), ExtResource("9_ryjoo"), ExtResource("10_fsrf1")])
 must_drop_items = Array[ExtResource("3_ece0o")]([ExtResource("4_b23ym")])
 chance_drop_items = Array[ExtResource("3_ece0o")]([])
 STR_up = 1

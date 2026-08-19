@@ -13,7 +13,7 @@ var inv_content = PlayerStats.player_inventory
 @export var selected_item_stacks := 1
 
 #@onready var unit_manager_ref:Unit_Manager =  get_tree().get_first_node_in_group("UNIT_MANAGER")
-var player:Unit_Instance
+#var player:Unit_Instance
 
 var weapon_icon = preload("res://Art/UI_Art/ui_icon_weapon.png")
 var armour_icon = preload("res://Art/UI_Art/ui_icon_armour.png")
@@ -27,6 +27,10 @@ var other_icon = preload("res://Art/UI_Art/ui_icon_other.png")
 var lockbox_icon = preload("res://Art/UI_Art/ui_icon_lockbox.png")
 var key_item_icon = preload("res://Art/UI_Art/ui_icon_keyitem.png")
 
+func _player_interaction():
+	pause_level()
+	open_close()
+
 func _ready() -> void:
 	self.visible = false
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -36,6 +40,7 @@ func _ready() -> void:
 	on_item_selected(selected_item)
 	_on_left_button_pressed()
 	load_item_inventory()
+	#open_close()
 
 func _process(delta: float) -> void:
 #	if Input.is_action_just_pressed("Inventory"):
@@ -270,6 +275,8 @@ func _on_button_10_pressed() -> void:
 enum SHOPS{CONSUMABLES,GEAR,TILES}
 @export var ShopType:SHOPS
 
+
+
 var player_level:int
 var itemcount_b:= 10
 var itemcount_r: = 5
@@ -335,8 +342,18 @@ func load_initial_shop_inventory():
 			shop_inv.append([add, randi_range(1,add.max_stack)])
 	pass
 
+func add_to_tile_inv(TILE_ID):
+	SaveLoad.SaveFileData.TileID_NamedInventory[TILE_ID][1] += 1
+	pass
+
 func _on_buy_button_pressed() -> void:
 	if selected_item.ItemName == 'Gold':
+		return
+	if selected_item.ItemType == 1:
+		if item_cost <= PlayerStats.player_gold:
+			add_to_tile_inv(selected_item.TILE_ID)
+		else:
+			print("You can't afford that.")
 		return
 	if inv_content.size() < PlayerStats.inventory_size and item_cost <= PlayerStats.player_gold:
 		var success_remainder = PlayerStats.Add_to_Player_Inv_stack(selected_item,selected_item_stacks)
@@ -361,3 +378,8 @@ func _on_buy_button_pressed() -> void:
 	else:
 		print("You can't afford that.")
 	pass # Replace with function body.
+
+
+func _on_texture_button_pressed() -> void:
+	pause_level()
+	open_close()

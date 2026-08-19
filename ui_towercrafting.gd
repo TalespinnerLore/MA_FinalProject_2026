@@ -292,6 +292,7 @@ func populate_inventory():
 
 
 func _ready() -> void:
+	TileID_NamedInventory = SaveLoad.SaveFileData.TileID_NamedInventory
 	init()
 	pass # Replace with function body.
 
@@ -319,6 +320,9 @@ func _on_button_start_pressed() -> void:
 	finalised = true
 	get_parent().finalised = true
 	get_tree().get_first_node_in_group("TOWER_PORTAL").open_door()
+	SaveLoad.SaveFileData.is_portal_open = true
+	SaveLoad.SaveFileData.TileID_NamedInventory = TileID_NamedInventory
+	#SaveLoad.save_dungeon_data()
 	var savekeys = SaveLoad.SaveFileData.checkpoint_persistance_keys
 	if Boss_T0_Mini > 0:
 		savekeys['unlocked_recipe_miniboss'] = true

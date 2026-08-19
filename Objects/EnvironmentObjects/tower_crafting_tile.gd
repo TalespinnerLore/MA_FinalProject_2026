@@ -7,7 +7,7 @@ func interaction():
 	
 	#await get_tree().create_timer(0.25).timeout
 	if crafting.finalised != true:
-		crafting.position = Vector2(0,0)
+		crafting.position = Vector2(-48,-4)
 		crafting.visible = true
 	#$"../TowerCrafting".init()
 	#print("interacted with tower crafting tile")

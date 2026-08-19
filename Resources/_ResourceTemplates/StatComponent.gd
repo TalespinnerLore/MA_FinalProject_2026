@@ -4,7 +4,10 @@ extends Resource
 
 @export var Sprite:Texture2D
 @export var BasicAttack:AbilityData
-@export var Attacks:Array[AbilityData] = [BasicAttack,BasicAttack,BasicAttack,BasicAttack]
+@export var Attacks:Array[AbilityData] = [load("res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres"),\
+load("res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres"),\
+load("res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres"),\
+load("res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres")]
 @export var UnitName:String
 @export var is_large_unit := false
 @export var is_rare_spawn := false

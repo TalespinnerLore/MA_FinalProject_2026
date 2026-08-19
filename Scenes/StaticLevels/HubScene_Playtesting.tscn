@@ -41,7 +41,8 @@ y_sort_enabled = false
 position = Vector2(272, 128)
 
 [node name="walls" type="Area2D" parent="."]
-collision_mask = 0
+collision_layer = 3
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
 position = Vector2(112, 143)
@@ -83,11 +84,13 @@ debug_color = Color(0.754598, 0.902022, 0.999142, 0.42)
 [node name="scenechange_collider" parent="." instance=ExtResource("24_npcs5")]
 position = Vector2(272, 304)
 scene_to_open = "res://Scenes/StaticLevels/HubWorld.tscn"
+new_player_location = 2
 
 [node name="TowerPortal" parent="." groups=["TOWER_PORTAL"] instance=ExtResource("26_be0ec")]
 position = Vector2(272, 0)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="TowerCrafting_FIXED" parent="." groups=["crafting"] instance=ExtResource("25_vx8k5")]
+top_level = true
+position = Vector2(-864, -656)
 
-[node name="TowerCrafting_FIXED" parent="CanvasLayer" groups=["crafting"] instance=ExtResource("25_vx8k5")]
-position = Vector2(-672, -388)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

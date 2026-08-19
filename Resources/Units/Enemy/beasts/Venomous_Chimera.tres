@@ -1,16 +1,24 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=6 format=3 uid="uid://drtxp1ey3lxnc"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=14 format=3 uid="uid://drtxp1ey3lxnc"]
 
-[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_5a6ga"]
+[ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="1_dttec"]
+[ext_resource type="Resource" uid="uid://rfa1oc5gpu6h" path="res://Resources/Abilities/DEX_base/40_Venom_Strike.tres" id="2_gyymd"]
 [ext_resource type="Texture2D" uid="uid://baj6qmljqsgg2" path="res://Art/UnitSprites/Spritesheets/enemytype_beast_base.png" id="2_hypan"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_jobgj"]
 [ext_resource type="Resource" uid="uid://cmc0ywri5q38h" path="res://Resources/Items/_TileItems/Tile36_Beasts.tres" id="4_crlbf"]
+[ext_resource type="Texture2D" uid="uid://dhrl0i2rgiq3p" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette0.png" id="4_n72nl"]
+[ext_resource type="Texture2D" uid="uid://bce0kg37pbsq2" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette1.png" id="5_e3u7y"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="5_eden2"]
+[ext_resource type="Texture2D" uid="uid://b4gh36awxcwlb" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette2.png" id="6_6k6gi"]
+[ext_resource type="Texture2D" uid="uid://df1wbojt3vbf7" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette3.png" id="7_7ktqo"]
+[ext_resource type="Texture2D" uid="uid://ej2etyj4u2v6" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette4.png" id="8_iocsx"]
+[ext_resource type="Texture2D" uid="uid://cofo7o2ts6jvr" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette5.png" id="9_awnhm"]
+[ext_resource type="Texture2D" uid="uid://btf8fokfi07s1" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette6.png" id="10_2vlu6"]
 
 [resource]
 script = ExtResource("5_eden2")
 Sprite = ExtResource("2_hypan")
-BasicAttack = ExtResource("1_5a6ga")
-Attacks = null
+BasicAttack = ExtResource("1_dttec")
+Attacks = Array[Object]([ExtResource("1_dttec"), ExtResource("1_dttec"), ExtResource("2_gyymd"), ExtResource("2_gyymd")])
 UnitName = "Venomous Chimera"
 is_large_unit = false
 is_rare_spawn = true
@@ -19,8 +27,7 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 4
 Element = 4
-unit_specific_drops = Array[ExtResource("3_jobgj")]([])
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("4_n72nl"), ExtResource("5_e3u7y"), ExtResource("6_6k6gi"), ExtResource("7_7ktqo"), ExtResource("8_iocsx"), ExtResource("9_awnhm"), ExtResource("10_2vlu6")])
 must_drop_items = Array[ExtResource("3_jobgj")]([ExtResource("4_crlbf")])
 chance_drop_items = Array[ExtResource("3_jobgj")]([])
 STR_up = 7

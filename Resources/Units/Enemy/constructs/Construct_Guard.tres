@@ -1,16 +1,23 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=6 format=3 uid="uid://d3qdwges8twgc"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=13 format=3 uid="uid://d3qdwges8twgc"]
 
 [ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_f60fd"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="1_ny5fv"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="2_hwa6p"]
 [ext_resource type="Texture2D" uid="uid://dmotdf6wk4kgq" path="res://Art/UnitSprites/Spritesheets/enemytype_construct_base.png" id="2_s8lip"]
 [ext_resource type="Resource" uid="uid://2wrn0j4w25sn" path="res://Resources/Items/_TileItems/Tile39_Constructs.tres" id="4_b1xex"]
+[ext_resource type="Texture2D" uid="uid://ch55eeyvolsx6" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette0.png" id="5_8ydl4"]
+[ext_resource type="Texture2D" uid="uid://bdsybxh2kvlt0" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette1.png" id="6_3lcfq"]
+[ext_resource type="Texture2D" uid="uid://c2j5owqvol76i" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette2.png" id="7_kya41"]
+[ext_resource type="Texture2D" uid="uid://24ox7fve628o" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette3.png" id="8_ywdsu"]
+[ext_resource type="Texture2D" uid="uid://bopedoaj800ol" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette4.png" id="9_d140l"]
+[ext_resource type="Texture2D" uid="uid://bdjrblkgpgtul" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette5.png" id="10_4x601"]
+[ext_resource type="Texture2D" uid="uid://byepr8g5c50li" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette6.png" id="11_q833n"]
 
 [resource]
 script = ExtResource("2_hwa6p")
 Sprite = ExtResource("2_s8lip")
 BasicAttack = ExtResource("1_f60fd")
-Attacks = null
+Attacks = Array[Object]([ExtResource("1_f60fd"), ExtResource("1_f60fd"), ExtResource("1_f60fd"), ExtResource("1_f60fd")])
 UnitName = "Construct Guard"
 is_large_unit = false
 is_rare_spawn = false
@@ -19,8 +26,7 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 3
 Element = 4
-unit_specific_drops = Array[ExtResource("1_ny5fv")]([])
-elem_palettes = Array[Texture2D]([])
+elem_palettes = Array[Texture2D]([ExtResource("5_8ydl4"), ExtResource("6_3lcfq"), ExtResource("7_kya41"), ExtResource("8_ywdsu"), ExtResource("9_d140l"), ExtResource("10_4x601"), ExtResource("11_q833n")])
 must_drop_items = Array[ExtResource("1_ny5fv")]([])
 chance_drop_items = Array[ExtResource("1_ny5fv")]([ExtResource("4_b1xex")])
 STR_up = 0
