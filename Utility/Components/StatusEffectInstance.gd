@@ -83,7 +83,7 @@ func periodic_effect():
 		'[DEFAULT]':
 			print("How the hecka are you seeing this? Bug report this.")
 			pass
-		'Burning':
+		'Burned':
 			apply_damage()
 		'Poisoned':
 			apply_damage()
@@ -122,9 +122,9 @@ func on_gain():
 	match effect_name:
 			'[DEFAULT]':
 				pass
-			'Burning':
+			'Burned':
 				pass
-			'Poison':
+			'Poisoned':
 				pass
 			'Regeneration':
 				pass
@@ -162,6 +162,37 @@ func on_gain():
 						to_free.append(se)
 				for se in to_free:
 					queue_free()
+				on_timeout()
+			'Anger':
+				affecting_value = int(5*multiplier)
+				owning_unit.Mag_ATK_boost += affecting_value
+				owning_unit.Phys_ATK_boost += affecting_value
+			'BurnHeal':
+				var to_free = []
+				for se:StatusEffectInstance in manager.get_children():
+					if se.effect_name == 'Burning':
+						to_free.append(se)
+				for se in to_free:
+					queue_free()
+				on_timeout()
+			'PoisonHeal':
+				var to_free = []
+				for se:StatusEffectInstance in manager.get_children():
+					if se.effect_name == 'Poisoned':
+						to_free.append(se)
+				for se in to_free:
+					queue_free()
+				on_timeout()
+			'Restore Mana':
+				for i in 4:
+					if PlayerStats.p1_ability_usesB1234WAT[i+1] < PlayerStats.p1_equipped_abilities[i].max_uses:
+						PlayerStats.p1_ability_usesB1234WAT[i+1] = clampi(PlayerStats.p1_ability_usesB1234WAT[i+1]+5,0,PlayerStats.p1_equipped_abilities[i].max_uses)
+				on_timeout()
+			'Sorrow':
+				affecting_value = int(5*multiplier)
+				owning_unit.Mag_DEF_boost_boost += affecting_value
+				owning_unit.Phys_DEF_boost += affecting_value
+			
 	#######################################
 	if StatusData.trigger_periodic_on_gain:
 		periodic_effect()
@@ -175,9 +206,9 @@ func on_timeout():
 	match effect_name:
 			'[DEFAULT]':
 				pass
-			'Burning':
+			'Burned':
 				pass
-			'Poison':
+			'Poisoned':
 				pass
 			'Regeneration':
 				pass

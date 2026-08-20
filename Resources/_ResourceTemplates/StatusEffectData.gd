@@ -1,8 +1,8 @@
 class_name StatusEffectData
 extends Resource
 
-@export var icon:Texture2D
-@export var vfx:Texture2D
+@export var icon:Texture2D = load("res://Art/UI_Art/ui_icon_other.png")
+@export var vfx:Texture2D = load('res://Art/VFX Sprites/vfx_force.png')
 @export var effect_name = "[DEFAULT]"
 @export var is_negative = false
 @export var turn_duration:int = 1 # number of turns it will last

@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="StatusEffectData" load_steps=3 format=3 uid="uid://vi8sxu46kilm"]
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=4 format=3 uid="uid://vi8sxu46kilm"]
 
+[ext_resource type="Texture2D" uid="uid://x40cm38jymlu" path="res://Art/UnitUI/statuseffect_p_sorrow.png" id="1_mpnlu"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_tl7ib"]
 [ext_resource type="Texture2D" uid="uid://jo8g6xyk6vmd" path="res://Art/VFX Sprites/vfx_water.png" id="2_i6e6n"]
 
 [resource]
 script = ExtResource("1_tl7ib")
+icon = ExtResource("1_mpnlu")
 vfx = ExtResource("2_i6e6n")
 effect_name = "Sorrow"
 is_negative = false
-turn_duration = 1
+turn_duration = 3
 has_periodic_effect = false
 trigger_periodic_on_gain = false
 trigger_effect_on_timeout = false
