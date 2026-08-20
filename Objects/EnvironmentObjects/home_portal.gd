@@ -11,9 +11,12 @@ func enable_disable():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Unit_Instance:
 		if body.Team == body.Teams.PLAYER:
+			get_tree().get_first_node_in_group('MUSIC').playing = false
 			emit_signal("player_found_portal")
 			sfx_player.stream = load("res://Sounds/stage clear.ogg")
 			sfx_player.play()
+			await sfx_player.finished
+			get_tree().get_first_node_in_group('MUSIC').playing = true
 
 			pass #SHOW DO YOU WANT TO GO TO THE NEXT FLOOR POPUP
 	pass # Replace with function body.

@@ -855,7 +855,7 @@ func _on_death():
 		#Roll Dropchance --- equipped gear
 		pass
 	else:
-		#print('player died')
+		print('player died')
 		emit_signal("player_died")
 		PlayerStats.player_gold /= randf_range(2,4)
 		var items_lost = int(PlayerStats.player_inventory.size() / 4)
@@ -948,6 +948,7 @@ func enemy_drop_items():
 
 
 func _on_turn_start() -> void:
+	
 	is_active_unit = true
 	turn_actions_used = 0
 	has_moved = false
@@ -967,9 +968,17 @@ func _on_turn_start() -> void:
 		else:
 			print("player team AI turn not yet implemented")
 			pass
+		await get_tree().create_timer(2).timeout
+		if HP_Current < 1:
+			if sfx_player.playing == true:
+				await sfx_player.finished
+				get_tree().change_scene_to_file("res://Scenes/StaticLevels/HubScene_Playtesting.tscn")
+			else:
+				get_tree().change_scene_to_file("res://Scenes/StaticLevels/HubScene_Playtesting.tscn")
 	else:
 		await get_tree().create_timer(0.05).timeout
 		AI_turn_enemy_new()
+	
 	
 
 var goal_tile:Vector2i
@@ -1039,9 +1048,12 @@ func proceed_forwards():
 	var non_coll = check_relative_collision()
 	if non_coll.size() > 1 and non_coll.has(last_tile-self_coords):
 		non_coll.erase(last_tile-self_coords)
-	facing = non_coll.pick_random()
-	set_pointer_at_facing()
-	_move(facing)
+	if non_coll.size() > 0:
+		facing = non_coll.pick_random()
+		set_pointer_at_facing()
+		_move(facing)
+	else:
+		action_used()
 	pass
 
 var AI_aggression := 0
@@ -1106,10 +1118,13 @@ func AI_turn_enemy_new():
 				for dir in pop_list:
 					non_coll.erase(dir)
 				
-				if non_coll.size() <= 0:
+				if non_coll.size() < 0:
 					
 					var temp_path_container = path
+					if prev_path.size() < 1:
+						prev_path.append(non_coll[0])
 					path = prev_path
+					
 					prev_path = temp_path_container
 					facing = clamp(path[0]-self_coords,Vector2i(-1,-1),Vector2i(1,1))
 					non_coll = check_relative_collision() #returns non-colliding DIRECTIONS
@@ -1131,6 +1146,8 @@ func AI_turn_enemy_new():
 			#prev_path.clear()
 			path = nav_manager_ref.get_valid_path_tiles(self_coords,nav_manager_ref.ROOMS.pick_random().RoomCenter,0)
 			print("cleared path help =========================================", path)
+			proceed_forwards()
+			
 			#if in room:
 				#pathfinding_manager.get_path_to_new_room() #ignore closest door
 			#else:
