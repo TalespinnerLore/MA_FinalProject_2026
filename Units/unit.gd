@@ -716,6 +716,8 @@ func action_used():
 
 func init(is_player_controlled):
 	nav_manager_ref = get_tree().get_first_node_in_group("NAVIGATION_MANAGER")
+	#if UnitStats.UnitName == 'Lord of the Cycle':
+	#	UnitStats.Element = randi_range(0,3)
 	print(UnitStats.UnitName,UnitStats.elem_palettes)
 	var palettesize = UnitStats.elem_palettes[UnitStats.Element].get_width()
 	$Sprite2D.material = $Sprite2D.material.duplicate()
@@ -921,7 +923,12 @@ func enemy_drop_items():
 			SaveLoad.SaveFileData.checkpoint_persistance_keys['unlocked_recipe_quadboss'] = true
 			if SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t2_quadboss'] != true:
 				item_manager.drop_item(self_coords,load("res://Resources/Items/_TileItems/Tile51_T2BossKeystone.tres"),1)
-
+	if UnitStats.is_t2_boss:
+		if UnitStats.UnitName == 'Lord of the Cycle':
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t2_quadboss'] == true
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['unlocked_recipe_forceboss2'] = true
+		if UnitStats.UnitName == 'Lord of Twilight':
+			SaveLoad.SaveFileData.checkpoint_persistance_keys['defeated_t2_forceboss'] == true
 #######################################
 #ABILITIES CODE
 #######################################

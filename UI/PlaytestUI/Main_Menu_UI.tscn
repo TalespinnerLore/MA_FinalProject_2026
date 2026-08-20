@@ -59,6 +59,7 @@ tile_set = ExtResource("21_fxhcd")
 script = ExtResource("22_bq2bh")
 
 [node name="ClassButtons" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

@@ -18,6 +18,10 @@ func _open_close():
 	self.visible = ! self.visible
 	
 
+func _on_texture_button_pressed() -> void:
+	print('eriufbwifub')
+	#pause_level()
+	_open_close()
 
 
 func _on_exilt_button_pressed() -> void:
@@ -39,7 +43,7 @@ func _on_recipes_button_pressed() -> void:
 	var savekeys =  SaveLoad.SaveFileData.checkpoint_persistance_keys.duplicate(true)
 	if savekeys['unlocked_recipe_monsterhouse']:
 		unlocked_pages.append(1)
-	if savekeys['unlocked_recipe_treasurevalut']:
+	if savekeys['unlocked_recipe_treasurevault']:
 		unlocked_pages.append(2)
 	if savekeys['unlocked_recipe_miniboss']:
 		unlocked_pages.append(3)

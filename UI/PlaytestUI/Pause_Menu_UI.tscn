@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://5k4xgds11d8w"]
+[gd_scene load_steps=10 format=4 uid="uid://5k4xgds11d8w"]
 
 [ext_resource type="Texture2D" uid="uid://c1klp2j8qpq82" path="res://Art/UI_Art/Frames/ui_bg_bluedark.png" id="1_8qhtr"]
 [ext_resource type="Script" path="res://UI/PlaytestUI/pause_menu_ui.gd" id="1_affb8"]
@@ -8,6 +8,7 @@
 [ext_resource type="TileSet" uid="uid://ty37cym0krxg" path="res://Crafting/tower_crafting_ui.tres" id="6_16kep"]
 [ext_resource type="Texture2D" uid="uid://d26g6cgvhcqaf" path="res://Art/UI_Art/arrow_tile_left.png" id="7_n783u"]
 [ext_resource type="Texture2D" uid="uid://b4i6a72h02ho" path="res://Art/UI_Art/arrow_tile_right.png" id="8_vp8kr"]
+[ext_resource type="Texture2D" uid="uid://cxattyo56h3cr" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile54.png" id="9_6a6ob"]
 
 [node name="PauseMenuUi" type="Control"]
 layout_mode = 3
@@ -121,6 +122,7 @@ text = "CLOSE
 flat = true
 
 [node name="Recipes" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 128.0
 offset_right = 512.0
@@ -277,6 +279,17 @@ position = Vector2(16, 3)
 tile_map_data = PackedByteArray("AAAFAAUAAgAAABEAAAAFAAYAAgAAAA4AAAAFAAQAAgAAAA4AAAAEAAUAAgACAA4AAAAGAAUAAgACAA4AAAAEAAQAAgACAAoAAAAGAAQAAgACAAoAAAAEAAYAAgABAAoAAAAGAAYAAgABAAoAAAADAAUAAgAAAAsAAAAHAAUAAgAAAAsAAAAFAAMAAgACAAsAAAAFAAcAAgABAAsAAAADAAMAAgACABAAAAAHAAMAAgACABAAAAAHAAcAAgACABAAAAADAAcAAgACABAAAAA=")
 tile_set = ExtResource("6_16kep")
 
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 490.0
+offset_top = 6.0
+offset_right = 522.0
+offset_bottom = 38.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("9_6a6ob")
+texture_pressed = ExtResource("9_6a6ob")
+texture_hover = ExtResource("9_6a6ob")
+stretch_mode = 0
+
 [connection signal="mouse_entered" from="OptionsBox/VBoxContainer/EXITtoMAIN/EXILTButton" to="OptionsBox/VBoxContainer/EXITtoMAIN" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="OptionsBox/VBoxContainer/EXITtoMAIN/EXILTButton" to="OptionsBox/VBoxContainer/EXITtoMAIN" method="_on_mouse_exited"]
 [connection signal="pressed" from="OptionsBox/VBoxContainer/EXITtoMAIN/EXILTButton" to="." method="_on_exilt_button_pressed"]
@@ -291,3 +304,4 @@ tile_set = ExtResource("6_16kep")
 [connection signal="mouse_entered" from="Recipes/TileMapLayer_Base/BACK/BACKButton" to="Recipes/TileMapLayer_Base/BACK" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Recipes/TileMapLayer_Base/BACK/BACKButton" to="Recipes/TileMapLayer_Base/BACK" method="_on_mouse_exited"]
 [connection signal="pressed" from="Recipes/TileMapLayer_Base/BACK/BACKButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

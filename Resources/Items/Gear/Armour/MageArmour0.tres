@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_sa6xo"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="2_cfgfa"]
-[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_fpghw"]
+[ext_resource type="Texture2D" uid="uid://ca6eif5q44jvk" path="res://Art/ItemSprites/gear_armour.png" id="2_w0imr"]
 
 [resource]
 script = ExtResource("2_cfgfa")
@@ -26,7 +26,7 @@ Def_Mult_boost = 0.0
 Reroll_Chance_boost = 0.0
 ItemName = "Apprentice Robe"
 max_stack = 1
-icon = ExtResource("2_fpghw")
+icon = ExtResource("2_w0imr")
 ITEM_ID = 11
 TILE_ID = 0
 shop_value = 1

@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=4 uid="uid://brhvpee45mcyk"]
+[gd_scene load_steps=14 format=4 uid="uid://brhvpee45mcyk"]
 
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_7jht4"]
 [ext_resource type="Script" path="res://tile_map_layer.gd" id="2_p3255"]
 [ext_resource type="PackedScene" uid="uid://qw8hxdfy48pn" path="res://Units/unit_non_combat.tscn" id="3_1e6fb"]
 [ext_resource type="PackedScene" uid="uid://cfwhb7u03fvhb" path="res://Objects/EnvironmentObjects/tower_crafting_tile.tscn" id="3_yskn6"]
 [ext_resource type="Resource" uid="uid://oygkar1j0gy3" path="res://Resources/Units/Player/Stats_Warrior.tres" id="4_cmdfg"]
+[ext_resource type="PackedScene" uid="uid://5k4xgds11d8w" path="res://UI/PlaytestUI/Pause_Menu_UI.tscn" id="9_jf5pk"]
 [ext_resource type="PackedScene" uid="uid://cmrvbbtrkis6q" path="res://Scenes/StaticLevels/scenechange_collider.tscn" id="24_npcs5"]
 [ext_resource type="PackedScene" uid="uid://bfynsxir5rxqw" path="res://Crafting/TowerCrafting_fixed.tscn" id="25_vx8k5"]
 [ext_resource type="PackedScene" uid="uid://bwa1723gqb8xw" path="res://Objects/EnvironmentObjects/TowerPortal.tscn" id="26_be0ec"]
@@ -94,3 +95,6 @@ top_level = true
 position = Vector2(-864, -656)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenuUi" parent="CanvasLayer" instance=ExtResource("9_jf5pk")]
+visible = false

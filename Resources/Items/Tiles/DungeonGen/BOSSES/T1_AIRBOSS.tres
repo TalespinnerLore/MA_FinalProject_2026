@@ -6,9 +6,9 @@
 script = ExtResource("1_4rle0")
 TILE_ID = 49
 rarity = 3
-Affinity_Fire = 0
+Affinity_Fire = -50
 Affinity_Water = 0
-Affinity_Earth = 0
+Affinity_Earth = -590
 Affinity_Air = 100
 Affinity_Force = 0
 Affinity_Light = 0

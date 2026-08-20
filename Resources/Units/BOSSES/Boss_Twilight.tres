@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="StatComponent" load_steps=16 format=3 uid="uid://cdfxjhdtoi7da"]
+
+[ext_resource type="Resource" uid="uid://0if3g3khpnhi" path="res://Resources/Abilities/VIT_base/80_Purify.tres" id="2_rbeqf"]
+[ext_resource type="Resource" uid="uid://d1stjwu4tuogd" path="res://Resources/Abilities/DEF_base/80_Curse_of_Fragility.tres" id="3_era6n"]
+[ext_resource type="Resource" uid="uid://cix2h68uqcx3c" path="res://Resources/Abilities/VIT_base/120_Smite.tres" id="4_g30np"]
+[ext_resource type="Resource" uid="uid://7j5xdkj4glc6" path="res://Resources/Abilities/STR_base/120_Void_Cleave.tres" id="5_w4pex"]
+[ext_resource type="Resource" uid="uid://53jlaccfbifb" path="res://Resources/Abilities/STR_base/40_Stunning_Blow.tres" id="5_ypic2"]
+[ext_resource type="Texture2D" uid="uid://digauguw7tk0p" path="res://Art/UnitSprites/BasicCharacter_enemyboss.png" id="6_8jb4h"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="7_rlhdy"]
+[ext_resource type="Texture2D" uid="uid://j3ro37ydk0qp" path="res://Art/UnitSprites/Palettes/boss_palette0.png" id="8_e2ss7"]
+[ext_resource type="Texture2D" uid="uid://ox28447xxxn8" path="res://Art/UnitSprites/Palettes/boss_palette1.png" id="9_dh0ui"]
+[ext_resource type="Texture2D" uid="uid://qrpjuophp427" path="res://Art/UnitSprites/Palettes/boss_palette2.png" id="10_h1w3x"]
+[ext_resource type="Texture2D" uid="uid://dvfkyahqogbhg" path="res://Art/UnitSprites/Palettes/boss_palette3.png" id="11_12tac"]
+[ext_resource type="Texture2D" uid="uid://dwf6g2bunyilh" path="res://Art/UnitSprites/Palettes/boss_palette4.png" id="12_hssa0"]
+[ext_resource type="Texture2D" uid="uid://sgcy1xqtka4y" path="res://Art/UnitSprites/Palettes/boss_palette5.png" id="13_gtfra"]
+[ext_resource type="Texture2D" uid="uid://c7oeb3q5dqjm7" path="res://Art/UnitSprites/Palettes/boss_palette6.png" id="14_6ekct"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="15_cncnr"]
+
+[resource]
+script = ExtResource("15_cncnr")
+Sprite = ExtResource("6_8jb4h")
+BasicAttack = ExtResource("5_ypic2")
+Attacks = Array[Object]([ExtResource("5_w4pex"), ExtResource("2_rbeqf"), ExtResource("3_era6n"), ExtResource("4_g30np")])
+UnitName = "Lord of Twilight"
+is_large_unit = false
+is_rare_spawn = false
+is_miniboss = false
+is_boss = false
+is_t2_boss = true
+CreatureType = 2
+Element = 6
+elem_palettes = Array[Texture2D]([ExtResource("8_e2ss7"), ExtResource("9_dh0ui"), ExtResource("10_h1w3x"), ExtResource("11_12tac"), ExtResource("12_hssa0"), ExtResource("13_gtfra"), ExtResource("14_6ekct")])
+must_drop_items = Array[ExtResource("7_rlhdy")]([])
+chance_drop_items = Array[ExtResource("7_rlhdy")]([])
+STR_up = 6
+DEX_up = 6
+VIT_up = 6
+MAG_up = 6
+DEF_up = 6
+LUK_up = 6
+Free_Stats = 0
+Base_HP = 50
+STR = 10
+DEX = 10
+VIT = 10
+MAG = 10
+DEF = 10
+LUK = 10
+HP_Max_withVIT = null
+Base_Phys_ATK = 5.0
+Base_Mag_ATK = 5.0
+Base_Phys_DEF = 5.0
+Base_Mag_DEF = 5.0
+Base_Evasion = 5.0
+Heal_Buff_Mult = 1.1
+Melee_Mult = 1.1
+Ranged_Mult = 1.1
+Def_Mult = 1.1
+Reroll_Chance = 0.05
+STR_boost = 0
+DEX_boost = 0
+VIT_boost = 0
+MAG_boost = 0
+DEF_boost = 0
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0

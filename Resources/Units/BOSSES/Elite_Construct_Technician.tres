@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="StatComponent" load_steps=15 format=3 uid="uid://cahevkdple5yg"]
+
+[ext_resource type="Resource" uid="uid://dygpdjty37286" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres" id="1_3tilc"]
+[ext_resource type="Resource" uid="uid://b3vlgoi6d1u1t" path="res://Resources/Abilities/VIT_base/10_Healing_Touch.tres" id="2_2tslq"]
+[ext_resource type="Resource" uid="uid://0if3g3khpnhi" path="res://Resources/Abilities/VIT_base/80_Purify.tres" id="2_oli8j"]
+[ext_resource type="Texture2D" uid="uid://dmotdf6wk4kgq" path="res://Art/UnitSprites/Spritesheets/enemytype_construct_base.png" id="3_n1gfb"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="4_xsl75"]
+[ext_resource type="Texture2D" uid="uid://ch55eeyvolsx6" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette0.png" id="5_4svd7"]
+[ext_resource type="Texture2D" uid="uid://bdsybxh2kvlt0" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette1.png" id="6_ma6v8"]
+[ext_resource type="Texture2D" uid="uid://c2j5owqvol76i" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette2.png" id="7_2v2xi"]
+[ext_resource type="Texture2D" uid="uid://24ox7fve628o" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette3.png" id="8_fv172"]
+[ext_resource type="Texture2D" uid="uid://bopedoaj800ol" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette4.png" id="9_54dv5"]
+[ext_resource type="Texture2D" uid="uid://bdjrblkgpgtul" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette5.png" id="10_eu8qb"]
+[ext_resource type="Texture2D" uid="uid://byepr8g5c50li" path="res://Art/UnitSprites/Palettes/enemytype_construct_palette6.png" id="11_ruauu"]
+[ext_resource type="Resource" uid="uid://2wrn0j4w25sn" path="res://Resources/Items/_TileItems/Tile39_Constructs.tres" id="12_2b7lg"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="13_6j2r6"]
+
+[resource]
+script = ExtResource("13_6j2r6")
+Sprite = ExtResource("3_n1gfb")
+BasicAttack = ExtResource("1_3tilc")
+Attacks = Array[Object]([ExtResource("1_3tilc"), ExtResource("2_oli8j"), ExtResource("2_2tslq"), ExtResource("1_3tilc")])
+UnitName = "Construct Technician"
+is_large_unit = false
+is_rare_spawn = false
+is_miniboss = true
+is_boss = false
+is_t2_boss = false
+CreatureType = 3
+Element = 2
+elem_palettes = Array[Texture2D]([ExtResource("5_4svd7"), ExtResource("6_ma6v8"), ExtResource("7_2v2xi"), ExtResource("8_fv172"), ExtResource("9_54dv5"), ExtResource("10_eu8qb"), ExtResource("11_ruauu")])
+must_drop_items = Array[ExtResource("4_xsl75")]([ExtResource("12_2b7lg")])
+chance_drop_items = Array[ExtResource("4_xsl75")]([])
+STR_up = 2
+DEX_up = 0
+VIT_up = 5
+MAG_up = 5
+DEF_up = 2
+LUK_up = 0
+Free_Stats = 4
+Base_HP = 25
+STR = 5
+DEX = 5
+VIT = 5
+MAG = 5
+DEF = 5
+LUK = 5
+HP_Max_withVIT = null
+Base_Phys_ATK = 5.0
+Base_Mag_ATK = 5.0
+Base_Phys_DEF = 5.0
+Base_Mag_DEF = 5.0
+Base_Evasion = 5.0
+Heal_Buff_Mult = 1.1
+Melee_Mult = 1.1
+Ranged_Mult = 1.1
+Def_Mult = 1.1
+Reroll_Chance = 0.05
+STR_boost = 0
+DEX_boost = 0
+VIT_boost = 0
+MAG_boost = 0
+DEF_boost = 0
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0

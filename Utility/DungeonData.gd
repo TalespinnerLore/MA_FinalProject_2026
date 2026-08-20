@@ -459,29 +459,34 @@ func set_floor_data():
 		match crafting_tier:
 			0:
 				max_floors = 4 + extra_floors
-				max_wandering_units = 2#4
+				max_wandering_units = 4
+				AREA_LEVEL = clampi(PlayerStats.p1_level,1,5)
 			1:
 				max_floors = 8 + extra_floors
 				max_wandering_units = 6
 				#safe_floor_amount = 1
+				AREA_LEVEL = clampi(PlayerStats.p1_level,6,10)
 			2:
 				max_floors = 16 + extra_floors
 				max_wandering_units = 8
 				if has_boss:
 					safe_floor_amount = 1
+				AREA_LEVEL = clampi(PlayerStats.p1_level,11,15)
 			3:
 				max_floors = 24 + extra_floors
 				max_wandering_units = 10
 				safe_floor_amount = 1
+				AREA_LEVEL = clampi(PlayerStats.p1_level,15,20)
 			4:
 				max_floors = 36 + extra_floors
 				max_wandering_units = 12
-				
+				AREA_LEVEL = clampi(PlayerStats.p1_level,20,20)
 				safe_floor_amount = 2
 			5:
 				max_floors = 40 + extra_floors
 				max_wandering_units = 14
 				safe_floor_amount = randi_range(0,2)
+				AREA_LEVEL = clampi(PlayerStats.p1_level,20,25)
 		
 		max_wandering_units = floori(max_wandering_units*(100+MobMods_SpawnRate)/100)
 		

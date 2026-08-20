@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://r088slqv62yb"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://r088slqv62yb"]
 
 [ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_wq7hm"]
+[ext_resource type="Texture2D" uid="uid://dhr5gisl0uq85" path="res://Art/ItemSprites/lockbox_wood.png" id="2_15gac"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="2_enmy7"]
 
 [resource]
 script = ExtResource("2_enmy7")
 ItemName = "Copper Lockbox"
 max_stack = 1
+icon = ExtResource("2_15gac")
 ITEM_ID = 400
 TILE_ID = 0
 shop_value = 25

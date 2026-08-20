@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="StatComponent" load_steps=15 format=3 uid="uid://dnqtjs57js4qx"]
+
+[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_du8fm"]
+[ext_resource type="Resource" uid="uid://t0ggjrv48v1w" path="res://Resources/Abilities/STR_base/80_Whirlwind_Swing.tres" id="2_jjye4"]
+[ext_resource type="Resource" uid="uid://g1dc6iey5fyf" path="res://Resources/Abilities/STR_base/10_Heavy_Chop.tres" id="2_vs0mb"]
+[ext_resource type="Texture2D" uid="uid://c1ossj8gcg1ig" path="res://Art/UnitSprites/Spritesheets/enemytype_undead_base.png" id="3_00fba"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="4_p6bif"]
+[ext_resource type="Texture2D" uid="uid://cw07hmvjramch" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette0.png" id="5_ua1ce"]
+[ext_resource type="Texture2D" uid="uid://clfevdleeveab" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette1.png" id="6_bncol"]
+[ext_resource type="Texture2D" uid="uid://btn5d2kk2b135" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette2.png" id="7_5as21"]
+[ext_resource type="Texture2D" uid="uid://wx4sxhuks2ld" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette3.png" id="8_aphml"]
+[ext_resource type="Texture2D" uid="uid://dxd3owd0gfgya" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette4.png" id="9_qekmr"]
+[ext_resource type="Texture2D" uid="uid://c135kdbvw4ehj" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette5.png" id="10_7k6dj"]
+[ext_resource type="Texture2D" uid="uid://ccf1xplejg0n2" path="res://Art/UnitSprites/Palettes/enemytype_undead_palette6.png" id="11_v2rcx"]
+[ext_resource type="Resource" uid="uid://d3v1ahrrtkdkr" path="res://Resources/Items/_TileItems/Tile38_Undead.tres" id="12_q2snd"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="13_ctftn"]
+
+[resource]
+script = ExtResource("13_ctftn")
+Sprite = ExtResource("3_00fba")
+BasicAttack = ExtResource("1_du8fm")
+Attacks = Array[Object]([ExtResource("1_du8fm"), ExtResource("1_du8fm"), ExtResource("2_jjye4"), ExtResource("2_vs0mb")])
+UnitName = "Elite Death Knight"
+is_large_unit = false
+is_rare_spawn = false
+is_miniboss = true
+is_boss = false
+is_t2_boss = false
+CreatureType = 1
+Element = 0
+elem_palettes = Array[Texture2D]([ExtResource("5_ua1ce"), ExtResource("6_bncol"), ExtResource("7_5as21"), ExtResource("8_aphml"), ExtResource("9_qekmr"), ExtResource("10_7k6dj"), ExtResource("11_v2rcx")])
+must_drop_items = Array[ExtResource("4_p6bif")]([ExtResource("12_q2snd")])
+chance_drop_items = Array[ExtResource("4_p6bif")]([])
+STR_up = 5
+DEX_up = 2
+VIT_up = 2
+MAG_up = 0
+DEF_up = 5
+LUK_up = 0
+Free_Stats = 4
+Base_HP = 25
+STR = 5
+DEX = 5
+VIT = 5
+MAG = 5
+DEF = 5
+LUK = 5
+HP_Max_withVIT = null
+Base_Phys_ATK = 5.0
+Base_Mag_ATK = 5.0
+Base_Phys_DEF = 5.0
+Base_Mag_DEF = 5.0
+Base_Evasion = 5.0
+Heal_Buff_Mult = 1.1
+Melee_Mult = 1.1
+Ranged_Mult = 1.1
+Def_Mult = 1.1
+Reroll_Chance = 0.05
+STR_boost = 0
+DEX_boost = 0
+VIT_boost = 0
+MAG_boost = 0
+DEF_boost = 0
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0

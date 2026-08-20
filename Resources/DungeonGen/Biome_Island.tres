@@ -13,12 +13,12 @@
 [ext_resource type="Resource" uid="uid://ctw25kl02og26" path="res://Resources/Units/Enemy/bandits/Bandit_Thug.tres" id="7_baaq1"]
 [ext_resource type="Resource" uid="uid://6oi2jvuw6g2i" path="res://Resources/Items/Gear/Armour/RogueArmour0.tres" id="7_jcy4b"]
 [ext_resource type="Resource" uid="uid://b4pjcdt4l6gxh" path="res://Resources/Items/Consumables/HealthPotion_Small.tres" id="7_ymmp5"]
-[ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="8_nysnv"]
 [ext_resource type="Resource" uid="uid://cpbnlkv0exvi1" path="res://Resources/Items/Gear/Armour/HealerArmour0.tres" id="10_rlagb"]
 [ext_resource type="Resource" uid="uid://cnd50xxi1muwb" path="res://Resources/Items/Gear/Weapons/RogueWeapon0.tres" id="11_7xoh4"]
 [ext_resource type="Resource" uid="uid://gy643k5rlbff" path="res://Resources/Items/Gear/Weapons/JesterWeapon0.tres" id="12_qfyyt"]
 [ext_resource type="Resource" uid="uid://b7uptpowiiq4n" path="res://Resources/Items/Gear/Weapons/HealerWeapon0.tres" id="13_veoyi"]
 [ext_resource type="Resource" uid="uid://b8x3poja3xktt" path="res://Resources/Items/Gear/Trinkets/Amulet_of_Health.tres" id="16_yrcuu"]
+[ext_resource type="Resource" uid="uid://r736atx2rsmm" path="res://Resources/Units/BOSSES/Elite_Venomous_Chimera.tres" id="17_jxoyo"]
 [ext_resource type="Resource" uid="uid://dj017droxyvia" path="res://Resources/Items/Gear/Trinkets/Lucky_Rabbit_Foot.tres" id="17_wr8bx"]
 [ext_resource type="Resource" uid="uid://drtxp1ey3lxnc" path="res://Resources/Units/Enemy/beasts/Venomous_Chimera.tres" id="18_7x00h"]
 [ext_resource type="Resource" uid="uid://rsc2ps6lj752" path="res://Resources/Units/Enemy/elementals/Guardian_of_Water.tres" id="19_5lk1l"]
@@ -32,7 +32,7 @@ Common_Enemies = Array[ExtResource("1_tmr2p")]([ExtResource("2_57w0k"), ExtResou
 Rare_Enemies = Array[ExtResource("1_tmr2p")]([ExtResource("18_7x00h"), ExtResource("18_7x00h"), ExtResource("19_5lk1l"), ExtResource("19_5lk1l"), ExtResource("20_k34ac")])
 Common_Items = Array[ExtResource("5_lgpex")]([ExtResource("6_wfnpi"), ExtResource("7_ymmp5"), ExtResource("6_chtle"), ExtResource("7_jcy4b"), ExtResource("10_rlagb"), ExtResource("11_7xoh4"), ExtResource("12_qfyyt"), ExtResource("13_veoyi")])
 Rare_Items = Array[ExtResource("5_lgpex")]([ExtResource("16_yrcuu"), ExtResource("17_wr8bx")])
-Mini_Boss = ExtResource("8_nysnv")
+Mini_Boss = ExtResource("17_jxoyo")
 Wandering_Boss = false
 Flooded = true
 FloodTile = 0

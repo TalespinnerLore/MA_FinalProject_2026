@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://sgp3l7ildadj"]
 
 [ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_ec6yr"]
-[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_gyvik"]
+[ext_resource type="Texture2D" uid="uid://ca6eif5q44jvk" path="res://Art/ItemSprites/gear_armour.png" id="2_iod2n"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_22a1a"]
 
 [resource]
@@ -26,7 +26,7 @@ Def_Mult_boost = 0.0
 Reroll_Chance_boost = 0.0
 ItemName = "Kiteshield"
 max_stack = 1
-icon = ExtResource("2_gyvik")
+icon = ExtResource("2_iod2n")
 ITEM_ID = 12
 TILE_ID = -1
 shop_value = 1
@@ -38,8 +38,8 @@ ItemType = 3
 GearType = 1
 ConsType = 0
 Class_Bias = 1
-min_area_level = 0
-max_area_level = 5
+min_area_level = 10
+max_area_level = 20
 Affinity_Fire = false
 Affinity_Water = false
 Affinity_Earth = false
@@ -49,7 +49,7 @@ Affinity_Light = false
 Affinity_Dark = false
 STR_NEEDED = 0
 DEX_NEEDED = 0
-VIT_NEEDED = 5
+VIT_NEEDED = 30
 MAG_NEEDED = 0
-DEF_NEEDED = 10
+DEF_NEEDED = 50
 LUK_NEEDED = 0

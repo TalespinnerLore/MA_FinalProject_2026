@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://cep05hvgm525l"]
+[gd_scene load_steps=27 format=4 uid="uid://cep05hvgm525l"]
 
 [ext_resource type="PackedScene" uid="uid://dwp2nrxgr03wq" path="res://Resources/DungeonGen/UniqueRooms/Tilemaps/000_TREASURE_ROOM.tscn" id="1_udpkw"]
 [ext_resource type="Script" path="res://Scenes/StaticLevels/hub_world.gd" id="1_vl8j1"]
@@ -23,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://cl6trdo68dmmv" path="res://Objects/EnvironmentObjects/save_point.tscn" id="17_qwlsw"]
 [ext_resource type="PackedScene" uid="uid://mgd3pw0f7l2m" path="res://Objects/EnvironmentObjects/HubShop.tscn" id="18_j58t3"]
 [ext_resource type="PackedScene" uid="uid://qs3fqojkph1u" path="res://UI/Menus/UI_Ability_Selector.tscn" id="21_iuu08"]
+[ext_resource type="PackedScene" uid="uid://c4q3ct53j64ax" path="res://UI/PlaytestUI/LockboxShop_UI.tscn" id="22_6ypay"]
+[ext_resource type="PackedScene" uid="uid://5k4xgds11d8w" path="res://UI/PlaytestUI/Pause_Menu_UI.tscn" id="23_5yecb"]
 [ext_resource type="PackedScene" uid="uid://ddrvqfukxkpfr" path="res://Objects/EnvironmentObjects/abilityswap_point.tscn" id="23_w6iwh"]
 
 [node name="HubWorld" type="Node2D" groups=["HUB_WORLD"]]
@@ -119,6 +121,12 @@ ShopType = 2
 [node name="UiAbilitySelector" parent="CanvasLayer" instance=ExtResource("21_iuu08")]
 visible = false
 offset_right = -6.10352e-05
+
+[node name="LockboxShopUi" parent="CanvasLayer" instance=ExtResource("22_6ypay")]
+visible = false
+
+[node name="PauseMenuUi" parent="CanvasLayer" instance=ExtResource("23_5yecb")]
+visible = false
 
 [node name="SavePoint2" parent="." instance=ExtResource("17_qwlsw")]
 position = Vector2(304, 1040)

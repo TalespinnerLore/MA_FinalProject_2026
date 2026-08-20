@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="StatComponent" load_steps=15 format=3 uid="uid://r736atx2rsmm"]
+
+[ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="1_d1qdt"]
+[ext_resource type="Resource" uid="uid://bdc3chafksay4" path="res://Resources/Abilities/DEX_base/80_Shattering_Shot.tres" id="2_3yfxk"]
+[ext_resource type="Resource" uid="uid://rfa1oc5gpu6h" path="res://Resources/Abilities/DEX_base/40_Venom_Strike.tres" id="2_d2bn8"]
+[ext_resource type="Texture2D" uid="uid://baj6qmljqsgg2" path="res://Art/UnitSprites/Spritesheets/enemytype_beast_base.png" id="3_ggyxc"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="4_qcyml"]
+[ext_resource type="Texture2D" uid="uid://dhrl0i2rgiq3p" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette0.png" id="5_cb0ky"]
+[ext_resource type="Texture2D" uid="uid://bce0kg37pbsq2" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette1.png" id="6_j1mat"]
+[ext_resource type="Texture2D" uid="uid://b4gh36awxcwlb" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette2.png" id="7_r3uam"]
+[ext_resource type="Texture2D" uid="uid://df1wbojt3vbf7" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette3.png" id="8_ytwtn"]
+[ext_resource type="Texture2D" uid="uid://ej2etyj4u2v6" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette4.png" id="9_xkbc1"]
+[ext_resource type="Texture2D" uid="uid://cofo7o2ts6jvr" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette5.png" id="10_qvirg"]
+[ext_resource type="Texture2D" uid="uid://btf8fokfi07s1" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette6.png" id="11_4do0c"]
+[ext_resource type="Resource" uid="uid://cmc0ywri5q38h" path="res://Resources/Items/_TileItems/Tile36_Beasts.tres" id="12_211pj"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="13_2gkby"]
+
+[resource]
+script = ExtResource("13_2gkby")
+Sprite = ExtResource("3_ggyxc")
+BasicAttack = ExtResource("1_d1qdt")
+Attacks = Array[Object]([ExtResource("1_d1qdt"), ExtResource("1_d1qdt"), ExtResource("2_3yfxk"), ExtResource("2_d2bn8")])
+UnitName = "Elite Venomous Chimera"
+is_large_unit = false
+is_rare_spawn = false
+is_miniboss = true
+is_boss = false
+is_t2_boss = false
+CreatureType = 4
+Element = 1
+elem_palettes = Array[Texture2D]([ExtResource("5_cb0ky"), ExtResource("6_j1mat"), ExtResource("7_r3uam"), ExtResource("8_ytwtn"), ExtResource("9_xkbc1"), ExtResource("10_qvirg"), ExtResource("11_4do0c")])
+must_drop_items = Array[ExtResource("4_qcyml")]([ExtResource("12_211pj")])
+chance_drop_items = Array[ExtResource("4_qcyml")]([])
+STR_up = 7
+DEX_up = 5
+VIT_up = 2
+MAG_up = 0
+DEF_up = 0
+LUK_up = 0
+Free_Stats = 4
+Base_HP = 25
+STR = 5
+DEX = 5
+VIT = 5
+MAG = 5
+DEF = 5
+LUK = 5
+HP_Max_withVIT = null
+Base_Phys_ATK = 5.0
+Base_Mag_ATK = 5.0
+Base_Phys_DEF = 5.0
+Base_Mag_DEF = 5.0
+Base_Evasion = 5.0
+Heal_Buff_Mult = 1.1
+Melee_Mult = 1.1
+Ranged_Mult = 1.1
+Def_Mult = 1.1
+Reroll_Chance = 0.05
+STR_boost = 0
+DEX_boost = 0
+VIT_boost = 0
+MAG_boost = 0
+DEF_boost = 0
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0

@@ -1,0 +1,82 @@
+[gd_resource type="Resource" script_class="DCTData_Preset" load_steps=7 format=3 uid="uid://c3ed2to0qkm63"]
+
+[ext_resource type="Resource" uid="uid://1qs1nbueuu8n" path="res://Resources/Units/BOSSES/Boss_Water.tres" id="1_wttft"]
+[ext_resource type="Resource" uid="uid://bopog0h76gw24" path="res://Resources/DungeonGen/UniqueRooms/Resources/FINAL_FLOOR_Generic.tres" id="2_v0koi"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="3_3w1bb"]
+[ext_resource type="Resource" uid="uid://r736atx2rsmm" path="res://Resources/Units/BOSSES/Elite_Venomous_Chimera.tres" id="4_kfag3"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/DCTData_Preset.gd" id="4_ktuv4"]
+[ext_resource type="Resource" uid="uid://hrr33ct56pgl" path="res://Resources/DungeonGen/UniqueRooms/Resources/SAFE_FLOOR_Generic.tres" id="5_l8cpw"]
+
+[resource]
+script = ExtResource("4_ktuv4")
+Boss_Enemy = ExtResource("1_wttft")
+Mini_Bosses = Array[ExtResource("3_3w1bb")]([ExtResource("4_kfag3")])
+Final_Floor = ExtResource("2_v0koi")
+Safe_Room_Floor = ExtResource("5_l8cpw")
+TILE_ID = 0
+rarity = 3
+Affinity_Fire = 0
+Affinity_Water = 125
+Affinity_Earth = -50
+Affinity_Air = 0
+Affinity_Force = 0
+Affinity_Light = 0
+Affinity_Dark = 0
+Biome_Test = 0
+Biome_Volcano = 0
+Biome_Island = 100
+Biome_Mesa = 0
+Biome_Skyland = 0
+EnvFeature_River = 50
+EnvFeature_Lake = 0
+EnvFeature_Flooded = 100
+EnvFeature_Barren = 0
+Halls_DeadEnds = 0
+Rooms_Round = 100
+Rooms_DenseLayout = 100
+Rooms_SparceLayout = 0
+Rooms_AlternatingSize = 0
+Rooms_Small = 0
+Rooms_Large = 0
+ItemType_Gold = -25
+ItemType_Tiles = 20
+ItemType_Consumable = 35
+ItemType_Gear = 10
+ItemType_Lockboxes = 10
+ItemType_KeyItem = 0
+ItemMods_SpawnRate = 50
+GearType_Weapon = 0
+GearType_Armour = 0
+GearType_Trinket = 0
+Class_Vanguard = 0
+Class_Warrior = 0
+Class_Mage = 0
+Class_Rogue = 0
+Class_Healer = 0
+Class_Jester = 0
+MobType_Beast = 125
+MobType_Elemental = 125
+MobType_Undead = 0
+MobType_Construct = 0
+MobType_Mortal = 100
+MobType_Wildling = 0
+MobMods_SpawnRate = 50
+MobMods_Level = 0
+MobMods_EXP = 5
+MobMods_Gold = -25
+MobMods_Gear = 5
+UniqueRooms_TreasureVault = 1
+UniqueRooms_MonsterHouse = 1
+Boss_T0_Roaming = 0
+Boss_T0_Mini = 1
+Boss_T1_Generic = 0
+Boss_T1_Fire = 0
+Boss_T1_Water = 1
+Boss_T1_Earth = 0
+Boss_T1_Wind = 0
+Boss_T1_Force = 0
+Boss_T2_Generic = 0
+Boss_T2_QuadElement = 0
+Boss_T2_Force = 0
+extra_floors = 8
+has_boss = true

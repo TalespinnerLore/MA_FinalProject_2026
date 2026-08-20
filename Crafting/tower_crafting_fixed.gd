@@ -82,6 +82,8 @@ var zonerarities_old = [t0_cross_rarities,t1_grid3_rarities,t1_grid3_rarities_un
 var zonelists = [t0_cross,t1_square,t2_unique,t3_star,t3_5_T2s,t4_fullgrid]
 var zonerarities = [t0_rarities,t1_rarities,t2_rarities,t3_rarities,t3_5_rarities,t4_rarities]
 
+@export var t2_quadboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
+@export var t2_forceboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
 @export var t1_forceboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
 @export var t1_fireboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
 @export var t1_waterboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
@@ -89,11 +91,14 @@ var zonerarities = [t0_rarities,t1_rarities,t2_rarities,t3_rarities,t3_5_raritie
 @export var t1_airboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
 @export var treasure_vault_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
 @export var monster_house_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
+@export var miniboss_recipe:Array[DUNGEON_CRAFTING_TILE_DATA]
 
 var preset_recipes = [t1_fireboss_recipe,t1_waterboss_recipe,t1_earthboss_recipe,t1_airboss_recipe,t1_forceboss_recipe,treasure_vault_recipe]
 
 func check_preset_recipes_FIXED():
-	preset_recipes = [t1_forceboss_recipe,treasure_vault_recipe,monster_house_recipe]
+	preset_recipes = [t1_forceboss_recipe,treasure_vault_recipe,monster_house_recipe,miniboss_recipe,\
+						t1_fireboss_recipe,t1_waterboss_recipe,t1_earthboss_recipe,t1_airboss_recipe,\
+						t2_forceboss_recipe,t2_quadboss_recipe]
 	var valid_recipe = false
 	var zones = $DROPZONES.get_children()
 	var return_preset
@@ -267,14 +272,26 @@ func _on_button_pressedPLUS() -> void:
 	for n:DropZone in $DROPZONES.get_children():
 		if n.slot_filled:
 			n.remove_data()
-	if grid_level == 3:
+	if grid_level == 0:
+		if SaveLoad.SaveFileData.checkpoint_persistance_keys["reached_level_5"] == true:
+			set_dropzones(clampi(grid_level+1,0,5))
+	elif grid_level == 1:
+		if SaveLoad.SaveFileData.checkpoint_persistance_keys["reached_level_10"] == true:
+			set_dropzones(clampi(grid_level+1,0,5))
+	elif grid_level == 2:
+		if SaveLoad.SaveFileData.checkpoint_persistance_keys["reached_level_15"] == true:
+			set_dropzones(clampi(grid_level+1,0,5))
+	elif grid_level == 3:
 		if $TileInventory.TileID_NamedInventory[-3][1] > 0:
 			set_dropzones(clampi(grid_level+1,0,5))
 		else:
 			set_dropzones(clampi(grid_level+2,0,5))
-	else:
-		set_dropzones(clampi(grid_level+1,0,5))
-	pass # Replace with function body.
+	elif grid_level == 4:
+		if SaveLoad.SaveFileData.checkpoint_persistance_keys["defeated_t2_quadboss"] == true:
+			set_dropzones(clampi(grid_level+1,0,5))
+	#else:
+	#	set_dropzones(clampi(grid_level+1,0,5))
+	#pass # Replace with function body.
 
 
 func _on_button_pressedMINUS() -> void:

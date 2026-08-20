@@ -1,16 +1,18 @@
-[gd_resource type="Resource" script_class="DCTData_Preset" load_steps=6 format=3 uid="uid://ygkbugjck1i1"]
+[gd_resource type="Resource" script_class="DCTData_Preset" load_steps=7 format=3 uid="uid://ygkbugjck1i1"]
 
-[ext_resource type="Resource" uid="uid://d207jia2og7yu" path="res://Resources/Units/Enemy/MiniBoss.tres" id="1_bufft"]
+[ext_resource type="Resource" uid="uid://cuww88c2uscoy" path="res://Resources/Units/BOSSES/Boss_Force.tres" id="1_al6sw"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="1_wmnpe"]
+[ext_resource type="Resource" uid="uid://bopog0h76gw24" path="res://Resources/DungeonGen/UniqueRooms/Resources/FINAL_FLOOR_Generic.tres" id="2_06msl"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/DCTData_Preset.gd" id="2_eud4p"]
-[ext_resource type="Resource" uid="uid://pmf5ls6spbfm" path="res://Resources/DungeonGen/UniqueRooms/Resources/MINI_BOSS.tres" id="2_h02fg"]
-[ext_resource type="Resource" uid="uid://v7oc1ln8lrh7" path="res://Resources/Units/Player/Stats_Healer.tres" id="4_1do15"]
+[ext_resource type="Resource" uid="uid://dje0c4itwscns" path="res://Resources/Units/BOSSES/Elite_Lawless_Fool.tres" id="4_ujadv"]
+[ext_resource type="Resource" uid="uid://hrr33ct56pgl" path="res://Resources/DungeonGen/UniqueRooms/Resources/SAFE_FLOOR_Generic.tres" id="5_jlv1u"]
 
 [resource]
 script = ExtResource("2_eud4p")
-Boss_Enemy = ExtResource("1_bufft")
-Mini_Bosses = Array[ExtResource("1_wmnpe")]([ExtResource("4_1do15")])
-Final_Floor = ExtResource("2_h02fg")
+Boss_Enemy = ExtResource("1_al6sw")
+Mini_Bosses = Array[ExtResource("1_wmnpe")]([ExtResource("4_ujadv")])
+Final_Floor = ExtResource("2_06msl")
+Safe_Room_Floor = ExtResource("5_jlv1u")
 TILE_ID = 0
 rarity = 3
 Affinity_Fire = 0

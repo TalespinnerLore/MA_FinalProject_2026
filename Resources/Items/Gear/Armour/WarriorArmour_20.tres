@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData_Gear" load_steps=4 format=3 uid="uid://der0woksh1w4f"]
 
 [ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_a0tny"]
-[ext_resource type="Texture2D" uid="uid://c3eopb6d2eqri" path="res://Art/ItemSprites/shield.png" id="2_evb7e"]
+[ext_resource type="Texture2D" uid="uid://ca6eif5q44jvk" path="res://Art/ItemSprites/gear_armour.png" id="2_udr0d"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData_Gear.gd" id="3_jry0c"]
 
 [resource]
@@ -26,7 +26,7 @@ Def_Mult_boost = 0.0
 Reroll_Chance_boost = 0.0
 ItemName = "Plate Armour"
 max_stack = 1
-icon = ExtResource("2_evb7e")
+icon = ExtResource("2_udr0d")
 ITEM_ID = 10
 TILE_ID = -1
 shop_value = 1
@@ -38,8 +38,8 @@ ItemType = 3
 GearType = 1
 ConsType = 0
 Class_Bias = 2
-min_area_level = 0
-max_area_level = 5
+min_area_level = 20
+max_area_level = 999
 Affinity_Fire = false
 Affinity_Water = false
 Affinity_Earth = false
@@ -47,9 +47,9 @@ Affinity_Air = false
 Affinity_Force = false
 Affinity_Light = false
 Affinity_Dark = false
-STR_NEEDED = 10
+STR_NEEDED = 100
 DEX_NEEDED = 0
 VIT_NEEDED = 0
 MAG_NEEDED = 0
-DEF_NEEDED = 5
+DEF_NEEDED = 60
 LUK_NEEDED = 0

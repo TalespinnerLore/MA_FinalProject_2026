@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cdw3g2fpsk3y5"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cdw3g2fpsk3y5"]
 
 [ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_nsr4x"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="2_e6oe5"]
+[ext_resource type="Texture2D" uid="uid://de31psfumpdwr" path="res://Art/ItemSprites/lockbox_silver.png" id="2_ku42h"]
 
 [resource]
 script = ExtResource("2_e6oe5")
 ItemName = "Silver Lockbox"
 max_stack = 1
+icon = ExtResource("2_ku42h")
 ITEM_ID = 402
 TILE_ID = 0
 shop_value = 200

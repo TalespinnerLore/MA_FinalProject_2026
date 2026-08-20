@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://drbfqa6siqmwe"]
 
 [ext_resource type="Resource" uid="uid://b4txgw8egicfk" path="res://Resources/Abilities/_ItemAbilities/---.tres" id="1_jitx8"]
-[ext_resource type="Texture2D" uid="uid://d3oyhcvbqu3iu" path="res://Art/UI_Art/ui_icon_lockbox.png" id="2_kr7mm"]
+[ext_resource type="Texture2D" uid="uid://cv7tdxoow0p1x" path="res://Art/ItemSprites/lockbox_gold.png" id="2_jk2jh"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="2_mw0w6"]
 
 [resource]
 script = ExtResource("2_mw0w6")
 ItemName = "Golden Lockbox"
 max_stack = 1
-icon = ExtResource("2_kr7mm")
+icon = ExtResource("2_jk2jh")
 ITEM_ID = 403
 TILE_ID = 0
 shop_value = 25

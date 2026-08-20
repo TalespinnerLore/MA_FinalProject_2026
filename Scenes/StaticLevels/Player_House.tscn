@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=4 uid="uid://bgknqn2di3rc1"]
+[gd_scene load_steps=12 format=4 uid="uid://bgknqn2di3rc1"]
 
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_4seee"]
 [ext_resource type="Script" path="res://tile_map_layer.gd" id="2_4clwx"]
 [ext_resource type="PackedScene" uid="uid://qw8hxdfy48pn" path="res://Units/unit_non_combat.tscn" id="3_5fc7e"]
 [ext_resource type="Resource" uid="uid://oygkar1j0gy3" path="res://Resources/Units/Player/Stats_Warrior.tres" id="4_gwii0"]
 [ext_resource type="PackedScene" uid="uid://cgf44y4ubuugp" path="res://Objects/EnvironmentObjects/classswap_point.tscn" id="7_f4v0j"]
+[ext_resource type="PackedScene" uid="uid://5k4xgds11d8w" path="res://UI/PlaytestUI/Pause_Menu_UI.tscn" id="7_ut6bm"]
 [ext_resource type="PackedScene" uid="uid://dfisf8473baje" path="res://UI/Menus/class_swap_ui.tscn" id="7_w0vxf"]
 [ext_resource type="PackedScene" uid="uid://cmrvbbtrkis6q" path="res://Scenes/StaticLevels/scenechange_collider.tscn" id="24_wiml1"]
 
@@ -70,6 +71,9 @@ scene_to_open = "res://Scenes/StaticLevels/HubWorld.tscn"
 visible = false
 offset_right = 640.0
 offset_bottom = 360.0
+
+[node name="PauseMenuUi" parent="CanvasLayer" instance=ExtResource("7_ut6bm")]
+visible = false
 
 [node name="SavePoint" parent="." instance=ExtResource("7_f4v0j")]
 z_index = 10

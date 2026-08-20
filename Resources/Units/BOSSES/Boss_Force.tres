@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="StatComponent" load_steps=16 format=3 uid="uid://cuww88c2uscoy"]
+
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="1_3b83s"]
+[ext_resource type="Resource" uid="uid://cv14lef7fcshm" path="res://Resources/Abilities/DEX_base/10_Piercing_Shot.tres" id="1_84m4i"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="2_1ltca"]
+[ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/10_Cone_of_Embers.tres" id="2_q5ccu"]
+[ext_resource type="Resource" uid="uid://0if3g3khpnhi" path="res://Resources/Abilities/VIT_base/80_Purify.tres" id="3_vlbjk"]
+[ext_resource type="Resource" uid="uid://rfa1oc5gpu6h" path="res://Resources/Abilities/DEX_base/40_Venom_Strike.tres" id="4_0e6yi"]
+[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="5_6lwfr"]
+[ext_resource type="Texture2D" uid="uid://digauguw7tk0p" path="res://Art/UnitSprites/BasicCharacter_enemyboss.png" id="6_6hds6"]
+[ext_resource type="Texture2D" uid="uid://j3ro37ydk0qp" path="res://Art/UnitSprites/Palettes/boss_palette0.png" id="8_edna6"]
+[ext_resource type="Texture2D" uid="uid://ox28447xxxn8" path="res://Art/UnitSprites/Palettes/boss_palette1.png" id="9_vspbc"]
+[ext_resource type="Texture2D" uid="uid://qrpjuophp427" path="res://Art/UnitSprites/Palettes/boss_palette2.png" id="10_isvqs"]
+[ext_resource type="Texture2D" uid="uid://dvfkyahqogbhg" path="res://Art/UnitSprites/Palettes/boss_palette3.png" id="11_u2wdl"]
+[ext_resource type="Texture2D" uid="uid://dwf6g2bunyilh" path="res://Art/UnitSprites/Palettes/boss_palette4.png" id="12_2rkx6"]
+[ext_resource type="Texture2D" uid="uid://sgcy1xqtka4y" path="res://Art/UnitSprites/Palettes/boss_palette5.png" id="13_l2wae"]
+[ext_resource type="Texture2D" uid="uid://c7oeb3q5dqjm7" path="res://Art/UnitSprites/Palettes/boss_palette6.png" id="14_dxkno"]
+
+[resource]
+script = ExtResource("2_1ltca")
+Sprite = ExtResource("6_6hds6")
+BasicAttack = ExtResource("5_6lwfr")
+Attacks = Array[Object]([ExtResource("1_84m4i"), ExtResource("2_q5ccu"), ExtResource("3_vlbjk"), ExtResource("4_0e6yi")])
+UnitName = "Lord of Force"
+is_large_unit = false
+is_rare_spawn = false
+is_miniboss = false
+is_boss = true
+is_t2_boss = false
+CreatureType = 0
+Element = 4
+elem_palettes = Array[Texture2D]([ExtResource("8_edna6"), ExtResource("9_vspbc"), ExtResource("10_isvqs"), ExtResource("11_u2wdl"), ExtResource("12_2rkx6"), ExtResource("13_l2wae"), ExtResource("14_dxkno")])
+must_drop_items = Array[ExtResource("1_3b83s")]([])
+chance_drop_items = Array[ExtResource("1_3b83s")]([])
+STR_up = 4
+DEX_up = 4
+VIT_up = 4
+MAG_up = 4
+DEF_up = 4
+LUK_up = 4
+Free_Stats = 0
+Base_HP = 35
+STR = 10
+DEX = 10
+VIT = 10
+MAG = 10
+DEF = 10
+LUK = 10
+HP_Max_withVIT = null
+Base_Phys_ATK = 5.0
+Base_Mag_ATK = 5.0
+Base_Phys_DEF = 5.0
+Base_Mag_DEF = 5.0
+Base_Evasion = 5.0
+Heal_Buff_Mult = 1.1
+Melee_Mult = 1.1
+Ranged_Mult = 1.1
+Def_Mult = 1.1
+Reroll_Chance = 0.05
+STR_boost = 0
+DEX_boost = 0
+VIT_boost = 0
+MAG_boost = 0
+DEF_boost = 0
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0

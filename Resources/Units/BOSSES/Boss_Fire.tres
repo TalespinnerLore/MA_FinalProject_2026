@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="StatComponent" load_steps=16 format=3 uid="uid://b4cp7sbvomxv6"]
+
+[ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/10_Cone_of_Embers.tres" id="2_h72b0"]
+[ext_resource type="Resource" uid="uid://cqc4lv8ck3ypo" path="res://Resources/Abilities/MAG_base/40_EmberBurst.tres" id="2_lr704"]
+[ext_resource type="Resource" uid="uid://bsl8f6nvn0fw" path="res://Resources/Abilities/MAG_base/80_Incinerate.tres" id="3_21o8s"]
+[ext_resource type="Resource" uid="uid://c4odm3pb7q1eu" path="res://Resources/Abilities/MAG_base/120_Fireball.tres" id="4_kmdf4"]
+[ext_resource type="Resource" uid="uid://d02ns3e6v636q" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres" id="5_ina5i"]
+[ext_resource type="Texture2D" uid="uid://digauguw7tk0p" path="res://Art/UnitSprites/BasicCharacter_enemyboss.png" id="6_wr616"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="7_x3mc6"]
+[ext_resource type="Texture2D" uid="uid://j3ro37ydk0qp" path="res://Art/UnitSprites/Palettes/boss_palette0.png" id="8_nl55j"]
+[ext_resource type="Texture2D" uid="uid://ox28447xxxn8" path="res://Art/UnitSprites/Palettes/boss_palette1.png" id="9_bilfm"]
+[ext_resource type="Texture2D" uid="uid://qrpjuophp427" path="res://Art/UnitSprites/Palettes/boss_palette2.png" id="10_mpad3"]
+[ext_resource type="Texture2D" uid="uid://dvfkyahqogbhg" path="res://Art/UnitSprites/Palettes/boss_palette3.png" id="11_b5v75"]
+[ext_resource type="Texture2D" uid="uid://dwf6g2bunyilh" path="res://Art/UnitSprites/Palettes/boss_palette4.png" id="12_wovse"]
+[ext_resource type="Texture2D" uid="uid://sgcy1xqtka4y" path="res://Art/UnitSprites/Palettes/boss_palette5.png" id="13_sbehu"]
+[ext_resource type="Texture2D" uid="uid://c7oeb3q5dqjm7" path="res://Art/UnitSprites/Palettes/boss_palette6.png" id="14_v1gxv"]
+[ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="15_myf23"]
+
+[resource]
+script = ExtResource("15_myf23")
+Sprite = ExtResource("6_wr616")
+BasicAttack = ExtResource("5_ina5i")
+Attacks = Array[Object]([ExtResource("2_h72b0"), ExtResource("2_lr704"), ExtResource("3_21o8s"), ExtResource("4_kmdf4")])
+UnitName = "Lord of Fire"
+is_large_unit = false
+is_rare_spawn = false
+is_miniboss = false
+is_boss = true
+is_t2_boss = false
+CreatureType = 2
+Element = 0
+elem_palettes = Array[Texture2D]([ExtResource("8_nl55j"), ExtResource("9_bilfm"), ExtResource("10_mpad3"), ExtResource("11_b5v75"), ExtResource("12_wovse"), ExtResource("13_sbehu"), ExtResource("14_v1gxv")])
+must_drop_items = Array[ExtResource("7_x3mc6")]([])
+chance_drop_items = Array[ExtResource("7_x3mc6")]([])
+STR_up = 1
+DEX_up = 6
+VIT_up = 1
+MAG_up = 6
+DEF_up = 6
+LUK_up = 1
+Free_Stats = 0
+Base_HP = 40
+STR = 10
+DEX = 10
+VIT = 10
+MAG = 10
+DEF = 10
+LUK = 10
+HP_Max_withVIT = null
+Base_Phys_ATK = 5.0
+Base_Mag_ATK = 5.0
+Base_Phys_DEF = 5.0
+Base_Mag_DEF = 5.0
+Base_Evasion = 5.0
+Heal_Buff_Mult = 1.1
+Melee_Mult = 1.1
+Ranged_Mult = 1.1
+Def_Mult = 1.1
+Reroll_Chance = 0.05
+STR_boost = 0
+DEX_boost = 0
+VIT_boost = 0
+MAG_boost = 0
+DEF_boost = 0
+LUK_boost = 0
+HP_Max_boost = 0
+Phys_ATK_boost = 0
+Mag_ATK_boost = 0
+Phys_DEF_boost = 0
+Mag_DEF_boost = 0
+Evasion_boost = 0
+CritChance_boost = 0.0
+Heal_Buff_Mult_boost = 0.0
+Melee_Mult_boost = 0.0
+Ranged_Mult_boost = 0.0
+Def_Mult_boost = 0.0
+Reroll_Chance_boost = 0.0

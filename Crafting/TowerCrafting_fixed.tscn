@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bfynsxir5rxqw"]
+[gd_scene load_steps=66 format=4 uid="uid://bfynsxir5rxqw"]
 
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_hxmwj"]
 [ext_resource type="Script" path="res://Crafting/tower_crafting_fixed.gd" id="1_u4c53"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/DungeonCraftingTileData.gd" id="2_fv2ap"]
 [ext_resource type="Resource" uid="uid://17804feuy204" path="res://Resources/Items/Tiles/DungeonGen/Items/TRINKET.tres" id="3_1moxw"]
 [ext_resource type="FontFile" uid="uid://bme72xoxft30d" path="res://Art/Tiny5-Regular.ttf" id="3_2s003"]
+[ext_resource type="Resource" uid="uid://bsgiq0jnpvyim" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/T2_BOSS.tres" id="3_xt0ya"]
+[ext_resource type="Resource" uid="uid://cc1rmk6x2kaih" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/MINI_BOSS.tres" id="4_1qba1"]
 [ext_resource type="Resource" uid="uid://sr4qktjx4o8r" path="res://Resources/Items/Tiles/DungeonGen/Items/CONSUMABLE.tres" id="4_dpa81"]
 [ext_resource type="PackedScene" uid="uid://b6dntdfdb23xd" path="res://Crafting/tile_dropzone.tscn" id="4_uf6kn"]
 [ext_resource type="Resource" uid="uid://dd8k3tis72r44" path="res://Resources/Items/Tiles/DungeonGen/Items/ARMOUR.tres" id="5_i8e2a"]
@@ -16,25 +18,66 @@
 [ext_resource type="PackedScene" uid="uid://bitvmnpjfrxby" path="res://Crafting/DungeonCraftingTile.tscn" id="7_jockm"]
 [ext_resource type="Resource" uid="uid://stb6ypti7q54" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_BOSS.tres" id="8_ywfu4"]
 [ext_resource type="Resource" uid="uid://ba1rjkyjexgx1" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_FORCEBOSS.tres" id="9_cvojt"]
+[ext_resource type="Resource" uid="uid://bdxh7qk41i2ke" path="res://Resources/Items/Tiles/DungeonGen/Items/GEAR.tres" id="10_2l3q5"]
 [ext_resource type="Resource" uid="uid://ygkbugjck1i1" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/FORCETOWER_T1.tres" id="10_i3nak"]
+[ext_resource type="Resource" uid="uid://b0wssm2gixsvj" path="res://Resources/Items/Tiles/DungeonGen/MOBS/UNDEAD.tres" id="11_54one"]
 [ext_resource type="Resource" uid="uid://dftxohwy60tkw" path="res://Resources/Items/Tiles/DungeonGen/Misq/INCREASED_GOLD.tres" id="11_c5xca"]
 [ext_resource type="Resource" uid="uid://c4s1uluohurar" path="res://Resources/Items/Tiles/DungeonGen/Unique Rooms/TREASURE_VAULT_RECIPE.tres" id="12_ddntj"]
 [ext_resource type="Resource" uid="uid://bp815opj4hc6b" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/T0_TreasureVault.tres" id="13_fju8x"]
+[ext_resource type="Resource" uid="uid://dljtq1ondvbvm" path="res://Resources/Items/Tiles/DungeonGen/Environment/LAKE_SPAWN.tres" id="13_ohuge"]
 [ext_resource type="Resource" uid="uid://b8w42kvnc7c44" path="res://Resources/Items/Tiles/DungeonGen/Rooms/DENSE_LAYOUT.tres" id="14_8k1dh"]
+[ext_resource type="Resource" uid="uid://b8rv0ct8rdicw" path="res://Resources/Items/Tiles/DungeonGen/Elements/FIRE.tres" id="14_cgnxh"]
 [ext_resource type="Resource" uid="uid://ck43pd0evuatv" path="res://Resources/Items/Tiles/DungeonGen/Rooms/LARGE_ROOMS.tres" id="15_6blm7"]
+[ext_resource type="Resource" uid="uid://cb2orgyikp3ja" path="res://Resources/Items/Tiles/DungeonGen/Biome/VOLCANO.tres" id="15_ukb6a"]
 [ext_resource type="Resource" uid="uid://bvj2gavwqhh1a" path="res://Resources/Items/Tiles/DungeonGen/Misq/INCREASED_MOB_DENSITY.tres" id="16_010fx"]
+[ext_resource type="Resource" uid="uid://d1g0gu83f8l7r" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_FIREBOSS.tres" id="16_gr6bv"]
+[ext_resource type="Resource" uid="uid://byncqo0ekhcub" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/T2_QUADBOSS.tres" id="17_7gmth"]
+[ext_resource type="Resource" uid="uid://81tdfqacug1l" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/FIRETOWER_T1.tres" id="17_jvvkr"]
 [ext_resource type="Resource" uid="uid://caef5r7a07b8s" path="res://Resources/Items/Tiles/DungeonGen/Unique Rooms/MONSTER_HOUSE_recipe.tres" id="17_sbjbf"]
 [ext_resource type="Resource" uid="uid://ceob6v0nkjrhq" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/T0_MonsterHouse.tres" id="18_emybg"]
+[ext_resource type="Resource" uid="uid://2585j20mvuya" path="res://Resources/Items/Tiles/DungeonGen/MOBS/BEASTS.tres" id="18_lhnvj"]
+[ext_resource type="Resource" uid="uid://cdupo0ix11alf" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/QuadTOWER_T2.tres" id="18_omjsn"]
+[ext_resource type="Resource" uid="uid://duuspbciu76rf" path="res://Resources/Items/Tiles/DungeonGen/Misq/DECREASED_GOLD.tres" id="19_51b43"]
+[ext_resource type="Resource" uid="uid://bpbxk34dygqlu" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/T2_FORCEBOSS.tres" id="19_j7p3r"]
+[ext_resource type="Resource" uid="uid://bxhc7qwxv6akv" path="res://Resources/Items/Tiles/DungeonGen/Unique Rooms/MONSTER_HOUSE.tres" id="19_ponto"]
+[ext_resource type="Resource" uid="uid://bdwyey8mknp4y" path="res://Resources/Items/Tiles/DungeonGen/Unique Rooms/TREASURE_VAULT.tres" id="20_3s23b"]
+[ext_resource type="Resource" uid="uid://d2figweb2ll2k" path="res://Resources/Items/Tiles/DungeonGen/Environment/RIVER_SPAWN.tres" id="20_ow1bi"]
+[ext_resource type="Resource" uid="uid://8qlu8astydwd" path="res://Resources/Items/Tiles/DungeonGen/Biome/ISLAND.tres" id="21_0hoae"]
 [ext_resource type="Texture2D" uid="uid://cxattyo56h3cr" path="res://Art/ItemSprites/CraftingTiles_SingleSprites/tile54.png" id="21_37v8o"]
+[ext_resource type="Resource" uid="uid://dnt7qoyuvq5hu" path="res://Resources/Items/Tiles/DungeonGen/Elements/WATER.tres" id="22_5co5s"]
+[ext_resource type="Resource" uid="uid://jr01cpue17p4" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_WATERBOSS.tres" id="23_jkaew"]
+[ext_resource type="Resource" uid="uid://c3ed2to0qkm63" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/WATERTOWER_T1.tres" id="24_yxrw5"]
+[ext_resource type="Resource" uid="uid://cmvm58sr6p0hd" path="res://Resources/Items/Tiles/DungeonGen/Misq/DECREASED_MOB_DENSITY.tres" id="26_x6l84"]
+[ext_resource type="Resource" uid="uid://b1ccuy3rb25y7" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/TwilightTOWER_T2.tres" id="27_7t660"]
+[ext_resource type="Resource" uid="uid://dm37wlyh5kl6p" path="res://Resources/Items/Tiles/DungeonGen/Classes/VANGUARD.tres" id="27_njve7"]
+[ext_resource type="Resource" uid="uid://c5cqarp42rurr" path="res://Resources/Items/Tiles/DungeonGen/Items/LOCKBOX.tres" id="28_36o2n"]
+[ext_resource type="Resource" uid="uid://dhstfgu31cpc2" path="res://Resources/Items/Tiles/DungeonGen/Elements/EARTH.tres" id="29_xx44w"]
+[ext_resource type="Resource" uid="uid://ducphpoadivwq" path="res://Resources/Items/Tiles/DungeonGen/Biome/MESA.tres" id="30_8ge7c"]
+[ext_resource type="Resource" uid="uid://daddaha156hgt" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_EARTHBOSS.tres" id="31_ivdr5"]
+[ext_resource type="Resource" uid="uid://c07uegjhbmhf7" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/EARTHTOWER_T1.tres" id="32_c3dvp"]
+[ext_resource type="Resource" uid="uid://c752keaps7fcp" path="res://Resources/Items/Tiles/DungeonGen/Classes/MAGE.tres" id="33_phbhb"]
+[ext_resource type="Resource" uid="uid://clgpujd4v4v5u" path="res://Resources/Items/Tiles/DungeonGen/Classes/HEALER.tres" id="34_uoae4"]
+[ext_resource type="Resource" uid="uid://u8gdoabjvpev" path="res://Resources/Items/Tiles/DungeonGen/Misq/INCREASED_XP.tres" id="35_7vbyv"]
+[ext_resource type="Resource" uid="uid://45x8xmapcnnw" path="res://Resources/Items/Tiles/DungeonGen/Misq/DECREASED_XP.tres" id="36_ddmhy"]
+[ext_resource type="Resource" uid="uid://cujhg6jc5404f" path="res://Resources/Items/Tiles/DungeonGen/Biome/SKYLAND.tres" id="37_rmflv"]
+[ext_resource type="Resource" uid="uid://1orai1uass5j" path="res://Resources/Items/Tiles/DungeonGen/Elements/AIR.tres" id="38_dmr2g"]
+[ext_resource type="Resource" uid="uid://cw4v4lfcnlvr6" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/T1_AIRBOSS.tres" id="39_4htgu"]
+[ext_resource type="Resource" uid="uid://chjmpghngmkme" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/AIRTOWER_T1.tres" id="40_e3rly"]
+[ext_resource type="Resource" uid="uid://ckcwv0i4gr6r2" path="res://Resources/Items/Tiles/DungeonGen/Unique Rooms/MINIBOSS_RECIPE.tres" id="47_2pjuw"]
+[ext_resource type="Resource" uid="uid://b3k0nrx1hstkf" path="res://Resources/Items/Tiles/DungeonGen/BOSSES/dungeon presets/T0_Miniboss.tres" id="48_pcpju"]
 
 [node name="TowerCrafting_FIXED" type="Node2D"]
 script = ExtResource("1_u4c53")
-t1_forceboss_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("5_i8e2a"), ExtResource("6_esmu1"), ExtResource("3_1moxw"), ExtResource("4_dpa81"), ExtResource("7_1m1sb"), ExtResource("7_1m1sb"), ExtResource("7_1m1sb"), ExtResource("7_1m1sb"), ExtResource("8_ywfu4"), ExtResource("9_cvojt"), ExtResource("10_i3nak")])
-t1_fireboss_recipe = Array[ExtResource("2_fv2ap")]([null, null, null, null, null, null, null, null, null, null, null])
-t1_waterboss_recipe = Array[ExtResource("2_fv2ap")]([null, null, null, null, null, null, null, null, null, null, null])
-t1_airboss_recipe = Array[ExtResource("2_fv2ap")]([null, null, null, null, null, null, null, null, null, null, null])
+t2_quadboss_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("3_xt0ya"), ExtResource("4_1qba1"), ExtResource("4_1qba1"), ExtResource("4_1qba1"), ExtResource("4_1qba1"), ExtResource("15_ukb6a"), ExtResource("30_8ge7c"), ExtResource("21_0hoae"), ExtResource("37_rmflv"), ExtResource("4_dpa81"), ExtResource("10_2l3q5"), ExtResource("11_c5xca"), ExtResource("28_36o2n"), ExtResource("16_gr6bv"), ExtResource("31_ivdr5"), ExtResource("23_jkaew"), ExtResource("39_4htgu"), ExtResource("17_7gmth"), ExtResource("18_omjsn")])
+t2_forceboss_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("3_xt0ya"), ExtResource("19_ponto"), ExtResource("19_ponto"), ExtResource("20_3s23b"), ExtResource("20_3s23b"), ExtResource("35_7vbyv"), ExtResource("11_c5xca"), ExtResource("35_7vbyv"), ExtResource("11_c5xca"), ExtResource("26_x6l84"), ExtResource("26_x6l84"), ExtResource("36_ddmhy"), ExtResource("19_51b43"), ExtResource("9_cvojt"), ExtResource("9_cvojt"), ExtResource("9_cvojt"), ExtResource("9_cvojt"), ExtResource("19_j7p3r"), ExtResource("27_7t660")])
+t1_forceboss_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("8_ywfu4"), ExtResource("5_i8e2a"), ExtResource("6_esmu1"), ExtResource("3_1moxw"), ExtResource("4_dpa81"), ExtResource("7_1m1sb"), ExtResource("7_1m1sb"), ExtResource("7_1m1sb"), ExtResource("7_1m1sb"), ExtResource("9_cvojt"), ExtResource("10_i3nak")])
+t1_fireboss_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("8_ywfu4"), ExtResource("11_54one"), ExtResource("11_54one"), ExtResource("11_c5xca"), ExtResource("13_ohuge"), ExtResource("14_cgnxh"), ExtResource("15_ukb6a"), ExtResource("14_cgnxh"), ExtResource("15_ukb6a"), ExtResource("16_gr6bv"), ExtResource("17_jvvkr")])
+t1_waterboss_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("8_ywfu4"), ExtResource("18_lhnvj"), ExtResource("19_51b43"), ExtResource("20_ow1bi"), ExtResource("4_dpa81"), ExtResource("21_0hoae"), ExtResource("22_5co5s"), ExtResource("21_0hoae"), ExtResource("22_5co5s"), ExtResource("23_jkaew"), ExtResource("24_yxrw5")])
+t1_earthboss_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("8_ywfu4"), ExtResource("16_010fx"), ExtResource("26_x6l84"), ExtResource("27_njve7"), ExtResource("28_36o2n"), ExtResource("29_xx44w"), ExtResource("30_8ge7c"), ExtResource("29_xx44w"), ExtResource("30_8ge7c"), ExtResource("31_ivdr5"), ExtResource("32_c3dvp")])
+t1_airboss_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("8_ywfu4"), ExtResource("33_phbhb"), ExtResource("34_uoae4"), ExtResource("35_7vbyv"), ExtResource("36_ddmhy"), ExtResource("37_rmflv"), ExtResource("38_dmr2g"), ExtResource("37_rmflv"), ExtResource("38_dmr2g"), ExtResource("39_4htgu"), ExtResource("40_e3rly")])
 treasure_vault_recipe = Array[ExtResource("2_fv2ap")]([null, ExtResource("11_c5xca"), ExtResource("11_c5xca"), ExtResource("11_c5xca"), ExtResource("11_c5xca"), ExtResource("12_ddntj"), ExtResource("13_fju8x")])
 monster_house_recipe = Array[ExtResource("2_fv2ap")]([ExtResource("16_010fx"), ExtResource("14_8k1dh"), ExtResource("14_8k1dh"), ExtResource("15_6blm7"), ExtResource("15_6blm7"), ExtResource("17_sbjbf"), ExtResource("18_emybg")])
+miniboss_recipe = Array[ExtResource("2_fv2ap")]([null, ExtResource("16_010fx"), ExtResource("16_010fx"), ExtResource("26_x6l84"), ExtResource("16_010fx"), ExtResource("47_2pjuw"), ExtResource("48_pcpju")])
 
 [node name="TileMapLayer_SideUI" type="TileMapLayer" parent="."]
 light_mask = 0
