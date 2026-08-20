@@ -30,7 +30,7 @@ var p2_free_stats := 0
 
 var player_inventory = [[load("res://Resources/Items/Consumables/HealthPotion_Small.tres"),3]] #[ITEM_ID,AMOUNT]
 var inventory_size = 10
-var player_gold = 999
+var player_gold = 0
 
 @export var TileID_NamedInventory = [["TEST",0],["FIRE",0],["WATER",0],["EARTH",0],["AIR",0],["FORCE",0],\
 ["VOLCANO",0],["ISLANDS",0],["MESA",0],["SKY_ISLANDS",0],\
