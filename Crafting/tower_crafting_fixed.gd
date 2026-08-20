@@ -269,17 +269,18 @@ func change_data(data:DUNGEON_CRAFTING_TILE_DATA,adding:bool):
 
 
 func _on_button_pressedPLUS() -> void:
+	#print(SaveLoad.SaveFileData.checkpoint_persistance_keys["defeated_t2_quadboss"])
 	for n:DropZone in $DROPZONES.get_children():
 		if n.slot_filled:
 			n.remove_data()
 	if grid_level == 0:
-		if SaveLoad.SaveFileData.checkpoint_persistance_keys["reached_level_5"] == true:
+		if PlayerStats.p1_level >= 5:
 			set_dropzones(clampi(grid_level+1,0,5))
 	elif grid_level == 1:
-		if SaveLoad.SaveFileData.checkpoint_persistance_keys["reached_level_10"] == true:
+		if PlayerStats.p1_level >= 10:
 			set_dropzones(clampi(grid_level+1,0,5))
 	elif grid_level == 2:
-		if SaveLoad.SaveFileData.checkpoint_persistance_keys["reached_level_15"] == true:
+		if PlayerStats.p1_level >= 15:
 			set_dropzones(clampi(grid_level+1,0,5))
 	elif grid_level == 3:
 		if $TileInventory.TileID_NamedInventory[-3][1] > 0:

@@ -1,9 +1,13 @@
-[gd_resource type="Resource" script_class="StatusEffectData" load_steps=2 format=3 uid="uid://c3711d2btgqt6"]
+[gd_resource type="Resource" script_class="StatusEffectData" load_steps=4 format=3 uid="uid://c3711d2btgqt6"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="1_u6vkt"]
+[ext_resource type="Texture2D" uid="uid://cp5yooysy1rm6" path="res://Art/UI_Art/ui_icon_other.png" id="1_xh281"]
+[ext_resource type="Texture2D" uid="uid://kecoy3onkl54" path="res://Art/VFX Sprites/Flare00_pxl.png" id="3_msetg"]
 
 [resource]
 script = ExtResource("1_u6vkt")
+icon = ExtResource("1_xh281")
+vfx = ExtResource("3_msetg")
 effect_name = "BurnHeal"
 is_negative = false
 turn_duration = 1
