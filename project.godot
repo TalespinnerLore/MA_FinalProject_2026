@@ -73,6 +73,7 @@ ABILITY_SELECTOR_UI=""
 SHOP_UI_POTION=""
 SHOP_UI_GEAR=""
 SHOP_UI_TILES=""
+MUSIC=""
 
 [godot_resource_groups]
 

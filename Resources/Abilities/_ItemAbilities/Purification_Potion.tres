@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://7j43okgcfmgv"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://7j43okgcfmgv"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_edpiy"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_liihf"]
 [ext_resource type="Resource" uid="uid://c1s0lqb64cpex" path="res://Resources/StatusEffects/Purification.tres" id="3_ydmej"]
+[ext_resource type="Texture2D" uid="uid://kecoy3onkl54" path="res://Art/VFX Sprites/Flare00_pxl.png" id="4_jpys5"]
 
 [resource]
 script = ExtResource("1_edpiy")
 ability_name = "Purification Potion"
+vfx = ExtResource("4_jpys5")
 element = 5
 valid_target = 3
 targeting = 4

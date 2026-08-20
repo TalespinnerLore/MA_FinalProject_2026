@@ -21,6 +21,12 @@ var lava_paths = []
 var air_paths = []
 
 func new_path_on_enter(body:Unit_Instance):
+	var topop = []
+	for path in ground_paths:
+		if path.size() < 1:
+			topop.append(path)
+	for path in topop:
+		ground_paths.erase(path)
 	ground_paths.shuffle()
 	print('ground paths:',ground_paths)
 	for path in ground_paths:

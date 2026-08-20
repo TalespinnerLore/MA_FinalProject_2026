@@ -305,15 +305,18 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 					if ! Source.UnitStats.is_boss:
 						if ! Source.UnitStats.is_miniboss:
 							if ! Source.UnitStats.is_rare_spawn:
-								amount = roundi(amount*0.5)
+								amount = floori(amount*0.5)
 							else:
-								amount = roundi(amount*0.6)
+								amount = floori(amount*0.6)
 						else:
-							amount = roundi(amount*0.70)
+							amount = floori(amount*0.70)
 					else:
-						amount = roundi(amount*0.80)
+						amount = floori(amount*0.80)
 				else:
-					amount = roundi(amount*0.85)
+					amount = floori(amount*0.85)
+			else:
+				in_combat = true
+			
 			if STATUS_EFECTS.get_child_count() > 0:
 				for se:StatusEffectInstance in STATUS_EFECTS.get_children():
 					se.on_get_hit(Source) #shoulddo nothing if it not a unit hitting, or there's no children
@@ -321,6 +324,8 @@ func ability_effect_calculations(Ability:AbilityData,Source):
 			print("Before: ",HP_Current)
 			var calcs = calc_damage(Ability.damage_type,amount,hitcrit[1],Ability.element)
 			amount = calcs[0]
+			if Team == Teams.PLAYER and amount == 1:
+				amount+=2 # little bonus damage for players
 			amount_negated = calcs[1]
 			HP_Module._take_damage(amount)
 			HP_Current = HP_Module.hp
@@ -503,7 +508,7 @@ func _physics_process(delta: float) -> void:
 	if is_active_unit and Team == Teams.PLAYER and is_team_leader and ! has_moved and ! has_taken_turn:
 		is_acting = true
 		
-		if ! waiting_for_dialogue:
+		if ! waiting_for_dialogue and HP_Current > 0:
 			
 			check_move_input()
 			
@@ -850,13 +855,16 @@ func _on_death():
 		#Roll Dropchance --- equipped gear
 		pass
 	else:
-		#emit_signal("player_died")
+		#print('player died')
+		emit_signal("player_died")
 		PlayerStats.player_gold /= randf_range(2,4)
 		var items_lost = int(PlayerStats.player_inventory.size() / 4)
 		for i in items_lost:
 			PlayerStats.player_inventory.erase(PlayerStats.player_inventory.pick_random())
 		#^^^ death penalty: half to 3/4 all held gold, quarter of inventory items.
 		self.process_mode = Node.PROCESS_MODE_ALWAYS
+		get_tree().paused = true
+		get_tree().get_first_node_in_group('MUSIC').playing = false
 		sfx_player.stream = load("res://Sounds/game over.ogg")
 		sfx_player.play()
 		await sfx_player.finished
@@ -864,7 +872,7 @@ func _on_death():
 		unit_manager_ref.player_dead = true
 		unit_manager_ref.get_child(1).player_dead = true
 		await $"../../../CanvasLayer/DialogueSystemBase".action_complete
-		get_tree().paused = true
+		
 		get_tree().change_scene_to_file("res://Scenes/StaticLevels/HubScene_Playtesting.tscn")
 		#await get_tree().create_timer(2).timeout
 		pass
@@ -1049,7 +1057,7 @@ func AI_turn_enemy_new():
 		#in_combat = false
 	if nav_manager_ref.check_unit_room_for_player(self):
 		in_combat = true
-		$isaggro.visible = true
+		#$isaggro.visible = true
 		AI_aggression = 3
 	#elif (abs(target_unit.self_coords.x) - abs(self_coords.x) <= 3 and abs(target_unit.self_coords.y) - abs(self_coords.y) == 0) or \
 	#(abs(target_unit.self_coords.y) - abs(self_coords.y) <= 3 and abs(target_unit.self_coords.x) - abs(self_coords.x) == 0):
@@ -1058,7 +1066,7 @@ func AI_turn_enemy_new():
 	#	AI_aggression = 3
 	elif AI_aggression > 0:
 		in_combat = true
-		$isaggro.visible = true
+		#$isaggro.visible = true
 		if (abs(target_unit.self_coords.x) - abs(self_coords.x) <= 3 and abs(target_unit.self_coords.y) - abs(self_coords.y) == 0) or \
 			(abs(target_unit.self_coords.y) - abs(self_coords.y) <= 3 and abs(target_unit.self_coords.x) - abs(self_coords.x) == 0):
 			AI_aggression = 3
@@ -1067,7 +1075,7 @@ func AI_turn_enemy_new():
 	
 	if AI_aggression < 1:
 		in_combat = false
-		$isaggro.visible = false
+		#$isaggro.visible = false
 	
 	if ! in_combat:
 		#proceed_forwards()

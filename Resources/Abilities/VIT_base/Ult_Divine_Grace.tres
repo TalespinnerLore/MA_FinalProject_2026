@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=6 format=3 uid="uid://cyd5kb7t5b008"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=7 format=3 uid="uid://cyd5kb7t5b008"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_71257"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_a7xpk"]
 [ext_resource type="Resource" uid="uid://eivq82k3cb6i" path="res://Resources/StatusEffects/Regeneration.tres" id="3_mfiy0"]
 [ext_resource type="Resource" uid="uid://cmijj0dvoxony" path="res://Resources/StatusEffects/Precision.tres" id="4_oes3k"]
 [ext_resource type="Texture2D" uid="uid://jo8g6xyk6vmd" path="res://Art/VFX Sprites/vfx_water.png" id="5_jucrn"]
+[ext_resource type="Resource" uid="uid://wis3ck0x2w2i" path="res://Resources/StatusEffects/Great_Strength.tres" id="5_pvqnd"]
 
 [resource]
 script = ExtResource("1_71257")
@@ -20,7 +21,7 @@ damage_type = 6
 damaging = false
 healing = true
 creates_shield = true
-inflict_status = Array[ExtResource("2_a7xpk")]([ExtResource("3_mfiy0"), ExtResource("4_oes3k")])
+inflict_status = Array[ExtResource("2_a7xpk")]([ExtResource("3_mfiy0"), ExtResource("4_oes3k"), ExtResource("5_pvqnd")])
 STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
 BaseStats_required = [0, 0, 160, 0, 0, 0]
 Abilities_required = Array[ExtResource("1_71257")]([])

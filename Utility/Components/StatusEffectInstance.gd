@@ -155,6 +155,7 @@ func on_gain():
 			'Great Strength':
 				affecting_value = int(10*multiplier)
 				owning_unit.STR_boost += affecting_value
+				owning_unit.Melee_Mult_boost += 0.2
 			'Purification':
 				var to_free = []
 				for se:StatusEffectInstance in manager.get_children():
@@ -231,6 +232,7 @@ func on_timeout():
 				owning_unit.DEF_boost -= affecting_value
 			'Great Strength':
 				owning_unit.STR_boost -= affecting_value
+				owning_unit.Melee_Mult_boost -= 0.2
 	#############################################################
 	if StatusData.periodic_effect_trigger == trigger.EFFECT_LOST:
 		periodic_effect()

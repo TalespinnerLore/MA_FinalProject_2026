@@ -708,6 +708,8 @@ func select_biome_index():
 	elif ! PRESET_Recipie:
 		total_chance += 25 #always at least a 25% chance to get a random biome, unless boss tower.
 	
+	return 4
+	
 	var randint = randi_range(0,total_chance)
 	
 	if randint >= total_chance - Biome_Skyland and Biome_Skyland != 0:

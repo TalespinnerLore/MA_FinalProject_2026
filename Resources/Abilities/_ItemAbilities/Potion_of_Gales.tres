@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://do2brtyisjgju"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://do2brtyisjgju"]
 
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/AbilityData.gd" id="1_ewct2"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatusEffectData.gd" id="2_fmd8o"]
 [ext_resource type="Resource" uid="uid://drsah4n8jwbi1" path="res://Resources/StatusEffects/Gale_Edge.tres" id="3_iduwg"]
+[ext_resource type="Texture2D" uid="uid://kecoy3onkl54" path="res://Art/VFX Sprites/Flare00_pxl.png" id="4_anbb1"]
 
 [resource]
 script = ExtResource("1_ewct2")
 ability_name = "Potion of Gales"
+vfx = ExtResource("4_anbb1")
 element = 3
 valid_target = 3
 targeting = 4

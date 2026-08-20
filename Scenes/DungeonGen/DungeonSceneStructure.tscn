@@ -42,6 +42,7 @@ script = ExtResource("2_sai8a")
 Width_X = 25
 Height_Y = 25
 SpawnRiver = true
+rand_seed = true
 
 [node name="Navigation_Manager" type="Node2D" parent="." groups=["NAVIGATION_MANAGER"]]
 script = ExtResource("3_vj0qi")
@@ -481,7 +482,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("26_r23u3")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/MUSIC"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/MUSIC" groups=["MUSIC"]]
 process_mode = 3
 stream = ExtResource("27_v4ogi")
 volume_db = -10.0
