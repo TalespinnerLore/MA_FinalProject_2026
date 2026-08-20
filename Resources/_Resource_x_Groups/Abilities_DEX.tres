@@ -6,5 +6,5 @@
 script = ExtResource("1_es6hu")
 base_folder = "res://Resources/Abilities/DEX_base"
 includes = Array[String]([])
-excludes = Array[String]([])
-paths = Array[String](["res://Resources/Abilities/DEX_base/10_Piercing_Shot.tres", "res://Resources/Abilities/DEX_base/40_Venom_Strike.tres", "res://Resources/Abilities/DEX_base/80_Shattering_Shot.tres", "res://Resources/Abilities/DEX_base/120_Twin_Volley.tres", "res://Resources/Abilities/DEX_base/SUB_120_Twin_Volley.tres", "res://Resources/Abilities/DEX_base/SUB_Hurricane_Burst.tres", "res://Resources/Abilities/DEX_base/Ult_Hurricane_Arrow.tres"])
+excludes = Array[String](["SUB_120_Twin_Volley.tres", "SUB_Hurricane_Burst.tres"])
+paths = Array[String](["res://Resources/Abilities/DEX_base/10_Piercing_Shot.tres", "res://Resources/Abilities/DEX_base/40_Venom_Strike.tres", "res://Resources/Abilities/DEX_base/80_Shattering_Shot.tres", "res://Resources/Abilities/DEX_base/120_Twin_Volley.tres", "res://Resources/Abilities/DEX_base/Ult_Hurricane_Arrow.tres"])

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=15 format=3 uid="uid://rsc2ps6lj752"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=14 format=3 uid="uid://rsc2ps6lj752"]
 
 [ext_resource type="Resource" uid="uid://dygpdjty37286" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleeMag.tres" id="1_j0y1e"]
 [ext_resource type="Resource" uid="uid://d1stjwu4tuogd" path="res://Resources/Abilities/DEF_base/80_Curse_of_Fragility.tres" id="2_hm46d"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://bytkpu6eh3mja" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette1.png" id="6_ryo0l"]
 [ext_resource type="Texture2D" uid="uid://cdvrukl1aqv1y" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette2.png" id="7_jcr8u"]
 [ext_resource type="Texture2D" uid="uid://bobdn0b18ccct" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette3.png" id="8_lk5qe"]
-[ext_resource type="Texture2D" uid="uid://bek26ylbkxen4" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette4.png" id="9_4y7g7"]
 [ext_resource type="Texture2D" uid="uid://b7rqbnlla460c" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette5.png" id="10_h0atq"]
 [ext_resource type="Texture2D" uid="uid://dgy7hq8xrmqnx" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette6.png" id="11_ghv6j"]
 
@@ -28,7 +27,7 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 2
 Element = 1
-elem_palettes = Array[Texture2D]([ExtResource("5_suscr"), ExtResource("6_ryo0l"), ExtResource("7_jcr8u"), ExtResource("8_lk5qe"), ExtResource("9_4y7g7"), ExtResource("10_h0atq"), ExtResource("11_ghv6j")])
+elem_palettes = Array[Texture2D]([ExtResource("5_suscr"), ExtResource("6_ryo0l"), ExtResource("7_jcr8u"), ExtResource("8_lk5qe"), ExtResource("5_suscr"), ExtResource("10_h0atq"), ExtResource("11_ghv6j")])
 must_drop_items = Array[ExtResource("3_ds6gl")]([ExtResource("5_b0fk2")])
 chance_drop_items = Array[ExtResource("3_ds6gl")]([ExtResource("4_qufbs")])
 STR_up = 2

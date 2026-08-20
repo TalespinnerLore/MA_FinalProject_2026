@@ -1122,7 +1122,7 @@ func AI_turn_enemy_new():
 			path.clear()
 			#prev_path.clear()
 			path = nav_manager_ref.get_valid_path_tiles(self_coords,nav_manager_ref.ROOMS.pick_random().RoomCenter,0)
-			print("cleared path help =========================================")
+			print("cleared path help =========================================", path)
 			#if in room:
 				#pathfinding_manager.get_path_to_new_room() #ignore closest door
 			#else:

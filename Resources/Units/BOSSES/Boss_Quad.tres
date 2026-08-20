@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/10_Cone_of_Embers.tres" id="2_rgt8p"]
 [ext_resource type="Resource" uid="uid://0if3g3khpnhi" path="res://Resources/Abilities/VIT_base/80_Purify.tres" id="3_6stg0"]
 [ext_resource type="Resource" uid="uid://rfa1oc5gpu6h" path="res://Resources/Abilities/DEX_base/40_Venom_Strike.tres" id="4_l6fa3"]
-[ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="5_vdqy0"]
+[ext_resource type="Resource" uid="uid://7j5xdkj4glc6" path="res://Resources/Abilities/STR_base/120_Void_Cleave.tres" id="5_ollax"]
 [ext_resource type="Texture2D" uid="uid://digauguw7tk0p" path="res://Art/UnitSprites/BasicCharacter_enemyboss.png" id="6_moy3c"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="7_lnuty"]
 [ext_resource type="Texture2D" uid="uid://j3ro37ydk0qp" path="res://Art/UnitSprites/Palettes/boss_palette0.png" id="8_yyqcy"]
@@ -19,7 +19,7 @@
 [resource]
 script = ExtResource("15_y181m")
 Sprite = ExtResource("6_moy3c")
-BasicAttack = ExtResource("5_vdqy0")
+BasicAttack = ExtResource("5_ollax")
 Attacks = Array[Object]([ExtResource("1_g6dft"), ExtResource("2_rgt8p"), ExtResource("3_6stg0"), ExtResource("4_l6fa3")])
 UnitName = "Lord of Force"
 is_large_unit = false

@@ -20,5 +20,5 @@ healing = true
 creates_shield = false
 inflict_status = Array[ExtResource("2_deek4")]([])
 STR_DEX_VIT_MAG_DEF_LUK = "<- reminder text variable"
-BaseStats_required = [0, 0, 10, 10, 0, 0]
+BaseStats_required = [0, 0, 15, 10, 0, 0]
 Abilities_required = Array[ExtResource("1_60f51")]([])

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=14 format=3 uid="uid://c365vhp4wk3nw"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=13 format=3 uid="uid://c365vhp4wk3nw"]
 
 [ext_resource type="Resource" uid="uid://d02ns3e6v636q" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres" id="1_vvd6c"]
 [ext_resource type="Texture2D" uid="uid://bnpa0fl0fa7aj" path="res://Art/UnitSprites/Spritesheets/enemytype_elemental_base.png" id="2_a7o7t"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://bytkpu6eh3mja" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette1.png" id="7_fx01k"]
 [ext_resource type="Texture2D" uid="uid://cdvrukl1aqv1y" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette2.png" id="8_h1mxr"]
 [ext_resource type="Texture2D" uid="uid://bobdn0b18ccct" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette3.png" id="9_mkqb5"]
-[ext_resource type="Texture2D" uid="uid://bek26ylbkxen4" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette4.png" id="10_jgpqi"]
 [ext_resource type="Texture2D" uid="uid://b7rqbnlla460c" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette5.png" id="11_5its3"]
 [ext_resource type="Texture2D" uid="uid://dgy7hq8xrmqnx" path="res://Art/UnitSprites/Palettes/enemytype_elemental_palette6.png" id="12_jk0pu"]
 
@@ -27,7 +26,7 @@ is_boss = false
 is_t2_boss = false
 CreatureType = 2
 Element = 3
-elem_palettes = Array[Texture2D]([ExtResource("6_g7jwd"), ExtResource("7_fx01k"), ExtResource("8_h1mxr"), ExtResource("9_mkqb5"), ExtResource("10_jgpqi"), ExtResource("11_5its3"), ExtResource("12_jk0pu")])
+elem_palettes = Array[Texture2D]([ExtResource("6_g7jwd"), ExtResource("7_fx01k"), ExtResource("8_h1mxr"), ExtResource("9_mkqb5"), ExtResource("6_g7jwd"), ExtResource("11_5its3"), ExtResource("12_jk0pu")])
 must_drop_items = Array[ExtResource("3_rpblr")]([])
 chance_drop_items = Array[ExtResource("3_rpblr")]([ExtResource("4_3e5nm"), ExtResource("5_rce6x")])
 STR_up = 5

@@ -16,7 +16,7 @@
 [resource]
 script = ExtResource("10_1iqt2")
 Sprite = ExtResource("2_7ien3")
-BasicAttack = ExtResource("1_lfcl6")
+BasicAttack = ExtResource("2_oxqng")
 Attacks = Array[Object]([ExtResource("1_lfcl6"), ExtResource("1_lfcl6"), ExtResource("2_oxqng"), ExtResource("2_oxqng")])
 UnitName = "Ember Shaman"
 is_large_unit = false

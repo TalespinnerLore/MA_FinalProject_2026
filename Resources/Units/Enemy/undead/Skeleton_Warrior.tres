@@ -15,6 +15,7 @@
 [resource]
 script = ExtResource("2_bhgx1")
 Sprite = ExtResource("2_1vx3j")
+BasicAttack = ExtResource("1_k7phs")
 Attacks = Array[Object]([ExtResource("1_k7phs"), ExtResource("1_k7phs"), ExtResource("1_k7phs"), ExtResource("1_k7phs")])
 UnitName = ""
 is_large_unit = false
