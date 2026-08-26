@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=14 format=3 uid="uid://drtxp1ey3lxnc"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=15 format=3 uid="uid://drtxp1ey3lxnc"]
 
 [ext_resource type="Resource" uid="uid://cvdimoxqxgfkf" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedPhys.tres" id="1_dttec"]
 [ext_resource type="Resource" uid="uid://rfa1oc5gpu6h" path="res://Resources/Abilities/DEX_base/40_Venom_Strike.tres" id="2_gyymd"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dhrl0i2rgiq3p" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette0.png" id="4_n72nl"]
 [ext_resource type="Texture2D" uid="uid://bce0kg37pbsq2" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette1.png" id="5_e3u7y"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="5_eden2"]
+[ext_resource type="Resource" uid="uid://brpl35grr5nua" path="res://Resources/Items/_TileItems/Tile18_Consumables.tres" id="5_j52a8"]
 [ext_resource type="Texture2D" uid="uid://b4gh36awxcwlb" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette2.png" id="6_6k6gi"]
 [ext_resource type="Texture2D" uid="uid://df1wbojt3vbf7" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette3.png" id="7_7ktqo"]
 [ext_resource type="Texture2D" uid="uid://ej2etyj4u2v6" path="res://Art/UnitSprites/Palettes/enemytype_beast_palette4.png" id="8_iocsx"]
@@ -29,7 +30,7 @@ CreatureType = 4
 Element = 1
 elem_palettes = Array[Texture2D]([ExtResource("4_n72nl"), ExtResource("5_e3u7y"), ExtResource("6_6k6gi"), ExtResource("7_7ktqo"), ExtResource("8_iocsx"), ExtResource("9_awnhm"), ExtResource("10_2vlu6")])
 must_drop_items = Array[ExtResource("3_jobgj")]([ExtResource("4_crlbf")])
-chance_drop_items = Array[ExtResource("3_jobgj")]([])
+chance_drop_items = Array[ExtResource("3_jobgj")]([ExtResource("5_j52a8")])
 STR_up = 7
 DEX_up = 5
 VIT_up = 2

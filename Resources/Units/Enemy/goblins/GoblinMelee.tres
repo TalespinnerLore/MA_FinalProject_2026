@@ -1,10 +1,13 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=12 format=3 uid="uid://ijbghilyc0ba"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=15 format=3 uid="uid://ijbghilyc0ba"]
 
 [ext_resource type="Resource" uid="uid://drmxfwlw2xuv4" path="res://Resources/Abilities/_basic_attacks/BasicAttack_MeleePhys.tres" id="1_fl6xa"]
 [ext_resource type="Texture2D" uid="uid://bt7ms3n1itwfp" path="res://Art/UnitSprites/Spritesheets/enemytype_goblin_base.png" id="2_hi3nr"]
 [ext_resource type="Texture2D" uid="uid://b3jx36v2l2q00" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette0.png" id="3_w5ngf"]
+[ext_resource type="Resource" uid="uid://c2fuj3iq1d8p4" path="res://Resources/Items/_TileItems/Tile41_Goblins.tres" id="4_4vtrb"]
 [ext_resource type="Texture2D" uid="uid://7e7ykwl42crn" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette1.png" id="4_kqtie"]
+[ext_resource type="Resource" uid="uid://cnku6v6oaf2c6" path="res://Resources/Items/_TileItems/Tile30_PlusMobs.tres" id="5_86r1k"]
 [ext_resource type="Texture2D" uid="uid://dgr04lpqi1dqf" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette2.png" id="5_hnkj5"]
+[ext_resource type="Resource" uid="uid://c2gkq2tg0s8fv" path="res://Resources/Items/_TileItems/Tile33_MinusMobs.tres" id="6_j1cua"]
 [ext_resource type="Texture2D" uid="uid://bva1bsnylcu50" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette3.png" id="6_pwfp4"]
 [ext_resource type="Texture2D" uid="uid://bklggjlht3xqp" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette4.png" id="7_pk1bi"]
 [ext_resource type="Texture2D" uid="uid://dn53jd5gcnvpu" path="res://Art/UnitSprites/Palettes/enemytype_goblin_palette5.png" id="8_gv806"]
@@ -27,7 +30,7 @@ CreatureType = 5
 Element = 4
 elem_palettes = Array[Texture2D]([ExtResource("3_w5ngf"), ExtResource("4_kqtie"), ExtResource("5_hnkj5"), ExtResource("6_pwfp4"), ExtResource("7_pk1bi"), ExtResource("8_gv806"), ExtResource("9_htjtx")])
 must_drop_items = Array[ExtResource("11_pochj")]([])
-chance_drop_items = Array[ExtResource("11_pochj")]([])
+chance_drop_items = Array[ExtResource("11_pochj")]([ExtResource("4_4vtrb"), ExtResource("5_86r1k"), ExtResource("6_j1cua")])
 STR_up = 5
 DEX_up = 2
 VIT_up = 0

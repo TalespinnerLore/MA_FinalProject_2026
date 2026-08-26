@@ -91,7 +91,7 @@ func load_item_inventory():
 	inv_container.visible = true
 	inv_content = PlayerStats.player_inventory
 	print('invcontent:',shop_inv,' count:',shop_inv.size())
-	
+	shop_inv.sort()
 	var index = 0
 	for item in inv_container.get_children():
 		if (inv_page*inv_page_max_items)+index > shop_inv.size() - 1:

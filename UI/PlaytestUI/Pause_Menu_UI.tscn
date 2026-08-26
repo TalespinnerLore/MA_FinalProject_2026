@@ -280,6 +280,7 @@ tile_map_data = PackedByteArray("AAAFAAUAAgAAABEAAAAFAAYAAgAAAA4AAAAFAAQAAgAAAA4
 tile_set = ExtResource("6_16kep")
 
 [node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 490.0
 offset_top = 6.0
 offset_right = 522.0

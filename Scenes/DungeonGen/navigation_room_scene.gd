@@ -27,6 +27,12 @@ func new_path_on_enter(body:Unit_Instance):
 			topop.append(path)
 	for path in topop:
 		ground_paths.erase(path)
+	if ground_paths.size() < 1:
+		var emergencypath = [] #for when everythings FUCKED
+		emergencypath.append_array(NavManager_ref.get_valid_path_tiles(RoomDoors[0],RoomCenter,0))
+		emergencypath.pop_back()
+		emergencypath.append_array(NavManager_ref.get_valid_path_tiles(RoomCenter,RoomDoors[0],0))
+		ground_paths.append(emergencypath)
 	ground_paths.shuffle()
 	print('ground paths:',ground_paths)
 	for path in ground_paths:

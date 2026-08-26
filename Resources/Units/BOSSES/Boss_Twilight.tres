@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=16 format=3 uid="uid://cdfxjhdtoi7da"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=22 format=3 uid="uid://cdfxjhdtoi7da"]
 
 [ext_resource type="Resource" uid="uid://0if3g3khpnhi" path="res://Resources/Abilities/VIT_base/80_Purify.tres" id="2_rbeqf"]
 [ext_resource type="Resource" uid="uid://d1stjwu4tuogd" path="res://Resources/Abilities/DEF_base/80_Curse_of_Fragility.tres" id="3_era6n"]
@@ -8,13 +8,19 @@
 [ext_resource type="Texture2D" uid="uid://digauguw7tk0p" path="res://Art/UnitSprites/BasicCharacter_enemyboss.png" id="6_8jb4h"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="7_rlhdy"]
 [ext_resource type="Texture2D" uid="uid://j3ro37ydk0qp" path="res://Art/UnitSprites/Palettes/boss_palette0.png" id="8_e2ss7"]
+[ext_resource type="Resource" uid="uid://d11xco5tgnoha" path="res://Resources/Items/_TileItems/Tile51_T2BossKeystone.tres" id="8_mc63w"]
 [ext_resource type="Texture2D" uid="uid://ox28447xxxn8" path="res://Art/UnitSprites/Palettes/boss_palette1.png" id="9_dh0ui"]
+[ext_resource type="Resource" uid="uid://dc211e1i6fkjb" path="res://Resources/Items/_TileItems/Tile5_Force.tres" id="9_vfs4t"]
 [ext_resource type="Texture2D" uid="uid://qrpjuophp427" path="res://Art/UnitSprites/Palettes/boss_palette2.png" id="10_h1w3x"]
+[ext_resource type="Resource" uid="uid://bltyj1wsytnoa" path="res://Resources/Items/_TileItems/Tile42_TreasureVault.tres" id="10_sbjkc"]
 [ext_resource type="Texture2D" uid="uid://dvfkyahqogbhg" path="res://Art/UnitSprites/Palettes/boss_palette3.png" id="11_12tac"]
+[ext_resource type="Resource" uid="uid://bo67aqs4ytc0v" path="res://Resources/Items/_TileItems/Tile44_MonsterHouse.tres" id="11_14j82"]
+[ext_resource type="Resource" uid="uid://ec53yaaptamg" path="res://Resources/Items/_TileItems/Tile43_MiniBoss.tres" id="12_8vqbg"]
 [ext_resource type="Texture2D" uid="uid://dwf6g2bunyilh" path="res://Art/UnitSprites/Palettes/boss_palette4.png" id="12_hssa0"]
 [ext_resource type="Texture2D" uid="uid://sgcy1xqtka4y" path="res://Art/UnitSprites/Palettes/boss_palette5.png" id="13_gtfra"]
 [ext_resource type="Texture2D" uid="uid://c7oeb3q5dqjm7" path="res://Art/UnitSprites/Palettes/boss_palette6.png" id="14_6ekct"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="15_cncnr"]
+[ext_resource type="Resource" uid="uid://k1v6c6rijr7" path="res://Resources/Items/_TileItems/Tile53_T2ForceBossKeystone.tres" id="20_xrrih"]
 
 [resource]
 script = ExtResource("15_cncnr")
@@ -30,8 +36,8 @@ is_t2_boss = true
 CreatureType = 2
 Element = 6
 elem_palettes = Array[Texture2D]([ExtResource("8_e2ss7"), ExtResource("9_dh0ui"), ExtResource("10_h1w3x"), ExtResource("11_12tac"), ExtResource("12_hssa0"), ExtResource("13_gtfra"), ExtResource("14_6ekct")])
-must_drop_items = Array[ExtResource("7_rlhdy")]([])
-chance_drop_items = Array[ExtResource("7_rlhdy")]([])
+must_drop_items = Array[ExtResource("7_rlhdy")]([ExtResource("20_xrrih")])
+chance_drop_items = Array[ExtResource("7_rlhdy")]([ExtResource("8_mc63w"), ExtResource("9_vfs4t"), ExtResource("10_sbjkc"), ExtResource("11_14j82"), ExtResource("12_8vqbg")])
 STR_up = 6
 DEX_up = 6
 VIT_up = 6

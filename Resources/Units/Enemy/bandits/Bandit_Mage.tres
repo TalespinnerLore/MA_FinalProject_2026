@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=12 format=3 uid="uid://dgvmn8brwaykn"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=15 format=3 uid="uid://dgvmn8brwaykn"]
 
 [ext_resource type="Resource" uid="uid://d02ns3e6v636q" path="res://Resources/Abilities/_basic_attacks/BasicAttack_RangedMag.tres" id="1_81p7w"]
 [ext_resource type="Texture2D" uid="uid://d16ekei1j7qu8" path="res://Art/UnitSprites/BasicCharacter_enemymage.png" id="2_s0h66"]
 [ext_resource type="Texture2D" uid="uid://b8r01xxaa8xxs" path="res://Art/UnitSprites/Palettes/testspritepallette0.png" id="3_l8ems"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="3_s72vj"]
+[ext_resource type="Resource" uid="uid://b5n6rd73w02h" path="res://Resources/Items/_TileItems/Tile40_Bandits.tres" id="4_5su3p"]
 [ext_resource type="Texture2D" uid="uid://b6hv8onls4dsr" path="res://Art/UnitSprites/Palettes/testspritepallette1.png" id="4_owi8n"]
+[ext_resource type="Resource" uid="uid://cqm2tstosohgp" path="res://Resources/Items/_TileItems/Tile31_PlusGold.tres" id="5_074pu"]
 [ext_resource type="Texture2D" uid="uid://flaexc2jrtx5" path="res://Art/UnitSprites/Palettes/testspritepallette2.png" id="5_b3sy4"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="5_vivjs"]
+[ext_resource type="Resource" uid="uid://chc65qf2h42y7" path="res://Resources/Items/_TileItems/Tile34_MinusGold.tres" id="6_0c3n0"]
 [ext_resource type="Texture2D" uid="uid://dut6j2j3px423" path="res://Art/UnitSprites/Palettes/testspritepallette3.png" id="6_nkqh1"]
 [ext_resource type="Texture2D" uid="uid://bd8fiogco46kp" path="res://Art/UnitSprites/Palettes/testspritepallette4.png" id="7_di8pr"]
 [ext_resource type="Texture2D" uid="uid://dmpsavoioy4md" path="res://Art/UnitSprites/Palettes/testspritepallette5.png" id="8_v76b7"]
@@ -27,7 +30,7 @@ CreatureType = 0
 Element = 4
 elem_palettes = Array[Texture2D]([ExtResource("3_l8ems"), ExtResource("4_owi8n"), ExtResource("5_b3sy4"), ExtResource("6_nkqh1"), ExtResource("7_di8pr"), ExtResource("8_v76b7"), ExtResource("9_jgogd")])
 must_drop_items = Array[ExtResource("3_s72vj")]([])
-chance_drop_items = Array[ExtResource("3_s72vj")]([])
+chance_drop_items = Array[ExtResource("3_s72vj")]([ExtResource("4_5su3p"), ExtResource("5_074pu"), ExtResource("6_0c3n0")])
 STR_up = 5
 DEX_up = 0
 VIT_up = 0

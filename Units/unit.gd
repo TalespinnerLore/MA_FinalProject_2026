@@ -203,6 +203,7 @@ func set_stats():
 		for i in UnitStats.Free_Stats*UnitLevel:
 			investedstats[randi_range(0,5)] += 1
 	var lvlUp_stats = UnitStats.get_levelup_stats(UnitLevel)
+	print('lvlupstats',lvlUp_stats)
 	UnitStats.calc_template_stats()
 	print("p1 base str post clac: ",UnitStats.STR)
 	#HP_Max = UnitStats.HP_Max_withVIT
@@ -772,7 +773,7 @@ func init(is_player_controlled):
 		Calc_XP_to_Level()
 	else: #FIX THIS LATER TO ACCOUNT FOR NPC AND ALLY UNITS
 		print('print unitstats name',UnitStats.UnitName)
-		$Label.visible = false
+		$Sprite2D/Label.visible = false
 		Team = Teams.ENEMY
 		set_stats()
 		HP_Current = HP_Max
@@ -889,9 +890,9 @@ func enemy_drop_items():
 			item_manager.drop_item(self_coords,item[0],item[1])
 	for item in UnitStats.must_drop_items:
 		item_manager.drop_item(self_coords,item,1)
-	if UnitStats.chance_drop_items.size() > 0 and randf() > 0.75: #25% chance to unit-specific item
+	if UnitStats.chance_drop_items.size() > 0 and randf() > 0.75/DungeonData.item_mult: #25% chance to unit-specific item
 		item_manager.drop_item(self_coords,UnitStats.chance_drop_items.pick_random(),1)
-	elif randf() > 0.9: #if no unit drop, 10% chance to get random area drop
+	elif randf() > 0.9/DungeonData.item_mult: #if no unit drop, 10% chance to get random area drop
 		item_manager.enemy_random_drop(self_coords)
 	var gold:GroundItem = goldscene.instantiate()
 	gold.global_position = self.global_position
@@ -970,15 +971,19 @@ func _on_turn_start() -> void:
 			pass
 		await get_tree().create_timer(2).timeout
 		if HP_Current < 1:
+			DungeonData.reset_data()
 			if sfx_player.playing == true:
 				await sfx_player.finished
 				get_tree().change_scene_to_file("res://Scenes/StaticLevels/HubScene_Playtesting.tscn")
 			else:
 				get_tree().change_scene_to_file("res://Scenes/StaticLevels/HubScene_Playtesting.tscn")
-	else:
+	elif target_unit.HP_Current > 0:
 		await get_tree().create_timer(0.05).timeout
 		AI_turn_enemy_new()
-	
+		#$EnemTimeout.time_left = 10
+		$EnemTimeout.start(10)
+	else:
+		$EnemTimeout.start(10)
 	
 
 var goal_tile:Vector2i
@@ -1321,7 +1326,20 @@ func reset_turn():
 	has_taken_turn = false
 	pass
 
+func _on_enem_timeout_timeout() -> void:
+	emergency_removal()
+
+func emergency_removal():
+	if ! $VisibleOnScreenNotifier2D.is_on_screen() and is_active_unit:
+		end_turn()
+		await get_tree().create_timer(0.1).timeout
+		queue_free()
+	#await get_tree().create_timer(10).timeout
+	
+
 func end_turn():
+	$EnemTimeout.stop()
+	is_active_unit = false
 	has_taken_turn = true
 	#cleartext()
 	if Team == Teams.PLAYER:

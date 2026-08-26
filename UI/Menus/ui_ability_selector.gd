@@ -59,12 +59,13 @@ func load_player_data():
 	basic_attack = classdata.BasicAttack
 	$StatAbilityBox/NameLabel.text = str('Test McTestface\n LVL ',PlayerStats.p1_level,' ',classdata.UnitName)
 	autostats = classdata.get_levelup_stats(PlayerStats.p1_level)
-	autostats[0]+=PlayerStats.p1_class.STR
-	autostats[1]+=PlayerStats.p1_class.DEX
-	autostats[2]+=PlayerStats.p1_class.VIT
-	autostats[3]+=PlayerStats.p1_class.MAG
-	autostats[4]+=PlayerStats.p1_class.DEF
-	autostats[5]+=PlayerStats.p1_class.LUK
+	print('autostats:',autostats)
+	#autostats[0]+=PlayerStats.p1_class.STR
+	#autostats[1]+=PlayerStats.p1_class.DEX
+	#autostats[2]+=PlayerStats.p1_class.VIT
+	#autostats[3]+=PlayerStats.p1_class.MAG
+	#autostats[4]+=PlayerStats.p1_class.DEF
+	#autostats[5]+=PlayerStats.p1_class.LUK
 	
 	print('autostats:',autostats,' level:',PlayerStats.p1_level)
 	for box in $StatAbilityBox/AbilityBoxContainer.get_children():

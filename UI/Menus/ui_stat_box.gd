@@ -36,6 +36,7 @@ func _on_usepoints_button_pressed() -> void:
 	if ! is_allocating_stats:
 		$"../StatBox7/Label2".text = ' USE'
 		$"../StatBox7/Label2".set("theme_override_colors/font_color",Color(0.988,0.945,0.796))
+		#get_parent().save_allocated_points()
 	else:
 		$"../StatBox7/Label2".text = ' SAVE'
 		$"../StatBox7/Label2".set("theme_override_colors/font_color",Color.SPRING_GREEN)

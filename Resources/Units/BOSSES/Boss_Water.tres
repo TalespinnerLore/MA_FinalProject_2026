@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatComponent" load_steps=16 format=3 uid="uid://1qs1nbueuu8n"]
+[gd_resource type="Resource" script_class="StatComponent" load_steps=19 format=3 uid="uid://1qs1nbueuu8n"]
 
 [ext_resource type="Resource" uid="uid://cfg11x78ssvji" path="res://Resources/Abilities/MAG_base/10_Cone_of_Embers.tres" id="1_ypnnr"]
 [ext_resource type="Resource" uid="uid://cqc4lv8ck3ypo" path="res://Resources/Abilities/MAG_base/40_EmberBurst.tres" id="2_vlp7y"]
@@ -8,13 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://digauguw7tk0p" path="res://Art/UnitSprites/BasicCharacter_enemyboss.png" id="6_8xsxs"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/ItemData.gd" id="7_tbuo4"]
 [ext_resource type="Texture2D" uid="uid://j3ro37ydk0qp" path="res://Art/UnitSprites/Palettes/boss_palette0.png" id="8_dui1k"]
+[ext_resource type="Resource" uid="uid://c6b7xq16rkvsh" path="res://Resources/Items/_TileItems/Tile45_BossKeystone.tres" id="8_q8dc6"]
 [ext_resource type="Texture2D" uid="uid://ox28447xxxn8" path="res://Art/UnitSprites/Palettes/boss_palette1.png" id="9_ayrty"]
+[ext_resource type="Resource" uid="uid://r5jqgja7wkb3" path="res://Resources/Items/_TileItems/Tile2_Water.tres" id="9_eqy1w"]
 [ext_resource type="Texture2D" uid="uid://qrpjuophp427" path="res://Art/UnitSprites/Palettes/boss_palette2.png" id="10_ed5g0"]
 [ext_resource type="Texture2D" uid="uid://dvfkyahqogbhg" path="res://Art/UnitSprites/Palettes/boss_palette3.png" id="11_li8x5"]
 [ext_resource type="Texture2D" uid="uid://dwf6g2bunyilh" path="res://Art/UnitSprites/Palettes/boss_palette4.png" id="12_a4cys"]
 [ext_resource type="Texture2D" uid="uid://sgcy1xqtka4y" path="res://Art/UnitSprites/Palettes/boss_palette5.png" id="13_r1wnd"]
 [ext_resource type="Texture2D" uid="uid://c7oeb3q5dqjm7" path="res://Art/UnitSprites/Palettes/boss_palette6.png" id="14_ow8qc"]
 [ext_resource type="Script" path="res://Resources/_ResourceTemplates/StatComponent.gd" id="15_22ewq"]
+[ext_resource type="Resource" uid="uid://dqmyhbqrwdeo" path="res://Resources/Items/_TileItems/Tile47_WaterBossKeystone.tres" id="17_u6iq2"]
 
 [resource]
 script = ExtResource("15_22ewq")
@@ -30,8 +33,8 @@ is_t2_boss = false
 CreatureType = 2
 Element = 0
 elem_palettes = Array[Texture2D]([ExtResource("8_dui1k"), ExtResource("9_ayrty"), ExtResource("10_ed5g0"), ExtResource("11_li8x5"), ExtResource("12_a4cys"), ExtResource("13_r1wnd"), ExtResource("14_ow8qc")])
-must_drop_items = Array[ExtResource("7_tbuo4")]([])
-chance_drop_items = Array[ExtResource("7_tbuo4")]([])
+must_drop_items = Array[ExtResource("7_tbuo4")]([ExtResource("17_u6iq2")])
+chance_drop_items = Array[ExtResource("7_tbuo4")]([ExtResource("8_q8dc6"), ExtResource("9_eqy1w")])
 STR_up = 4
 DEX_up = 4
 VIT_up = 4

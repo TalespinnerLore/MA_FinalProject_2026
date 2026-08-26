@@ -86,9 +86,11 @@ enum ElementType {FIRE,WATER,EARTH,AIR,FORCE,LIGHT,DARK}
 
 func get_levelup_stats(level):
 	var BaseStats = [STR_up,DEX_up,VIT_up,MAG_up,DEF_up,LUK_up]
-	for stat in BaseStats:
-		stat*=level
+	for y in 6:
+		BaseStats[y]*=level
+	print('lvl',BaseStats)
 	var base = [STR,DEX,VIT,MAG,DEF,LUK]
+	print('base',base)
 	for i in range(6):
 		BaseStats[i]+=base[i]
 	return BaseStats

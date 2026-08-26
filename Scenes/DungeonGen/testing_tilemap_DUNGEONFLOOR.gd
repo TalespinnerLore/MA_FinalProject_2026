@@ -1072,12 +1072,83 @@ func populate_tile_terrain():
 		#Connect_Doors_BRUTE(8)
 		#connect_doorways()
 		pass
+	if Rooms.size() == 1:
+		oneroom_spawn_to_stairs()
 	for door in PermDoors:
 		pass #double checking door placement
 		#set_cell(Vector2i(door.x,door.y),0, Vector2i(0,0))
 
 func mark_tile_bugfixing(tile:Vector2i):
 	set_cell(tile,0, Vector2i(1,1))
+
+func oneroom_spawn_to_stairs():
+	var theroom = Rooms[0]
+	var connecting_path = []
+	var end:Vector2i = stairs_spawnloc[0]
+	var start:Vector2i = player_spawnpoint
+
+	var current = start
+	connecting_path.append(start)
+	var done = false
+	
+	while done == false:
+		var direction = Vector2i(clampi(end.x-current.x,-1,1),clampi(end.y-current.y,-1,1))
+		var new_tile:Vector2i = current+direction
+		var up_down = Global.randb()
+		var valid_tile = false
+		
+		if direction.x == 0 or direction.y == 0:
+			if ! theroom[2].has(new_tile):
+				valid_tile = true
+			else:
+				for dir in Global.dir4:
+					if theroom[1].has(current+dir):
+						new_tile = current+dir
+						valid_tile = true
+						break
+				print("? fuck noes")
+				
+		else:
+			if up_down:
+				new_tile.y = current.y
+			else:
+				new_tile.x = current.x
+			
+			if ! theroom[2].has(new_tile):
+				valid_tile = true
+			else:
+				new_tile = current+direction
+				if up_down:
+					new_tile.x = current.x
+				else:
+					new_tile.y = current.y
+				if ! theroom[2].has(new_tile):
+					valid_tile = true
+				else:
+					print("INVALID EVERYTHING APPARENTLY FUCK MEEEEEEEEEEEEEEEE")
+		
+		if valid_tile == true:
+			if connecting_path.has(new_tile):
+				done = true
+			else:
+				connecting_path.append(new_tile)
+		
+		current = new_tile
+		
+		if end == current:
+			done = true
+			
+		for tile in connecting_path:
+				if River_Tiles_list.has(tile) or TileGrid[tile.x][tile.y] != 'FLOOR':
+					match DungeonData.river_tile:
+						'WATER':
+							set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(10,10)) #THIS IS THE BRIDGE TILE
+						'LAVA':
+							set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(13,10))
+						'AIR':
+							set_cell(Vector2i(tile.x,tile.y),terrain_set, Vector2i(16,10))
+					TileGrid[tile.x][tile.y] = 'FLOOR'
+
 
 func Connect_Doors_BRUTE(room_index):
 	#print('diirs cinnect brute; to connect:',Rooms[room_index][3])
