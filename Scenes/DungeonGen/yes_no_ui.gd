@@ -46,5 +46,6 @@ func _on_yes_button_pressed() -> void:
 	if is_instance_valid(stairs):
 		stairs.emit_signal("player_proceeding")
 	elif is_instance_valid(portal):
+		SaveLoad.SaveFileData.TileID_NamedInventory = PlayerStats.TileID_NamedInventory
 		portal.emit_signal("player_proceeding")
 	pass # Replace with function body.

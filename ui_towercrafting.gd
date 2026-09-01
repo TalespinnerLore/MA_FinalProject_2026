@@ -322,6 +322,7 @@ func _on_button_start_pressed() -> void:
 	get_tree().get_first_node_in_group("TOWER_PORTAL").open_door()
 	SaveLoad.SaveFileData.is_portal_open = true
 	SaveLoad.SaveFileData.TileID_NamedInventory = TileID_NamedInventory
+	PlayerStats.TileID_NamedInventory = TileID_NamedInventory
 	#SaveLoad.save_dungeon_data()
 	var savekeys = SaveLoad.SaveFileData.checkpoint_persistance_keys
 	if Boss_T0_Mini > 0:

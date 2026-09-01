@@ -27,7 +27,8 @@ func _on_button_pressed() -> void:
 	PlayerStats.p1_class = class_data[0]
 	PlayerStats.p1_equipped_abilities = v_abilities
 	await get_tree().create_timer(0.15).timeout
-	open_to_house()
+	#open_to_house()
+	open_to_crafting()
 
 
 
@@ -35,7 +36,8 @@ func _on_button_pressed2() -> void:
 	PlayerStats.p1_class = class_data[1]
 	PlayerStats.p1_equipped_abilities = w_abilities
 	await get_tree().create_timer(0.15).timeout
-	open_to_house()
+	#open_to_house()
+	open_to_crafting()
 
 
 
@@ -43,7 +45,8 @@ func _on_button_pressed3() -> void:
 	PlayerStats.p1_class = class_data[2]
 	PlayerStats.p1_equipped_abilities = r_abilities
 	await get_tree().create_timer(0.15).timeout
-	open_to_house()
+	#open_to_house()
+	open_to_crafting()
 
 
 
@@ -51,7 +54,8 @@ func _on_button_pressed4() -> void:
 	PlayerStats.p1_class = class_data[3]
 	PlayerStats.p1_equipped_abilities = m_abilities
 	await get_tree().create_timer(0.15).timeout
-	open_to_house()
+	#open_to_house()
+	open_to_crafting()
 
 
 
@@ -59,7 +63,8 @@ func _on_button_pressed5() -> void:
 	PlayerStats.p1_class = class_data[4]
 	PlayerStats.p1_equipped_abilities = h_abilities
 	await get_tree().create_timer(0.15).timeout
-	open_to_house()
+	#open_to_house()
+	open_to_crafting()
 
 
 
@@ -68,7 +73,8 @@ func _on_button_pressed6() -> void:
 	PlayerStats.p1_equipped_abilities = j_abilities
 	PlayerStats.p1_free_stats = 8
 	await get_tree().create_timer(0.15).timeout
-	open_to_house()
+	#open_to_house()
+	open_to_crafting()
 
 
 

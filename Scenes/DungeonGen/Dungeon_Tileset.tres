@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c83xwiw54ovjd" path="res://Art/2D_images/TileMap_Mesa_transBG.png" id="4_fdwxq"]
 [ext_resource type="Texture2D" uid="uid://d2q34abw7goum" path="res://Art/TileMap_SkyIsland.png" id="5_gvbev"]
 [ext_resource type="Texture2D" uid="uid://d0uj06egk8ngv" path="res://Art/2D_images/PodiumBase.png" id="6_lq7wv"]
-[ext_resource type="Texture2D" uid="uid://dh3fjbqm6wr8o" path="res://Art/2D_images/PodiumTileSprites_3wide.png" id="7_tmu73"]
+[ext_resource type="Texture2D" uid="uid://dh3fjbqm6wr8o" path="res://PodiumTileSprites_3wide.png" id="7_tmu73"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ejgb5"]
 resource_name = "basicTestTiles"

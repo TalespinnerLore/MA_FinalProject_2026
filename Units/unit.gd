@@ -506,7 +506,8 @@ func grid_to_pos(coord, pos):
 ####################################################
 
 func _physics_process(delta: float) -> void:
-	if is_active_unit and Team == Teams.PLAYER and is_team_leader and ! has_moved and ! has_taken_turn:
+	if is_active_unit and Team == Teams.PLAYER and is_team_leader and ! has_moved and ! has_taken_turn \
+	and get_tree().paused == false:
 		is_acting = true
 		
 		if ! waiting_for_dialogue and HP_Current > 0:
@@ -668,26 +669,27 @@ func check_move_input():
 	pass
 
 func _move(dir:Vector2):
-	prev_path.append(self_coords)
-	$Sprite2D/pointer.look_at(self.global_position+(dir*Vector2(32,32)))
-	last_tile = self_coords
-	global_position += dir*tile_size
-	get_self_coords()
-	$Sprite2D.global_position -= dir * tile_size #lake the spirte lag behind by a tile
-	facing = Vector2i(dir)
-	if sprite_node_pos_tween: 
-		sprite_node_pos_tween.kill()
-	sprite_node_pos_tween = create_tween()
-	sprite_node_pos_tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	await sprite_node_pos_tween.tween_property($Sprite2D, "global_position", global_position, move_duration).set_trans(Tween.TRANS_SINE)
-	#^^^actual movment is snappy, but visually the sprite moves smoothly - CAMERA TIED TO SPRITE, OR CHOPPY AS FUCK! My eyes...
-	
-	has_moved = true
-	is_acting = false
-	action_used()
-	#end_turn()
-	#_on_turn_start()
-	pass
+	if get_tree().paused == false:
+		prev_path.append(self_coords)
+		$Sprite2D/pointer.look_at(self.global_position+(dir*Vector2(32,32)))
+		last_tile = self_coords
+		global_position += dir*tile_size
+		get_self_coords()
+		$Sprite2D.global_position -= dir * tile_size #lake the spirte lag behind by a tile
+		facing = Vector2i(dir)
+		if sprite_node_pos_tween: 
+			sprite_node_pos_tween.kill()
+		sprite_node_pos_tween = create_tween()
+		sprite_node_pos_tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+		await sprite_node_pos_tween.tween_property($Sprite2D, "global_position", global_position, move_duration).set_trans(Tween.TRANS_SINE)
+		#^^^actual movment is snappy, but visually the sprite moves smoothly - CAMERA TIED TO SPRITE, OR CHOPPY AS FUCK! My eyes...
+		
+		has_moved = true
+		is_acting = false
+		action_used()
+		#end_turn()
+		#_on_turn_start()
+		pass
 
 func _select_direction(dir:Vector2):
 	facing = Vector2i(dir)
@@ -974,9 +976,11 @@ func _on_turn_start() -> void:
 			DungeonData.reset_data()
 			if sfx_player.playing == true:
 				await sfx_player.finished
-				get_tree().change_scene_to_file("res://Scenes/StaticLevels/HubScene_Playtesting.tscn")
+				if is_instance_valid(get_tree()):
+					get_tree().change_scene_to_file("res://Scenes/StaticLevels/HubScene_Playtesting.tscn")
 			else:
-				get_tree().change_scene_to_file("res://Scenes/StaticLevels/HubScene_Playtesting.tscn")
+				if is_instance_valid(get_tree()):
+					get_tree().change_scene_to_file("res://Scenes/StaticLevels/HubScene_Playtesting.tscn")
 	elif target_unit.HP_Current > 0:
 		await get_tree().create_timer(0.05).timeout
 		AI_turn_enemy_new()

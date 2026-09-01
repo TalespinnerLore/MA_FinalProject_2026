@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d1yshb420qmo7"]
 
 [ext_resource type="Script" path="res://Crafting/tile_object.gd" id="1_xtudk"]
-[ext_resource type="Texture2D" uid="uid://dh3fjbqm6wr8o" path="res://Art/2D_images/PodiumTileSprites_3wide.png" id="2_bdrvt"]
+[ext_resource type="Texture2D" uid="uid://dh3fjbqm6wr8o" path="res://PodiumTileSprites_3wide.png" id="2_bdrvt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bhwd3"]
 size = Vector2(26, 26)

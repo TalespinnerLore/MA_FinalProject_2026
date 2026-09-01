@@ -6,6 +6,7 @@ signal player_proceeding
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Unit_Instance:
+		print('UNIT TOUCHED STAIRS: ',body.UnitStats.UnitName)
 		if body.Team == body.Teams.PLAYER:
 			emit_signal("player_found_stairs")
 

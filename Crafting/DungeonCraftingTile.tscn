@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bitvmnpjfrxby"]
 
-[ext_resource type="Texture2D" uid="uid://dh3fjbqm6wr8o" path="res://Art/2D_images/PodiumTileSprites_3wide.png" id="1_qqiyx"]
+[ext_resource type="Texture2D" uid="uid://dh3fjbqm6wr8o" path="res://PodiumTileSprites_3wide.png" id="1_qqiyx"]
 [ext_resource type="Script" path="res://Crafting/dungeon_crafting_tile.gd" id="2_d8wo2"]
 [ext_resource type="Resource" uid="uid://kwvvojannkq6" path="res://Resources/Items/Tiles/DungeonGen/Elements/TEST.tres" id="3_dj6e4"]
 [ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="4_46o2k"]

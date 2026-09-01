@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://bj1i2ct8r8gpt"]
+[gd_scene load_steps=32 format=4 uid="uid://bj1i2ct8r8gpt"]
 
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_7fd7v"]
 [ext_resource type="Script" path="res://Scenes/DungeonGen/testing_tilemap_DUNGEONFLOOR.gd" id="2_sai8a"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b3cg8kwm8w2ob" path="res://Art/2D_images/temp_loadscreen.png" id="15_yyivg"]
 [ext_resource type="PackedScene" uid="uid://s0jii18fk7d6" path="res://UI/Menus/unit_stats_gear_ui.tscn" id="16_ed1a7"]
 [ext_resource type="Script" path="res://Scenes/DungeonGen/loadscreen.gd" id="16_wlj7n"]
+[ext_resource type="Texture2D" uid="uid://c6dpkom8jkj10" path="res://Art/UI_Art/inventory_icon.png" id="16_y71ry"]
 [ext_resource type="PackedScene" uid="uid://qs3fqojkph1u" path="res://UI/Menus/UI_Ability_Selector.tscn" id="18_w3fuu"]
 [ext_resource type="Script" path="res://Scenes/DungeonGen/ability_ui.gd" id="19_gu8xj"]
 [ext_resource type="Texture2D" uid="uid://cu3lk0k4qo1aj" path="res://Art/UI_Art/Frames/ui_bg_thin.png" id="20_ka3vg"]
@@ -42,7 +43,6 @@ script = ExtResource("2_sai8a")
 Width_X = 25
 Height_Y = 25
 SpawnRiver = true
-rand_seed = true
 
 [node name="Navigation_Manager" type="Node2D" parent="." groups=["NAVIGATION_MANAGER"]]
 script = ExtResource("3_vj0qi")
@@ -99,10 +99,33 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("13_jpkop")
+theme_override_constants/line_spacing = 7
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 8
 text = "###
 GOLD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRectInv" type="TextureRect" parent="CanvasLayer/GoldCounter"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 48.0
+offset_bottom = 80.0
+texture = ExtResource("16_y71ry")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GoldCounter/TextureRectInv"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("13_jpkop")
+theme_override_constants/line_spacing = 7
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 8
+text = "##/##
+INVENTORY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -152,6 +175,17 @@ Basic Attack: Left-Click
 Ability Buttons: 1 & 2
 Buttons: Mouse/Touchpad Left-Click"
 horizontal_alignment = 1
+
+[node name="AreaInfo" type="Label" parent="CanvasLayer/GoldCounter"]
+layout_mode = 0
+offset_left = 566.0
+offset_top = 16.0
+offset_right = 624.0
+offset_bottom = 39.0
+theme = ExtResource("13_jpkop")
+theme_override_constants/outline_size = 4
+text = "BIOME: Skylands
+Area Level: ##"
 
 [node name="PlayerInventory_UI" parent="CanvasLayer" instance=ExtResource("15_2a8p0")]
 visible = false
@@ -458,6 +492,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Loadscreen" type="TextureRect" parent="CanvasLayer"]
+visible = false
 offset_right = 640.0
 offset_bottom = 360.0
 texture = ExtResource("15_yyivg")

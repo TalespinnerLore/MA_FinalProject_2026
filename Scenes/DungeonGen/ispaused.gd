@@ -1,5 +1,5 @@
 extends Control
-@onready var unit:Unit_Instance = get_parent()
+@onready var unit:Unit_Instance = get_parent().get_parent()
 
 func _process(delta: float) -> void:
 	if unit.Team == unit.Teams.PLAYER:
