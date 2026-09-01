@@ -492,7 +492,6 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Loadscreen" type="TextureRect" parent="CanvasLayer"]
-visible = false
 offset_right = 640.0
 offset_bottom = 360.0
 texture = ExtResource("15_yyivg")
