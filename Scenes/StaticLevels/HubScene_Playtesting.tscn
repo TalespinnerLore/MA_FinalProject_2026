@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://brhvpee45mcyk"]
+[gd_scene load_steps=20 format=4 uid="uid://brhvpee45mcyk"]
 
 [ext_resource type="TileSet" uid="uid://mig48d4qsg8" path="res://Scenes/DungeonGen/Dungeon_Tileset.tres" id="1_7jht4"]
 [ext_resource type="Script" path="res://Scenes/StaticLevels/hub_scene_playtesting.gd" id="1_kati5"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://5k4xgds11d8w" path="res://UI/PlaytestUI/Pause_Menu_UI.tscn" id="9_jf5pk"]
 [ext_resource type="PackedScene" uid="uid://qs3fqojkph1u" path="res://UI/Menus/UI_Ability_Selector.tscn" id="10_64g1i"]
 [ext_resource type="PackedScene" uid="uid://ddrvqfukxkpfr" path="res://Objects/EnvironmentObjects/abilityswap_point.tscn" id="10_iq8ws"]
+[ext_resource type="Script" path="res://Scenes/DungeonGen/music.gd" id="13_8xv1t"]
+[ext_resource type="AudioStream" uid="uid://bqagbc4ceo6k5" path="res://Sounds/mesas.ogg" id="14_h3djo"]
+[ext_resource type="Script" path="res://Scenes/StaticLevels/hubmusic.gd" id="15_3i6an"]
 [ext_resource type="PackedScene" uid="uid://cmrvbbtrkis6q" path="res://Scenes/StaticLevels/scenechange_collider.tscn" id="24_npcs5"]
 [ext_resource type="PackedScene" uid="uid://bfynsxir5rxqw" path="res://Crafting/TowerCrafting_fixed.tscn" id="25_vx8k5"]
 [ext_resource type="PackedScene" uid="uid://bwa1723gqb8xw" path="res://Objects/EnvironmentObjects/TowerPortal.tscn" id="26_be0ec"]
@@ -108,3 +111,18 @@ visible = false
 
 [node name="AbilitySwapPoint" parent="." instance=ExtResource("10_iq8ws")]
 position = Vector2(144, 0)
+
+[node name="MUSIC" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("13_8xv1t")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MUSIC" groups=["MUSIC"]]
+process_mode = 3
+stream = ExtResource("14_h3djo")
+volume_db = -10.0
+autoplay = true
+parameters/looping = true
+script = ExtResource("15_3i6an")

@@ -31,6 +31,9 @@ func init() -> void:
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body is Unit_Instance:
 		if body.Team == body.Teams.PLAYER:
-			emit_signal("player_found_stairs")
+			#emit_signal("player_found_stairs")
+			if is_instance_valid(get_tree()):
+				if get_tree().paused == true:
+					get_tree().paused = false
 
 	pass # Replace with function body.

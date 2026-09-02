@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://qw8hxdfy48pn"]
+[gd_scene load_steps=7 format=3 uid="uid://qw8hxdfy48pn"]
 
 [ext_resource type="Script" path="res://Units/unit_non_combat.gd" id="1_lna23"]
 [ext_resource type="Script" path="res://Units/equipment.gd" id="2_6lvts"]
+[ext_resource type="Theme" uid="uid://dd4fy2mbfaue1" path="res://UI/8bit.tres" id="5_2w2w6"]
 [ext_resource type="Texture2D" uid="uid://bw1adqq7ug2vq" path="res://Art/UnitSprites/BasicCharacter_player.png" id="7_ayqgv"]
 [ext_resource type="PackedScene" uid="uid://dp6qyj1ggegbu" path="res://Utility/Components/HP_module.tscn" id="8_82kg4"]
 
@@ -24,6 +25,32 @@ texture = ExtResource("7_ayqgv")
 [node name="HP_module" parent="Sprite2D" instance=ExtResource("8_82kg4")]
 visible = false
 position = Vector2(0, -24)
+
+[node name="Label" type="Label" parent="Sprite2D"]
+offset_left = -312.0
+offset_top = 124.0
+offset_right = -128.0
+offset_bottom = 217.0
+theme = ExtResource("5_2w2w6")
+theme_override_constants/outline_size = 4
+text = "HUB CONTROLS:
+WASD / ArrowKeys  - Move
+SHIFT + Move - Move diagonal.
+CTRL + Move - Face that direction and don't move.
+"
+
+[node name="Label2" type="Label" parent="Sprite2D"]
+offset_left = 144.0
+offset_top = 112.0
+offset_right = 349.0
+offset_bottom = 217.0
+theme = ExtResource("5_2w2w6")
+theme_override_constants/outline_size = 4
+text = "DUNGEON-ONLY CONTROLS:
+Hold Q - Reveal clickable ability buttons and 
+remaining uses. (Or hit 1 - 4 for hotkeys)
+Press C - Character screen. Allocate points here.
+Press I - View inventory. Equip gear here."
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
