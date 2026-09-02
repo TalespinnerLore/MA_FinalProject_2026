@@ -69,20 +69,25 @@ texture = ExtResource("12_bgx25")
 offset = Vector2(8, -8)
 
 [node name="Label" type="Label" parent="Sprite2D"]
-offset_left = -304.0
-offset_top = 64.0
-offset_right = -120.0
-offset_bottom = 157.0
+offset_left = -310.0
+offset_top = 15.0
+offset_right = -122.0
+offset_bottom = 168.0
 theme = ExtResource("10_gh1p6")
 theme_override_constants/outline_size = 4
-text = "WASD / ArrowKeys  - Move
+text = "POSITIONING:
+WASD / ArrowKeys  - Move
 SHIFT + Move - Move diagonal.
 CTRL + Move - Face that direction and don't move.
-Hold Q - Reveal clickable ability buttons and remaining uses. 
-(Or hit 1 - 4 for hotkeys)
 
-Press C character screen. Allocate points here.
-Press I for inventory."
+COMBAT:
+Hold Q - Reveal clickable ability buttons and 
+remaining uses. (Or hit 1 - 4 for hotkeys)
+Right-Click - Basic Attack (Infinite uses, bad damage)
+
+OTHER:
+Press C - Character screen (Allocate points here)
+Press I - View inventory (Use items/equip gear here)"
 
 [node name="Control" type="Control" parent="Sprite2D"]
 process_mode = 3
